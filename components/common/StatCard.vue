@@ -1,5 +1,5 @@
 <template>
-  <div class="card-fiori hover:shadow-md transition-shadow">
+  <div class="card-fiori hover:shadow-md transition-all">
     <div class="flex items-start justify-between">
       <div class="flex-1">
         <p class="text-sm font-medium text-fiori-gray-600 mb-1">{{ title }}</p>

@@ -9,7 +9,7 @@
       >
         <slot name="sidebar" />
       </aside>
-      <main class="flex-1 overflow-y-auto bg-gray-50">
+      <main class="flex-1 overflow-y-auto bg-transparent">
         <slot name="content" />
       </main>
     </div>

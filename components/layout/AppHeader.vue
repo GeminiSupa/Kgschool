@@ -1,29 +1,29 @@
 <template>
-  <header class="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-sm">
+  <header class="bg-white/80 backdrop-blur-xl border-b border-white/20 px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-lg">
     <div class="flex items-center gap-4">
       <!-- Back Button (shown only when not on dashboard) -->
-      <button
-        v-if="showBackButton"
-        @click="goBack"
-        class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900"
-        aria-label="Zurück"
-      >
-        <span class="text-xl">←</span>
-      </button>
-      
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-sm">KG</span>
-        </div>
-        <Heading size="lg" class="text-gray-900 font-semibold">
-          Kita Management
-        </Heading>
-      </div>
-    </div>
+              <button
+                v-if="showBackButton"
+                @click="goBack"
+                class="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900"
+                aria-label="Zurück"
+              >
+                <span class="text-xl">←</span>
+              </button>
+              
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                  <span class="text-white font-bold text-sm">KG</span>
+                </div>
+                <Heading size="lg" class="text-gray-900 font-semibold">
+                  Kita Management
+                </Heading>
+              </div>
+            </div>
 
-    <div class="flex items-center gap-3">
-      <UserMenu />
-    </div>
+            <div class="flex items-center gap-3">
+              <UserMenu />
+            </div>
   </header>
 </template>
 

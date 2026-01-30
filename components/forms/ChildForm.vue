@@ -2,67 +2,67 @@
   <form @submit.prevent="handleSubmit" class="space-y-4">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
-        <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">
-          First Name *
+        <label for="first_name" class="form-label-fiori form-label-fiori-required">
+          Vorname
         </label>
         <input
           id="first_name"
           v-model="form.first_name"
           type="text"
           required
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          class="input-fiori"
         />
       </div>
 
       <div>
-        <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">
-          Last Name *
+        <label for="last_name" class="form-label-fiori form-label-fiori-required">
+          Nachname
         </label>
         <input
           id="last_name"
           v-model="form.last_name"
           type="text"
           required
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          class="input-fiori"
         />
       </div>
     </div>
 
     <div>
-      <label for="date_of_birth" class="block text-sm font-medium text-gray-700 mb-1">
-        Date of Birth *
+      <label for="date_of_birth" class="form-label-fiori form-label-fiori-required">
+        Geburtsdatum
       </label>
       <input
         id="date_of_birth"
         v-model="form.date_of_birth"
         type="date"
         required
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        class="input-fiori"
       />
     </div>
 
     <div>
-      <label for="enrollment_date" class="block text-sm font-medium text-gray-700 mb-1">
-        Enrollment Date *
+      <label for="enrollment_date" class="form-label-fiori form-label-fiori-required">
+        Einschulungsdatum
       </label>
       <input
         id="enrollment_date"
         v-model="form.enrollment_date"
         type="date"
         required
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        class="input-fiori"
       />
     </div>
 
     <div>
-      <label for="group_id" class="block text-sm font-medium text-gray-700 mb-1">
-        Group
+      <label for="group_id" class="form-label-fiori">
+        Gruppe
       </label>
       <select
         id="group_id"
         v-model="form.group_id"
         @change="onGroupChange"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        class="input-fiori"
       >
         <option value="">Unassigned</option>
         <option v-for="group in sortedGroups" :key="group.id" :value="group.id">
@@ -71,8 +71,8 @@
       </select>
       
       <!-- Show suggestions if no group selected -->
-      <div v-if="!form.group_id && suggestions.length > 0" class="mt-2 p-3 bg-blue-50 rounded-md">
-        <p class="text-sm font-medium text-blue-900 mb-2">Suggested Groups:</p>
+      <div v-if="!form.group_id && suggestions.length > 0" class="mt-2 p-3 alert-fiori alert-fiori-info">
+        <p class="text-sm font-medium mb-2">Vorgeschlagene Gruppen:</p>
         <div class="space-y-1">
           <button
             v-for="suggestion in suggestions.slice(0, 3)"
@@ -82,13 +82,13 @@
             :class="[
               'text-left w-full px-3 py-2 text-sm rounded-md border transition-colors',
               suggestion.match === 'perfect' ? 'bg-green-50 border-green-200 hover:bg-green-100' :
-              suggestion.match === 'good' ? 'bg-blue-50 border-blue-200 hover:bg-blue-100' :
-              'bg-gray-50 border-gray-200 hover:bg-gray-100'
+              suggestion.match === 'good' ? 'bg-fiori-blue-50 border-fiori-blue-200 hover:bg-fiori-blue-100' :
+              'bg-fiori-gray-50 border-fiori-gray-200 hover:bg-fiori-gray-100'
             ]"
           >
             <div class="flex items-center justify-between">
               <span class="font-medium">{{ suggestion.group.name }} ({{ suggestion.group.age_range }})</span>
-              <span class="text-xs text-gray-600">{{ suggestion.reason }}</span>
+              <span class="text-xs text-fiori-gray-600">{{ suggestion.reason }}</span>
             </div>
           </button>
         </div>
@@ -106,13 +106,13 @@
       </div>
 
       <!-- Show teachers for selected group -->
-      <div v-if="form.group_id && selectedGroupTeachers.length > 0" class="mt-2 p-2 bg-gray-50 rounded-md">
-        <p class="text-xs font-medium text-gray-700 mb-1">Assigned Teachers:</p>
+      <div v-if="form.group_id && selectedGroupTeachers.length > 0" class="mt-2 p-2 bg-fiori-gray-50 rounded-md">
+        <p class="text-xs font-medium text-fiori-gray-700 mb-1">Zugewiesene Lehrer:</p>
         <div class="flex flex-wrap gap-1">
           <span
             v-for="teacher in selectedGroupTeachers"
             :key="teacher.id"
-            class="text-xs px-2 py-0.5 bg-white rounded border border-gray-200"
+            class="badge-fiori badge-fiori-neutral"
           >
             {{ teacher.full_name }} ({{ teacher.role === 'primary' ? 'Primary' : teacher.role }})
           </span>
@@ -121,13 +121,13 @@
     </div>
 
     <div>
-      <label for="status" class="block text-sm font-medium text-gray-700 mb-1">
+      <label for="status" class="form-label-fiori">
         Status
       </label>
       <select
         id="status"
         v-model="form.status"
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        class="input-fiori"
       >
         <option value="active">Active</option>
         <option value="inactive">Inactive</option>
@@ -142,7 +142,7 @@
       </p>
     </div>
 
-    <div v-if="error" class="p-3 bg-red-50 text-red-700 rounded-md text-sm">
+    <div v-if="error" class="alert-fiori alert-fiori-error">
       {{ error }}
     </div>
 
@@ -150,16 +150,16 @@
       <button
         type="button"
         @click="$emit('cancel')"
-        class="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+        class="btn-fiori-secondary"
       >
-        Cancel
+        Abbrechen
       </button>
       <button
         type="submit"
         :disabled="loading"
-        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        class="btn-fiori-primary"
       >
-        {{ loading ? 'Saving...' : (isEdit ? 'Update' : 'Create') }}
+        {{ loading ? 'Wird gespeichert...' : (isEdit ? 'Aktualisieren' : 'Erstellen') }}
       </button>
     </div>
   </form>

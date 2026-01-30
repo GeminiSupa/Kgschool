@@ -18,13 +18,14 @@ const props = withDefaults(defineProps<Props>(), {
 const sizes = {
   xs: 'text-sm font-semibold',
   sm: 'text-base font-semibold',
-  md: 'text-lg font-bold',
-  lg: 'text-xl font-bold',
+  md: 'text-lg font-semibold',
+  lg: 'text-xl font-semibold',
   xl: 'text-2xl font-bold',
   '2xl': 'text-3xl font-bold'
 }
 
 const headingClasses = computed(() => {
-  return `${sizes[props.size]} text-gray-900`
+  // Don't force color - let parent components/style decide
+  return sizes[props.size]
 })
 </script>

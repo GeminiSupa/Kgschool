@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-full flex flex-col sidebar-container bg-gradient-to-b from-white to-gray-50/50 transition-all duration-200"
+    class="h-full flex flex-col sidebar-container bg-white/80 backdrop-blur-xl border-r border-white/20 transition-all duration-200"
     :class="{ 'sidebar-collapsed': collapsed }"
   >
     <!-- Sidebar Header -->
@@ -41,12 +41,12 @@
           :key="item.path"
           :to="item.path"
           :class="[
-            'group relative flex items-center gap-3 px-4 py-3 rounded-lg',
-            'text-sm font-medium transition-all duration-200 ease-in-out',
+            'group relative flex items-center gap-3 px-4 py-3 ios-rounded',
+            'text-sm font-medium ios-animate ios-press',
             'hover:bg-blue-50 hover:text-blue-700 hover:shadow-sm',
             'focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1',
             isActive(item.path)
-              ? 'bg-blue-50 text-blue-700 shadow-sm font-semibold'
+              ? 'bg-blue-50 text-blue-700 shadow-sm font-semibold ios-glass'
               : 'text-gray-700 hover:text-blue-700'
           ]"
         >

@@ -19,17 +19,22 @@ interface Props {
   subtitle?: string
   elevated?: boolean
   hover?: boolean
+  color?: 'blue' | 'green' | 'purple' | 'orange' | 'pink' | 'teal' | 'yellow' | 'indigo' | 'default'
 }
 
 const props = withDefaults(defineProps<Props>(), {
   elevated: false,
-  hover: true
+  hover: true,
+  color: 'default'
 })
 
 const cardClasses = computed(() => {
   let classes = props.elevated ? 'card-fiori-elevated' : 'card-fiori'
   if (props.hover && !props.elevated) {
     classes += ' hover:shadow-md'
+  }
+  if (props.color && props.color !== 'default') {
+    classes += ` card-${props.color}`
   }
   return classes
 })

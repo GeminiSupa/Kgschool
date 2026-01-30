@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="page-header-fiori mb-8">
-      <h1 class="page-header-fiori-title">Dashboard</h1>
-      <p class="page-header-fiori-subtitle">Overview of your kindergarten management system</p>
+    <div class="ios-page-header">
+      <h1>Dashboard</h1>
+      <p>Übersicht über Ihr Kindergarten-Managementsystem</p>
     </div>
     
     <div v-if="loading" class="flex justify-center py-16">
@@ -12,90 +12,94 @@
     <div v-else class="space-y-8">
       <!-- Statistics Cards -->
       <div>
-        <h2 class="text-lg font-semibold text-fiori-gray-900 mb-4">Overview</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Übersicht</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard title="Total Children" :value="totalChildren" icon="👶" />
-          <StatCard title="Total Staff" :value="totalStaff" icon="👥" />
-          <StatCard title="Today's Attendance" :value="todayAttendance" icon="✅" />
-          <StatCard title="Active Groups" :value="activeGroups" icon="👪" />
+          <IOSStatCard title="Gesamt Kinder" :value="totalChildren" icon="👶" to="/admin/children" />
+          <IOSStatCard title="Gesamt Personal" :value="totalStaff" icon="👥" to="/admin/staff" />
+          <IOSStatCard title="Heutige Anwesenheit" :value="todayAttendance" icon="✅" to="/admin/attendance" />
+          <IOSStatCard title="Aktive Gruppen" :value="activeGroups" icon="👪" to="/admin/groups" />
         </div>
       </div>
 
       <div>
-        <h2 class="text-lg font-semibold text-fiori-gray-900 mb-4">Kindergarten Features</h2>
+        <h2 class="text-xl font-bold text-gray-900 mb-4">Kindergarten-Funktionen</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard title="Users" :value="totalUsers" icon="👤" />
-          <StatCard title="Daily Reports" :value="totalDailyReports" icon="📄" />
-          <StatCard title="Learning Themes" :value="totalLearningThemes" icon="🎨" />
-          <StatCard title="Observations" :value="totalObservations" icon="👁️" />
+          <IOSStatCard title="Benutzer" :value="totalUsers" icon="👤" to="/admin/users" />
+          <IOSStatCard title="Tagesberichte" :value="totalDailyReports" icon="📄" to="/admin/daily-reports" />
+          <IOSStatCard title="Bildungsbereiche" :value="totalLearningThemes" icon="🎨" to="/admin/learning-themes" />
+          <IOSStatCard title="Beobachtungen" :value="totalObservations" icon="👁️" to="/admin/observations" />
         </div>
       </div>
 
       <NuxtLink v-if="pendingLeaveRequests > 0" to="/admin/leave" class="block">
-        <StatCard 
-          title="Pending Leave Requests" 
+        <IOSStatCard 
+          title="Ausstehende Urlaubsanträge" 
           :value="pendingLeaveRequests" 
           icon="📝"
-          subtitle="Requires your attention"
+          subtitle="Benötigt Ihre Aufmerksamkeit"
         />
       </NuxtLink>
 
       <!-- Quick Actions and Links -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card title="Quick Actions" subtitle="Common tasks">
+        <IOSCard customClass="p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-1">Schnellaktionen</h3>
+          <p class="text-sm text-gray-600 mb-4">Häufige Aufgaben</p>
           <div class="space-y-2">
             <NuxtLink
               to="/admin/children/new"
-              class="flex items-center gap-3 px-4 py-3 bg-fiori-blue-50 text-fiori-blue-600 rounded-md hover:bg-fiori-blue-100 transition-colors"
+              class="flex items-center gap-3 px-4 py-3 ios-glass ios-rounded hover:scale-105 transition-transform"
             >
               <span>➕</span>
-              <span class="font-medium">Add New Child</span>
+              <span class="font-medium text-gray-900">Neues Kind hinzufügen</span>
             </NuxtLink>
             <NuxtLink
               to="/admin/users/new"
-              class="flex items-center gap-3 px-4 py-3 bg-fiori-blue-50 text-fiori-blue-600 rounded-md hover:bg-fiori-blue-100 transition-colors"
+              class="flex items-center gap-3 px-4 py-3 ios-glass ios-rounded hover:scale-105 transition-transform"
             >
               <span>➕</span>
-              <span class="font-medium">Create User</span>
+              <span class="font-medium text-gray-900">Benutzer erstellen</span>
             </NuxtLink>
             <NuxtLink
               to="/admin/groups/new"
-              class="flex items-center gap-3 px-4 py-3 bg-fiori-blue-50 text-fiori-blue-600 rounded-md hover:bg-fiori-blue-100 transition-colors"
+              class="flex items-center gap-3 px-4 py-3 ios-glass ios-rounded hover:scale-105 transition-transform"
             >
               <span>➕</span>
-              <span class="font-medium">Create Group</span>
+              <span class="font-medium text-gray-900">Gruppe erstellen</span>
             </NuxtLink>
             <NuxtLink
               to="/admin/attendance"
-              class="flex items-center gap-3 px-4 py-3 bg-fiori-blue-50 text-fiori-blue-600 rounded-md hover:bg-fiori-blue-100 transition-colors"
+              class="flex items-center gap-3 px-4 py-3 ios-glass ios-rounded hover:scale-105 transition-transform"
             >
               <span>📊</span>
-              <span class="font-medium">View Attendance Reports</span>
+              <span class="font-medium text-gray-900">Anwesenheitsberichte anzeigen</span>
             </NuxtLink>
             <NuxtLink
               v-if="pendingLeaveRequests > 0"
               to="/admin/leave"
-              class="flex items-center gap-3 px-4 py-3 bg-yellow-50 text-yellow-700 rounded-md hover:bg-yellow-100 transition-colors"
+              class="flex items-center gap-3 px-4 py-3 ios-glass ios-rounded hover:scale-105 transition-transform"
             >
               <span>📝</span>
-              <span class="font-medium">Review Leave Requests ({{ pendingLeaveRequests }})</span>
+              <span class="font-medium text-gray-900">Urlaubsanträge prüfen ({{ pendingLeaveRequests }})</span>
             </NuxtLink>
           </div>
-        </Card>
+        </IOSCard>
 
-        <Card title="Quick Links" subtitle="Navigate to main sections">
+        <IOSCard customClass="p-6">
+          <h3 class="text-lg font-bold text-gray-900 mb-1">Schnellzugriff</h3>
+          <p class="text-sm text-gray-600 mb-4">Zu Hauptbereichen navigieren</p>
           <div class="grid grid-cols-1 gap-2">
             <NuxtLink
               v-for="link in quickLinks"
               :key="link.path"
               :to="link.path"
-              class="flex items-center gap-3 px-4 py-2.5 text-fiori-gray-700 hover:bg-fiori-gray-50 rounded-md transition-colors"
+              class="flex items-center gap-3 px-4 py-2.5 ios-glass ios-rounded hover:scale-105 transition-transform"
             >
               <span class="text-lg">{{ link.icon }}</span>
-              <span>{{ link.label }}</span>
+              <span class="text-gray-900 font-medium">{{ link.label }}</span>
             </NuxtLink>
           </div>
-        </Card>
+        </IOSCard>
       </div>
     </div>
   </div>
@@ -104,23 +108,23 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useSupabaseClient } from '#imports'
-import StatCard from '~/components/common/StatCard.vue'
+import IOSStatCard from '~/components/common/IOSStatCard.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
-import Card from '~/components/ui/Card.vue'
+import IOSCard from '~/components/ui/IOSCard.vue'
 
-const quickLinks = [
-  { path: '/admin/children', label: 'Manage Children', icon: '👶' },
-  { path: '/admin/staff', label: 'Manage Staff', icon: '👥' },
-  { path: '/admin/users', label: 'Manage Users', icon: '👤' },
-  { path: '/admin/groups', label: 'Manage Groups', icon: '👪' },
-  { path: '/admin/daily-reports', label: 'Daily Reports', icon: '📄' },
-  { path: '/admin/observations', label: 'Observations', icon: '👁️' },
+const quickLinks = computed(() => [
+  { path: '/admin/children', label: 'Kinder verwalten', icon: '👶' },
+  { path: '/admin/staff', label: 'Personal verwalten', icon: '👥' },
+  { path: '/admin/users', label: 'Benutzer verwalten', icon: '👤' },
+  { path: '/admin/groups', label: 'Gruppen verwalten', icon: '👪' },
+  { path: '/admin/daily-reports', label: 'Tagesberichte', icon: '📄' },
+  { path: '/admin/observations', label: 'Beobachtungen', icon: '👁️' },
   { path: '/admin/portfolios', label: 'Portfolios', icon: '📔' },
-  { path: '/admin/learning-themes', label: 'Learning Themes', icon: '🎨' },
-  { path: '/admin/daily-routines', label: 'Daily Routines', icon: '⏰' },
-  { path: '/admin/lunch/menus', label: 'Lunch Menus', icon: '🍽️' },
-  { path: '/admin/messages', label: 'Messages', icon: '💬' }
-]
+  { path: '/admin/learning-themes', label: 'Bildungsbereiche', icon: '🎨' },
+  { path: '/admin/daily-routines', label: 'Tagesablauf', icon: '⏰' },
+  { path: '/admin/lunch/menus', label: 'Mittagessen-Menüs', icon: '🍽️' },
+  { path: '/admin/messages', label: 'Nachrichten', icon: '💬' }
+])
 
 definePageMeta({
   middleware: ['auth', 'role'],

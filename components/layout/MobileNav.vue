@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <nav
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 shadow-lg flex"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-white/20 z-50 shadow-lg flex ios-safe-bottom"
     >
       <NuxtLink
         v-for="item in navItems"
@@ -34,33 +34,33 @@ const navItems = computed(() => {
 
   if (role === 'admin') {
     items.push(
-      { path: '/admin/dashboard', label: 'Home', icon: '🏠' },
-      { path: '/admin/children', label: 'Children', icon: '👶' },
-      { path: '/admin/daily-reports', label: 'Reports', icon: '📄' },
-      { path: '/admin/observations', label: 'Observe', icon: '👁️' },
-      { path: '/admin/messages', label: 'Messages', icon: '💬' }
+      { path: '/admin/dashboard', label: 'Startseite', icon: '🏠' },
+      { path: '/admin/children', label: 'Kinder', icon: '👶' },
+      { path: '/admin/daily-reports', label: 'Berichte', icon: '📄' },
+      { path: '/admin/observations', label: 'Beobachten', icon: '👁️' },
+      { path: '/admin/messages', label: 'Nachrichten', icon: '💬' }
     )
   } else if (role === 'teacher') {
     items.push(
-      { path: '/teacher/dashboard', label: 'Home', icon: '🏠' },
-      { path: '/teacher/children', label: 'Children', icon: '👶' },
-      { path: '/teacher/daily-reports', label: 'Reports', icon: '📄' },
-      { path: '/teacher/observations', label: 'Observe', icon: '👁️' },
-      { path: '/teacher/messages', label: 'Messages', icon: '💬' }
+      { path: '/teacher/dashboard', label: 'Startseite', icon: '🏠' },
+      { path: '/teacher/children', label: 'Kinder', icon: '👶' },
+      { path: '/teacher/daily-reports', label: 'Berichte', icon: '📄' },
+      { path: '/teacher/observations', label: 'Beobachten', icon: '👁️' },
+      { path: '/teacher/messages', label: 'Nachrichten', icon: '💬' }
     )
   } else if (role === 'parent') {
     items.push(
-      { path: '/parent/dashboard', label: 'Home', icon: '🏠' },
-      { path: '/parent/children', label: 'Children', icon: '👶' },
-      { path: '/parent/daily-reports', label: 'Reports', icon: '📄' },
+      { path: '/parent/dashboard', label: 'Startseite', icon: '🏠' },
+      { path: '/parent/children', label: 'Kinder', icon: '👶' },
+      { path: '/parent/daily-reports', label: 'Berichte', icon: '📄' },
       { path: '/parent/portfolios', label: 'Portfolio', icon: '📔' },
-      { path: '/parent/messages', label: 'Messages', icon: '💬' }
+      { path: '/parent/messages', label: 'Nachrichten', icon: '💬' }
     )
   } else if (role === 'kitchen') {
     items.push(
-      { path: '/kitchen/dashboard', label: 'Home', icon: '🏠' },
-      { path: '/kitchen/menus', label: 'Menus', icon: '🍽️' },
-      { path: '/kitchen/orders', label: 'Orders', icon: '🛒' }
+      { path: '/kitchen/dashboard', label: 'Startseite', icon: '🏠' },
+      { path: '/kitchen/menus', label: 'Menüs', icon: '🍽️' },
+      { path: '/kitchen/orders', label: 'Bestellungen', icon: '🛒' }
     )
   }
 

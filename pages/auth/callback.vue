@@ -66,9 +66,31 @@ onMounted(async () => {
 
     if (!profile) {
       console.error('Callback - Profile error after retries:', profileError)
-      alert('Could not load your profile. Please contact administrator.')
-      await router.push('/login')
-      return
+      // Try to create a basic profile if it doesn't exist
+      try {
+        const { data: newProfile, error: createError } = await supabase
+          .from('profiles')
+          .insert({
+            id: currentUser.id,
+            email: currentUser.email || '',
+            full_name: currentUser.email?.split('@')[0] || 'User',
+            role: 'parent' // Default role
+          })
+          .select()
+          .single()
+
+        if (!createError && newProfile) {
+          profile = newProfile
+          console.log('Callback - Created default profile')
+        } else {
+          throw createError || new Error('Failed to create profile')
+        }
+      } catch (createErr) {
+        console.error('Callback - Could not create profile:', createErr)
+        alert('Could not load your profile. Please contact administrator.')
+        await router.push('/login')
+        return
+      }
     }
 
     console.log('Callback - Profile found:', profile.role)

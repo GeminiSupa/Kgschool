@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Heading size="xl" class="mb-6">My Profile</Heading>
+    <Heading size="xl" class="mb-6">Mein Profil</Heading>
 
     <div v-if="loading" class="flex justify-center py-12">
       <LoadingSpinner />
@@ -10,11 +10,12 @@
       <ErrorAlert :message="error" />
     </div>
 
-    <div v-else-if="profile" class="bg-white rounded-lg shadow p-6 max-w-2xl">
+    <div v-else-if="profile">
+      <IOSCard customClass="max-w-2xl p-6">
       <form @submit.prevent="handleUpdate" class="space-y-6">
         <!-- Profile Picture -->
         <div>
-          <Heading size="md" class="mb-4">Profile Picture</Heading>
+          <Heading size="md" class="mb-4">Profilbild</Heading>
           <div class="flex items-center gap-6">
             <div class="relative">
               <div
@@ -48,10 +49,10 @@
                 :disabled="uploadingAvatar"
                 class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors disabled:opacity-50"
               >
-                {{ uploadingAvatar ? 'Uploading...' : 'Change Picture' }}
+                {{ uploadingAvatar ? 'Wird hochgeladen...' : 'Bild ändern' }}
               </button>
               <p class="text-xs text-gray-500 mt-2">
-                JPG, PNG or GIF. Max size 2MB.
+                JPG, PNG oder GIF. Max. Größe 2MB.
               </p>
               <button
                 v-if="profile.avatar_url"
@@ -60,7 +61,7 @@
                 :disabled="uploadingAvatar"
                 class="mt-2 text-sm text-red-600 hover:text-red-700 disabled:opacity-50"
               >
-                Remove Picture
+                Bild entfernen
               </button>
             </div>
           </div>
@@ -71,49 +72,49 @@
 
         <!-- Profile Information -->
         <div class="pt-6 border-t">
-          <Heading size="md" class="mb-4">Profile Information</Heading>
+          <Heading size="md" class="mb-4">Profilinformationen</Heading>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                Full Name *
+                Vollständiger Name *
               </label>
               <input
                 v-model="form.full_name"
                 type="text"
                 required
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="ios-input"
               />
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                Email
+                E-Mail
               </label>
               <input
                 :value="profile.email"
                 type="email"
                 disabled
-                class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-600 cursor-not-allowed"
+                class="ios-input"
               />
-              <p class="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+              <p class="text-xs text-gray-500 mt-1">E-Mail kann nicht geändert werden</p>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                Phone
+                Telefon
               </label>
               <input
                 v-model="form.phone"
                 type="tel"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="ios-input"
                 placeholder="+49 123 456 7890"
               />
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                Role
+                Rolle
               </label>
               <input
                 :value="profile.role"
@@ -121,37 +122,37 @@
                 disabled
                 class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-600 cursor-not-allowed capitalize"
               />
-              <p class="text-xs text-gray-500 mt-1">Role cannot be changed</p>
+              <p class="text-xs text-gray-500 mt-1">Rolle kann nicht geändert werden</p>
             </div>
           </div>
         </div>
 
         <!-- Change Password -->
         <div class="pt-6 border-t">
-          <Heading size="md" class="mb-4">Change Password</Heading>
+          <Heading size="md" class="mb-4">Passwort ändern</Heading>
           
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                New Password *
+                Neues Passwort *
               </label>
               <input
                 v-model="passwordForm.newPassword"
                 type="password"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter new password"
+                class="ios-input"
+                placeholder="Neues Passwort eingeben"
                 :disabled="changingPassword"
               />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                Confirm New Password *
+                Neues Passwort bestätigen *
               </label>
               <input
                 v-model="passwordForm.confirmPassword"
                 type="password"
-                class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Confirm new password"
+                class="ios-input"
+                placeholder="Neues Passwort bestätigen"
                 :disabled="changingPassword"
               />
             </div>
@@ -159,27 +160,27 @@
               {{ passwordError }}
             </div>
             <div v-if="passwordSuccess" class="p-2 bg-green-50 text-green-700 rounded-md text-sm">
-              Password changed successfully!
+              Passwort erfolgreich geändert!
             </div>
             <button
               type="button"
               @click="handleChangePassword"
               :disabled="changingPassword || !passwordForm.newPassword || !passwordForm.confirmPassword"
-              class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
+              class="ios-button ios-button-primary disabled:opacity-50"
             >
-              {{ changingPassword ? 'Changing...' : 'Change Password' }}
+              {{ changingPassword ? 'Wird geändert...' : 'Passwort ändern' }}
             </button>
           </div>
         </div>
 
         <!-- Account Information -->
         <div class="pt-6 border-t">
-          <Heading size="md" class="mb-4">Account Information</Heading>
+          <Heading size="md" class="mb-4">Kontoinformationen</Heading>
           
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                User ID
+                Benutzer-ID
               </label>
               <input
                 :value="profile.id"
@@ -192,25 +193,25 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Created At
+                  Erstellt am
                 </label>
                 <input
                   :value="formatDate(profile.created_at)"
                   type="text"
                   disabled
-                  class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-600 cursor-not-allowed"
+                  class="ios-input"
                 />
               </div>
 
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Last Updated
+                  Zuletzt aktualisiert
                 </label>
                 <input
                   :value="formatDate(profile.updated_at)"
                   type="text"
                   disabled
-                  class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-600 cursor-not-allowed"
+                  class="ios-input"
                 />
               </div>
             </div>
@@ -224,26 +225,27 @@
 
         <!-- Success Message -->
         <div v-if="updateSuccess" class="p-3 bg-green-50 text-green-700 rounded-md text-sm">
-          Profile updated successfully!
+          Profil erfolgreich aktualisiert!
         </div>
 
         <!-- Actions -->
         <div class="flex justify-end gap-3 pt-4">
           <NuxtLink
             to="/"
-            class="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+            class="ios-button ios-button-secondary"
           >
-            Cancel
+            Abbrechen
           </NuxtLink>
           <button
             type="submit"
             :disabled="updating"
             class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
           >
-            {{ updating ? 'Saving...' : 'Save Changes' }}
+            {{ updating ? 'Wird gespeichert...' : 'Änderungen speichern' }}
           </button>
         </div>
       </form>
+      </IOSCard>
     </div>
   </div>
 </template>
@@ -256,6 +258,7 @@ import { useAuth } from '~/composables/useAuth'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
+import IOSCard from '~/components/ui/IOSCard.vue'
 
 definePageMeta({
   middleware: ['auth']
@@ -305,7 +308,7 @@ onMounted(async () => {
     const { data: { user: currentUser } } = await supabase.auth.getUser()
     
     if (!currentUser) {
-      error.value = 'Not authenticated. Please log in again.'
+      error.value = 'Nicht authentifiziert. Bitte melden Sie sich erneut an.'
       loading.value = false
       return
     }
@@ -327,11 +330,11 @@ onMounted(async () => {
         phone: authStore.profile.phone || ''
       }
     } else {
-      error.value = 'Failed to load profile'
+      error.value = 'Profil konnte nicht geladen werden'
     }
   } catch (e: any) {
     console.error('Error loading profile:', e)
-    error.value = e.message || 'Failed to load profile'
+    error.value = e.message || 'Profil konnte nicht geladen werden'
   } finally {
     loading.value = false
   }
@@ -345,7 +348,7 @@ const handleUpdate = async () => {
   try {
     // Validate form
     if (!form.value.full_name || form.value.full_name.trim() === '') {
-      updateError.value = 'Full name is required'
+      updateError.value = 'Vollständiger Name ist erforderlich'
       updating.value = false
       return
     }
@@ -355,7 +358,7 @@ const handleUpdate = async () => {
     const { data: { user: currentUser } } = await supabase.auth.getUser()
     
     if (!currentUser) {
-      updateError.value = 'Not authenticated. Please log in again.'
+      updateError.value = 'Nicht authentifiziert. Bitte melden Sie sich erneut an.'
       updating.value = false
       return
     }
@@ -375,7 +378,7 @@ const handleUpdate = async () => {
     }, 3000)
   } catch (e: any) {
     console.error('Update error:', e)
-    updateError.value = e.message || 'Failed to update profile'
+    updateError.value = e.message || 'Profil konnte nicht aktualisiert werden'
   } finally {
     updating.value = false
   }
@@ -395,7 +398,7 @@ const handleAvatarChange = async (event: Event) => {
     await authStore.fetchProfile()
     profile.value = authStore.profile
   } catch (e: any) {
-    avatarError.value = e.message || 'Failed to upload avatar'
+    avatarError.value = e.message || 'Avatar konnte nicht hochgeladen werden'
   } finally {
     uploadingAvatar.value = false
     // Reset input
@@ -414,7 +417,7 @@ const removeAvatar = async () => {
     await authStore.fetchProfile()
     profile.value = authStore.profile
   } catch (e: any) {
-    avatarError.value = e.message || 'Failed to remove avatar'
+    avatarError.value = e.message || 'Avatar konnte nicht entfernt werden'
   } finally {
     uploadingAvatar.value = false
   }
@@ -422,12 +425,12 @@ const removeAvatar = async () => {
 
 const handleChangePassword = async () => {
   if (passwordForm.value.newPassword !== passwordForm.value.confirmPassword) {
-    passwordError.value = 'Passwords do not match'
+    passwordError.value = 'Passwörter stimmen nicht überein'
     return
   }
 
   if (passwordForm.value.newPassword.length < 6) {
-    passwordError.value = 'Password must be at least 6 characters'
+    passwordError.value = 'Passwort muss mindestens 6 Zeichen lang sein'
     return
   }
 
@@ -443,7 +446,7 @@ const handleChangePassword = async () => {
       passwordSuccess.value = false
     }, 3000)
   } catch (e: any) {
-    passwordError.value = e.message || 'Failed to change password'
+    passwordError.value = e.message || 'Passwort konnte nicht geändert werden'
   } finally {
     changingPassword.value = false
   }

@@ -3,11 +3,11 @@
     <div class="mb-6">
       <NuxtLink
         to="/admin/lunch/menus"
-        class="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+        class="link-fiori mb-4 inline-block"
       >
         ← Back to Lunch Menus
       </NuxtLink>
-      <Heading size="xl">Lunch Menu</Heading>
+      <Heading size="xl" class="text-white drop-shadow">Mittagessen-Menü</Heading>
     </div>
 
     <div v-if="loading" class="flex justify-center py-12">
@@ -18,34 +18,35 @@
       <ErrorAlert :message="error" />
     </div>
 
-    <div v-else-if="!menu" class="p-8 text-center text-gray-500">
-      Lunch menu not found.
-    </div>
+      <div v-else-if="!menu" class="empty-state-fiori">
+        <div class="empty-state-fiori-icon">🍽️</div>
+        <p class="empty-state-fiori-title">Menü nicht gefunden</p>
+      </div>
 
-    <div v-else class="bg-white rounded-lg shadow p-6 max-w-3xl">
+    <div v-else class="card-fiori card-orange rounded-lg shadow p-6 max-w-3xl">
       <div class="space-y-4">
         <div>
-          <h3 class="text-sm font-medium text-gray-500">Meal Name</h3>
-          <p class="mt-1 text-lg text-gray-900">{{ menu.meal_name }}</p>
+          <h3 class="form-label-fiori text-fiori-blue-600">Gerichtname</h3>
+          <p class="mt-1 text-lg text-fiori-gray-900 font-semibold">{{ menu.meal_name }}</p>
         </div>
 
         <div>
-          <h3 class="text-sm font-medium text-gray-500">Date</h3>
-          <p class="mt-1 text-gray-900">{{ formatDate(menu.date) }}</p>
+          <h3 class="form-label-fiori text-fiori-blue-600">Datum</h3>
+          <p class="mt-1 text-fiori-gray-900">{{ formatDate(menu.date) }}</p>
         </div>
 
         <div v-if="menu.description">
-          <h3 class="text-sm font-medium text-gray-500">Description</h3>
-          <p class="mt-1 text-gray-900">{{ menu.description }}</p>
+          <h3 class="form-label-fiori text-fiori-blue-600">Beschreibung</h3>
+          <p class="mt-1 text-fiori-gray-900">{{ menu.description }}</p>
         </div>
 
         <div v-if="menu.allergens && menu.allergens.length > 0">
-          <h3 class="text-sm font-medium text-gray-500">Allergens</h3>
+          <h3 class="form-label-fiori text-fiori-blue-600">Allergene</h3>
           <div class="mt-1 flex flex-wrap gap-2">
             <span
               v-for="allergen in menu.allergens"
               :key="allergen"
-              class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full"
+              class="badge-fiori badge-fiori-warning"
             >
               {{ allergen }}
             </span>
@@ -53,17 +54,17 @@
         </div>
 
         <div v-if="menu.nutritional_info && Object.keys(menu.nutritional_info).length > 0">
-          <h3 class="text-sm font-medium text-gray-500">Nutritional Information</h3>
+          <h3 class="form-label-fiori text-fiori-blue-600">Nährwertinformationen</h3>
           <div class="mt-1 grid grid-cols-2 gap-4">
             <div v-for="(value, key) in menu.nutritional_info" :key="key">
-              <span class="text-sm text-gray-600 capitalize">{{ key }}:</span>
-              <span class="ml-2 text-gray-900">{{ value }}</span>
+              <span class="text-sm text-fiori-gray-900 capitalize font-medium">{{ key }}:</span>
+              <span class="ml-2 text-fiori-gray-700">{{ value }}</span>
             </div>
           </div>
         </div>
 
         <div v-if="menu.photo_url" class="mt-4">
-          <h3 class="text-sm font-medium text-gray-500 mb-2">Photo</h3>
+          <h3 class="form-label-fiori text-fiori-blue-600 mb-2">Foto</h3>
           <img
             :src="menu.photo_url"
             :alt="menu.meal_name"
@@ -71,34 +72,34 @@
           />
         </div>
 
-        <div class="pt-4 border-t">
-          <h3 class="text-sm font-medium text-gray-500 mb-4">Orders for this Menu</h3>
-          <div v-if="orders.length === 0" class="text-gray-500 text-sm">
-            No orders for this menu yet.
+        <div class="pt-4 border-t border-fiori-gray-200">
+          <h3 class="form-label-fiori text-fiori-blue-600 mb-4">Bestellungen für dieses Menü</h3>
+          <div v-if="orders.length === 0" class="text-fiori-gray-600 text-sm">
+            Noch keine Bestellungen für dieses Menü.
           </div>
           <div v-else class="space-y-2">
             <div
               v-for="order in orders"
               :key="order.id"
-              class="p-3 bg-gray-50 rounded-md flex items-center justify-between"
+              class="p-3 bg-fiori-gray-50 rounded-md flex items-center justify-between"
             >
               <div>
-                <p class="font-medium text-sm">{{ getChildName(order.child_id) }}</p>
-                <p class="text-xs text-gray-600">
+                <p class="font-medium text-sm text-fiori-gray-900">{{ getChildName(order.child_id) }}</p>
+                <p class="text-xs text-fiori-gray-700">
                   Status: 
                   <span
                     :class="[
-                      'font-medium',
-                      order.status === 'confirmed' ? 'text-green-600' :
-                      order.status === 'cancelled' ? 'text-red-600' :
-                      'text-gray-600'
+                      'badge-fiori ml-1',
+                      order.status === 'confirmed' ? 'badge-fiori-success' :
+                      order.status === 'cancelled' ? 'badge-fiori-error' :
+                      'badge-fiori-neutral'
                     ]"
                   >
-                    {{ order.status }}
+                    {{ order.status === 'confirmed' ? 'Bestätigt' : order.status === 'cancelled' ? 'Storniert' : order.status }}
                   </span>
                 </p>
-                <p v-if="order.special_requests" class="text-xs text-gray-500 mt-1">
-                  Special requests: {{ order.special_requests }}
+                <p v-if="order.special_requests" class="text-xs text-fiori-gray-700 mt-1">
+                  Besondere Wünsche: {{ order.special_requests }}
                 </p>
               </div>
             </div>

@@ -18,7 +18,7 @@
     </div>
 
     <div v-else class="space-y-6">
-      <div class="bg-white rounded-lg shadow p-6">
+      <div class="card-fiori card-pink rounded-lg shadow p-6">
         <div class="mb-6">
           <Heading size="xl" class="mb-2">Manage Parents</Heading>
           <p class="text-lg font-medium text-gray-900">Child: {{ childName }}</p>
@@ -94,7 +94,7 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-lg shadow p-6">
+      <div class="card-fiori card-pink rounded-lg shadow p-6">
         <Heading size="md" class="mb-4">Current Parents</Heading>
         <div v-if="currentParents.length === 0" class="text-gray-500 text-sm">
           No parents linked to this child.

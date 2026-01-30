@@ -20,7 +20,7 @@
     </div>
 
     <div v-else class="space-y-6">
-      <div class="bg-white rounded-lg shadow p-6">
+      <div class="card-fiori card-pink rounded-lg shadow p-6">
         <Heading size="md" class="mb-4">Current Assignments</Heading>
         <TeacherAssignmentList
           ref="assignmentListRef"
@@ -33,7 +33,7 @@
         />
       </div>
 
-      <div class="bg-white rounded-lg shadow p-6">
+      <div class="card-fiori card-pink rounded-lg shadow p-6">
         <Heading size="md" class="mb-4">Add New Assignment</Heading>
         <TeacherAssignmentForm
           :key="formKey"

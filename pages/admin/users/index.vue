@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="page-header-fiori">
+    <div class="ios-page-header">
       <div class="flex justify-between items-center">
         <div>
-          <h1 class="page-header-fiori-title">User Management</h1>
-          <p class="page-header-fiori-subtitle">Manage system users and their roles</p>
+          <h1>Benutzerverwaltung</h1>
+          <p>Systembenutzer und deren Rollen verwalten</p>
         </div>
-        <NuxtLink to="/admin/users/new" class="btn-fiori-primary">
-          ➕ Create User
+        <NuxtLink to="/admin/users/new" class="ios-button ios-button-primary inline-flex items-center gap-2">
+          ➕ Benutzer erstellen
         </NuxtLink>
       </div>
     </div>
@@ -18,13 +18,13 @@
         :key="role"
         @click="selectedRole = role"
         :class="[
-          'px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 capitalize',
+          'ios-button transition-all duration-200 capitalize',
           selectedRole === role 
-            ? 'bg-fiori-blue-500 text-white shadow-sm' 
-            : 'bg-white text-fiori-gray-700 border border-fiori-gray-300 hover:bg-fiori-gray-50'
+            ? 'ios-button-primary' 
+            : 'ios-button-secondary'
         ]"
       >
-        {{ role || 'All' }}
+        {{ role || 'Alle' }}
       </button>
     </div>
 
@@ -37,66 +37,70 @@
     </div>
 
     <div v-else>
-      <EmptyState
-        v-if="filteredUsers.length === 0"
-        icon="👤"
-        title="No users found"
-        :description="selectedRole ? `No ${selectedRole} users found.` : 'Create your first user to get started.'"
-      >
-        <template #actions>
-          <NuxtLink to="/admin/users/new" class="btn-fiori-primary">
-            Create User
+      <div v-if="filteredUsers.length === 0">
+        <IOSCard customClass="p-8 text-center">
+          <div class="text-6xl mb-4 opacity-50">👤</div>
+          <p class="text-lg font-semibold text-gray-900 mb-2">Keine Benutzer gefunden</p>
+          <p class="text-sm text-gray-600 mb-4">
+            {{ selectedRole ? `Keine ${selectedRole}-Benutzer gefunden.` : 'Erstellen Sie Ihren ersten Benutzer, um zu beginnen.' }}
+          </p>
+          <NuxtLink to="/admin/users/new" class="ios-button ios-button-primary inline-flex items-center gap-2">
+            Benutzer erstellen
           </NuxtLink>
-        </template>
-      </EmptyState>
+        </IOSCard>
+      </div>
 
-      <div v-else class="card-fiori overflow-hidden p-0">
-        <table class="table-fiori">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Created</th>
-              <th class="text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="user in filteredUsers" :key="user.id">
-              <td class="font-medium text-fiori-gray-900">
-                {{ user.full_name }}
-              </td>
-              <td class="text-fiori-gray-600">
-                {{ user.email }}
-              </td>
-              <td>
-                <span
-                  :class="[
-                    'badge-fiori capitalize',
-                    user.role === 'admin' ? 'badge-fiori-primary' :
-                    user.role === 'teacher' ? 'badge-fiori-primary' :
-                    user.role === 'parent' ? 'badge-fiori-success' :
-                    user.role === 'kitchen' ? 'badge-fiori-warning' :
-                    'badge-fiori-neutral'
-                  ]"
-                >
-                  {{ user.role }}
-                </span>
-              </td>
-              <td class="text-fiori-gray-600">
-                {{ formatDate(user.created_at) }}
-              </td>
-              <td class="text-right">
-                <button
-                  @click="editUser(user)"
-                  class="text-fiori-blue-600 hover:text-fiori-blue-700 font-medium text-sm"
-                >
-                  Edit
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div v-else>
+        <IOSCard customClass="overflow-hidden p-0">
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="ios-glass">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Name</th>
+                  <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Email</th>
+                  <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Rolle</th>
+                  <th class="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Erstellt</th>
+                  <th class="px-6 py-3 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider">Aktionen</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr v-for="user in filteredUsers" :key="user.id" class="hover:bg-gray-50 transition-colors">
+                  <td class="px-6 py-4 whitespace-nowrap font-semibold text-gray-900">
+                    {{ user.full_name }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    {{ user.email }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <span
+                      :class="[
+                        'px-3 py-1 text-xs font-semibold rounded-full capitalize',
+                        user.role === 'admin' ? 'bg-blue-100 text-blue-800' :
+                        user.role === 'teacher' ? 'bg-blue-100 text-blue-800' :
+                        user.role === 'parent' ? 'bg-green-100 text-green-800' :
+                        user.role === 'kitchen' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-gray-100 text-gray-800'
+                      ]"
+                    >
+                      {{ user.role }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    {{ formatDate(user.created_at) }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button
+                      @click="editUser(user)"
+                      class="text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      Bearbeiten
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </IOSCard>
       </div>
     </div>
   </div>
@@ -108,7 +112,7 @@ import { useSupabaseClient } from '#imports'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
-import EmptyState from '~/components/ui/EmptyState.vue'
+import IOSCard from '~/components/ui/IOSCard.vue'
 
 definePageMeta({
   middleware: ['auth', 'role'],

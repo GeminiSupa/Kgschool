@@ -19,7 +19,7 @@
 
     <div v-else-if="staff" class="space-y-6">
       <div class="bg-white rounded-lg shadow p-6">
-        <Heading size="xl" class="mb-6">
+        <Heading size="xl" class="mb-6 text-fiori-gray-900">
           {{ staff.full_name }}
         </Heading>
 
@@ -49,7 +49,7 @@
       </div>
 
       <div v-if="staff.role === 'teacher' || staff.role === 'support'" class="bg-white rounded-lg shadow p-6">
-        <Heading size="md" class="mb-4">Assigned Groups</Heading>
+        <Heading size="md" class="mb-4 text-fiori-gray-900">Zugewiesene Gruppen</Heading>
         <div v-if="assignedGroups.length === 0" class="text-gray-500 text-sm">
           No groups assigned yet
         </div>

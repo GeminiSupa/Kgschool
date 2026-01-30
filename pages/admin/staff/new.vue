@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Heading size="xl" class="mb-6">Add New Staff Member</Heading>
+    <Heading size="xl" class="mb-6 text-white drop-shadow">Neues Personalmitglied hinzufügen</Heading>
     
     <div class="bg-white rounded-lg shadow p-6 max-w-2xl">
       <StaffForm @submit="handleSubmit" @cancel="handleCancel" />

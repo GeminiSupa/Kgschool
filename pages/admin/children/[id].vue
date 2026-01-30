@@ -8,7 +8,7 @@
       <div class="flex items-center gap-4 mb-6">
         <NuxtLink
           to="/admin/children"
-          class="text-gray-600 hover:text-gray-900"
+          class="link-fiori"
         >
           ← Back to Children
         </NuxtLink>
@@ -22,78 +22,79 @@
         <ErrorAlert :message="error" />
       </div>
 
-      <div v-else-if="child" class="bg-white rounded-lg shadow p-6 max-w-2xl">
-      <Heading size="xl" class="mb-6">
+      <div v-else-if="child">
+        <IOSCard customClass="max-w-2xl p-6">
+      <Heading size="xl" class="mb-6 text-fiori-gray-900">
         {{ child.first_name }} {{ child.last_name }}
       </Heading>
 
       <div class="space-y-4">
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-600">First Name</label>
-            <p class="mt-1 text-gray-900">{{ child.first_name }}</p>
+            <label class="form-label-fiori">Vorname</label>
+            <p class="mt-1 text-fiori-gray-900">{{ child.first_name }}</p>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-600">Last Name</label>
-            <p class="mt-1 text-gray-900">{{ child.last_name }}</p>
+            <label class="form-label-fiori">Nachname</label>
+            <p class="mt-1 text-fiori-gray-900">{{ child.last_name }}</p>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-600">Date of Birth</label>
-            <p class="mt-1 text-gray-900">{{ formatDate(child.date_of_birth) }}</p>
+            <label class="form-label-fiori">Geburtsdatum</label>
+            <p class="mt-1 text-fiori-gray-900">{{ formatDate(child.date_of_birth) }}</p>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-600">Enrollment Date</label>
-            <p class="mt-1 text-gray-900">{{ formatDate(child.enrollment_date) }}</p>
+            <label class="form-label-fiori">Einschulungsdatum</label>
+            <p class="mt-1 text-fiori-gray-900">{{ formatDate(child.enrollment_date) }}</p>
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-600 mb-2">Group</label>
+          <label class="form-label-fiori mb-2">Gruppe</label>
           <div v-if="child.group_id && groupInfo" class="space-y-2">
             <div class="flex items-center gap-2">
-              <p class="text-gray-900 font-medium">{{ groupInfo.name }} ({{ groupInfo.age_range }})</p>
+              <p class="text-fiori-gray-900 font-medium">{{ groupInfo.name }} ({{ groupInfo.age_range }})</p>
               <NuxtLink
                 :to="`/admin/groups/${child.group_id}`"
-                class="text-xs text-blue-600 hover:text-blue-800"
+                class="link-fiori text-xs"
               >
-                View Group →
+                Gruppe ansehen →
               </NuxtLink>
             </div>
-            <div v-if="groupTeachers.length > 0" class="text-sm text-gray-600">
-              <span class="font-medium">Teachers:</span>
+            <div v-if="groupTeachers.length > 0" class="text-sm text-fiori-gray-600">
+              <span class="font-medium">Lehrer:</span>
               <span class="ml-1">
                 {{ groupTeachers.map(t => t.full_name).join(', ') }}
               </span>
             </div>
           </div>
-          <p v-else class="mt-1 text-gray-900">Unassigned</p>
+          <p v-else class="mt-1 text-fiori-gray-900">Nicht zugewiesen</p>
           <NuxtLink
             :to="`/admin/children/${route.params.id}/change-group`"
-            class="mt-2 inline-block text-sm text-blue-600 hover:text-blue-800"
+            class="link-fiori mt-2 inline-block text-sm"
           >
-            {{ child.group_id ? 'Change Group' : 'Assign to Group' }} →
+            {{ child.group_id ? 'Gruppe ändern' : 'Gruppe zuweisen' }} →
           </NuxtLink>
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-600">Status</label>
+          <label class="form-label-fiori">Status</label>
           <span
             :class="[
-              'inline-block mt-1 px-2 py-1 text-xs font-medium rounded-full',
-              child.status === 'active' ? 'bg-green-100 text-green-800' :
-              child.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
-              'bg-yellow-100 text-yellow-800'
+              'badge-fiori mt-1',
+              child.status === 'active' ? 'badge-fiori-success' :
+              child.status === 'inactive' ? 'badge-fiori-neutral' :
+              'badge-fiori-warning'
             ]"
           >
-            {{ child.status }}
+            {{ child.status === 'active' ? 'Aktiv' : child.status === 'inactive' ? 'Inaktiv' : 'Ausstehend' }}
           </span>
         </div>
 
         <div class="pt-4 border-t">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Assigned Staff</label>
+          <label class="form-label-fiori mb-2">Zugewiesenes Personal</label>
           <TeacherAssignmentList
             :child-id="child.id"
             :can-edit="false"
@@ -101,27 +102,28 @@
           />
         </div>
 
-        <div class="pt-4 border-t space-y-2">
+        <div class="pt-4 border-t border-fiori-gray-200 space-y-2">
           <button
             @click="navigateToAssignTeachers"
-            class="block w-full text-left px-4 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition-colors cursor-pointer"
+            class="ios-button ios-button-secondary w-full text-left"
           >
-            👥 Assign Teachers
+            👥 Lehrer zuweisen
           </button>
           <button
             @click="navigateToManageParents"
-            class="block w-full text-left px-4 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition-colors cursor-pointer"
+            class="ios-button ios-button-secondary w-full text-left"
           >
-            👨‍👩‍👧 Manage Parents
+            👨‍👩‍👧 Eltern verwalten
           </button>
           <NuxtLink
             :to="`/admin/attendance?child_id=${childId || route.params.id}`"
-            class="block w-full text-left px-4 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition-colors cursor-pointer"
+            class="ios-button ios-button-secondary w-full text-left block"
           >
-            ✅ View Attendance
+            ✅ Anwesenheit ansehen
           </NuxtLink>
         </div>
       </div>
+      </IOSCard>
     </div>
     </template>
   </div>
@@ -136,6 +138,7 @@ import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
 import TeacherAssignmentList from '~/components/common/TeacherAssignmentList.vue'
+import IOSCard from '~/components/ui/IOSCard.vue'
 
 definePageMeta({
   middleware: ['auth', 'role'],

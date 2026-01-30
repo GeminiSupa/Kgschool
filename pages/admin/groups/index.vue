@@ -1,13 +1,19 @@
 <template>
   <div>
     <div class="flex justify-between items-center mb-6">
-      <Heading size="xl">Groups</Heading>
-      <NuxtLink
-        to="/admin/groups/new"
-        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-      >
-        ➕ Create Group
-      </NuxtLink>
+      <div class="ios-page-header">
+        <div class="flex justify-between items-center">
+          <div>
+            <h1>Gruppen</h1>
+          </div>
+          <NuxtLink
+            to="/admin/groups/new"
+            class="ios-button ios-button-primary inline-flex items-center gap-2"
+          >
+            ➕ Gruppe erstellen
+          </NuxtLink>
+        </div>
+      </div>
     </div>
 
     <div v-if="loading" class="flex justify-center py-12">
@@ -18,39 +24,43 @@
       <ErrorAlert :message="error" />
     </div>
 
-    <div v-else class="bg-white rounded-lg shadow overflow-hidden">
-      <div v-if="groups.length === 0" class="p-8 text-center text-gray-500">
-        No groups created yet.
-      </div>
+    <div v-else>
+      <IOSCard customClass="overflow-hidden">
+        <div v-if="groups.length === 0" class="p-8 text-center text-gray-600">
+          <div class="text-6xl mb-4 opacity-50">👪</div>
+          <p class="text-lg font-semibold text-gray-900 mb-2">Noch keine Gruppen erstellt</p>
+          <p class="text-sm text-gray-600">Erstellen Sie Ihre erste Gruppe, um zu beginnen.</p>
+        </div>
 
-      <div v-else class="divide-y divide-gray-200">
-        <div
-          v-for="group in groups"
-          :key="group.id"
-          class="p-6 hover:bg-gray-50 transition-colors"
-        >
-          <div class="flex items-center justify-between">
-            <div class="flex-1">
-              <p class="text-lg font-medium text-gray-900">{{ group.name }}</p>
-              <p class="text-sm text-gray-600 mt-1">
-                Age Range: {{ group.age_range }} | Capacity: {{ group.capacity }}
-              </p>
-              <p v-if="group.educator_id" class="text-sm text-gray-500 mt-1">
-                Teacher: {{ getTeacherName(group.educator_id) }}
-              </p>
-              <p v-else class="text-sm text-orange-600 mt-1">
-                No teacher assigned
-              </p>
+        <div v-else class="divide-y divide-gray-200">
+          <div
+            v-for="group in groups"
+            :key="group.id"
+            class="p-6 hover:bg-gray-50 transition-colors"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex-1">
+                <p class="text-lg font-semibold text-gray-900">{{ group.name }}</p>
+                <p class="text-sm text-gray-600 mt-1">
+                  Altersbereich: {{ group.age_range }} | Kapazität: {{ group.capacity }}
+                </p>
+                <p v-if="group.educator_id" class="text-sm text-gray-500 mt-1">
+                  Erzieher: {{ getTeacherName(group.educator_id) }}
+                </p>
+                <p v-else class="text-sm text-orange-600 mt-1">
+                  Kein Erzieher zugewiesen
+                </p>
+              </div>
+              <NuxtLink
+                :to="`/admin/groups/${group.id}`"
+                class="text-blue-600 hover:text-blue-700 text-sm font-medium"
+              >
+                Ansehen →
+              </NuxtLink>
             </div>
-            <NuxtLink
-              :to="`/admin/groups/${group.id}`"
-              class="text-blue-600 hover:text-blue-700 text-sm"
-            >
-              View →
-            </NuxtLink>
           </div>
         </div>
-      </div>
+      </IOSCard>
     </div>
   </div>
 </template>
@@ -63,6 +73,7 @@ import { useGroupsStore } from '~/stores/groups'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
+import IOSCard from '~/components/ui/IOSCard.vue'
 
 definePageMeta({
   middleware: ['auth', 'role'],

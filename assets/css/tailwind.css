@@ -1,10 +1,27 @@
-/* Import Fiori Design System - CSS Variables and Base Styles */
-/* Component classes are defined in @layer components in fiori-design-system.css */
-/* Must import before Tailwind directives */
+/* Import Fiori Design System - CSS Variables only (no @layer directives) */
 @import './fiori-design-system.css';
 
+/* Import iOS Design System */
+@import './ios-design-system.css';
+
+/* Import Fiori Component Styles - Must be before @tailwind directives */
+@import './fiori-components.css';
+
 @tailwind base;
+
+/* Fiori Base Typography */
+@layer base {
+  body {
+    font-family: var(--fiori-font-family);
+    font-size: var(--fiori-font-size-base);
+    line-height: var(--fiori-line-height-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
 @tailwind components;
+
 @tailwind utilities;
 
 /* Note: Use Fiori classes directly (e.g., btn-fiori-primary, card-fiori, table-fiori) */

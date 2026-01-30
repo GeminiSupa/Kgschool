@@ -1,83 +1,85 @@
 <template>
   <div>
-    <Heading size="xl" class="mb-6">Create Lunch Menu</Heading>
+    <div class="ios-page-header mb-6">
+      <h1>Mittagessen-Menü erstellen</h1>
+    </div>
     
-    <div class="bg-white rounded-lg shadow p-6 max-w-2xl">
+    <IOSCard customClass="max-w-2xl p-6">
       <form @submit.prevent="handleSubmit" class="space-y-4">
-        <div>
-          <label for="date" class="block text-sm font-medium text-gray-700 mb-1">
-            Date *
+        <div class="form-group-fiori">
+          <label for="date" class="form-label-fiori form-label-fiori-required">
+            Datum
           </label>
           <input
             id="date"
             v-model="form.date"
             type="date"
             required
-            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            class="ios-input"
           />
         </div>
 
-        <div>
-          <label for="meal_name" class="block text-sm font-medium text-gray-700 mb-1">
-            Meal Name *
+        <div class="form-group-fiori">
+          <label for="meal_name" class="form-label-fiori form-label-fiori-required">
+            Gerichtname
           </label>
           <input
             id="meal_name"
             v-model="form.meal_name"
             type="text"
             required
-            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-            placeholder="e.g., Vegetable Pasta"
+            class="ios-input"
+            placeholder="z.B. Gemüse-Pasta"
           />
         </div>
 
-        <div>
-          <label for="description" class="block text-sm font-medium text-gray-700 mb-1">
-            Description
+        <div class="form-group-fiori">
+          <label for="description" class="form-label-fiori">
+            Beschreibung
           </label>
           <textarea
             id="description"
             v-model="form.description"
             rows="3"
-            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-            placeholder="Meal description..."
+            class="ios-input"
+            placeholder="Gerichtbeschreibung..."
           />
         </div>
 
-        <div>
-          <label for="allergens" class="block text-sm font-medium text-gray-700 mb-1">
-            Allergens (comma-separated)
+        <div class="form-group-fiori">
+          <label for="allergens" class="form-label-fiori">
+            Allergene (kommagetrennt)
           </label>
           <input
             id="allergens"
             v-model="allergensInput"
             type="text"
-            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-            placeholder="e.g., Nuts, Dairy"
+            class="ios-input"
+            placeholder="z.B. Nüsse, Milchprodukte"
           />
         </div>
 
-        <div v-if="error" class="p-3 bg-red-50 text-red-700 rounded-md text-sm">
+        <div v-if="error" class="alert-fiori alert-fiori-error">
           {{ error }}
         </div>
 
         <div class="flex gap-3 justify-end pt-4">
           <NuxtLink
             to="/admin/lunch/menus"
-            class="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+            class="btn-fiori-secondary"
           >
-            Cancel
+            Abbrechen
           </NuxtLink>
           <button
             type="submit"
             :disabled="loading"
-            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                  class="ios-button ios-button-primary"
           >
-            {{ loading ? 'Creating...' : 'Create Menu' }}
+            {{ loading ? 'Wird erstellt...' : 'Menü erstellen' }}
           </button>
         </div>
       </form>
-    </div>
+    </IOSCard>
   </div>
 </template>
 
@@ -86,6 +88,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useLunchStore } from '~/stores/lunch'
 import Heading from '~/components/ui/Heading.vue'
+import IOSCard from '~/components/ui/IOSCard.vue'
 
 definePageMeta({
   middleware: ['auth', 'role'],

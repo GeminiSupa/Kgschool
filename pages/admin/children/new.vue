@@ -2,9 +2,9 @@
   <div>
     <Heading size="xl" class="mb-6">Add New Child</Heading>
     
-    <div class="bg-white rounded-lg shadow p-6 max-w-2xl">
+    <IOSCard customClass="max-w-2xl p-6">
       <ChildForm @submit="handleSubmit" @cancel="handleCancel" />
-    </div>
+    </IOSCard>
   </div>
 </template>
 
@@ -13,6 +13,7 @@ import { useSupabaseClient } from '#imports'
 import { useRouter } from 'vue-router'
 import Heading from '~/components/ui/Heading.vue'
 import ChildForm from '~/components/forms/ChildForm.vue'
+import IOSCard from '~/components/ui/IOSCard.vue'
 
 definePageMeta({
   middleware: ['auth', 'role'],

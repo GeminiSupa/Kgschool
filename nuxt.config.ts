@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const isProduction = process.env.NODE_ENV === 'production'
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-01-01',
   devtools: { enabled: true },
@@ -6,6 +8,13 @@ export default defineNuxtConfig({
   vite: {
     build: {
       rollupOptions: {
+        external: (id) => {
+          // Mark webpack as external - it's only needed at build time, not runtime
+          if (id === 'webpack' || id.startsWith('webpack/')) {
+            return true
+          }
+          return false
+        },
         onwarn(warning, warn) {
           // Suppress Supabase internal unused import warnings
           if (warning.code === 'UNUSED_EXTERNAL_IMPORT' && 
@@ -17,10 +26,25 @@ export default defineNuxtConfig({
               warning.message?.includes('@supabase/')) {
             return
           }
+          // Suppress PWA manifest errors in dev mode (harmless)
+          if (warning.message?.includes('#app-manifest')) {
+            return
+          }
+          // Suppress webpack resolution errors - it's external
+          if (warning.message?.includes('webpack') || 
+              warning.code === 'UNRESOLVED_IMPORT' && warning.message?.includes('webpack')) {
+            return
+          }
           // Use default warning handler for other warnings
           warn(warning)
         }
+      },
+      commonjsOptions: {
+        transformMixedEsModules: true
       }
+    },
+    optimizeDeps: {
+      exclude: ['webpack']
     }
   },
   
@@ -29,7 +53,13 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
-    '@vite-pwa/nuxt'
+    // Only enable PWA in production to avoid dev mode manifest errors
+    ...(isProduction ? ['@vite-pwa/nuxt'] : [])
+  ],
+
+  // Explicitly prevent i18n from being auto-detected
+  ignore: [
+    '**/node_modules/@nuxtjs/i18n/**'
   ],
 
   supabase: {
@@ -43,43 +73,43 @@ export default defineNuxtConfig({
     }
   },
 
-  pwa: {
-    registerType: 'autoUpdate',
-    manifest: {
-      name: 'Kindergarten Management System',
-      short_name: 'KG School',
-      description: 'Kindergarten Management System',
-      theme_color: '#0070F2',
-      icons: [
-        {
-          src: 'pwa-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: 'pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png'
-        }
-      ]
-    },
-    workbox: {
-      navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
-    },
-    client: {
-      installPrompt: true,
-      periodicSyncForUpdates: 20
-    },
-    devOptions: {
-      enabled: false,
-      suppressWarnings: true,
-      navigateFallbackAllowlist: [/^\/$/],
-      type: 'module'
+  // PWA configuration - only used in production
+  ...(isProduction ? {
+    pwa: {
+      registerType: 'autoUpdate',
+      manifest: {
+        name: 'Kindergarten Management System',
+        short_name: 'KG School',
+        description: 'Kindergarten Management System',
+        theme_color: '#0070F2',
+        icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      },
+      workbox: {
+        navigateFallback: '/',
+        globPatterns: ['**/*.{js,css,html,png,svg,ico}']
+      },
+      client: {
+        installPrompt: true,
+        periodicSyncForUpdates: 20
+      }
     }
-  },
+  } : {}),
 
-  css: ['~/assets/css/tailwind.css'],
+  css: [
+    '~/assets/css/tailwind.css',
+    '~/assets/css/fiori-design-system.css'
+  ],
 
   runtimeConfig: {
     public: {
