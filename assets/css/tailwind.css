@@ -1,0 +1,12 @@
+/* Import Fiori Design System - CSS Variables and Base Styles */
+/* Component classes are defined in @layer components in fiori-design-system.css */
+/* Must import before Tailwind directives */
+@import './fiori-design-system.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Note: Use Fiori classes directly (e.g., btn-fiori-primary, card-fiori, table-fiori) */
+/* The aliases below are removed because @apply can't reference imported classes */
+/* Use the full class names from fiori-design-system.css instead */

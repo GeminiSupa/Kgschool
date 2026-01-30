@@ -1,0 +1,53 @@
+/* Global styles and Fiori-inspired theme variables */
+:root {
+  /* SAP Fiori Color Palette */
+  --fiori-blue-1: #0070F2;
+  --fiori-blue-2: #0057D2;
+  --fiori-blue-3: #0040B0;
+  --fiori-gray-1: #F5F5F5;
+  --fiori-gray-2: #E5E5E5;
+  --fiori-gray-3: #CCCCCC;
+  --fiori-gray-4: #999999;
+  --fiori-gray-5: #666666;
+  --fiori-gray-6: #333333;
+  --fiori-success: #107E3E;
+  --fiori-warning: #FFB300;
+  --fiori-error: #E60000;
+  --fiori-info: #0070F2;
+  
+  /* Spacing (4px base unit) */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile-first responsive utilities */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
