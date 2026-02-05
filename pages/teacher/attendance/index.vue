@@ -41,7 +41,7 @@
       <div v-else>
         <AttendanceBulkActions
           v-if="bulkMode"
-          :select-all="selectedChildren.length === myChildren.length"
+          :select-all="selectedChildren.length === myChildren.length && myChildren.length > 0"
           :selected-count="selectedChildren.length"
           @toggle-select-all="toggleSelectAll"
           @mark-all-present="markAllPresent"
@@ -293,11 +293,25 @@ const exitBulkMode = () => {
 }
 
 const toggleSelectAll = () => {
-  if (selectedChildren.value.length === myChildren.value.length) {
+  console.log('toggleSelectAll called', {
+    selectedCount: selectedChildren.value.length,
+    totalCount: myChildren.value.length,
+    selected: selectedChildren.value,
+    allIds: myChildren.value.map(c => c.id)
+  })
+  
+  if (selectedChildren.value.length === myChildren.value.length && myChildren.value.length > 0) {
+    // Deselect all
     selectedChildren.value = []
   } else {
-    selectedChildren.value = myChildren.value.map(c => c.id)
+    // Select all
+    selectedChildren.value = [...myChildren.value.map(c => c.id)]
   }
+  
+  console.log('After toggle:', {
+    selectedCount: selectedChildren.value.length,
+    selected: selectedChildren.value
+  })
 }
 
 const toggleChildSelection = (childId: string) => {

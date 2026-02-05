@@ -65,6 +65,7 @@ import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLunchPricingStore } from '~/stores/lunchPricing'
 import { useGroupsStore } from '~/stores/groups'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
@@ -76,14 +77,16 @@ definePageMeta({
 
 const pricingStore = useLunchPricingStore()
 const groupsStore = useGroupsStore()
+const { getUserKitaId } = useKita()
 
 const { pricing, loading, error } = storeToRefs(pricingStore)
 const { groups } = storeToRefs(groupsStore)
 
 onMounted(async () => {
+  const kitaId = await getUserKitaId()
   await Promise.all([
-    pricingStore.fetchPricing(),
-    groupsStore.fetchGroups()
+    pricingStore.fetchPricing(kitaId || undefined),
+    groupsStore.fetchGroups(kitaId || undefined)
   ])
 })
 

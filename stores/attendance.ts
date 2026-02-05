@@ -31,13 +31,36 @@ export const useAttendanceStore = defineStore('attendance', {
   }),
 
   actions: {
-    async fetchAttendance(childId?: string, date?: string) {
+    async fetchAttendance(childId?: string, date?: string, kitaId?: string) {
       this.loading = true
       this.error = null
 
       try {
         const supabase = useSupabaseClient()
-        let query = supabase.from('attendance').select('*')
+        
+        // If kitaId provided or we need to filter by kita, join with children
+        const needsKitaFilter = !childId && (kitaId !== undefined)
+        
+        let query
+        if (needsKitaFilter) {
+          // Join with children to filter by kita_id
+          query = supabase
+            .from('attendance')
+            .select('*, children!inner(kita_id)')
+          
+          // Get user's kita_id if not provided
+          let targetKitaId = kitaId
+          if (targetKitaId === undefined) {
+            const { getUserKitaId } = useKita()
+            targetKitaId = await getUserKitaId()
+          }
+          
+          if (targetKitaId) {
+            query = query.eq('children.kita_id', targetKitaId)
+          }
+        } else {
+          query = supabase.from('attendance').select('*')
+        }
 
         if (childId) {
           query = query.eq('child_id', childId)
@@ -52,7 +75,12 @@ export const useAttendanceStore = defineStore('attendance', {
         const { data, error } = await query
 
         if (error) throw error
-        this.attendance = data || []
+        
+        // Clean up the data structure if we joined with children
+        this.attendance = (data || []).map((item: any) => {
+          const { children, ...attendance } = item
+          return attendance
+        })
       } catch (e: any) {
         this.error = e
         console.error('Error fetching attendance:', e)
@@ -66,10 +94,20 @@ export const useAttendanceStore = defineStore('attendance', {
         const supabase = useSupabaseClient()
         const authStore = useAuthStore()
         
-        const dataToInsert = {
-          ...attendanceData,
-          recorded_by: authStore.user?.id,
-          check_in_method: attendanceData.check_in_method || 'manual'
+        // Build data object - start with required fields
+        const dataToInsert: any = {
+          ...attendanceData
+        }
+        
+        // Try to add optional fields (may not exist in schema)
+        // If columns don't exist, Supabase will return an error which we'll handle
+        if (authStore.user?.id) {
+          dataToInsert.recorded_by = authStore.user.id
+        }
+        if (attendanceData.check_in_method) {
+          dataToInsert.check_in_method = attendanceData.check_in_method
+        } else {
+          dataToInsert.check_in_method = 'manual'
         }
 
         const { data, error } = await supabase
@@ -77,6 +115,26 @@ export const useAttendanceStore = defineStore('attendance', {
           .upsert(dataToInsert, { onConflict: 'child_id,date' })
           .select()
           .single()
+
+        // If error is about missing columns, retry without them
+        if (error && (error.message?.includes('check_in_method') || error.message?.includes('recorded_by'))) {
+          console.warn('Optional columns not available, retrying without them:', error.message)
+          const fallbackData: any = {
+            ...attendanceData
+          }
+          // Remove optional fields
+          delete fallbackData.recorded_by
+          delete fallbackData.check_in_method
+          
+          const { data: fallbackResult, error: fallbackError } = await supabase
+            .from('attendance')
+            .upsert(fallbackData, { onConflict: 'child_id,date' })
+            .select()
+            .single()
+            
+          if (fallbackError) throw fallbackError
+          return fallbackResult
+        }
 
         if (error) throw error
         return data
@@ -165,13 +223,14 @@ export const useAttendanceStore = defineStore('attendance', {
         const supabase = useSupabaseClient()
         const authStore = useAuthStore()
         
+        // Build records with optional fields
         const attendanceRecords = childIds.map(childId => ({
           child_id: childId,
           date,
           status,
+          check_in_time: status === 'present' ? new Date().toISOString() : null,
           recorded_by: authStore.user?.id,
-          check_in_method: 'bulk',
-          check_in_time: status === 'present' ? new Date().toISOString() : null
+          check_in_method: 'bulk'
         }))
 
         const { data, error } = await supabase
@@ -192,18 +251,40 @@ export const useAttendanceStore = defineStore('attendance', {
         const supabase = useSupabaseClient()
         const authStore = useAuthStore()
         
+        const record: any = {
+          child_id: childId,
+          date,
+          status: 'present',
+          check_in_time: new Date().toISOString(),
+          recorded_by: authStore.user?.id,
+          check_in_method: 'check_in_out'
+        }
+        
         const { data, error } = await supabase
           .from('attendance')
-          .upsert({
+          .upsert(record, { onConflict: 'child_id,date' })
+          .select()
+          .single()
+
+        // If error is about missing columns, retry without them
+        if (error && (error.message?.includes('check_in_method') || error.message?.includes('recorded_by'))) {
+          console.warn('Optional columns not available, retrying without them:', error.message)
+          const fallbackRecord: any = {
             child_id: childId,
             date,
             status: 'present',
-            check_in_time: new Date().toISOString(),
-            recorded_by: authStore.user?.id,
-            check_in_method: 'check_in_out'
-          }, { onConflict: 'child_id,date' })
-          .select()
-          .single()
+            check_in_time: new Date().toISOString()
+          }
+          
+          const { data: fallbackResult, error: fallbackError } = await supabase
+            .from('attendance')
+            .upsert(fallbackRecord, { onConflict: 'child_id,date' })
+            .select()
+            .single()
+            
+          if (fallbackError) throw fallbackError
+          return fallbackResult
+        }
 
         if (error) throw error
         return data

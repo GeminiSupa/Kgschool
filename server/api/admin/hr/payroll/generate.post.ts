@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { defineEventHandler, readBody, createError } from 'h3'
+import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -22,6 +23,17 @@ export default defineEventHandler(async (event) => {
       })
     }
 
+    // Get authenticated user to determine kita_id
+    const supabase = await serverSupabaseClient(event)
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      throw createError({
+        statusCode: 401,
+        message: 'Unauthorized'
+      })
+    }
+
     const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
       auth: {
         autoRefreshToken: false,
@@ -29,11 +41,43 @@ export default defineEventHandler(async (event) => {
       }
     })
 
-    // Get all staff (teachers, support, kitchen)
-    const { data: staff, error: staffError } = await supabaseAdmin
+    // Get user's kita_id from organization_members
+    let userKitaId: string | null = null
+    const { data: memberData } = await supabaseAdmin
+      .from('organization_members')
+      .select('kita_id')
+      .eq('profile_id', user.id)
+      .not('kita_id', 'is', null)
+      .limit(1)
+      .single()
+
+    if (memberData) {
+      userKitaId = memberData.kita_id
+    }
+
+    // Get all staff (teachers, support, kitchen) - filter by kita_id if available
+    let staffQuery = supabaseAdmin
       .from('profiles')
       .select('id')
       .in('role', ['teacher', 'support', 'kitchen'])
+
+    // If user belongs to a kita, filter staff by kita_id
+    if (userKitaId) {
+      const { data: memberIds } = await supabaseAdmin
+        .from('organization_members')
+        .select('profile_id')
+        .eq('kita_id', userKitaId)
+
+      const staffIds = memberIds?.map(m => m.profile_id) || []
+      if (staffIds.length > 0) {
+        staffQuery = staffQuery.in('id', staffIds)
+      } else {
+        // No staff in this kita, return empty
+        return { success: true, count: 0, message: 'No staff members found in your Kita' }
+      }
+    }
+
+    const { data: staff, error: staffError } = await staffQuery
 
     if (staffError) throw staffError
     if (!staff || staff.length === 0) {

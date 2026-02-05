@@ -169,8 +169,14 @@ const navItems = computed(() => {
     items.push(
       { path: '/admin/dashboard', label: 'Dashboard', icon: '🏠' },
       { path: '/admin/children', label: 'Kinder', icon: '👶' },
+      { path: '/admin/groups', label: 'Gruppen', icon: '👪' },
       { path: '/admin/staff', label: 'Personal', icon: '👥' },
+      { path: '/admin/users', label: 'Benutzer', icon: '👤' },
       { path: '/admin/attendance', label: 'Anwesenheit', icon: '✅' },
+      { path: '/admin/calendar', label: 'Kalender', icon: '📅' },
+      { path: '/admin/applications', label: 'Bewerbungen', icon: '📋' },
+      { path: '/admin/contracts', label: 'Verträge', icon: '📝' },
+      { path: '/admin/consents', label: 'Einverständnisse', icon: '✅' },
       { path: '/admin/daily-reports', label: 'Tagesberichte', icon: '📄' },
       { path: '/admin/observations', label: 'Beobachtungen', icon: '👁️' },
       { path: '/admin/portfolios', label: 'Portfolios', icon: '📔' },
@@ -178,8 +184,12 @@ const navItems = computed(() => {
       { path: '/admin/daily-routines', label: 'Tagesablauf', icon: '⏰' },
       { path: '/admin/lunch/menus', label: 'Mittagessen', icon: '🍽️' },
       { path: '/admin/lunch/billing', label: 'Abrechnung', icon: '💰' },
+      { path: '/admin/fees', label: 'Gebühren', icon: '💳' },
+      { path: '/admin/parent-work', label: 'Elternarbeit', icon: '🔧' },
+      { path: '/admin/leave', label: 'Urlaub', icon: '🏖️' },
       { path: '/admin/hr/payroll', label: 'Personalabrechnung', icon: '💼' },
-      { path: '/admin/messages', label: 'Nachrichten', icon: '💬' }
+      { path: '/admin/messages', label: 'Nachrichten', icon: '💬' },
+      { path: '/admin/settings', label: 'Einstellungen', icon: '⚙️' }
     )
   } else if (role === 'teacher') {
     items.push(

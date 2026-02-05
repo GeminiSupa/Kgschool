@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useKita } from '~/composables/useKita'
 
 export interface MonthlyBilling {
   id: string
@@ -39,16 +40,38 @@ export const useBillingStore = defineStore('billing', {
   }),
 
   actions: {
-    async fetchBills(childId?: string, month?: number, year?: number) {
+    async fetchBills(childId?: string, month?: number, year?: number, kitaId?: string) {
       this.loading = true
       this.error = null
 
       try {
         const supabase = useSupabaseClient()
-        let query = supabase
-          .from('monthly_billing')
-          .select('*')
-          .order('year', { ascending: false })
+        
+        // If kitaId provided or we need to filter by kita, join with children
+        const needsKitaFilter = !childId && (kitaId !== undefined)
+        
+        let query
+        if (needsKitaFilter) {
+          // Join with children to filter by kita_id
+          query = supabase
+            .from('monthly_billing')
+            .select('*, children!inner(kita_id)')
+          
+          // Get user's kita_id if not provided
+          let targetKitaId = kitaId
+          if (targetKitaId === undefined) {
+            const { getUserKitaId } = useKita()
+            targetKitaId = await getUserKitaId()
+          }
+          
+          if (targetKitaId) {
+            query = query.eq('children.kita_id', targetKitaId)
+          }
+        } else {
+          query = supabase.from('monthly_billing').select('*')
+        }
+
+        query = query.order('year', { ascending: false })
           .order('month', { ascending: false })
 
         if (childId) {
@@ -64,7 +87,12 @@ export const useBillingStore = defineStore('billing', {
         const { data, error } = await query
 
         if (error) throw error
-        this.bills = data || []
+        
+        // Clean up the data structure if we joined with children
+        this.bills = (data || []).map((item: any) => {
+          const { children, ...billing } = item
+          return billing
+        })
       } catch (e: any) {
         this.error = e
         console.error('Error fetching bills:', e)

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useKita } from '~/composables/useKita'
 
 export interface LunchPricing {
   id: string
@@ -18,19 +19,59 @@ export const useLunchPricingStore = defineStore('lunchPricing', {
   }),
 
   actions: {
-    async fetchPricing() {
+    async fetchPricing(kitaId?: string) {
       this.loading = true
       this.error = null
 
       try {
         const supabase = useSupabaseClient()
-        const { data, error } = await supabase
-          .from('lunch_pricing')
-          .select('*')
-          .order('effective_from', { ascending: false })
+        
+        // If kitaId provided or we need to filter by kita, join with groups
+        const needsKitaFilter = kitaId !== undefined
+        
+        let query
+        if (needsKitaFilter) {
+          // Join with groups to filter by kita_id
+          query = supabase
+            .from('lunch_pricing')
+            .select('*, groups!inner(kita_id)')
+          
+          // Get user's kita_id if not provided
+          let targetKitaId = kitaId
+          if (targetKitaId === undefined) {
+            const { getUserKitaId } = useKita()
+            targetKitaId = await getUserKitaId()
+          }
+          
+          if (targetKitaId) {
+            query = query.eq('groups.kita_id', targetKitaId)
+          }
+        } else {
+          // Auto-get kita_id if not provided
+          const { getUserKitaId } = useKita()
+          const userKitaId = await getUserKitaId()
+          
+          if (userKitaId) {
+            query = supabase
+              .from('lunch_pricing')
+              .select('*, groups!inner(kita_id)')
+              .eq('groups.kita_id', userKitaId)
+          } else {
+            query = supabase.from('lunch_pricing').select('*')
+          }
+        }
+
+        query = query.order('effective_from', { ascending: false })
+
+        const { data, error } = await query
 
         if (error) throw error
-        this.pricing = data || []
+        
+        // Clean up the data structure if we joined with groups
+        this.pricing = (data || []).map((item: any) => {
+          const { groups, ...pricing } = item
+          return pricing
+        })
       } catch (e: any) {
         this.error = e
         console.error('Error fetching lunch pricing:', e)
@@ -59,6 +100,25 @@ export const useLunchPricingStore = defineStore('lunchPricing', {
     async createPricing(pricingData: Partial<LunchPricing>) {
       try {
         const supabase = useSupabaseClient()
+        
+        // Verify group belongs to user's kita
+        if (pricingData.group_id) {
+          const { getUserKitaId } = useKita()
+          const kitaId = await getUserKitaId()
+          
+          if (kitaId) {
+            const { data: groupData } = await supabase
+              .from('groups')
+              .select('kita_id')
+              .eq('id', pricingData.group_id)
+              .single()
+            
+            if (!groupData || groupData.kita_id !== kitaId) {
+              throw new Error('Group does not belong to your Kita')
+            }
+          }
+        }
+        
         const { data, error } = await supabase
           .from('lunch_pricing')
           .insert([pricingData])

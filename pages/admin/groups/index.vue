@@ -70,6 +70,7 @@ import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSupabaseClient } from '#imports'
 import { useGroupsStore } from '~/stores/groups'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
@@ -82,12 +83,14 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const groupsStore = useGroupsStore()
+const { getUserKitaId } = useKita()
 const { groups, loading, error } = storeToRefs(groupsStore)
 const teachers = ref<any[]>([])
 
 onMounted(async () => {
+  const kitaId = await getUserKitaId()
   await Promise.all([
-    groupsStore.fetchGroups(),
+    groupsStore.fetchGroups(kitaId || undefined),
     fetchTeachers()
   ])
 })

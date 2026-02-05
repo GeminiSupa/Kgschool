@@ -7,21 +7,21 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const supabase = useSupabaseClient()
   const authStore = useAuthStore()
 
-  // Always check the current session directly (more reliable than reactive user)
-  const { data: { session }, error } = await supabase.auth.getSession()
+  // Use getUser() instead of getSession() for security (authenticates with server)
+  const { data: { user }, error } = await supabase.auth.getUser()
 
-  if (error || !session?.user) {
-    // No valid session → send to login
-    console.log('Auth middleware: No session found, redirecting to login')
+  if (error || !user) {
+    // No valid user → send to login
+    console.log('Auth middleware: No user found, redirecting to login')
     return navigateTo('/login')
   }
 
   // Keep Pinia auth store in sync for components
-  if (!authStore.user || authStore.user.id !== session.user.id) {
-    authStore.setUser(session.user)
+  if (!authStore.user || authStore.user.id !== user.id) {
+    authStore.setUser(user)
     
     // Try to fetch profile if not already loaded
-    if (!authStore.profile || authStore.profile.id !== session.user.id) {
+    if (!authStore.profile || authStore.profile.id !== user.id) {
       try {
         await authStore.fetchProfile()
       } catch (e) {

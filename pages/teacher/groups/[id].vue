@@ -36,16 +36,47 @@
         </div>
 
         <div class="pt-4 border-t space-y-4">
-          <div class="flex items-center justify-between mb-2">
-            <label class="block text-sm font-medium text-gray-700">
-              Assigned Teachers
-            </label>
+          <div class="flex items-center justify-between mb-4">
+            <Heading size="md">Assigned Teachers</Heading>
           </div>
-          <GroupTeacherList
-            :group-id="route.params.id as string"
-            :can-edit="false"
-            :can-delete="false"
-          />
+          <div v-if="teachersLoading" class="text-center py-8 text-gray-500">
+            Loading teachers...
+          </div>
+          <div v-else-if="assignedTeachers.length === 0" class="text-center py-8 text-gray-500">
+            <p>No teachers assigned to this group yet.</p>
+          </div>
+          <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div
+              v-for="assignment in assignedTeachers"
+              :key="assignment.id"
+              class="p-4 bg-gray-50 rounded-xl border border-gray-200"
+            >
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg">
+                  {{ getTeacherInitials(assignment.teacher_id) }}
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-gray-900">{{ getTeacherName(assignment.teacher_id) }}</p>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span
+                      :class="[
+                        'px-2.5 py-1 text-xs font-semibold rounded-full',
+                        assignment.role === 'primary' ? 'bg-blue-500 text-white' :
+                        assignment.role === 'assistant' ? 'bg-green-500 text-white' :
+                        'bg-gray-400 text-white'
+                      ]"
+                    >
+                      {{ formatRole(assignment.role) }}
+                    </span>
+                    <span class="text-xs text-gray-500">
+                      {{ formatDate(assignment.start_date) }}
+                      <span v-if="!assignment.end_date" class="text-green-600 ml-1">(Active)</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -83,8 +114,9 @@ import { useAuthStore } from '~/stores/auth'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
-import GroupTeacherList from '~/components/groups/GroupTeacherList.vue'
 import GroupCapacityIndicator from '~/components/groups/GroupCapacityIndicator.vue'
+import { useGroupTeachersStore } from '~/stores/groupTeachers'
+import type { GroupTeacher } from '~/stores/groupTeachers'
 
 definePageMeta({
   middleware: ['auth', 'role'],
@@ -95,12 +127,18 @@ const route = useRoute()
 const groupsStore = useGroupsStore()
 const childrenStore = useChildrenStore()
 const authStore = useAuthStore()
+const groupTeachersStore = useGroupTeachersStore()
+const supabase = useSupabaseClient()
 
 const group = ref<any>(null)
 const loading = ref(true)
 const error = ref('')
 const childrenInGroup = ref<any[]>([])
 const capacity = ref({ current: 0, max: 0, available: 0 })
+const assignedTeachers = ref<GroupTeacher[]>([])
+const teachersLoading = ref(false)
+const teachers = ref<any[]>([])
+const teacherNames = ref<Record<string, string>>({})
 
 const { children } = storeToRefs(childrenStore)
 
@@ -146,12 +184,66 @@ onMounted(async () => {
 
     // Get capacity
     capacity.value = await groupsStore.getGroupCapacity(groupData.id)
+
+    // Load assigned teachers
+    await loadAssignedTeachers()
   } catch (e: any) {
     error.value = e.message || 'Failed to load group'
   } finally {
     loading.value = false
   }
 })
+
+const loadAssignedTeachers = async () => {
+  try {
+    teachersLoading.value = true
+    await groupTeachersStore.fetchGroupTeachers(route.params.id as string)
+    assignedTeachers.value = groupTeachersStore.assignments
+
+    // Load teacher names
+    const teacherIds = [...new Set(assignedTeachers.value.map(t => t.teacher_id))]
+    if (teacherIds.length > 0) {
+      const { data } = await supabase
+        .from('profiles')
+        .select('id, full_name')
+        .in('id', teacherIds)
+
+      if (data) {
+        data.forEach(profile => {
+          teacherNames.value[profile.id] = profile.full_name
+          teachers.value.push(profile)
+        })
+      }
+    }
+  } catch (e: any) {
+    console.error('Error loading assigned teachers:', e)
+  } finally {
+    teachersLoading.value = false
+  }
+}
+
+const getTeacherName = (teacherId: string) => {
+  return teacherNames.value[teacherId] || teachers.value.find(t => t.id === teacherId)?.full_name || teacherId
+}
+
+const getTeacherInitials = (teacherId: string) => {
+  const name = getTeacherName(teacherId)
+  return name
+    .split(' ')
+    .map((n: string) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2)
+}
+
+const formatRole = (role: string) => {
+  const roles: Record<string, string> = {
+    primary: 'Primary Teacher',
+    assistant: 'Assistant Teacher',
+    support: 'Support Staff'
+  }
+  return roles[role] || role
+}
 
 const formatDate = (date: string) => {
   return new Date(date).toLocaleDateString('de-DE')

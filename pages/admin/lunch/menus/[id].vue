@@ -72,8 +72,16 @@
           />
         </div>
 
-        <div class="pt-4 border-t border-fiori-gray-200">
-          <h3 class="form-label-fiori text-fiori-blue-600 mb-4">Bestellungen für dieses Menü</h3>
+        <div class="pt-4 border-t border-fiori-gray-200 flex justify-between items-center mb-4">
+          <h3 class="form-label-fiori text-fiori-blue-600">Bestellungen für dieses Menü</h3>
+          <NuxtLink
+            :to="`/admin/lunch/menus/${menu.id}/edit`"
+            class="ios-button ios-button-primary inline-flex items-center gap-2"
+          >
+            ✏️ Menü bearbeiten
+          </NuxtLink>
+        </div>
+        <div>
           <div v-if="orders.length === 0" class="text-fiori-gray-600 text-sm">
             Noch keine Bestellungen für dieses Menü.
           </div>

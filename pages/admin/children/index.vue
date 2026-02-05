@@ -30,7 +30,56 @@
           <p class="text-sm text-gray-600">Fügen Sie Ihr erstes Kind hinzu, um zu beginnen.</p>
         </div>
 
-        <div v-else class="overflow-x-auto">
+        <template v-else>
+          <!-- Mobile Card View -->
+          <div class="block md:hidden space-y-3">
+            <div
+              v-for="child in children"
+              :key="child.id"
+              class="bg-white rounded-lg shadow-sm border border-gray-200 p-4"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <h3 class="text-base font-semibold text-gray-900">
+                    {{ child.first_name }} {{ child.last_name }}
+                  </h3>
+                  <p class="text-sm text-gray-600 mt-1">
+                    {{ formatDate(child.date_of_birth) }}
+                  </p>
+                </div>
+                <span
+                  :class="[
+                    'px-2 py-1 text-xs font-semibold rounded-full',
+                    child.status === 'active' ? 'bg-green-100 text-green-800' :
+                    child.status === 'inactive' ? 'bg-gray-100 text-gray-800' :
+                    'bg-yellow-100 text-yellow-800'
+                  ]"
+                >
+                  {{ getStatusLabel(child.status) }}
+                </span>
+              </div>
+              <div class="text-sm text-gray-600 mb-3">
+                <span class="font-medium">Gruppe:</span> {{ getGroupName(child.group_id) }}
+              </div>
+              <div class="flex gap-2">
+                <NuxtLink
+                  :to="`/admin/children/${child.id}`"
+                  class="flex-1 ios-button ios-button-secondary text-sm px-3 py-2 text-center"
+                >
+                  👁️ Ansehen
+                </NuxtLink>
+                <NuxtLink
+                  :to="`/admin/children/${child.id}?edit=true`"
+                  class="flex-1 ios-button ios-button-secondary text-sm px-3 py-2 text-center"
+                >
+                  ✏️ Bearbeiten
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop Table View -->
+          <div class="hidden md:block overflow-x-auto">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="ios-glass">
               <tr>
@@ -97,7 +146,8 @@
               </tr>
             </tbody>
           </table>
-        </div>
+          </div>
+        </template>
       </IOSCard>
     </div>
   </div>
@@ -108,6 +158,7 @@ import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useChildrenStore } from '~/stores/children'
 import { useGroupsStore } from '~/stores/groups'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
@@ -120,13 +171,15 @@ definePageMeta({
 
 const childrenStore = useChildrenStore()
 const groupsStore = useGroupsStore()
+const { getUserKitaId } = useKita()
 const { children, loading, error } = storeToRefs(childrenStore)
 const { groups } = storeToRefs(groupsStore)
 
 onMounted(async () => {
+  const kitaId = await getUserKitaId()
   await Promise.all([
-    childrenStore.fetchChildren(),
-    groupsStore.fetchGroups()
+    childrenStore.fetchChildren(kitaId || undefined),
+    groupsStore.fetchGroups(kitaId || undefined)
   ])
 })
 

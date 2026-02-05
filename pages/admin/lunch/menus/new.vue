@@ -87,6 +87,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useLunchStore } from '~/stores/lunch'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import IOSCard from '~/components/ui/IOSCard.vue'
 
@@ -110,6 +111,8 @@ const form = ref({
   nutritional_info: {}
 })
 
+const { getUserKitaId } = useKita()
+
 const handleSubmit = async () => {
   loading.value = true
   error.value = ''
@@ -119,6 +122,12 @@ const handleSubmit = async () => {
       .split(',')
       .map(a => a.trim())
       .filter(a => a.length > 0)
+
+    // Add kita_id if available
+    const kitaId = await getUserKitaId()
+    if (kitaId) {
+      (form.value as any).kita_id = kitaId
+    }
 
     await lunchStore.createMenu(form.value)
     await router.push('/admin/lunch/menus')

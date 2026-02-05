@@ -22,6 +22,7 @@
         </template>
       </ClientOnly>
     </div>
+    <Toast />
   </div>
 </template>
 
@@ -31,6 +32,7 @@ import AppShell from '~/components/layout/AppShell.vue'
 import AppHeader from '~/components/layout/AppHeader.vue'
 import AppSidebar from '~/components/layout/AppSidebar.vue'
 import MobileNav from '~/components/layout/MobileNav.vue'
+import Toast from '~/components/common/Toast.vue'
 
 const sidebarCollapsed = ref(false)
 </script>

@@ -59,6 +59,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useSupabaseClient } from '#imports'
 import { useGroupsStore } from '~/stores/groups'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
@@ -101,11 +102,20 @@ onMounted(async () => {
 
 const fetchChildren = async () => {
   try {
-    const { data, error: fetchError } = await supabase
+    const { getUserKitaId } = useKita()
+    const kitaId = await getUserKitaId()
+    
+    let query = supabase
       .from('children')
       .select('*')
       .eq('status', 'active')
       .order('first_name')
+
+    if (kitaId) {
+      query = query.eq('kita_id', kitaId)
+    }
+
+    const { data, error: fetchError } = await query
 
     if (fetchError) throw fetchError
     children.value = data || []

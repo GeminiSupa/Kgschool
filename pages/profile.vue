@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Heading size="xl" class="mb-6">Mein Profil</Heading>
+    <div class="mb-6">
+      <Heading size="xl" class="mb-1">Mein Profil</Heading>
+      <p class="text-sm text-gray-500">Verwalten Sie Ihre persönlichen Informationen und Kontoeinstellungen</p>
+    </div>
 
     <div v-if="loading" class="flex justify-center py-12">
       <LoadingSpinner />
@@ -10,241 +13,255 @@
       <ErrorAlert :message="error" />
     </div>
 
-    <div v-else-if="profile">
-      <IOSCard customClass="max-w-2xl p-6">
-      <form @submit.prevent="handleUpdate" class="space-y-6">
-        <!-- Profile Picture -->
-        <div>
-          <Heading size="md" class="mb-4">Profilbild</Heading>
-          <div class="flex items-center gap-6">
-            <div class="relative">
-              <div
-                v-if="profile.avatar_url"
-                class="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-200"
-              >
-                <img
-                  :src="profile.avatar_url"
-                  :alt="profile.full_name"
-                  class="w-full h-full object-cover"
-                />
-              </div>
-              <div
-                v-else
-                class="w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-white text-2xl font-medium border-2 border-gray-200"
-              >
-                {{ initials }}
-              </div>
-              <input
-                ref="avatarInput"
-                type="file"
-                accept="image/*"
-                @change="handleAvatarChange"
-                class="hidden"
+    <div v-else-if="profile" class="space-y-6">
+      <!-- Profile Picture Card -->
+      <IOSCard customClass="p-6">
+        <Heading size="md" class="mb-6">Profilbild</Heading>
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+          <div class="relative">
+            <div
+              v-if="profile.avatar_url"
+              class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg ring-2 ring-gray-200"
+            >
+              <img
+                :src="profile.avatar_url"
+                :alt="profile.full_name"
+                class="w-full h-full object-cover"
               />
             </div>
-            <div class="flex-1">
-              <button
-                type="button"
-                @click="avatarInput?.click()"
-                :disabled="uploadingAvatar"
-                class="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors disabled:opacity-50"
-              >
-                {{ uploadingAvatar ? 'Wird hochgeladen...' : 'Bild ändern' }}
-              </button>
-              <p class="text-xs text-gray-500 mt-2">
-                JPG, PNG oder GIF. Max. Größe 2MB.
-              </p>
-              <button
-                v-if="profile.avatar_url"
-                type="button"
-                @click="removeAvatar"
-                :disabled="uploadingAvatar"
-                class="mt-2 text-sm text-red-600 hover:text-red-700 disabled:opacity-50"
-              >
-                Bild entfernen
-              </button>
+            <div
+              v-else
+              class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold border-4 border-white shadow-lg ring-2 ring-gray-200"
+            >
+              {{ initials }}
             </div>
+            <div
+              v-if="uploadingAvatar"
+              class="absolute inset-0 rounded-full bg-black bg-opacity-50 flex items-center justify-center"
+            >
+              <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            </div>
+            <input
+              ref="avatarInput"
+              type="file"
+              accept="image/*"
+              @change="handleAvatarChange"
+              class="hidden"
+            />
           </div>
-          <div v-if="avatarError" class="mt-2 p-2 bg-red-50 text-red-700 rounded-md text-sm">
-            {{ avatarError }}
+          <div class="flex-1 w-full sm:w-auto">
+            <button
+              type="button"
+              @click="avatarInput?.click()"
+              :disabled="uploadingAvatar"
+              class="w-full sm:w-auto px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all"
+            >
+              {{ uploadingAvatar ? '⏳ Wird hochgeladen...' : '📷 Bild ändern' }}
+            </button>
+            <p class="text-xs text-gray-500 mt-3">
+              JPG, PNG oder GIF. Max. Größe 2MB.
+            </p>
+            <button
+              v-if="profile.avatar_url"
+              type="button"
+              @click="removeAvatar"
+              :disabled="uploadingAvatar"
+              class="mt-3 text-sm font-medium text-red-600 hover:text-red-700 disabled:opacity-50 transition-colors"
+            >
+              🗑️ Bild entfernen
+            </button>
           </div>
         </div>
+        <div v-if="avatarError" class="mt-4 p-4 bg-red-50 border-2 border-red-200 text-red-800 rounded-xl text-sm">
+          <div class="font-semibold mb-1">⚠️ Upload Fehler:</div>
+          {{ avatarError }}
+        </div>
+      </IOSCard>
 
-        <!-- Profile Information -->
-        <div class="pt-6 border-t">
-          <Heading size="md" class="mb-4">Profilinformationen</Heading>
-          
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Profile Information Card -->
+      <IOSCard customClass="p-6">
+        <form @submit.prevent="handleUpdate" class="space-y-6">
+        <Heading size="md" class="mb-6">Profilinformationen</Heading>
+
+        
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Vollständiger Name *
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Vollständiger Name <span class="text-red-500">*</span>
               </label>
               <input
                 v-model="form.full_name"
                 type="text"
                 required
-                class="ios-input"
+                class="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                placeholder="Ihr vollständiger Name"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
                 E-Mail
               </label>
               <input
                 :value="profile.email"
                 type="email"
                 disabled
-                class="ios-input"
+                class="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed"
               />
-              <p class="text-xs text-gray-500 mt-1">E-Mail kann nicht geändert werden</p>
+              <p class="text-xs text-gray-500 mt-2">E-Mail kann nicht geändert werden</p>
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Telefon
               </label>
               <input
                 v-model="form.phone"
                 type="tel"
-                class="ios-input"
+                class="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 placeholder="+49 123 456 7890"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
                 Rolle
               </label>
-              <input
-                :value="profile.role"
-                type="text"
-                disabled
-                class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-600 cursor-not-allowed capitalize"
-              />
-              <p class="text-xs text-gray-500 mt-1">Rolle kann nicht geändert werden</p>
+              <div class="relative">
+                <input
+                  :value="formatRole(profile.role)"
+                  type="text"
+                  disabled
+                  class="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed capitalize"
+                />
+                <span
+                  :class="[
+                    'absolute right-3 top-1/2 -translate-y-1/2 px-2.5 py-1 text-xs font-semibold rounded-full',
+                    profile.role === 'admin' ? 'bg-purple-500 text-white' :
+                    profile.role === 'teacher' ? 'bg-blue-500 text-white' :
+                    profile.role === 'parent' ? 'bg-green-500 text-white' :
+                    'bg-gray-500 text-white'
+                  ]"
+                >
+                  {{ profile.role }}
+                </span>
+              </div>
+              <p class="text-xs text-gray-500 mt-2">Rolle kann nicht geändert werden</p>
             </div>
           </div>
-        </div>
 
-        <!-- Change Password -->
-        <div class="pt-6 border-t">
-          <Heading size="md" class="mb-4">Passwort ändern</Heading>
-          
-          <div class="space-y-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Neues Passwort *
-              </label>
-              <input
-                v-model="passwordForm.newPassword"
-                type="password"
-                class="ios-input"
-                placeholder="Neues Passwort eingeben"
-                :disabled="changingPassword"
-              />
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Neues Passwort bestätigen *
-              </label>
-              <input
-                v-model="passwordForm.confirmPassword"
-                type="password"
-                class="ios-input"
-                placeholder="Neues Passwort bestätigen"
-                :disabled="changingPassword"
-              />
-            </div>
-            <div v-if="passwordError" class="p-2 bg-red-50 text-red-700 rounded-md text-sm">
-              {{ passwordError }}
-            </div>
-            <div v-if="passwordSuccess" class="p-2 bg-green-50 text-green-700 rounded-md text-sm">
-              Passwort erfolgreich geändert!
-            </div>
+          <!-- Error Message -->
+          <div v-if="updateError" class="p-4 bg-red-50 border-2 border-red-200 text-red-800 rounded-xl text-sm">
+            ⚠️ {{ updateError }}
+          </div>
+
+          <!-- Success Message -->
+          <div v-if="updateSuccess" class="p-4 bg-green-50 border-2 border-green-200 text-green-800 rounded-xl text-sm">
+            ✅ Profil erfolgreich aktualisiert!
+          </div>
+
+          <!-- Actions -->
+          <div class="flex justify-end gap-3 pt-4 border-t border-gray-200">
             <button
-              type="button"
-              @click="handleChangePassword"
-              :disabled="changingPassword || !passwordForm.newPassword || !passwordForm.confirmPassword"
-              class="ios-button ios-button-primary disabled:opacity-50"
+              type="submit"
+              :disabled="updating"
+              class="px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all"
             >
-              {{ changingPassword ? 'Wird geändert...' : 'Passwort ändern' }}
+              {{ updating ? '⏳ Wird gespeichert...' : '✅ Änderungen speichern' }}
             </button>
           </div>
-        </div>
+        </form>
+      </IOSCard>
 
-        <!-- Account Information -->
-        <div class="pt-6 border-t">
-          <Heading size="md" class="mb-4">Kontoinformationen</Heading>
-          
-          <div class="space-y-4">
+      <!-- Change Password Card -->
+      <IOSCard customClass="p-6">
+        <Heading size="md" class="mb-6">Passwort ändern</Heading>
+        
+        <div class="space-y-5">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">
+              Neues Passwort <span class="text-red-500">*</span>
+            </label>
+            <input
+              v-model="passwordForm.newPassword"
+              type="password"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              placeholder="Neues Passwort eingeben"
+              :disabled="changingPassword"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">
+              Neues Passwort bestätigen <span class="text-red-500">*</span>
+            </label>
+            <input
+              v-model="passwordForm.confirmPassword"
+              type="password"
+              class="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              placeholder="Neues Passwort bestätigen"
+              :disabled="changingPassword"
+            />
+          </div>
+          <div v-if="passwordError" class="p-4 bg-red-50 border-2 border-red-200 text-red-800 rounded-xl text-sm">
+            ⚠️ {{ passwordError }}
+          </div>
+          <div v-if="passwordSuccess" class="p-4 bg-green-50 border-2 border-green-200 text-green-800 rounded-xl text-sm">
+            ✅ Passwort erfolgreich geändert!
+          </div>
+          <button
+            type="button"
+            @click="handleChangePassword"
+            :disabled="changingPassword || !passwordForm.newPassword || !passwordForm.confirmPassword"
+            class="w-full sm:w-auto px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transition-all"
+          >
+            {{ changingPassword ? '⏳ Wird geändert...' : '🔒 Passwort ändern' }}
+          </button>
+        </div>
+      </IOSCard>
+
+      <!-- Account Information Card -->
+      <IOSCard customClass="p-6">
+        <Heading size="md" class="mb-6">Kontoinformationen</Heading>
+        
+        <div class="space-y-5">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">
+              Benutzer-ID
+            </label>
+            <input
+              :value="profile.id"
+              type="text"
+              disabled
+              class="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed font-mono text-sm"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Benutzer-ID
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Erstellt am
               </label>
               <input
-                :value="profile.id"
+                :value="formatDate(profile.created_at)"
                 type="text"
                 disabled
-                class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-600 cursor-not-allowed font-mono text-sm"
+                class="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed"
               />
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Erstellt am
-                </label>
-                <input
-                  :value="formatDate(profile.created_at)"
-                  type="text"
-                  disabled
-                  class="ios-input"
-                />
-              </div>
-
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">
-                  Zuletzt aktualisiert
-                </label>
-                <input
-                  :value="formatDate(profile.updated_at)"
-                  type="text"
-                  disabled
-                  class="ios-input"
-                />
-              </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Zuletzt aktualisiert
+              </label>
+              <input
+                :value="formatDate(profile.updated_at)"
+                type="text"
+                disabled
+                class="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed"
+              />
             </div>
           </div>
         </div>
-
-        <!-- Error Message -->
-        <div v-if="updateError" class="p-3 bg-red-50 text-red-700 rounded-md text-sm">
-          {{ updateError }}
-        </div>
-
-        <!-- Success Message -->
-        <div v-if="updateSuccess" class="p-3 bg-green-50 text-green-700 rounded-md text-sm">
-          Profil erfolgreich aktualisiert!
-        </div>
-
-        <!-- Actions -->
-        <div class="flex justify-end gap-3 pt-4">
-          <NuxtLink
-            to="/"
-            class="ios-button ios-button-secondary"
-          >
-            Abbrechen
-          </NuxtLink>
-          <button
-            type="submit"
-            :disabled="updating"
-            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors"
-          >
-            {{ updating ? 'Wird gespeichert...' : 'Änderungen speichern' }}
-          </button>
-        </div>
-      </form>
       </IOSCard>
     </div>
   </div>
@@ -453,6 +470,23 @@ const handleChangePassword = async () => {
 }
 
 const formatDate = (date: string) => {
-  return new Date(date).toLocaleString()
+  return new Date(date).toLocaleDateString('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+
+const formatRole = (role: string) => {
+  const roles: Record<string, string> = {
+    admin: 'Administrator',
+    teacher: 'Erzieher/in',
+    parent: 'Elternteil',
+    kitchen: 'Küche',
+    support: 'Support'
+  }
+  return roles[role] || role
 }
 </script>

@@ -77,6 +77,7 @@ import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLunchStore } from '~/stores/lunch'
 import { useChildrenStore } from '~/stores/children'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
@@ -88,16 +89,18 @@ definePageMeta({
 
 const lunchStore = useLunchStore()
 const childrenStore = useChildrenStore()
+const { getUserKitaId } = useKita()
 const { orders, loading, error } = storeToRefs(lunchStore)
 
 const children = ref<any[]>([])
 const menus = ref<any[]>([])
 
 onMounted(async () => {
+  const kitaId = await getUserKitaId()
   await Promise.all([
-    lunchStore.fetchOrders(),
-    childrenStore.fetchChildren(),
-    lunchStore.fetchMenus()
+    lunchStore.fetchOrders(undefined, undefined, kitaId || undefined),
+    childrenStore.fetchChildren(kitaId || undefined),
+    lunchStore.fetchMenus(undefined, undefined, kitaId || undefined)
   ])
   children.value = childrenStore.children
   menus.value = lunchStore.menus

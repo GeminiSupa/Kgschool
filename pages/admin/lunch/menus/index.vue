@@ -49,12 +49,20 @@
                   </span>
                 </div>
               </div>
-              <NuxtLink
-                :to="`/admin/lunch/menus/${menu.id}`"
-                class="text-blue-600 hover:text-blue-700 text-sm font-medium"
-              >
-                Ansehen →
-              </NuxtLink>
+              <div class="flex gap-3">
+                <NuxtLink
+                  :to="`/admin/lunch/menus/${menu.id}`"
+                  class="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                >
+                  Ansehen →
+                </NuxtLink>
+                <NuxtLink
+                  :to="`/admin/lunch/menus/${menu.id}/edit`"
+                  class="text-indigo-600 hover:text-indigo-700 text-sm font-medium"
+                >
+                  ✏️ Bearbeiten
+                </NuxtLink>
+              </div>
             </div>
           </div>
         </div>
@@ -67,6 +75,7 @@
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useLunchStore } from '~/stores/lunch'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
@@ -78,10 +87,12 @@ definePageMeta({
 })
 
 const lunchStore = useLunchStore()
+const { getUserKitaId } = useKita()
 const { menus, loading, error } = storeToRefs(lunchStore)
 
 onMounted(async () => {
-  await lunchStore.fetchMenus()
+  const kitaId = await getUserKitaId()
+  await lunchStore.fetchMenus(undefined, undefined, kitaId || undefined)
 })
 
 const formatDate = (date: string) => {

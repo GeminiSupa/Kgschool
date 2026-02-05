@@ -170,6 +170,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSupabaseClient } from '#imports'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 
 definePageMeta({
@@ -179,6 +180,7 @@ definePageMeta({
 
 const router = useRouter()
 const supabase = useSupabaseClient()
+const { getUserKitaId } = useKita()
 
 const loading = ref(false)
 const loadingPreview = ref(false)
@@ -207,24 +209,40 @@ onMounted(async () => {
 
 const loadPreview = async () => {
   try {
-    const { count } = await supabase
+    const kitaId = await getUserKitaId()
+    
+    let childrenQuery = supabase
       .from('children')
       .select('*', { count: 'exact', head: true })
       .eq('status', 'active')
+    
+    if (kitaId) {
+      childrenQuery = childrenQuery.eq('kita_id', kitaId)
+    }
+    
+    const { count } = await childrenQuery
 
-    // Check if pricing is set up
-    const { data: pricingData } = await supabase
+    // Check if pricing is set up (filtered by kita via groups)
+    let pricingQuery = supabase
       .from('lunch_pricing')
       .select('id')
       .limit(1)
-      .single()
+    
+    // Note: lunch_pricing doesn't have kita_id directly, but groups do
+    // For now, just check if any pricing exists
+    const { data: pricingData } = await pricingQuery.single()
 
-    const { data: groupsData } = await supabase
+    let groupsQuery = supabase
       .from('groups')
       .select('id, lunch_price_per_meal')
       .not('lunch_price_per_meal', 'is', null)
       .limit(1)
-      .single()
+    
+    if (kitaId) {
+      groupsQuery = groupsQuery.eq('kita_id', kitaId)
+    }
+    
+    const { data: groupsData } = await groupsQuery.single()
 
     const hasPricing = !!(pricingData || groupsData)
 

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useKita } from '~/composables/useKita'
 
 export interface StaffPayroll {
   id: string
@@ -28,13 +29,50 @@ export const usePayrollStore = defineStore('payroll', {
   }),
 
   actions: {
-    async fetchPayroll(staffId?: string, month?: number, year?: number) {
+    async fetchPayroll(staffId?: string, month?: number, year?: number, kitaId?: string) {
       this.loading = true
       this.error = null
 
       try {
         const supabase = useSupabaseClient()
-        let query = supabase.from('staff_payroll').select('*')
+        
+        // If kitaId provided or we need to filter by kita, join with organization_members
+        const needsKitaFilter = !staffId && (kitaId !== undefined)
+        
+        let query
+        if (needsKitaFilter) {
+          // Get user's kita_id if not provided
+          let targetKitaId = kitaId
+          if (targetKitaId === undefined) {
+            const { getUserKitaId } = useKita()
+            targetKitaId = await getUserKitaId()
+          }
+          
+          if (targetKitaId) {
+            // Get staff IDs that belong to this kita
+            const { data: membersData } = await supabase
+              .from('organization_members')
+              .select('profile_id')
+              .eq('kita_id', targetKitaId)
+            
+            const staffIds = membersData?.map(m => m.profile_id) || []
+            
+            if (staffIds.length > 0) {
+              query = supabase
+                .from('staff_payroll')
+                .select('*')
+                .in('staff_id', staffIds)
+            } else {
+              // No staff in this kita, return empty
+              this.payroll = []
+              return
+            }
+          } else {
+            query = supabase.from('staff_payroll').select('*')
+          }
+        } else {
+          query = supabase.from('staff_payroll').select('*')
+        }
 
         if (staffId) {
           query = query.eq('staff_id', staffId)

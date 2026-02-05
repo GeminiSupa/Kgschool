@@ -177,6 +177,7 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useBillingStore } from '~/stores/billing'
 import { useChildrenStore } from '~/stores/children'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
@@ -188,6 +189,7 @@ definePageMeta({
 
 const billingStore = useBillingStore()
 const childrenStore = useChildrenStore()
+const { getUserKitaId } = useKita()
 
 const { bills, loading, error } = storeToRefs(billingStore)
 const { children } = storeToRefs(childrenStore)
@@ -217,14 +219,16 @@ const filteredBills = computed(() => {
 })
 
 onMounted(async () => {
+  const kitaId = await getUserKitaId()
   await Promise.all([
-    billingStore.fetchBills(),
-    childrenStore.fetchChildren()
+    billingStore.fetchBills(undefined, undefined, undefined, kitaId || undefined),
+    childrenStore.fetchChildren(kitaId || undefined)
   ])
 })
 
-const applyFilters = () => {
-  billingStore.fetchBills(undefined, filters.value.month || undefined, filters.value.year || undefined)
+const applyFilters = async () => {
+  const kitaId = await getUserKitaId()
+  await billingStore.fetchBills(undefined, filters.value.month || undefined, filters.value.year || undefined, kitaId || undefined)
 }
 
 const getChildName = (childId: string) => {

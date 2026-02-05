@@ -103,6 +103,7 @@ export const useAuth = () => {
     if (!file.type.startsWith('image/')) {
       throw new Error('File must be an image')
     }
+    // Bucket allows 3MB, but we'll limit to 2MB for consistency
     if (file.size > 2 * 1024 * 1024) {
       throw new Error('File size must be less than 2 MB')
     }
@@ -147,9 +148,10 @@ export const useAuth = () => {
       console.log('No existing avatar to delete or error:', e)
     }
 
-    // Skip bucket existence check - listBuckets() may be blocked by RLS
-    // The upload attempt will provide a better error if bucket doesn't exist
-    // Since bucket exists (confirmed in dashboard), we proceed directly to upload
+    // Note: listBuckets() may be blocked by RLS, so we skip the check
+    // The upload attempt will provide accurate error messages if bucket doesn't exist
+    // Since you confirmed the bucket exists, we proceed directly to upload
+    console.log('Attempting upload to avatars bucket...')
 
     // Upload to storage - use upsert to replace if exists
     const { data: uploadData, error: uploadError } = await supabase.storage
@@ -160,25 +162,54 @@ export const useAuth = () => {
       })
 
     if (uploadError) {
-      console.error('Upload error details:', {
+      // Log full error details for debugging
+      console.error('❌ Upload error details:', {
         error: uploadError,
+        errorName: uploadError.name,
+        errorMessage: uploadError.message,
+        errorCode: uploadError.statusCode,
         fileName,
         userId: user.value.id,
         bucket: 'avatars',
-        errorCode: uploadError.statusCode,
-        errorMessage: uploadError.message
+        fullError: JSON.stringify(uploadError, null, 2)
       })
       
-      // More specific error messages
-      if (uploadError.message?.includes('row-level security') || uploadError.message?.includes('RLS')) {
-        throw new Error('Permission denied. Please run the SQL migration: supabase/migrations/diagnose-and-fix-avatars.sql in Supabase SQL Editor.')
+      // More specific error messages based on actual error
+      const errorMsg = (uploadError.message || '').toLowerCase()
+      const errorCode = uploadError.statusCode
+      
+      if (errorMsg.includes('row-level security') || errorMsg.includes('rls') || errorMsg.includes('policy') || errorMsg.includes('permission') || errorMsg.includes('new row violates')) {
+        // Log detailed info for debugging
+        console.error('❌ RLS Error Debug Info:', {
+          fileName,
+          userId: user.value.id,
+          userIdType: typeof user.value.id,
+          expectedPath: `${user.value.id}/avatar.${file.name.split('.').pop()}`,
+          policyCheck: `First folder should match: ${user.value.id}`,
+          fullError: uploadError,
+          errorMessage: uploadError.message,
+          errorName: uploadError.name,
+          errorCode: uploadError.statusCode
+        })
+        
+        // Get current session to verify auth
+        const { data: { session } } = await supabase.auth.getSession()
+        console.error('Current session:', {
+          hasSession: !!session,
+          userId: session?.user?.id,
+          sessionUserId: session?.user?.id,
+          matches: session?.user?.id === user.value.id
+        })
+        
+        throw new Error(`❌ Permission denied (RLS error).\n\nError: ${uploadError.message}\n\nDebug Info (check console):\n- File path: ${fileName}\n- User ID: ${user.value.id}\n- Policy expects: First folder = user ID\n\nTry:\n1. Run FINAL_AVATAR_FIX.sql (alternative policy syntax)\n2. Log out and log back in (refresh session)\n3. Check browser console for full debug details`)
       }
       
-      if (uploadError.message?.includes('Bucket not found') || uploadError.statusCode === 404) {
-        throw new Error('avatars bucket not found. Please create it in Supabase Dashboard > Storage > New Bucket (name: avatars, public: YES).')
+      if (errorMsg.includes('Bucket not found') || errorCode === 404 || errorMsg.includes('not found') || errorMsg.includes('does not exist')) {
+        throw new Error('❌ "avatars" bucket not found!\n\nPlease create it:\n1. Go to Supabase Dashboard > Storage\n2. Click "New bucket"\n3. Name: "avatars" (exactly this)\n4. Public bucket: YES ✅ (must be checked)\n5. Click "Create bucket"\n\nThen run the SQL migration for RLS policies.')
       }
       
-      throw new Error(`Failed to upload avatar: ${uploadError.message || 'Unknown error'}`)
+      // Generic error with full details
+      throw new Error(`❌ Upload failed: ${errorMsg || 'Unknown error'}\n\nError Code: ${errorCode || 'N/A'}\n\nTroubleshooting:\n1. Verify "avatars" bucket exists and is PUBLIC ✅\n2. Check RLS policies are set up (run SQL migration)\n3. Ensure you are logged in\n4. Check browser console for more details`)
     }
 
     console.log('Upload successful:', uploadData)
@@ -190,24 +221,44 @@ export const useAuth = () => {
 
     console.log('Public URL:', urlData.publicUrl)
 
-    // Update profile with avatar URL
+    // Get user ID directly from session to ensure it's available
+    const { data: { user: currentUser }, error: userError } = await supabase.auth.getUser()
+    
+    if (userError || !currentUser) {
+      console.error('Failed to get user:', userError)
+      // Try to clean up the uploaded file
+      try {
+        await supabase.storage.from('avatars').remove([fileName])
+      } catch (cleanupError) {
+        console.error('Failed to cleanup uploaded file:', cleanupError)
+      }
+      throw new Error('User not authenticated. Please log in again.')
+    }
+
+    const userId = currentUser.id
+    console.log('Updating profile with user ID:', userId)
+
+    // Update profile directly with the confirmed user ID
     const { error: updateError } = await supabase
       .from('profiles')
       .update({ avatar_url: urlData.publicUrl })
-      .eq('id', user.value.id)
+      .eq('id', userId)
 
     if (updateError) {
       console.error('Profile update error:', updateError)
       // Try to clean up the uploaded file if profile update fails
       try {
         await supabase.storage.from('avatars').remove([fileName])
+        console.log('Cleaned up uploaded file due to profile update failure')
       } catch (cleanupError) {
         console.error('Failed to cleanup uploaded file:', cleanupError)
       }
       throw new Error(`Failed to update profile: ${updateError.message}`)
     }
 
-    // Refresh profile
+    console.log('Profile updated successfully with avatar URL')
+
+    // Refresh profile to get updated avatar URL
     await authStore.fetchProfile()
 
     return urlData.publicUrl

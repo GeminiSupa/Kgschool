@@ -27,16 +27,16 @@ onMounted(async () => {
     // Wait for session to be fully established - give Supabase time to persist
     await new Promise(resolve => setTimeout(resolve, 500))
     
-    // Verify session exists and is valid
-    const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+    // Use getUser() instead of getSession() for security (authenticates with server)
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
     
-    if (sessionError || !session?.user) {
-      console.error('Callback - Session error:', sessionError)
+    if (userError || !user) {
+      console.error('Callback - User error:', userError)
       await router.push('/login')
       return
     }
 
-    const currentUser = session.user
+    const currentUser = user
     console.log('Callback - User found:', currentUser.id)
 
     // Set user in store immediately
@@ -98,20 +98,29 @@ onMounted(async () => {
     // Set profile in store
     authStore.setProfile(profile)
 
-    // CRITICAL: Ensure session is persisted in browser storage
-    // Refresh session to ensure it's properly stored
-    const { data: { session: refreshedSession }, error: refreshError } = await supabase.auth.refreshSession()
+    // Verify user is still authenticated using getUser() (more secure than getSession)
+    const { data: { user: verifiedUser }, error: verifyError } = await supabase.auth.getUser()
     
-    if (refreshError || !refreshedSession?.user) {
-      console.warn('Callback - Could not refresh session, but proceeding:', refreshError)
-    }
-
-    // Double-check session is still valid before redirect
-    const { data: { session: finalCheck } } = await supabase.auth.getSession()
-    if (!finalCheck?.user) {
-      console.error('Callback - Session lost before redirect')
+    if (verifyError || !verifiedUser) {
+      console.error('Callback - User verification failed:', verifyError)
       await router.push('/login')
       return
+    }
+
+    // Only refresh session if we have a valid session to refresh
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.refresh_token) {
+        // Only refresh if we have a refresh token
+        const { error: refreshError } = await supabase.auth.refreshSession()
+        if (refreshError) {
+          // Log but don't fail - session might still be valid
+          console.warn('Callback - Could not refresh session:', refreshError.message)
+        }
+      }
+    } catch (refreshErr) {
+      // Silently handle refresh errors - session might still be valid
+      console.warn('Callback - Session refresh error (non-critical):', refreshErr)
     }
 
     // Get role

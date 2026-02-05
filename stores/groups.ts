@@ -18,16 +18,30 @@ export const useGroupsStore = defineStore('groups', {
   }),
 
   actions: {
-    async fetchGroups() {
+    async fetchGroups(kitaId?: string) {
       this.loading = true
       this.error = null
 
       try {
         const supabase = useSupabaseClient()
-        const { data, error } = await supabase
+        let query = supabase
           .from('groups')
           .select('*')
           .order('name', { ascending: true })
+
+        // Add kita_id filter if provided or get from user
+        if (kitaId) {
+          query = query.eq('kita_id', kitaId)
+        } else {
+          // Try to get user's kita_id
+          const { getUserKitaId } = useKita()
+          const userKitaId = await getUserKitaId()
+          if (userKitaId) {
+            query = query.eq('kita_id', userKitaId)
+          }
+        }
+
+        const { data, error } = await query
 
         if (error) throw error
         this.groups = data || []
@@ -83,12 +97,25 @@ export const useGroupsStore = defineStore('groups', {
 
         if (!group) return { current: 0, max: 0, available: 0 }
 
-        // Count active children in group
-        const { count } = await supabase
+        // Get group's kita_id first
+        const { data: groupData } = await supabase
+          .from('groups')
+          .select('kita_id')
+          .eq('id', groupId)
+          .single()
+
+        // Count active children in group (with kita filter if available)
+        let countQuery = supabase
           .from('children')
           .select('id', { count: 'exact', head: true })
           .eq('group_id', groupId)
           .eq('status', 'active')
+
+        if (groupData?.kita_id) {
+          countQuery = countQuery.eq('kita_id', groupData.kita_id)
+        }
+
+        const { count } = await countQuery
 
         const current = count || 0
         const max = group.capacity || 0
@@ -103,28 +130,6 @@ export const useGroupsStore = defineStore('groups', {
   },
 
   getters: {
-    getGroupCapacity: (state) => async (groupId: string) => {
-      const supabase = useSupabaseClient()
-      
-      const group = state.groups.find(g => g.id === groupId)
-      if (!group) return { current: 0, max: 0, available: 0 }
-
-      try {
-        const { count } = await supabase
-          .from('children')
-          .select('id', { count: 'exact', head: true })
-          .eq('group_id', groupId)
-          .eq('status', 'active')
-
-        const current = count || 0
-        const max = group.capacity || 0
-        const available = Math.max(0, max - current)
-
-        return { current, max, available }
-      } catch (e: any) {
-        console.error('Error getting group capacity:', e)
-        return { current: 0, max: 0, available: 0 }
-      }
-    }
+    // Removed getGroupCapacity getter - using action instead to avoid conflicts
   }
 })

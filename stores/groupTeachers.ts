@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useKita } from '~/composables/useKita'
 
 export interface GroupTeacher {
   id: string
@@ -26,14 +27,28 @@ export const useGroupTeachersStore = defineStore('groupTeachers', {
 
       try {
         const supabase = useSupabaseClient()
+        
+        // Fetch group teachers with group info to verify kita_id
         const { data, error } = await supabase
           .from('group_teachers')
-          .select('*')
+          .select('*, group:groups(id, kita_id)')
           .eq('group_id', groupId)
           .order('start_date', { ascending: false })
 
         if (error) throw error
-        this.assignments = data || []
+
+        // Filter by kita_id if available
+        const { getUserKitaId } = useKita()
+        const kitaId = await getUserKitaId()
+        
+        if (kitaId && data) {
+          // Filter assignments where group's kita_id matches
+          this.assignments = data.filter((assignment: any) => 
+            assignment.group?.kita_id === kitaId
+          ) || []
+        } else {
+          this.assignments = data || []
+        }
       } catch (e: any) {
         this.error = e
         console.error('Error fetching group teachers:', e)

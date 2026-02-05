@@ -77,7 +77,52 @@
           <p class="text-sm text-gray-600">Fügen Sie Ihren ersten Mitarbeiter hinzu, um zu beginnen.</p>
         </div>
 
-        <div v-else class="overflow-x-auto">
+        <template v-else>
+          <!-- Mobile Card View -->
+          <div class="block md:hidden space-y-3">
+            <div
+              v-for="member in filteredStaff"
+              :key="member.id"
+              class="bg-white rounded-lg shadow-sm border border-gray-200 p-4"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <div>
+                  <h3 class="text-base font-semibold text-gray-900">
+                    {{ member.full_name }}
+                  </h3>
+                  <p class="text-sm text-gray-600 mt-1">{{ member.email }}</p>
+                </div>
+                <span
+                  :class="[
+                    'px-2 py-1 text-xs font-semibold rounded-full',
+                    getRoleClass(member.role)
+                  ]"
+                >
+                  {{ getRoleLabel(member.role) }}
+                </span>
+              </div>
+              <div class="text-sm text-gray-600 mb-3" v-if="member.phone">
+                <span class="font-medium">Telefon:</span> {{ member.phone }}
+              </div>
+              <div class="flex gap-2">
+                <NuxtLink
+                  :to="`/admin/staff/${member.id}`"
+                  class="flex-1 ios-button ios-button-secondary text-sm px-3 py-2 text-center"
+                >
+                  👁️ Ansehen
+                </NuxtLink>
+                <NuxtLink
+                  :to="`/admin/staff/${member.id}?edit=true`"
+                  class="flex-1 ios-button ios-button-secondary text-sm px-3 py-2 text-center"
+                >
+                  ✏️ Bearbeiten
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop Table View -->
+          <div class="hidden md:block overflow-x-auto">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="ios-glass">
               <tr>
@@ -124,7 +169,8 @@
               </tr>
             </tbody>
           </table>
-        </div>
+          </div>
+        </template>
       </IOSCard>
     </div>
   </div>
@@ -160,4 +206,21 @@ onMounted(async () => {
 watch(selectedRole, async (newRole) => {
   await staffStore.fetchStaff(newRole || undefined)
 })
+
+const getRoleLabel = (role: string) => {
+  const labels: Record<string, string> = {
+    teacher: 'Erzieher',
+    kitchen: 'Küche',
+    support: 'Support',
+    admin: 'Admin'
+  }
+  return labels[role] || role
+}
+
+const getRoleClass = (role: string) => {
+  if (role === 'teacher') return 'bg-blue-100 text-blue-800'
+  if (role === 'kitchen') return 'bg-yellow-100 text-yellow-800'
+  if (role === 'support') return 'bg-green-100 text-green-800'
+  return 'bg-gray-100 text-gray-800'
+}
 </script>

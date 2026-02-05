@@ -154,6 +154,7 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSupabaseClient } from '#imports'
 import { usePayrollStore } from '~/stores/payroll'
+import { useKita } from '~/composables/useKita'
 import Heading from '~/components/ui/Heading.vue'
 import LoadingSpinner from '~/components/common/LoadingSpinner.vue'
 import ErrorAlert from '~/components/common/ErrorAlert.vue'
@@ -165,6 +166,7 @@ definePageMeta({
 
 const supabase = useSupabaseClient()
 const payrollStore = usePayrollStore()
+const { getUserKitaId } = useKita()
 
 const { payroll, loading, error } = storeToRefs(payrollStore)
 const staff = ref<any[]>([])
@@ -195,34 +197,53 @@ const filteredPayroll = computed(() => {
 
 onMounted(async () => {
   try {
+    const kitaId = await getUserKitaId()
     await Promise.all([
-      payrollStore.fetchPayroll(),
-      fetchStaff()
+      payrollStore.fetchPayroll(undefined, undefined, undefined, kitaId || undefined),
+      fetchStaff(kitaId || undefined)
     ])
   } catch (e: any) {
     console.error('Error loading payroll:', e)
   }
 })
 
-const fetchStaff = async () => {
+const fetchStaff = async (kitaId?: string) => {
   try {
-    const { data } = await supabase
-      .from('profiles')
-      .select('id, full_name')
-      .in('role', ['teacher', 'support', 'kitchen'])
-      .order('full_name')
+    if (kitaId) {
+      // Get staff who belong to this kita
+      const { data: membersData } = await supabase
+        .from('organization_members')
+        .select('profile_id, profiles(*)')
+        .eq('kita_id', kitaId)
+      
+      if (membersData) {
+        staff.value = membersData
+          .map((item: any) => item.profiles)
+          .filter((profile: any) => profile && ['teacher', 'support', 'kitchen'].includes(profile.role))
+          .sort((a: any, b: any) => (a.full_name || '').localeCompare(b.full_name || ''))
+      }
+    } else {
+      // Fallback: load all staff
+      const { data } = await supabase
+        .from('profiles')
+        .select('id, full_name')
+        .in('role', ['teacher', 'support', 'kitchen'])
+        .order('full_name')
 
-    staff.value = data || []
+      staff.value = data || []
+    }
   } catch (e: any) {
     console.error('Error fetching staff:', e)
   }
 }
 
 const filterPayroll = async () => {
+  const kitaId = await getUserKitaId()
   await payrollStore.fetchPayroll(
     undefined,
     filters.value.month || undefined,
-    filters.value.year || undefined
+    filters.value.year || undefined,
+    kitaId || undefined
   )
 }
 
@@ -240,8 +261,9 @@ const markAsPaid = async (id: string) => {
   if (!confirm('Mark this payroll as paid?')) return
 
   try {
+    const kitaId = await getUserKitaId()
     await payrollStore.markAsPaid(id)
-    await payrollStore.fetchPayroll()
+    await payrollStore.fetchPayroll(undefined, undefined, undefined, kitaId || undefined)
   } catch (e: any) {
     alert(e.message || 'Failed to mark as paid')
   }

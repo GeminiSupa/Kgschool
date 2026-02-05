@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const supabase = useSupabaseClient()
   const authStore = useAuthStore()
 
-  // Always check session directly first (more reliable than reactive composable)
+  // Use getUser() instead of getSession() for security (authenticates with server)
   let currentUser = null
   
   // If coming from callback, wait a moment for session to be established
@@ -13,15 +13,15 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     await new Promise(resolve => setTimeout(resolve, 300))
   }
   
-  const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+  const { data: { user }, error: userError } = await supabase.auth.getUser()
   
-  if (sessionError || !session?.user) {
-    console.log('Auth-role middleware: No session found', sessionError)
+  if (userError || !user) {
+    console.log('Auth-role middleware: No user found', userError)
     return navigateTo('/login')
   }
   
-  currentUser = session.user
-  console.log('Auth-role middleware: Session found, user:', currentUser.id)
+  currentUser = user
+  console.log('Auth-role middleware: User found:', currentUser.id)
 
   // Update store if needed
   if (!authStore.user || authStore.user.id !== currentUser.id) {

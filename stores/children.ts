@@ -22,16 +22,30 @@ export const useChildrenStore = defineStore('children', {
   }),
 
   actions: {
-    async fetchChildren() {
+    async fetchChildren(kitaId?: string) {
       this.loading = true
       this.error = null
 
       try {
         const supabase = useSupabaseClient()
-        const { data, error } = await supabase
+        let query = supabase
           .from('children')
           .select('*')
           .order('first_name', { ascending: true })
+
+        // Add kita_id filter if provided or get from user
+        if (kitaId) {
+          query = query.eq('kita_id', kitaId)
+        } else {
+          // Try to get user's kita_id
+          const { getUserKitaId } = useKita()
+          const userKitaId = await getUserKitaId()
+          if (userKitaId) {
+            query = query.eq('kita_id', userKitaId)
+          }
+        }
+
+        const { data, error } = await query
 
         if (error) throw error
         this.children = data || []

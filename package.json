@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./.nuxt/dist/server/server.mjs"
+    },
+    "#internal/*": "./.nuxt/dist/server/*",
+    "#app/*": "./.nuxt/dist/app/*"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useKita } from '~/composables/useKita'
 
 export interface LunchMenu {
   id: string
@@ -35,13 +36,25 @@ export const useLunchStore = defineStore('lunch', {
   }),
 
   actions: {
-    async fetchMenus(startDate?: string, endDate?: string) {
+    async fetchMenus(startDate?: string, endDate?: string, kitaId?: string) {
       this.loading = true
       this.error = null
 
       try {
         const supabase = useSupabaseClient()
         let query = supabase.from('lunch_menus').select('*').order('date', { ascending: false })
+
+        // Add kita_id filter if provided or get from user
+        if (kitaId) {
+          query = query.eq('kita_id', kitaId)
+        } else {
+          // Try to get user's kita_id
+          const { getUserKitaId } = useKita()
+          const userKitaId = await getUserKitaId()
+          if (userKitaId) {
+            query = query.eq('kita_id', userKitaId)
+          }
+        }
 
         if (startDate) {
           query = query.gte('date', startDate)
@@ -62,15 +75,27 @@ export const useLunchStore = defineStore('lunch', {
       }
     },
 
-    async fetchTodayMenu() {
+    async fetchTodayMenu(kitaId?: string) {
       try {
         const supabase = useSupabaseClient()
         const today = new Date().toISOString().split('T')[0]
-        const { data, error } = await supabase
+        let query = supabase
           .from('lunch_menus')
           .select('*')
           .eq('date', today)
-          .single()
+
+        // Add kita_id filter if provided or get from user
+        if (kitaId) {
+          query = query.eq('kita_id', kitaId)
+        } else {
+          const { getUserKitaId } = useKita()
+          const userKitaId = await getUserKitaId()
+          if (userKitaId) {
+            query = query.eq('kita_id', userKitaId)
+          }
+        }
+
+        const { data, error } = await query.single()
 
         if (error && error.code !== 'PGRST116') throw error
         this.todayMenu = data
@@ -79,13 +104,38 @@ export const useLunchStore = defineStore('lunch', {
       }
     },
 
-    async fetchOrders(childId?: string, menuId?: string) {
+    async fetchOrders(childId?: string, menuId?: string, kitaId?: string) {
       this.loading = true
       this.error = null
 
       try {
         const supabase = useSupabaseClient()
-        let query = supabase.from('lunch_orders').select('*').order('order_date', { ascending: false })
+        
+        // If kitaId provided or we need to filter by kita, join with children
+        const needsKitaFilter = !childId && (kitaId !== undefined)
+        
+        let query
+        if (needsKitaFilter) {
+          // Join with children to filter by kita_id
+          query = supabase
+            .from('lunch_orders')
+            .select('*, children!inner(kita_id)')
+          
+          // Get user's kita_id if not provided
+          let targetKitaId = kitaId
+          if (targetKitaId === undefined) {
+            const { getUserKitaId } = useKita()
+            targetKitaId = await getUserKitaId()
+          }
+          
+          if (targetKitaId) {
+            query = query.eq('children.kita_id', targetKitaId)
+          }
+        } else {
+          query = supabase.from('lunch_orders').select('*')
+        }
+
+        query = query.order('order_date', { ascending: false })
 
         if (childId) {
           query = query.eq('child_id', childId)
@@ -97,7 +147,12 @@ export const useLunchStore = defineStore('lunch', {
         const { data, error } = await query
 
         if (error) throw error
-        this.orders = data || []
+        
+        // Clean up the data structure if we joined with children
+        this.orders = (data || []).map((item: any) => {
+          const { children, ...order } = item
+          return order
+        })
       } catch (e: any) {
         this.error = e
         console.error('Error fetching orders:', e)
@@ -119,6 +174,39 @@ export const useLunchStore = defineStore('lunch', {
         return data
       } catch (e: any) {
         console.error('Error creating menu:', e)
+        throw e
+      }
+    },
+
+    async updateMenu(menuId: string, menuData: Partial<LunchMenu>) {
+      try {
+        const supabase = useSupabaseClient()
+        const { data, error } = await supabase
+          .from('lunch_menus')
+          .update(menuData)
+          .eq('id', menuId)
+          .select()
+          .single()
+
+        if (error) throw error
+        return data
+      } catch (e: any) {
+        console.error('Error updating menu:', e)
+        throw e
+      }
+    },
+
+    async deleteMenu(menuId: string) {
+      try {
+        const supabase = useSupabaseClient()
+        const { error } = await supabase
+          .from('lunch_menus')
+          .delete()
+          .eq('id', menuId)
+
+        if (error) throw error
+      } catch (e: any) {
+        console.error('Error deleting menu:', e)
         throw e
       }
     },
@@ -194,27 +282,45 @@ export const useLunchStore = defineStore('lunch', {
       }
     },
 
-    async autoCreateOrdersForDate(date: string) {
+    async autoCreateOrdersForDate(date: string, kitaId?: string) {
       try {
         const supabase = useSupabaseClient()
         
-        // Get today's menu
-        const { data: menu } = await supabase
+        // Get user's kita_id if not provided
+        let targetKitaId = kitaId
+        if (!targetKitaId) {
+          const { getUserKitaId } = useKita()
+          targetKitaId = await getUserKitaId()
+        }
+        
+        // Get today's menu (filtered by kita_id if available)
+        let menuQuery = supabase
           .from('lunch_menus')
           .select('id')
           .eq('date', date)
-          .single()
+        
+        if (targetKitaId) {
+          menuQuery = menuQuery.eq('kita_id', targetKitaId)
+        }
+        
+        const { data: menu } = await menuQuery.single()
 
         if (!menu) {
           console.log(`No menu found for date ${date}`)
           return []
         }
 
-        // Get all active children
-        const { data: children } = await supabase
+        // Get all active children (filtered by kita_id if available)
+        let childrenQuery = supabase
           .from('children')
           .select('id')
           .eq('status', 'active')
+        
+        if (targetKitaId) {
+          childrenQuery = childrenQuery.eq('kita_id', targetKitaId)
+        }
+        
+        const { data: children } = await childrenQuery
 
         if (!children || children.length === 0) {
           return []
