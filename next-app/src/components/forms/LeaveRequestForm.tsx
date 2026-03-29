@@ -1,0 +1,193 @@
+'use client'
+
+import React, { useState, useMemo } from 'react'
+import { IOSButton } from '@/components/ui/IOSButton'
+import { LoadingSpinner } from '@/components/common/LoadingSpinner'
+
+interface LeaveRequestFormProps {
+  children: any[]
+  onSubmit: (data: any) => void
+  onCancel: () => void
+  loading?: boolean
+}
+
+export const LeaveRequestForm = ({
+  children,
+  onSubmit,
+  onCancel,
+  loading: submitting
+}: LeaveRequestFormProps) => {
+  const [form, setForm] = useState({
+    child_id: '',
+    start_date: '',
+    end_date: '',
+    leave_type: '' as 'sick' | 'vacation' | 'other' | '',
+    reason: '',
+    notes: ''
+  })
+
+  const [error, setError] = useState('')
+
+  const minDate = useMemo(() => new Date().toISOString().split('T')[0], [])
+
+  const isFormValid = 
+    form.child_id && 
+    form.start_date && 
+    form.end_date && 
+    form.leave_type && 
+    form.reason.trim()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target
+    setForm(prev => ({ ...prev, [id]: value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!isFormValid) {
+      setError('Bitte füllen Sie alle erforderlichen Felder aus.')
+      return
+    }
+
+    if (new Date(form.end_date) < new Date(form.start_date)) {
+      setError('Das Enddatum muss nach dem Startdatum liegen.')
+      return
+    }
+
+    setError('')
+    onSubmit({
+      ...form,
+      reason: form.reason.trim(),
+      notes: form.notes.trim() || undefined,
+      status: 'pending'
+    })
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label htmlFor="child_id" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Kind <span className="text-red-500">*</span>
+        </label>
+        <select
+          id="child_id"
+          value={form.child_id}
+          onChange={handleChange}
+          required
+          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+        >
+          <option value="">Kind auswählen</option>
+          {children.map(child => (
+            <option key={child.id} value={child.id}>
+              {child.first_name} {child.last_name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="start_date" className="block text-sm font-semibold text-gray-700 mb-1.5">
+            Startdatum <span className="text-red-500">*</span>
+          </label>
+          <input
+            id="start_date"
+            type="date"
+            value={form.start_date}
+            onChange={handleChange}
+            required
+            min={minDate}
+            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="end_date" className="block text-sm font-semibold text-gray-700 mb-1.5">
+            Enddatum <span className="text-red-500">*</span>
+          </label>
+          <input
+            id="end_date"
+            type="date"
+            value={form.end_date}
+            onChange={handleChange}
+            required
+            min={form.start_date || minDate}
+            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="leave_type" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Art der Abwesenheit <span className="text-red-500">*</span>
+        </label>
+        <select
+          id="leave_type"
+          value={form.leave_type}
+          onChange={handleChange}
+          required
+          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+        >
+          <option value="">Art auswählen</option>
+          <option value="sick">Krankheit</option>
+          <option value="vacation">Urlaub</option>
+          <option value="other">Sonstiges</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="reason" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Grund <span className="text-red-500">*</span>
+        </label>
+        <textarea
+          id="reason"
+          value={form.reason}
+          onChange={handleChange}
+          rows={3}
+          required
+          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          placeholder="Geben Sie den Grund für die Abwesenheit an..."
+        />
+      </div>
+
+      <div>
+        <label htmlFor="notes" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          Zusätzliche Anmerkungen (Optional)
+        </label>
+        <textarea
+          id="notes"
+          value={form.notes}
+          onChange={handleChange}
+          rows={2}
+          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          placeholder="Weitere Informationen..."
+        />
+      </div>
+
+      {error && (
+        <div className="p-3 bg-red-50 text-red-700 rounded-xl text-xs font-medium border border-red-100">
+          {error}
+        </div>
+      )}
+
+      <div className="flex gap-3 justify-end pt-4">
+        <IOSButton
+          type="button"
+          variant="secondary"
+          onClick={onCancel}
+          className="px-6 py-2.5 font-bold"
+        >
+          Abbrechen
+        </IOSButton>
+        <IOSButton
+          type="submit"
+          variant="primary"
+          disabled={submitting || !isFormValid}
+          className="px-6 py-2.5 font-bold min-w-[140px]"
+        >
+          {submitting ? <LoadingSpinner size="sm" /> : 'Absenden'}
+        </IOSButton>
+      </div>
+    </form>
+  )
+}

@@ -1,0 +1,246 @@
+'use client'
+
+import React from 'react'
+import Link from 'next/link'
+import { useI18n } from '@/i18n/I18nProvider'
+import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
+import { 
+  ArrowRight, Shield, Users, Calendar, 
+  MessageSquare, BookOpen, Clock, Heart,
+  Smartphone, CreditCard, LayoutDashboard
+} from 'lucide-react'
+import { IOSButton } from '@/components/ui/IOSButton'
+
+export default function Home() {
+  const { t } = useI18n()
+
+  const features = [
+    {
+      icon: <LayoutDashboard className="w-8 h-8 text-indigo-500" />,
+      title: 'School Management',
+      description: 'Streamline attendance, billing, and complete school administration from one unified dashboard.',
+      image: 'https://www.kinderpedia.co/media/yootheme/cache/29/student_information_system_1280px-290d7e79.webp'
+    },
+    {
+      icon: <Users className="w-8 h-8 text-blue-500" />,
+      title: 'Parent Engagement',
+      description: 'Keep families connected with real-time updates, photos, and daily reports from the classroom.',
+      image: 'https://www.kinderpedia.co/media/yootheme/cache/66/parent_teacher_communication_app_1280-66b0e1d7.webp'
+    },
+    {
+      icon: <BookOpen className="w-8 h-8 text-fuchsia-500" />,
+      title: 'Classroom Management',
+      description: 'Teachers can easily plan lessons, track progress, and evaluate student milestones.',
+      image: 'https://www.kinderpedia.co/media/yootheme/cache/4a/classroom_management_software_1280px-4ab4ef11.webp'
+    },
+    {
+      icon: <CreditCard className="w-8 h-8 text-violet-500" />,
+      title: 'Tuition & Billing',
+      description: 'Automated invoice generation, payment tracking, and financial reporting for stress-free billing.',
+      image: 'https://www.kinderpedia.co/media/yootheme/cache/c6/childcare_billing_software_1280px-c6312ec2.webp'
+    }
+  ]
+
+  const stats = [
+    { value: '2500+', label: 'Schools & Nurseries' },
+    { value: '300k+', label: 'Happy Parents' },
+    { value: '80k+', label: 'Teachers' },
+    { value: '99%', label: 'Satisfaction Rate' }
+  ]
+
+  return (
+    <main className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans overflow-x-hidden">
+      {/* Navbar overlay */}
+      <div className="absolute top-0 left-0 right-0 z-50 p-6 flex justify-between items-center max-w-7xl mx-auto">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-linear-to-br from-indigo-500 to-fuchsia-500 rounded-xl flex items-center justify-center shadow-lg">
+            <span className="text-white text-xl font-bold">KG</span>
+          </div>
+          <span className="font-bold text-xl tracking-tight text-slate-800">KG School</span>
+        </div>
+        <div className="flex items-center gap-4">
+          <LanguageSwitcher />
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        {/* Animated background blobs */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-linear-to-b from-indigo-50/50 to-white">
+          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-linear-to-br from-fuchsia-400/20 to-indigo-500/20 blur-[80px] animate-[pulse_8s_ease-in-out_infinite]" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-linear-to-tr from-blue-400/20 to-teal-400/20 blur-[100px] animate-[pulse_10s_ease-in-out_infinite_reverse]" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-md border border-indigo-100 shadow-xs mb-8 animate-[fadeInUp_0.8s_ease_out]">
+            <span className="flex h-2 w-2 rounded-full bg-indigo-500"></span>
+            <span className="text-sm font-medium text-indigo-800">The #1 Platform for K12 & Preschools</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-8 animate-[fadeInUp_1s_ease_out]">
+            Thrive with the best <br />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-fuchsia-600">
+              Student Information System
+            </span>
+          </h1>
+          
+          <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-600 mb-12 animate-[fadeInUp_1.2s_ease_out]">
+            Simplifying school management, enhancing parent-teacher communication, and empowering students to reach their full potential.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-[fadeInUp_1.4s_ease_out]">
+            <Link href="/register" className="w-full sm:w-auto">
+              <IOSButton variant="primary" size="large" className="w-full sm:w-auto bg-linear-to-r from-indigo-600 to-fuchsia-600 hover:from-indigo-700 hover:to-fuchsia-700 border-0 shadow-xl shadow-indigo-500/20 group">
+                Register Your Kita
+                <ArrowRight className="w-4 h-4 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
+              </IOSButton>
+            </Link>
+            <Link href="/login" className="w-full sm:w-auto">
+              <IOSButton variant="secondary" size="large" className="w-full sm:w-auto bg-white/80 backdrop-blur-md border-indigo-100 text-indigo-700 hover:bg-indigo-50">
+                Log In to Dashboard
+              </IOSButton>
+            </Link>
+          </div>
+        </div>
+
+        {/* Dashboard Mockup Image */}
+        <div className="max-w-6xl mx-auto px-6 mt-20 animate-[fadeInUp_1.6s_ease_out]">
+          <div className="relative rounded-2xl md:rounded-[40px] bg-white p-2 md:p-4 shadow-2xl shadow-indigo-900/10 border border-slate-100 overflow-hidden">
+            <img 
+              src="https://www.kinderpedia.co/media/yootheme/cache/29/student_information_system_1280px-290d7e79.webp" 
+              alt="Kinderpedia Student Information System"
+              className="w-full h-auto rounded-xl md:rounded-[32px] block shadow-inner"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-12 border-y border-slate-200 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-slate-100">
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center px-4">
+                <div className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-2 tracking-tight">{stat.value}</div>
+                <div className="text-sm font-medium text-slate-500">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Modules/Features Section */}
+      <section className="py-24 bg-[#F8FAFC]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-sm font-bold tracking-widest text-indigo-600 uppercase mb-3">All-In-One Solution</h2>
+            <h3 className="text-3xl md:text-5xl font-bold text-slate-900">
+              Everything your school needs, <br /> in one place.
+            </h3>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {features.map((feature, i) => (
+              <div key={i} className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group overflow-hidden flex flex-col">
+                <div className="p-8 md:p-10 flex-1">
+                  <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform">
+                    {feature.icon}
+                  </div>
+                  <h4 className="text-2xl font-bold text-slate-900 mb-4">{feature.title}</h4>
+                  <p className="text-slate-600 text-lg leading-relaxed mb-6">
+                    {feature.description}
+                  </p>
+                </div>
+                <div className="px-8 pb-8">
+                   <div className="rounded-2xl overflow-hidden border border-slate-50 shadow-inner bg-slate-50">
+                      <img 
+                        src={feature.image} 
+                        alt={feature.title} 
+                        className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      />
+                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits split section */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+          <div className="flex-1 relative">
+             <div className="w-full aspect-square md:aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl relative border-8 border-white">
+                <img 
+                  src="https://www.kinderpedia.co/media/yootheme/cache/59/gradinita-bergman-05cf8571-593ee558.webp" 
+                  alt="Children at Bergman Kindergarten" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-indigo-900/40 to-transparent"></div>
+             </div>
+          </div>
+          <div className="flex-1">
+            <h2 className="text-sm font-bold tracking-widest text-fuchsia-600 uppercase mb-3">Families as Partners</h2>
+            <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
+              Bring families closer to their children's education
+            </h3>
+            <ul className="space-y-6">
+              {[
+                { icon: <MessageSquare className="w-6 h-6 text-indigo-500" />, text: 'Real-time messaging and announcements' },
+                { icon: <Calendar className="w-6 h-6 text-fuchsia-500" />, text: 'Shared calendar for events and holidays' },
+                { icon: <Heart className="w-6 h-6 text-rose-500" />, text: 'Daily activity reports and health tracking' },
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 shadow-xs">
+                    {item.icon}
+                  </div>
+                  <span className="text-lg text-slate-700 font-medium">{item.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 relative overflow-hidden bg-indigo-900">
+        <div className="absolute inset-0 bg-linear-to-br from-indigo-900 via-indigo-800 to-fuchsia-900 -z-10"></div>
+        {/* Decorative circles */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div className="max-w-4xl mx-auto px-6 text-center text-white">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8">Ready to transform your school?</h2>
+          <p className="text-xl text-indigo-100 mb-12 opacity-90">
+            Join thousands of schools and nurseries that have simplified their administration and delighted their communities.
+          </p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Link href="/register">
+              <IOSButton size="large" className="bg-white text-indigo-900 hover:bg-indigo-50 border-0 shadow-xl px-10 py-4 text-lg">
+                Register Now
+              </IOSButton>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-50 border-t border-slate-200 pt-16 pb-8">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 flex items-center justify-center bg-indigo-600 rounded-lg text-white font-bold text-xs">KG</div>
+            <span className="font-semibold text-slate-900 tracking-tight">KG School</span>
+          </div>
+          <div className="flex flex-wrap gap-6 text-sm font-medium text-slate-500">
+            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
+            <Link href="/imprint" className="hover:text-indigo-600 transition-colors">Imprint</Link>
+            <Link href="/security" className="hover:text-indigo-600 transition-colors">Security</Link>
+            <Link href="/dpa" className="hover:text-indigo-600 transition-colors">DPA</Link>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 mt-8 text-center md:text-left text-sm text-slate-400">
+          &copy; {new Date().getFullYear()} KG School Platform. All rights reserved.
+        </div>
+      </footer>
+    </main>
+  )
+}
