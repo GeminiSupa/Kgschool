@@ -37,6 +37,7 @@ export const DailyReportForm = ({
 
   const [activitiesText, setActivitiesText] = useState(initialData?.activities?.join('\n') || '')
   const [error, setError] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
 
   useEffect(() => {
     fetchGroups()
@@ -53,6 +54,34 @@ export const DailyReportForm = ({
     setActivitiesText(text)
     const activitiesList = text.split('\n').map(a => a.trim()).filter(a => a.length > 0)
     setForm(prev => ({ ...prev, activities: activitiesList }))
+  }
+
+  const handleGenerateAI = async () => {
+    setIsGenerating(true)
+    setError('')
+    try {
+      const res = await fetch('/api/ai/generate-report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          activities: form.activities,
+          weather: form.weather,
+          specialEvents: form.special_events,
+          briefNotes: form.content
+        })
+      })
+
+      if (!res.ok) throw new Error('AI Bericht konnte nicht generiert werden.')
+
+      const data = await res.json()
+      if (data.error) throw new Error(data.error)
+      
+      setForm(prev => ({ ...prev, content: data.text }))
+    } catch (e: any) {
+      setError(e.message || 'Ein Fehler ist aufgetreten.')
+    } finally {
+      setIsGenerating(false)
+    }
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -131,9 +160,19 @@ export const DailyReportForm = ({
       </div>
 
       <div>
-        <label htmlFor="content" className="block text-sm font-semibold text-gray-700 mb-1.5">
-          Inhalt <span className="text-red-500">*</span>
-        </label>
+        <div className="flex justify-between items-center mb-1.5">
+          <label htmlFor="content" className="block text-sm font-semibold text-gray-700">
+            Inhalt <span className="text-red-500">*</span>
+          </label>
+          <button
+            type="button"
+            onClick={handleGenerateAI}
+            disabled={isGenerating}
+            className="text-sm font-semibold text-[#667eea] hover:text-[#5a6edb] flex items-center gap-1.5 disabled:opacity-50 transition-colors bg-[#667eea]/10 px-3 py-1.5 rounded-lg"
+          >
+            {isGenerating ? <LoadingSpinner size="sm" /> : '✨ Magic Wand'}
+          </button>
+        </div>
         <textarea
           id="content"
           value={form.content}
@@ -141,7 +180,7 @@ export const DailyReportForm = ({
           rows={6}
           required
           className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
-          placeholder="Beschreiben Sie, was heute passiert ist..."
+          placeholder="Stichpunkte oder Text hier eingeben... (dann 'Magic Wand' drücken)"
         />
       </div>
 

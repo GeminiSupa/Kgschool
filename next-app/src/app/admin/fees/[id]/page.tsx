@@ -30,6 +30,8 @@ export default function FeeDetailPage() {
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [paymentAmount, setPaymentAmount] = useState<number>(0)
+  const [isGeneratingReminder, setIsGeneratingReminder] = useState(false)
+  const [reminderText, setReminderText] = useState('')
 
   useEffect(() => {
     loadData()
@@ -92,6 +94,37 @@ export default function FeeDetailPage() {
       loadData()
     } catch (e: any) {
       toast.push({ type: 'error', title: 'Gebühren', message: e?.message || 'Fehler beim Aktualisieren des Status.' })
+    }
+  }
+
+  const handleGenerateReminder = async (tone: 'friendly' | 'standard' | 'urgent') => {
+    if (!fee) return
+    setIsGeneratingReminder(true)
+    setReminderText('')
+    try {
+      const res = await fetch('/api/ai/fee-reminder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          childName: getChildName(fee.child_id),
+          amount: Math.max(0, fee.amount - payments.reduce((sum, p) => sum + p.amount, 0)),
+          dueDate: fee.due_date,
+          feeType: fee.fee_type,
+          tone
+        })
+      })
+
+      if (!res.ok) throw new Error('AI Erinnerung konnte nicht generiert werden.')
+
+      const data = await res.json()
+      if (data.error) throw new Error(data.error)
+      
+      setReminderText(data.text)
+      toast.push({ type: 'success', title: 'AI Assistent', message: 'Erinnerung erfolgreich generiert!' })
+    } catch (e: any) {
+      toast.push({ type: 'error', title: 'AI Assistent', message: e?.message || 'Fehler beim Generieren der Erinnerung.' })
+    } finally {
+      setIsGeneratingReminder(false)
     }
   }
 
@@ -208,6 +241,39 @@ export default function FeeDetailPage() {
                     </IOSButton>
                 </div>
             </IOSCard>
+
+            {remaining > 0 && (
+                <IOSCard className="p-6 border-black/5 shadow-sm bg-indigo-50/30">
+                    <h3 className="text-xs font-black text-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span>✨</span> AI Zahlungserinnerung
+                    </h3>
+                    <p className="text-xs text-gray-500 mb-4 font-medium">Lassen Sie die AI eine professionelle Zahlungserinnerung an die Eltern schreiben.</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+                        <IOSButton variant="secondary" onClick={() => handleGenerateReminder('friendly')} disabled={isGeneratingReminder} className="w-full py-2 text-[10px] font-black uppercase tracking-widest text-indigo-600 border-indigo-100 hover:bg-indigo-50">
+                            {isGeneratingReminder ? <LoadingSpinner size="sm" /> : 'Freundlich'}
+                        </IOSButton>
+                        <IOSButton variant="secondary" onClick={() => handleGenerateReminder('urgent')} disabled={isGeneratingReminder} className="w-full py-2 text-[10px] font-black uppercase tracking-widest text-red-600 border-red-100 hover:bg-red-50">
+                            {isGeneratingReminder ? <LoadingSpinner size="sm" /> : 'Dringend'}
+                        </IOSButton>
+                    </div>
+                    {reminderText && (
+                        <div className="mt-4 animate-in slide-in-from-top-2 fade-in duration-300">
+                            <label className="block text-[10px] font-black text-black/30 uppercase tracking-widest mb-1.5 ml-1">Generierter Text (Bearbeitbar)</label>
+                            <textarea
+                                value={reminderText}
+                                onChange={(e) => setReminderText(e.target.value)}
+                                rows={6}
+                                className="w-full px-4 py-3 bg-white border border-black/10 rounded-2xl text-sm font-medium text-gray-900 outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none shadow-sm"
+                            />
+                            <div className="mt-3 flex justify-end">
+                                <IOSButton variant="primary" onClick={() => { navigator.clipboard.writeText(reminderText); toast.push({ type: 'success', title: 'Kopiert', message: 'Text in Zwischenablage kopiert.' }) }} className="py-2 px-4 text-xs font-black uppercase tracking-widest bg-indigo-600 hover:bg-indigo-700">
+                                    Text Kopieren
+                                </IOSButton>
+                            </div>
+                        </div>
+                    )}
+                </IOSCard>
+            )}
          </div>
       </div>
     </div>

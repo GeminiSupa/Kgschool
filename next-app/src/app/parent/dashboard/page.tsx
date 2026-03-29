@@ -117,7 +117,7 @@ export default function ParentDashboardPage() {
         {todayMenu && (
           <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="flex items-center gap-4 mb-8">
-                <h2 className="text-sm font-black text-orange-600 uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionTodayMenu', 'Heutiges Menü 🍽️'))}</h2>
+                <h2 className="text-sm font-black text-orange-600 uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionTodayMenu')) || 'Heutiges Menü 🍽️'}</h2>
                 <div className="h-px flex-1 bg-slate-100"></div>
             </div>
             <Link href="/parent/lunch">
