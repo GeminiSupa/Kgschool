@@ -24,7 +24,13 @@ export function Heading({ as: Component = 'h2', size = 'md', children, className
   }
 
   return (
-    <Component className={cn(sizes[size], className)}>
+    <Component
+      className={cn(
+        'font-display font-bold tracking-tight text-foreground',
+        sizes[size],
+        className
+      )}
+    >
       {children}
     </Component>
   )

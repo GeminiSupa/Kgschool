@@ -13,9 +13,9 @@ interface IOSInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export function IOSInput({ label, error, className, id, ...props }: IOSInputProps) {
   return (
-    <div className="w-full">
+    <div className={cn('w-full space-y-2', className)}>
       {label && (
-        <label htmlFor={id} className="block text-[14px] font-semibold text-[#1d1d1f] mb-2 tracking-[0.3px]">
+        <label htmlFor={id} className="block text-sm font-bold text-foreground/80 tracking-tight">
           {label}
         </label>
       )}
@@ -23,18 +23,15 @@ export function IOSInput({ label, error, className, id, ...props }: IOSInputProp
         <input
           id={id}
           className={cn(
-            'w-full px-4 py-3 bg-white/90 backdrop-blur-[10px] border border-black/10 rounded-[12px] text-[#1d1d1f] text-base transition-all duration-200 outline-none appearance-none placeholder:text-black/40',
-            'focus:bg-white focus:border-[#667eea]/50 focus:shadow-[0_0_0_4px_rgba(102,126,234,0.2)] focus:scale-[1.01]',
-            'disabled:opacity-50 disabled:cursor-not-allowed',
-            error && 'border-[#ff3b30]/60 bg-[#ff3b30]/10',
-            className
+            'w-full px-4 py-3 bg-background border-2 border-border rounded-2xl text-foreground placeholder:text-muted transition-all duration-300 outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed',
+            error && 'border-red-500 focus:ring-red-500 focus:border-red-500'
           )}
           {...props}
         />
         {error && (
-          <div className="mt-[6px] text-[13px] text-[#ff3b30] font-medium">
+          <p className="mt-2 text-xs font-bold text-red-500 tracking-tight">
             {error}
-          </div>
+          </p>
         )}
       </div>
     </div>

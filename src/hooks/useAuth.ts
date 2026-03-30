@@ -91,39 +91,40 @@ export const useAuth = () => {
     if (file.size > 2 * 1024 * 1024) throw new Error('File size must be less than 2 MB')
 
     const fileExt = file.name.split('.').pop() || 'jpg'
-    const fileName = `${user.id}/avatar.${fileExt}`
+    const timestamp = Date.now()
+    const fileName = `${user.id}/avatar_${timestamp}.${fileExt}`
 
     try {
+      // List and remove all existing files in the user's avatar folder to keep it clean
       const { data: existingFiles } = await supabase.storage.from('avatars').list(user.id)
       if (existingFiles && existingFiles.length > 0) {
-        const filesToDelete = existingFiles
-          .filter(f => f.name.startsWith('avatar.'))
-          .map(f => `${user.id}/${f.name}`)
-        if (filesToDelete.length > 0) {
-          await supabase.storage.from('avatars').remove(filesToDelete)
-        }
+        const filesToDelete = existingFiles.map(f => `${user.id}/${f.name}`)
+        await supabase.storage.from('avatars').remove(filesToDelete)
       }
     } catch (e) {
-      console.log('No existing avatar to delete or error:', e)
+      console.log('Cleanup error (non-critical):', e)
     }
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('avatars')
-      .upload(fileName, file, { cacheControl: '3600', upsert: true })
+      .upload(fileName, file, { cacheControl: '0', upsert: true })
 
     if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`)
 
-    const { data: urlData } = supabase.storage.from('avatars').getPublicUrl(fileName)
+    const { data: { publicUrl } } = supabase.storage.from('avatars').getPublicUrl(fileName)
 
     const { error: updateError } = await supabase
       .from('profiles')
-      .update({ avatar_url: urlData.publicUrl })
+      .update({ 
+        avatar_url: publicUrl,
+        updated_at: new Date().toISOString() 
+      })
       .eq('id', user.id)
 
     if (updateError) throw new Error(`Failed to update profile: ${updateError.message}`)
 
     await fetchProfile()
-    return urlData.publicUrl
+    return publicUrl
   }
 
   const removeAvatar = async () => {

@@ -18,19 +18,25 @@ export function IOSButton({
   children,
   ...props
 }: IOSButtonProps) {
+  const variants = {
+    primary: 'bg-indigo-600 text-white shadow-lg shadow-indigo-200/50 hover:bg-indigo-700 hover:shadow-indigo-300/50 dark:shadow-none focus:ring-indigo-500',
+    secondary: 'bg-background border-2 border-border text-foreground hover:bg-slate-50 dark:hover:bg-white/5 focus:ring-slate-400 font-bold',
+    ghost: 'bg-transparent text-muted hover:bg-slate-100 dark:hover:bg-white/5 hover:text-foreground',
+    danger: 'bg-red-500 text-white shadow-lg shadow-red-200/50 hover:bg-red-600 focus:ring-red-500',
+  }
+  const sizes = {
+    small: 'px-3 py-1.5 text-xs',
+    medium: 'px-6 py-2.5 text-sm',
+    large: 'px-8 py-3.5 text-base',
+  }
+
   return (
     <button
       {...props}
       className={cn(
-        'relative border-none font-semibold cursor-pointer transition-all duration-200 overflow-hidden select-none active:scale-[0.98]',
-        // Variants
-        variant === 'primary' && 'bg-gradient-to-br from-[#667eea] to-[#764ba2] text-white shadow-[0_4px_14px_0_rgba(102,126,234,0.39)] hover:translate-y-[-2px] hover:shadow-[0_6px_20px_0_rgba(102,126,234,0.5)] active:translate-y-0 active:shadow-[0_2px_10px_0_rgba(102,126,234,0.3)] disabled:opacity-50 disabled:cursor-not-allowed',
-        variant === 'secondary' && 'bg-white/20 backdrop-blur-[10px] text-[#667eea] border border-[#667eea]/30',
-        variant === 'ghost' && 'bg-transparent text-white/90',
-        // Sizes
-        size === 'large' && 'px-8 py-4 text-lg rounded-[16px]',
-        size === 'medium' && 'px-6 py-3 text-base rounded-[12px]',
-        size === 'small' && 'px-4 py-2 text-sm rounded-[10px]',
+        'inline-flex items-center justify-center rounded-2xl font-bold transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2',
+        variants[variant as keyof typeof variants] || variants.primary,
+        sizes[size as keyof typeof sizes] || sizes.medium,
         className
       )}
     >

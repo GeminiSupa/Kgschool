@@ -148,6 +148,14 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
             </div>
           )}
         </div>
+      </div>
+      
+      <nav className="flex-1 px-4 py-8 space-y-1 overflow-y-auto custom-scrollbar">
+        {loading ? (
+          Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="h-11 px-4 rounded-xl bg-slate-50 animate-pulse mb-2"></div>
+          ))
+        ) : (
           navItems.map((item) => {
             const active = isActive(item.path)
             return (
