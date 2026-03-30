@@ -14,8 +14,15 @@ export class AuthzError extends Error {
 function getSupabaseAdmin() {
   const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!supabaseUrl || !supabaseServiceKey) {
-    throw new AuthzError('Server configuration error: Missing Supabase credentials', 500)
+
+  if (!supabaseUrl) {
+    console.error('[Admin] SUPABASE_URL and NEXT_PUBLIC_SUPABASE_URL are both undefined.')
+    throw new AuthzError('Server configuration error: Missing Supabase URL', 500)
+  }
+  
+  if (!supabaseServiceKey) {
+    console.error('[Admin] SUPABASE_SERVICE_ROLE_KEY is undefined on the server.')
+    throw new AuthzError('Server configuration error: Missing Supabase Service Role Key', 500)
   }
 
   return createSupabaseAdminClient(supabaseUrl, supabaseServiceKey, {

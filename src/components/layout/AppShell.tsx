@@ -24,58 +24,76 @@ export function AppShell({
 
   return (
     <div className="flex flex-col min-h-screen relative overflow-hidden bg-background text-foreground transition-colors duration-500">
-      {header && <div className="flex-none">{header}</div>}
+      {/* Mobile Header */}
+      <div className="md:hidden flex items-center justify-between px-4 py-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-100 dark:border-white/5 sticky top-0 z-40">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs">KG</div>
+          <span className="font-bold text-sm tracking-tight">{t('brand.appTitle')}</span>
+        </div>
+        <button
+          type="button"
+          className="p-2 -mr-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+          onClick={() => setMobileSidebarOpen(true)}
+          aria-label={t('shell.openMenu')}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="18" x2="20" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      {header && <div className="hidden md:block flex-none">{header}</div>}
 
       <div className="flex flex-1 overflow-hidden relative z-10">
         {showSidebar && (
           <>
-            <button
-              type="button"
-              className="md:hidden fixed left-4 bottom-4 z-40 rounded-full bg-blue-600 text-white shadow-lg px-4 py-3 text-sm font-semibold"
-              onClick={() => setMobileSidebarOpen(true)}
-              aria-label={t('shell.openMenu')}
-            >
-              {t('shell.openMenu')}
-            </button>
             {mobileSidebarOpen && (
               <button
                 type="button"
-                className="md:hidden fixed inset-0 z-40 bg-black/40"
+                className="md:hidden fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm animate-[fadeIn_0.2s_ease-out]"
                 onClick={() => setMobileSidebarOpen(false)}
                 aria-label={t('shell.closeMenu')}
               />
             )}
             <aside
               className={[
-                'md:hidden fixed inset-y-0 left-0 z-50 w-[84vw] max-w-[320px] bg-background shadow-2xl transition-transform duration-300',
+                'md:hidden fixed inset-y-0 left-0 z-50 w-[84vw] max-w-[320px] bg-background shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
                 mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full',
               ].join(' ')}
             >
-              <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
-                <p className="text-sm font-semibold text-gray-700">{t('shell.navigation')}</p>
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-white/5 px-6 py-5">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs">KG</div>
+                  <span className="font-bold text-sm tracking-tight">{t('brand.appTitle')}</span>
+                </div>
                 <button
                   type="button"
-                  className="rounded-lg px-2 py-1 text-gray-600 hover:bg-gray-100"
+                  className="rounded-xl p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
                   onClick={() => setMobileSidebarOpen(false)}
                   aria-label={t('shell.closeMenu')}
                 >
-                  ✕
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
                 </button>
               </div>
-              <div className="h-[calc(100%-49px)] overflow-y-auto">{sidebar}</div>
+              <div className="h-[calc(100%-65px)] overflow-y-auto">{sidebar}</div>
             </aside>
           </>
         )}
         {showSidebar && (
           <aside
-            className="hidden md:block transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] shrink-0 origin-left border-r border-slate-200 z-20 shadow-sm"
+            className="hidden md:block transition-all duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] shrink-0 origin-left border-r border-slate-200 dark:border-white/5 z-20 shadow-sm"
             style={{ width: sidebarWidth }}
           >
             {sidebar}
           </aside>
         )}
 
-        <main className="flex-1 overflow-y-auto relative perspective-1000">
+        <main className="flex-1 overflow-y-auto relative perspective-1000 bg-white/50 dark:bg-slate-900/50">
           <div className="min-h-full transition-transform duration-500 transform-style-3d bg-transparent">
             {children}
           </div>

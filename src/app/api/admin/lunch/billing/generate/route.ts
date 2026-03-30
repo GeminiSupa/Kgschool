@@ -13,29 +13,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, message: 'Month and year are required' }, { status: 400 })
     }
 
-    const supabaseUrl = process.env.SUPABASE_URL
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-    if (!supabaseUrl || !supabaseServiceKey) {
-      return NextResponse.json(
-        { success: false, message: 'Server configuration error: Missing Supabase credentials' },
-        { status: 500 },
-      )
-    }
-
-    // Get authenticated user to determine kita_id.
-    const supabase = await createSupabaseServerClient()
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser()
-
+    const { data: { user }, error: userError } = await (await createSupabaseServerClient()).auth.getUser()
     if (userError || !user) {
       return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 })
     }
 
-    const supabaseAdmin = createSupabaseAdminClient(supabaseUrl, supabaseServiceKey, {
-      auth: { autoRefreshToken: false, persistSession: false },
-    })
+    const supabaseAdmin = (await import('@/utils/authz/tenantGuard')).getAdminClient()
 
     // Get user's kita_id from organization_members.
     let userKitaId: string | null = null

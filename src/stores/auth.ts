@@ -79,34 +79,52 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     try {
       const supabase = createClient()
+      
+      // Fetch profile with an explicit check for kita_id
       const { data, error } = await supabase
         .from('profiles')
-        .select('*')
+        .select(`
+          *,
+          organization_members (
+            kita_id
+          )
+        `)
         .eq('id', user.id)
         .maybeSingle()
 
       if (error) {
         console.error(
-          `[fetchProfile] ${formatFetchProfileError(error)} | rawMessage=${JSON.stringify((error as { message?: string }).message)}`,
+          `[fetchProfile] Database error: ${formatFetchProfileError(error)}`,
         )
         return
       }
 
       if (data) {
-        const profileData = data as Profile
-        // Map default_kita_id to kita_id for backward compatibility across the app
+        const profileData = { ...data } as any
+        
+        // Use kita_id from organization_members if profile doesn't have it
+        if (!profileData.kita_id && data.organization_members && data.organization_members.length > 0) {
+          profileData.kita_id = data.organization_members[0].kita_id
+        }
+        
+        // Fallback to default_kita_id for backward compatibility
         if (!profileData.kita_id && profileData.default_kita_id) {
             profileData.kita_id = profileData.default_kita_id
         }
-        set({ profile: profileData })
+        
+        if (!profileData.kita_id) {
+          console.warn(`[fetchProfile] User ${user.email} has no assigned kita_id. Data access will be restricted by RLS.`)
+        }
+
+        set({ profile: profileData as Profile })
       } else {
-        console.warn(
-          'fetchProfile: No profile row for this user. Check RLS policy "Users can view their own profile" and that handle_new_user / registration created public.profiles.',
-          { userId: user.id },
+        console.error(
+          '[fetchProfile] Profile not found for authenticated user.',
+          { userId: user.id, email: user.email },
         )
       }
     } catch (e: unknown) {
-      console.error('Error in fetchProfile:', e instanceof Error ? e.message : e)
+      console.error('Unexpected error in fetchProfile:', e instanceof Error ? e.message : e)
     }
   },
 
