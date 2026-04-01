@@ -1,6 +1,7 @@
 'use client'
 
 import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 import { pT } from '@/i18n/pT'
 
 const ROUTE = 'admin.messages'
@@ -60,7 +61,7 @@ export default function AdminMessagesPage() {
       setShowCompose(false)
       setComposeForm({ recipient_id: '', content: '' })
     } catch (e: any) {
-      setComposeError(e.message || 'Failed to send message')
+      setComposeError(e.message || t(sT('errSendMessage')))
     } finally {
       setComposeLoading(false)
     }

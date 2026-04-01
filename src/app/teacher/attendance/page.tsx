@@ -17,6 +17,7 @@ import { IOSButton } from '@/components/ui/IOSButton'
 import { AttendanceBulkActions } from '@/components/attendance/AttendanceBulkActions'
 import { CheckInOutButton } from '@/components/attendance/CheckInOutButton'
 import { AbsenceSubmissionForm } from '@/components/forms/AbsenceSubmissionForm'
+import { sT } from '@/i18n/sT'
 
 export default function TeacherAttendancePage() {
   const { t } = useI18n()
@@ -148,7 +149,7 @@ export default function TeacherAttendancePage() {
       setBulkMode(false)
       await loadData()
     } catch (e: any) {
-      alert(e.message || 'Fehler beim Speichern der Anwesenheit')
+      alert(e.message || t(sT('errSaveAttendance')))
     } finally {
       setSubmitting(false)
     }
@@ -159,7 +160,7 @@ export default function TeacherAttendancePage() {
       await checkIn(childId, date)
       await loadData()
     } catch (e: any) {
-      alert(e.message || 'Check-In fehlgeschlagen')
+      alert(e.message || t(sT('errCheckIn')))
     }
   }
 
@@ -168,7 +169,7 @@ export default function TeacherAttendancePage() {
       await checkOut(childId, date)
       await loadData()
     } catch (e: any) {
-      alert(e.message || 'Check-Out fehlgeschlagen')
+      alert(e.message || t(sT('errCheckOut')))
     }
   }
 
@@ -182,7 +183,7 @@ export default function TeacherAttendancePage() {
       })
       await loadData()
     } catch (e: any) {
-      alert(e.message || 'Fehler beim Markieren als anwesend')
+      alert(e.message || t(sT('errMarkPresent')))
     }
   }
 
@@ -195,7 +196,7 @@ export default function TeacherAttendancePage() {
       setSelectedChildId(null)
       await loadData()
     } catch (e: any) {
-      alert(e.message || 'Fehler beim Melden der Abwesenheit')
+      alert(e.message || t(sT('errReportAbsence')))
     } finally {
       setSubmitting(false)
     }

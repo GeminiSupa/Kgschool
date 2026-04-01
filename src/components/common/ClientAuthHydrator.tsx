@@ -1,40 +1,48 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
+import type { User } from '@supabase/supabase-js'
 import { useAuthStore } from '@/stores/auth'
 import { createClient } from '@/utils/supabase/client'
 
 export default function ClientAuthHydrator() {
-  const { setUser, fetchProfile, user } = useAuthStore()
-  const supabase = createClient()
+  const setUser = useAuthStore((s) => s.setUser)
+  const fetchProfile = useAuthStore((s) => s.fetchProfile)
+  const supabase = useMemo(() => createClient(), [])
 
   useEffect(() => {
-    // Initial fetch of session
-    const initializeAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
-      if (session?.user) {
-        setUser(session.user)
+    let cancelled = false
+
+    const applySession = async (sessionUser: User | null) => {
+      if (!sessionUser) {
+        setUser(null)
+        return
       }
+      setUser(sessionUser)
+      await fetchProfile()
     }
 
-    initializeAuth()
+    const init = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+      if (cancelled) return
+      await applySession(session?.user ?? null)
+    }
 
-    // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user || null)
+    void init()
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      void applySession(session?.user ?? null)
     })
 
     return () => {
+      cancelled = true
       subscription.unsubscribe()
     }
-  }, [setUser, supabase.auth])
-
-  // Fetch profile whenever user ID changes
-  useEffect(() => {
-    if (user?.id) {
-      fetchProfile()
-    }
-  }, [user?.id, fetchProfile])
+  }, [setUser, fetchProfile, supabase])
 
   return null
 }

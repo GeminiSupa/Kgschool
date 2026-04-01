@@ -7,6 +7,7 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { Heading } from '@/components/ui/Heading'
 import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 
 type BetreuungHoursType = '25' | '35' | '45' | 'ganztag' | 'halbtag' | ''
@@ -49,7 +50,7 @@ export default function ApplyPage() {
         setKitas((data as Kita[]) || [])
       } catch (e: unknown) {
         console.error('Error loading kitas:', e)
-        const message = e instanceof Error ? e.message : 'Failed to load kitas'
+        const message = e instanceof Error ? e.message : t(sT('failedLoadKitas'))
         setSubmitError(message)
       } finally {
         setKitasLoading(false)

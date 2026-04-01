@@ -14,6 +14,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
+import { sT } from '@/i18n/sT'
 
 export default function ParentBillingPage() {
   const { t } = useI18n()
@@ -88,7 +89,7 @@ export default function ParentBillingPage() {
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
   if (error || feesError) return (
     <div className="max-w-2xl mx-auto py-10 px-4">
-      <ErrorAlert message={error || feesError?.message || 'Fehler beim Laden'} />
+      <ErrorAlert message={error || feesError?.message || t(sT('errLoadData'))} />
     </div>
   )
 

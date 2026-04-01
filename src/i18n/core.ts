@@ -10,6 +10,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       imprint: 'Impressum',
       security: 'Sicherheit',
       dpa: 'AVV / DPA',
+      loadingDashboard: 'Dashboard wird geladen…',
     },
     brand: {
       appTitle: 'Kita Management',
@@ -20,6 +21,8 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       closeMenu: 'Menü schließen',
       navigation: 'Navigation',
       toggleSidebar: 'Sidebar ein-/ausklappen',
+      useLightTheme: 'Helles Design aktivieren',
+      useDarkTheme: 'Dunkles Design aktivieren',
     },
     roles: {
       admin: 'Administrator',
@@ -32,6 +35,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
     },
     nav: {
       gen: { dashboard: 'Dashboard' },
+      logout: 'Abmelden',
       admin: {
         dashboard: 'Dashboard',
         setup: 'Setup',
@@ -153,6 +157,48 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
         'Digitalisieren Sie Platzvergabe, Elternkommunikation, Abrechnung, Personal und Berichtswesen in einer zentralen Plattform.',
       login: 'Zur Anmeldung',
       apply: 'Kita Platz anfragen',
+      marketingHeroBadge: 'Die Plattform für Kita & Elementarbereich',
+      marketingHeroLead: 'Gemeinsam stark mit dem',
+      marketingHeroAccent: 'Kita-Verwaltungssystem',
+      marketingHeroSubtitle:
+        'Verwaltung vereinfachen, Teams und Eltern verbinden und den Fokus auf die Kinder legen.',
+      marketingCtaRegister: 'Einrichtung registrieren',
+      marketingCtaLogin: 'Zum Dashboard',
+      marketingHeroImageAlt: 'Dashboard-Ansicht der Kita-Verwaltung',
+      marketingStat1Value: '2500+',
+      marketingStat1Label: 'Kitas & Einrichtungen',
+      marketingStat2Value: '300k+',
+      marketingStat2Label: 'zufriedene Eltern',
+      marketingStat3Value: '80k+',
+      marketingStat3Label: 'Fachkräfte',
+      marketingStat4Value: '99%',
+      marketingStat4Label: 'Zufriedenheit',
+      marketingFeature1Title: 'Verwaltung',
+      marketingFeature1Desc:
+        'Anwesenheit, Abrechnung und Organisation – alles aus einem Dashboard.',
+      marketingFeature2Title: 'Eltern einbinden',
+      marketingFeature2Desc:
+        'Aktuelle Infos, Fotos und Tagesberichte direkt aus der Gruppe.',
+      marketingFeature3Title: 'Pädagogik & Alltag',
+      marketingFeature3Desc:
+        'Planen, Fortschritt dokumentieren und Entwicklung beobachten.',
+      marketingFeature4Title: 'Gebühren & Finanzen',
+      marketingFeature4Desc:
+        'Rechnungen, Zahlungen und Finanzüberblick mit weniger Aufwand.',
+      marketingModulesEyebrow: 'Alles aus einer Hand',
+      marketingModulesTitleLine1: 'Alles, was Ihre Einrichtung braucht —',
+      marketingModulesTitleLine2: 'an einem Ort.',
+      marketingPartnersEyebrow: 'Eltern als Partner',
+      marketingPartnersTitle: 'Näher an Bildung und Entwicklung Ihrer Kinder',
+      marketingBenefit1: 'Nachrichten und Ankündigungen in Echtzeit',
+      marketingBenefit2: 'Gemeinsamer Kalender für Feiertage und Termine',
+      marketingBenefit3: 'Tagesberichte und Wohlbefinden im Blick',
+      marketingPartnersImageAlt: 'Kinder in der Kita',
+      marketingCtaBandTitle: 'Bereit für den nächsten Schritt?',
+      marketingCtaBandSubtitle:
+        'Schließen Sie sich Einrichtungen an, die Verwaltung vereinfachen und Familien begeistern.',
+      marketingCtaBandButton: 'Jetzt registrieren',
+      marketingFooterRights: 'KG School Plattform. Alle Rechte vorbehalten.',
     },
     login: {
       title: 'KG School',
@@ -202,6 +248,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       imprint: 'Imprint',
       security: 'Security',
       dpa: 'DPA',
+      loadingDashboard: 'Loading dashboard…',
     },
     brand: {
       appTitle: 'Daycare Management',
@@ -212,6 +259,8 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       closeMenu: 'Close menu',
       navigation: 'Navigation',
       toggleSidebar: 'Toggle sidebar',
+      useLightTheme: 'Switch to light mode',
+      useDarkTheme: 'Switch to dark mode',
     },
     roles: {
       admin: 'Administrator',
@@ -224,6 +273,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
     },
     nav: {
       gen: { dashboard: 'Dashboard' },
+      logout: 'Log out',
       admin: {
         dashboard: 'Dashboard',
         setup: 'Setup',
@@ -345,6 +395,48 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
         'Digitize admissions, parent communication, billing, staffing, and reporting in one central platform.',
       login: 'Login',
       apply: 'Apply for Daycare Spot',
+      marketingHeroBadge: 'The platform for daycare & early years',
+      marketingHeroLead: 'Thrive with the best',
+      marketingHeroAccent: 'center management system',
+      marketingHeroSubtitle:
+        'Simplify operations, connect families and staff, and keep the focus on children.',
+      marketingCtaRegister: 'Register your center',
+      marketingCtaLogin: 'Log in to dashboard',
+      marketingHeroImageAlt: 'Daycare management dashboard',
+      marketingStat1Value: '2500+',
+      marketingStat1Label: 'Centers & nurseries',
+      marketingStat2Value: '300k+',
+      marketingStat2Label: 'Happy parents',
+      marketingStat3Value: '80k+',
+      marketingStat3Label: 'Educators',
+      marketingStat4Value: '99%',
+      marketingStat4Label: 'Satisfaction',
+      marketingFeature1Title: 'Operations',
+      marketingFeature1Desc:
+        'Attendance, billing, and admin in one unified dashboard.',
+      marketingFeature2Title: 'Family engagement',
+      marketingFeature2Desc:
+        'Real-time updates, photos, and daily reports from the classroom.',
+      marketingFeature3Title: 'Teaching & care',
+      marketingFeature3Desc:
+        'Plan activities, track progress, and record milestones.',
+      marketingFeature4Title: 'Tuition & billing',
+      marketingFeature4Desc:
+        'Invoicing, payments, and financial clarity with less manual work.',
+      marketingModulesEyebrow: 'All-in-one',
+      marketingModulesTitleLine1: 'Everything your school needs,',
+      marketingModulesTitleLine2: 'in one place.',
+      marketingPartnersEyebrow: 'Families as partners',
+      marketingPartnersTitle: "Bring families closer to their children's learning",
+      marketingBenefit1: 'Real-time messaging and announcements',
+      marketingBenefit2: 'Shared calendar for events and holidays',
+      marketingBenefit3: 'Daily reports and wellbeing at a glance',
+      marketingPartnersImageAlt: 'Children at kindergarten',
+      marketingCtaBandTitle: 'Ready to transform your center?',
+      marketingCtaBandSubtitle:
+        'Join centers that simplified administration and delighted their communities.',
+      marketingCtaBandButton: 'Register now',
+      marketingFooterRights: 'KG School Platform. All rights reserved.',
     },
     login: {
       title: 'KG School',
@@ -394,6 +486,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       imprint: 'Künye',
       security: 'Güvenlik',
       dpa: 'Veri İşleme Sözleşmesi',
+      loadingDashboard: 'Panel yükleniyor…',
     },
     brand: {
       appTitle: 'Kreş Yönetimi',
@@ -404,6 +497,8 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       closeMenu: 'Menüyü kapat',
       navigation: 'Gezinme',
       toggleSidebar: 'Kenar çubuğunu aç/kapat',
+      useLightTheme: 'Açık temaya geç',
+      useDarkTheme: 'Koyu temaya geç',
     },
     roles: {
       admin: 'Yönetici',
@@ -416,6 +511,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
     },
     nav: {
       gen: { dashboard: 'Panel' },
+      logout: 'Çıkış',
       admin: {
         dashboard: 'Panel',
         setup: 'Kurulum',
@@ -537,6 +633,48 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
         'Kayıt, ebeveyn iletişimi, faturalama, personel ve raporlamayı tek bir platformda dijitalleştirin.',
       login: 'Giriş',
       apply: 'Kreş Başvurusu',
+      marketingHeroBadge: 'Kreş ve okul öncesi için güçlü platform',
+      marketingHeroLead: 'En iyi sistemle',
+      marketingHeroAccent: 'kreş yönetiminde öne çıkın',
+      marketingHeroSubtitle:
+        'İşleri kolaylaştırın, aileler ve ekip ile bağ kurun, odağı çocuklara verin.',
+      marketingCtaRegister: 'Kurumunuzu kaydedin',
+      marketingCtaLogin: 'Panele giriş',
+      marketingHeroImageAlt: 'Kreş yönetim paneli',
+      marketingStat1Value: '2500+',
+      marketingStat1Label: 'Kurum ve kreş',
+      marketingStat2Value: '300k+',
+      marketingStat2Label: 'mutlu ebeveyn',
+      marketingStat3Value: '80k+',
+      marketingStat3Label: 'eğitimci',
+      marketingStat4Value: '%99',
+      marketingStat4Label: 'memnuniyet',
+      marketingFeature1Title: 'Yönetim',
+      marketingFeature1Desc:
+        'Yoklama, faturalama ve tüm operasyonlar tek panelde.',
+      marketingFeature2Title: 'Aile katılımı',
+      marketingFeature2Desc:
+        'Sınıftan anlık güncellemeler, fotoğraflar ve günlük raporlar.',
+      marketingFeature3Title: 'Pedagoji ve bakım',
+      marketingFeature3Desc:
+        'Planlama, gelişim takibi ve kayıt tutma.',
+      marketingFeature4Title: 'Ücret ve finans',
+      marketingFeature4Desc:
+        'Faturalar, ödemeler ve finansal özet.',
+      marketingModulesEyebrow: 'Hepsi bir arada',
+      marketingModulesTitleLine1: 'Kurumunuzun ihtiyaç duyduğu her şey,',
+      marketingModulesTitleLine2: 'tek yerde.',
+      marketingPartnersEyebrow: 'Aileler ortak',
+      marketingPartnersTitle: 'Aileleri çocuklarının eğitimine yaklaştırın',
+      marketingBenefit1: 'Gerçek zamanlı mesaj ve duyurular',
+      marketingBenefit2: 'Etkinlik ve tatiller için ortak takvim',
+      marketingBenefit3: 'Günlük raporlar ve sağlık takibi',
+      marketingPartnersImageAlt: 'Anaokulunda çocuklar',
+      marketingCtaBandTitle: 'Dönüşüme hazır mısınız?',
+      marketingCtaBandSubtitle:
+        'Yönetimini kolaylaştıran ve toplulukları memnun eden kurumlara katılın.',
+      marketingCtaBandButton: 'Şimdi kayıt ol',
+      marketingFooterRights: 'KG School Platform. Tüm hakları saklıdır.',
     },
     login: {
       title: 'KG School',

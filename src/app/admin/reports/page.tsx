@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { sT } from '@/i18n/sT'
 import { IOSCard } from '@/components/ui/IOSCard'
 
 const ROUTE = 'admin.reports'
@@ -50,10 +51,8 @@ export default function ReportsIndexPage() {
   return (
     <div className="max-w-7xl mx-auto pb-20">
       <div className="mb-16">
-        <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-4">Premium Reports Hub</h1>
-        <p className="text-lg text-slate-500 font-medium max-w-2xl">
-          Centralized intelligence for your Kindergarten. Access deep insights into pedagogical progress, operations, and financial health.
-        </p>
+        <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-4 font-display">{t(sT('reportsHubTitle'))}</h1>
+        <p className="text-lg text-slate-500 font-medium max-w-2xl">{t(sT('reportsHubSubtitle'))}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -86,11 +85,11 @@ export default function ReportsIndexPage() {
             <div className="absolute bottom-10 right-10 w-60 h-60 bg-purple-500 rounded-full blur-[100px]" />
           </div>
           <div className="relative z-10 max-w-xl mx-auto">
-            <h4 className="text-2xl font-black mb-4">Advanced Visual Analytics Coming Soon</h4>
-            <p className="text-slate-400 font-medium mb-8 italic">We are building interactive heatmaps and trend analysis charts for better staff performance tracking and student progress visualization.</p>
+            <h4 className="text-2xl font-black mb-4 font-display">{t(sT('reportsAdvancedTitle'))}</h4>
+            <p className="text-slate-400 font-medium mb-8 italic">{t(sT('reportsBuilding'))}</p>
             <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/10 rounded-full border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/60">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
-              In Development
+              {t(sT('reportsInDevelopment'))}
             </div>
           </div>
         </IOSCard>

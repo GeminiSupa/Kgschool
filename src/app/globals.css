@@ -61,13 +61,30 @@
   --color-aura-lavender: var(--aura-lavender);
   --color-aura-rose: var(--aura-rose);
   
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-plus-jakarta), var(--font-inter), system-ui, sans-serif;
   
   --radius-premium: 32px;
 }
 
 @layer utilities {
+  .bg-mesh-light {
+    background-color: var(--background);
+    background-image:
+      radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.08) 0, transparent 50%),
+      radial-gradient(at 50% 0%, rgba(239, 68, 68, 0.06) 0, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.06) 0, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  .dark .bg-mesh-light {
+    background-color: var(--background);
+    background-image:
+      radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.12) 0, transparent 50%),
+      radial-gradient(at 50% 0%, rgba(251, 113, 133, 0.08) 0, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(52, 211, 153, 0.08) 0, transparent 50%);
+  }
+
   .glass {
     background: var(--glass-bg);
     backdrop-filter: blur(var(--glass-blur));

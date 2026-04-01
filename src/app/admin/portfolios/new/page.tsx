@@ -14,6 +14,7 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { PortfolioForm } from '@/components/forms/PortfolioForm'
+import { sT } from '@/i18n/sT'
 
 export default function AdminPortfoliosNewPage() {
   const { t } = useI18n()
@@ -27,7 +28,7 @@ export default function AdminPortfoliosNewPage() {
 
   const handleSubmit = async (data: Partial<Portfolio>) => {
     if (!user?.id) {
-      setError('Not authenticated')
+      setError(t(sT('errNotAuthenticated')))
       return
     }
 
@@ -35,10 +36,10 @@ export default function AdminPortfoliosNewPage() {
     setSubmitting(true)
     try {
       await portfoliosStore.createPortfolio(data, user.id)
-      alert('Portfolio item created successfully!')
+      alert(t(sT('successPortfolioCreated')))
       router.push('/admin/portfolios')
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to create portfolio item')
+      setError(err instanceof Error ? err.message : t(sT('errCreatePortfolioItem')))
     } finally {
       setSubmitting(false)
     }

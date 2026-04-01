@@ -10,8 +10,11 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { GroupForm } from '@/components/forms/GroupForm'
 import { useChildrenStore } from '@/stores/children'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 export default function GroupDetailPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const { id } = useParams()
   const { groups, fetchGroups, updateGroup, deleteGroup, fetchGroupTeachers } = useGroupsStore()
@@ -48,18 +51,18 @@ export default function GroupDetailPage() {
     setSubmitting(true)
     try {
       await updateGroup(id as string, formData)
-      alert('Gruppe erfolgreich aktualisiert!')
+      alert(t(sT('successGroupUpdated')))
       setIsEditing(false)
       fetchGroups()
     } catch (error: any) {
-      alert(error.message || 'Fehler beim Aktualisieren')
+      alert(error.message || t(sT('errUpdateGeneric')))
     } finally {
       setSubmitting(false)
     }
   }
 
   const handleDelete = async () => {
-    if (!confirm('Gruppe wirklich löschen? Alle Kind-Beziehungen werden aufgehoben.')) return
+    if (!confirm(t(sT('confirmDeleteGroup')))) return
     try {
         await deleteGroup(id as string)
         router.push('/admin/groups')
@@ -71,7 +74,10 @@ export default function GroupDetailPage() {
   const groupChildren = children.filter(c => c.group_id === id)
 
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
-  if (!group) return <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">Gruppe nicht gefunden.</div>
+  if (!group)
+    return (
+      <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">{t(sT('errNotFoundGroup'))}</div>
+    )
 
   return (
     <div className="max-w-7xl mx-auto pb-12">
@@ -169,7 +175,7 @@ export default function GroupDetailPage() {
                         <h3 className="text-[10px] font-black text-indigo-700/40 uppercase tracking-widest group-hover:text-indigo-600 transition-colors">Stundenplan / Timetable</h3>
                         <span className="text-indigo-400 group-hover:translate-x-1 transition-transform">→</span>
                     </div>
-                    <p className="text-xs font-bold text-slate-500">Configure active and billable days for this group.</p>
+                    <p className="text-xs font-bold text-slate-500">{t(sT('groupsDetailConfigureHint'))}</p>
                 </IOSCard>
             </Link>
 

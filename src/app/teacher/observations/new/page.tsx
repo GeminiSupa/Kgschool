@@ -12,6 +12,7 @@ import { ObservationForm } from '@/components/forms/ObservationForm'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { sT } from '@/i18n/sT'
 
 export default function TeacherObservationsNewPage() {
   const { t } = useI18n()
@@ -44,10 +45,10 @@ export default function TeacherObservationsNewPage() {
       }
 
       await observationsStore.createObservation(payload)
-      alert('Beobachtung erfolgreich erstellt!')
+      alert(t(sT('successTeacherObservationCreated')))
       router.push('/teacher/observations')
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Failed to create observation')
+      setError(e instanceof Error ? e.message : t(sT('errCreateObservation')))
     }
   }
 

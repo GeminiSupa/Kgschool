@@ -14,6 +14,7 @@ import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
+import { sT } from '@/i18n/sT'
 
 export default function AdminLeavePage() {
   const { t } = useI18n()
@@ -50,14 +51,14 @@ export default function AdminLeavePage() {
 
   const getStaffName = (id: string) => {
     const s = staff.find(s => s.id === id)
-    return s ? s.full_name : 'Unbekannt'
+    return s ? s.full_name : t(sT('lblUnknown'))
   }
 
   const handleReview = async (id: string, status: 'approved' | 'rejected', type: 'child' | 'staff') => {
       try {
           if (type === 'child') await updateLeaveRequestStatus(id, status)
           else await updateTeacherStatus(id, status)
-          alert('Status aktualisiert!')
+          alert(t(sT('successLeaveStatusUpdated')))
       } catch (e: any) {
           alert(e.message)
       }

@@ -12,6 +12,7 @@ import { getActiveKitaId } from '@/utils/tenant/client'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
+import { sT } from '@/i18n/sT'
 
 type SetupStatus = {
   kitaId: string
@@ -37,7 +38,7 @@ export default function AdminSetupPage() {
         setLoading(true)
         setError('')
         const kitaId = await getActiveKitaId()
-        if (!kitaId) throw new Error('Keine Einrichtung gefunden (kita_id).')
+        if (!kitaId) throw new Error(t(sT('errKitaNotFound')))
 
         const [{ count: groups }, { count: children }, { count: contracts }, { count: feeConfigs }, { count: lunchMenus }] =
           await Promise.all([
@@ -69,7 +70,7 @@ export default function AdminSetupPage() {
           lunchMenus: lunchMenus || 0,
         })
       } catch (e: unknown) {
-        const message = e instanceof Error ? e.message : 'Setup konnte nicht geladen werden.'
+        const message = e instanceof Error ? e.message : t(sT('errLoadSetup'))
         setError(message)
       } finally {
         setLoading(false)

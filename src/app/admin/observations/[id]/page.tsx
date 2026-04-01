@@ -12,6 +12,7 @@ import { useChildrenStore, type Child } from '@/stores/children'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { sT } from '@/i18n/sT'
 
 type Params = { id?: string }
 
@@ -60,7 +61,7 @@ export default function AdminObservationDetailPage() {
 
     void run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [observationId])
+  }, [observationId, t])
 
   if (loading) {
     return (

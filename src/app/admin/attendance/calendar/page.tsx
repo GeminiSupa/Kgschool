@@ -2,6 +2,7 @@
 
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { sT } from '@/i18n/sT'
 
 const ROUTE = 'admin.attendance.calendar'
 
@@ -199,7 +200,7 @@ export default function AdminAttendanceCalendarPage() {
 
       setCalendarDays(days)
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to load calendar'
+      const message = e instanceof Error ? e.message : t(sT('errLoadCalendar'))
       console.error('Error loading calendar:', e)
       setError(message)
     } finally {

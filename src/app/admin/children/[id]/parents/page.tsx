@@ -8,6 +8,8 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { CreateParentModal } from '@/components/modals/CreateParentModal'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 type ProfileLite = {
   id: string
@@ -16,6 +18,7 @@ type ProfileLite = {
 }
 
 export default function AdminChildParentsPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const params = useParams()
   const childId = typeof params?.id === 'string' ? params.id : ''
@@ -42,13 +45,13 @@ export default function AdminChildParentsPage() {
 
     try {
       if (!childId) {
-        setError('Child not found')
+        setError(t(sT('errNotFoundChild')))
         return
       }
 
       const child = (await childrenStore.fetchChildById(childId)) as Child | null
       if (!child) {
-        setError('Child not found')
+        setError(t(sT('errNotFoundChild')))
         return
       }
 
@@ -70,7 +73,7 @@ export default function AdminChildParentsPage() {
         setCurrentParents([])
       }
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Failed to load child')
+      setError(e instanceof Error ? e.message : t(sT('errLoadChild')))
     } finally {
       setLoading(false)
     }
@@ -79,7 +82,7 @@ export default function AdminChildParentsPage() {
   useEffect(() => {
     loadChild()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [childId])
+  }, [childId, t])
 
   const searchParents = async () => {
     const q = searchQuery.trim()
@@ -89,7 +92,7 @@ export default function AdminChildParentsPage() {
     }
 
     if (q.length < 2) {
-      alert('Please enter at least 2 characters to search')
+      alert(t(sT('errSearchParentsMinChars')))
       return
     }
 
@@ -107,7 +110,7 @@ export default function AdminChildParentsPage() {
       setSearchResults((data || []) as ProfileLite[])
     } catch (e: unknown) {
       console.error('Search error:', e)
-      alert('Failed to search parents. Please try again.')
+      alert(t(sT('errSearchParents')))
     } finally {
       setSearching(false)
     }
@@ -115,12 +118,12 @@ export default function AdminChildParentsPage() {
 
   const addParent = async (parentId: string) => {
     if (!parentId) {
-      alert('Invalid parent ID')
+      alert(t(sT('errInvalidParentId')))
       return
     }
 
     if (currentParentIds.includes(parentId)) {
-      alert('This parent is already linked to this child')
+      alert(t(sT('errParentAlreadyLinked')))
       return
     }
 
@@ -145,12 +148,12 @@ export default function AdminChildParentsPage() {
       setSearchResults([])
     } catch (e: unknown) {
       console.error('Error adding parent:', e)
-      alert(e instanceof Error ? e.message : 'Failed to add parent. Please try again.')
+      alert(e instanceof Error ? e.message : t(sT('errAddParent')))
     }
   }
 
   const removeParent = async (parentId: string) => {
-    if (!confirm('Remove this parent from the child?')) return
+    if (!confirm(t(sT('confirmRemoveParentFromChild')))) return
 
     try {
       const newParentIds = currentParentIds.filter((id) => id !== parentId)
@@ -161,7 +164,7 @@ export default function AdminChildParentsPage() {
       setCurrentParents((prev) => prev.filter((p) => p.id !== parentId))
     } catch (e: unknown) {
       console.error('Error removing parent:', e)
-      alert(e instanceof Error ? e.message : 'Failed to remove parent. Please try again.')
+      alert(e instanceof Error ? e.message : t(sT('errRemoveParent')))
     }
   }
 
@@ -169,7 +172,7 @@ export default function AdminChildParentsPage() {
     setShowCreateModal(false)
     if (newParent?.id) {
       await addParent(newParent.id)
-      alert('Parent created and linked to child successfully!')
+      alert(t(sT('successParentLinked')))
     }
   }
 

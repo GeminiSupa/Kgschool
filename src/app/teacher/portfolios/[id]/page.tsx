@@ -10,8 +10,11 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 export default function PortfolioDetailPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const { id } = useParams()
   const { portfolios, loading: portfoliosLoading, error: portfoliosError, fetchPortfolios, deletePortfolio } = usePortfoliosStore()
@@ -65,18 +68,23 @@ export default function PortfolioDetailPage() {
   }
 
   const handleDelete = async () => {
-    if (!confirm('Möchten Sie dieses Portfolio-Element wirklich löschen?')) return
+    if (!confirm(t(sT('confirmDeletePortfolioItem')))) return
     try {
       await deletePortfolio(id as string)
-      alert('Portfolio-Element erfolgreich gelöscht!')
+      alert(t(sT('successPortfolioDeleted')))
       router.push('/teacher/portfolios')
     } catch (e: any) {
-      alert(e.message || 'Fehler beim Löschen')
+      alert(e.message || t(sT('errDeleteDocument')))
     }
   }
 
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
-  if (!portfolio && !portfoliosLoading) return <div className="max-w-4xl mx-auto py-12 text-center"><p className="text-gray-500">Portfolio-Element nicht gefunden.</p></div>
+  if (!portfolio && !portfoliosLoading)
+    return (
+      <div className="max-w-4xl mx-auto py-12 text-center">
+        <p className="text-gray-500">{t(sT('errNotFoundPortfolio'))}</p>
+      </div>
+    )
 
   return (
     <div className="max-w-4xl mx-auto pb-12">

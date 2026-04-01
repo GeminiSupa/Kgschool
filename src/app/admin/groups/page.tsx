@@ -2,6 +2,7 @@
 
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { sT } from '@/i18n/sT'
 
 const ROUTE = 'admin.groups'
 
@@ -35,13 +36,11 @@ export default function AdminGroupsPage() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-2">
             {t(pT(ROUTE))}
           </h1>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl">
-            Organize your kindergarten into pedagogical groups and managed environments.
-          </p>
+          <p className="text-lg text-slate-500 font-medium max-w-2xl">{t(sT('groupsListSubtitle'))}</p>
         </div>
         <div className="flex gap-3">
           <Link href="/admin/groups/new" className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all">
-            Create New Group
+            {t(sT('createNewGroup'))}
           </Link>
         </div>
       </div>
@@ -51,8 +50,8 @@ export default function AdminGroupsPage() {
       ) : groups.length === 0 ? (
         <IOSCard className="p-24 text-center border-dashed border-2 border-slate-200 bg-transparent shadow-none">
           <div className="text-6xl opacity-10 mb-6">🏫</div>
-          <p className="text-slate-500 font-bold text-xl">No groups found in the system</p>
-          <p className="text-slate-400 mt-2 font-medium">Start by creating your first group.</p>
+          <p className="text-slate-500 font-bold text-xl">{t(sT('noGroupsSystem'))}</p>
+          <p className="text-slate-400 mt-2 font-medium">{t(sT('noGroupsHint'))}</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

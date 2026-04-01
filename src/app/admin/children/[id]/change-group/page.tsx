@@ -14,6 +14,8 @@ import {
   validateGroupAssignment,
   checkGroupCapacity,
 } from '@/utils/groupAssignment'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 type TeacherInGroup = {
   id?: string
@@ -29,6 +31,7 @@ function toISODate(d: Date) {
 }
 
 export default function AdminChildChangeGroupPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const params = useParams()
   const childId = typeof params?.id === 'string' ? params.id : ''
@@ -67,13 +70,13 @@ export default function AdminChildChangeGroupPage() {
 
     try {
       if (!childId) {
-        setError('Child not found')
+        setError(t(sT('errNotFoundChild')))
         return
       }
 
       const childData = await childrenStore.fetchChildById(childId)
       if (!childData) {
-        setError('Child not found')
+        setError(t(sT('errNotFoundChild')))
         return
       }
 
@@ -120,7 +123,7 @@ export default function AdminChildChangeGroupPage() {
         setSuggestions([])
       }
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Failed to load data')
+      setError(e instanceof Error ? e.message : t(sT('errLoadData')))
     } finally {
       setLoading(false)
     }
@@ -163,7 +166,7 @@ export default function AdminChildChangeGroupPage() {
   useEffect(() => {
     void load()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [childId])
+  }, [childId, t])
 
   useEffect(() => {
     if (!newGroupId) return
@@ -173,7 +176,7 @@ export default function AdminChildChangeGroupPage() {
 
   const handleSubmit = async () => {
     if (!newGroupId || !transferDate) {
-      setValidationErrors(['Please select a group and transfer date'])
+      setValidationErrors([t(sT('errSelectGroupTransferDate'))])
       return
     }
 
@@ -200,10 +203,10 @@ export default function AdminChildChangeGroupPage() {
 
       if (updateErr) throw updateErr
 
-      alert('Child successfully transferred to new group!')
+      alert(t(sT('successChildTransferred')))
       router.push(`/admin/children/${childId}`)
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to transfer child'
+      const message = e instanceof Error ? e.message : t(sT('errTransferChild'))
       setValidationErrors([message])
     } finally {
       setSubmitting(false)

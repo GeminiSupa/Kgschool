@@ -3,6 +3,8 @@ import { defaultLanguage } from './constants'
 import { coreTranslations } from './core'
 import { pagesFlat } from './pagesFlat.generated'
 import { pagesFlatExtra } from './pagesFlat.extra'
+import { sharedFlat } from './sharedFlat'
+import { sharedErrorsFlat } from './sharedErrorsFlat'
 import { nestFlatStrings } from './nestFlat'
 import { mergeDeep } from './mergeDeep'
 import type { TranslationTree } from './translationTypes'
@@ -21,13 +23,28 @@ function walk(tree: TranslationTree | undefined, parts: string[]): string | unde
 
 export const translations: Record<AppLanguage, TranslationTree> = {
   de: mergeDeep(coreTranslations.de, {
-    pages: nestFlatStrings({ ...pagesFlat.de, ...pagesFlatExtra.de }),
+    pages: nestFlatStrings({
+      ...pagesFlat.de,
+      ...pagesFlatExtra.de,
+      ...sharedFlat.de,
+      ...sharedErrorsFlat.de,
+    }),
   }),
   en: mergeDeep(coreTranslations.en, {
-    pages: nestFlatStrings({ ...pagesFlat.en, ...pagesFlatExtra.en }),
+    pages: nestFlatStrings({
+      ...pagesFlat.en,
+      ...pagesFlatExtra.en,
+      ...sharedFlat.en,
+      ...sharedErrorsFlat.en,
+    }),
   }),
   tr: mergeDeep(coreTranslations.tr, {
-    pages: nestFlatStrings({ ...pagesFlat.tr, ...pagesFlatExtra.tr }),
+    pages: nestFlatStrings({
+      ...pagesFlat.tr,
+      ...pagesFlatExtra.tr,
+      ...sharedFlat.tr,
+      ...sharedErrorsFlat.tr,
+    }),
   }),
 }
 

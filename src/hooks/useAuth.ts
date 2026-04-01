@@ -5,11 +5,12 @@ import { createClient } from '@/utils/supabase/client'
 
 export const useAuth = () => {
   const supabase = createClient()
-  const { user, profile, setUser, fetchProfile, logout: storeLogout } = useAuthStore()
+  const { user, profile, setUser, fetchProfile, logout: storeLogout, authHydrated } = useAuthStore()
 
   const login = async (email: string, password: string) => {
+    const normalizedEmail = email.trim().toLowerCase()
     const { data, error } = await supabase.auth.signInWithPassword({
-      email,
+      email: normalizedEmail,
       password
     })
     if (error) throw error
@@ -154,7 +155,8 @@ export const useAuth = () => {
   return {
     user,
     profile,
-    loading: useAuthStore().loading,
+    /** True until first session + profile resolution (ClientAuthHydrator + fetchProfile). */
+    loading: !authHydrated,
     login,
     logout,
     signUp,

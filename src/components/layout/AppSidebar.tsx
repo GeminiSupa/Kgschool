@@ -141,7 +141,7 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
           </div>
           {!isCollapsed && (
             <div className="flex-1 min-w-0 transition-opacity duration-300">
-              <p className="text-sm font-bold text-slate-900 tracking-tight truncate">{t('brand.appTitle')}</p>
+              <p className="text-sm font-bold text-slate-900 dark:text-white tracking-tight truncate font-display">{t('brand.appTitle')}</p>
               <p className="text-[10px] text-indigo-500 font-bold tracking-widest uppercase mt-0.5">
                 {loading ? '...' : userRoleLabel}
               </p>
@@ -162,10 +162,10 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
               <Link
                 key={item.path}
                 href={item.path}
-                className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 mb-1 focus:outline-none focus:ring-2 focus:ring-indigo-100 ${
+                className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 mb-1 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900/40 ${
                   active 
-                    ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm' 
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                    ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm dark:bg-indigo-950/60 dark:text-indigo-200' 
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-slate-100'
                 } ${isCollapsed ? 'justify-center px-0' : ''}`}
                 title={isCollapsed ? t(item.labelKey) : undefined}
               >
@@ -173,7 +173,7 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
                   <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-600 rounded-r-full" />
                 )}
                 
-                <span className={`${active ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500 transition-colors'}`}>
+                <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-slate-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors'}`}>
                   {item.icon}
                 </span>
                 
@@ -189,11 +189,11 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
       <div className="border-t border-slate-50 dark:border-white/5 p-4 flex flex-col gap-3 mt-auto bg-slate-50/50 dark:bg-white/5">
         <Link
           href="/logout"
-          className={`flex items-center gap-3 justify-center w-full px-3 py-2.5 rounded-xl text-sm font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 hover:text-rose-700 transition-all focus:ring-2 focus:ring-rose-100 ${isCollapsed ? 'px-0' : ''}`}
-          title={isCollapsed ? 'Logout' : undefined}
+          className={`flex items-center gap-3 justify-center w-full px-3 py-2.5 rounded-xl text-sm font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 hover:text-rose-700 dark:text-rose-400 dark:bg-rose-950/40 dark:hover:bg-rose-950/60 transition-all focus:ring-2 focus:ring-rose-100 dark:focus:ring-rose-900/50 ${isCollapsed ? 'px-0' : ''}`}
+          title={isCollapsed ? t('nav.logout') : undefined}
         >
-          <LogOut size={18} className="shrink-0" />
-          {!isCollapsed && <span className="truncate tracking-tight">Logout</span>}
+          <LogOut size={18} className="shrink-0" aria-hidden />
+          {!isCollapsed && <span className="truncate tracking-tight">{t('nav.logout')}</span>}
         </Link>
         {!isCollapsed && (
           <div className="pt-2 flex flex-col gap-3">

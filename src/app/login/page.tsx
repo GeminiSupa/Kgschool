@@ -9,6 +9,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 import { useI18n } from '@/i18n/I18nProvider'
 import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
+import { AlertCircle, GraduationCap } from 'lucide-react'
 
 export default function LoginPage() {
   const { t } = useI18n()
@@ -70,8 +71,8 @@ export default function LoginPage() {
             <LanguageSwitcher />
           </div>
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-purple-400 to-pink-400 rounded-2xl mb-4 shadow-lg">
-              <span className="text-3xl">🎓</span>
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-indigo-500 to-fuchsia-500 rounded-2xl mb-4 shadow-lg shadow-indigo-500/25">
+              <GraduationCap className="w-8 h-8 text-white" strokeWidth={2} aria-hidden />
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
               {t('login.title')}
@@ -120,7 +121,10 @@ export default function LoginPage() {
             </IOSButton>
 
             {error && !error.includes('email') && !error.includes('Email') && !error.includes('password') && !error.includes('Password') && (
-              <div className="flex items-center gap-2.5 p-3 px-4 bg-[#ff3b30]/15 backdrop-blur-[10px] border border-[#ff3b30]/30 rounded-xl text-[#ff3b30] text-sm animate-[shake_0.4s_ease]">
+              <div
+                className="flex items-center gap-2.5 p-3 px-4 bg-red-500/10 backdrop-blur-[10px] border border-red-500/25 rounded-xl text-red-600 dark:text-red-400 text-sm animate-[shake_0.4s_ease]"
+                role="alert"
+              >
                 <style dangerouslySetInnerHTML={{__html: `
                   @keyframes shake {
                     0%, 100% { transform: translateX(0); }
@@ -128,7 +132,7 @@ export default function LoginPage() {
                     75% { transform: translateX(5px); }
                   }
                 `}} />
-                <span className="text-[18px]">⚠️</span>
+                <AlertCircle className="w-5 h-5 shrink-0" strokeWidth={2} aria-hidden />
                 <span>{error}</span>
               </div>
             )}

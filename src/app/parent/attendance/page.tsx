@@ -15,6 +15,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { sT } from '@/i18n/sT'
 
 export default function ParentAttendancePage() {
   const { t } = useI18n()
@@ -111,7 +112,7 @@ export default function ParentAttendancePage() {
       {loading || attendanceLoading ? (
         <div className="flex justify-center py-24"><LoadingSpinner /></div>
       ) : error || attendanceError ? (
-        <ErrorAlert message={error || attendanceError?.message || 'Fehler beim Laden'} />
+        <ErrorAlert message={error || attendanceError?.message || t(sT('errLoadData'))} />
       ) : filteredAttendance.length === 0 ? (
         <IOSCard className="p-12 text-center">
           <div className="text-5xl opacity-40 mb-4">📅</div>

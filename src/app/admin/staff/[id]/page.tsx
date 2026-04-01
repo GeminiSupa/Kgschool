@@ -10,8 +10,11 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { StaffForm } from '@/components/forms/StaffForm'
 import { createClient } from '@/utils/supabase/client'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 export default function StaffDetailPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const { id } = useParams()
   const { fetchStaffById } = useStaffStore()
@@ -45,19 +48,22 @@ export default function StaffDetailPage() {
         .eq('id', id)
 
       if (error) throw error
-      alert('Profil erfolgreich aktualisiert!')
+      alert(t(sT('successProfileUpdated')))
       setIsEditing(false)
       const data = await fetchStaffById(id as string)
       setMember(data)
     } catch (error: any) {
-      alert(error.message || 'Fehler beim Aktualisieren')
+      alert(error.message || t(sT('errUpdateGeneric')))
     } finally {
       setSubmitting(false)
     }
   }
 
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
-  if (!member) return <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">Mitarbeiter nicht gefunden.</div>
+  if (!member)
+    return (
+      <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">{t(sT('errNotFoundStaff'))}</div>
+    )
 
   return (
     <div className="max-w-5xl mx-auto pb-12">

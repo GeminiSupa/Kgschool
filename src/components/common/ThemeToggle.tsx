@@ -1,8 +1,11 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { Moon, Sun } from 'lucide-react'
+import { useI18n } from '@/i18n/I18nProvider'
 
 export function ThemeToggle() {
+  const { t } = useI18n()
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
@@ -28,18 +31,21 @@ export function ThemeToggle() {
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
-      className="p-3 rounded-2xl glass hover:scale-110 active:scale-95 transition-all duration-300 shadow-lg border-white/20 group relative overflow-hidden"
-      aria-label="Toggle Night Mode"
+      className="p-3 rounded-2xl glass hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg border-white/20 dark:border-white/10 group relative overflow-hidden"
+      aria-label={isDark ? t('shell.useLightTheme') : t('shell.useDarkTheme')}
     >
-      <div className="relative z-10 text-xl flex items-center justify-center">
+      <div className="relative z-10 flex items-center justify-center text-foreground">
         {isDark ? (
-          <span className="animate-in zoom-in duration-500">🌙</span>
+          <Moon className="w-5 h-5 shrink-0" strokeWidth={2} aria-hidden />
         ) : (
-          <span className="animate-in zoom-in duration-500">☀️</span>
+          <Sun className="w-5 h-5 shrink-0 text-amber-600" strokeWidth={2} aria-hidden />
         )}
       </div>
-      <div className={`absolute inset-0 opacity-20 transition-colors duration-500 ${isDark ? 'bg-aura-indigo' : 'bg-aura-coral'}`} />
+      <div
+        className={`absolute inset-0 opacity-15 transition-colors duration-500 ${isDark ? 'bg-aura-indigo' : 'bg-amber-400'}`}
+      />
     </button>
   )
 }

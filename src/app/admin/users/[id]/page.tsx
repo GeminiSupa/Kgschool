@@ -13,6 +13,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { sT } from '@/i18n/sT'
 
 export default function EditUserPage() {
   const { t } = useI18n()
@@ -187,7 +188,7 @@ export default function EditUserPage() {
         
         await Promise.all(uploadPromises)
 
-        alert('Erfolgreich aktualisiert!')
+        alert(t(sT('successUserUpdated')))
         await fetchUser() // Reload data
         setFiles({ contract: null, health_cert: null, avatar: null }) // Reset files
     } catch (e: any) {
@@ -198,10 +199,10 @@ export default function EditUserPage() {
   }
 
   const handleDelete = async () => {
-    if (!confirm('Möchten Sie diesen Benutzer wirklich deaktivieren?')) return
+    if (!confirm(t(sT('confirmDeactivateUser')))) return
     try {
         await supabase.from('profiles').update({ active: false }).eq('id', id)
-        alert('Benutzer deaktiviert!')
+        alert(t(sT('successUserDeactivated')))
         router.push('/admin/users')
     } catch (e: any) {
         alert(e.message)
@@ -216,18 +217,18 @@ export default function EditUserPage() {
               window.open(data.signedUrl, '_blank')
           }
       } catch (err) {
-          alert('Das Dokument konnte nicht aufgerufen werden.')
+          alert(t(sT('errDocumentOpen')))
       }
   }
 
   const deleteDocument = async (docId: string, filePath: string) => {
-      if (!confirm('Dokument wirklich löschen?')) return
+      if (!confirm(t(sT('confirmDeleteDocument')))) return
       try {
           await supabase.storage.from('user-documents').remove([filePath])
           await supabase.from('user_documents').delete().eq('id', docId)
           setDocuments(prev => prev.filter(d => d.id !== docId))
       } catch (err) {
-          alert('Fehler beim Löschen.')
+          alert(t(sT('errDeleteDocument')))
       }
   }
 

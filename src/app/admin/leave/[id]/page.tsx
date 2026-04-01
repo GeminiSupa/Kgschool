@@ -13,6 +13,7 @@ import { useChildrenStore, type Child } from '@/stores/children'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { sT } from '@/i18n/sT'
 
 type Params = { id?: string }
 
@@ -83,7 +84,7 @@ export default function AdminLeaveRequestDetailPage() {
 
     void run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [requestId])
+  }, [requestId, t])
 
   const approveRequest = async () => {
     if (!request) return
@@ -94,10 +95,10 @@ export default function AdminLeaveRequestDetailPage() {
         'approved',
         adminNotes.trim() || undefined
       )
-      alert('Leave request approved successfully!')
+      alert(t(sT('successLeaveApproved')))
       router.push('/admin/leave')
     } catch (e: unknown) {
-      alert(e instanceof Error ? e.message : 'Failed to approve request')
+      alert(e instanceof Error ? e.message : t(sT('errApproveLeave')))
     } finally {
       setProcessing(false)
     }
@@ -112,10 +113,10 @@ export default function AdminLeaveRequestDetailPage() {
         'rejected',
         adminNotes.trim() || undefined
       )
-      alert('Leave request rejected.')
+      alert(t(sT('successLeaveRejected')))
       router.push('/admin/leave')
     } catch (e: unknown) {
-      alert(e instanceof Error ? e.message : 'Failed to reject request')
+      alert(e instanceof Error ? e.message : t(sT('errRejectLeave')))
     } finally {
       setProcessing(false)
     }

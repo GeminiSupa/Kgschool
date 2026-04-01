@@ -10,6 +10,7 @@ import { createClient } from '@/utils/supabase/client'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { sT } from '@/i18n/sT'
 
 type GroupLite = { id: string; name: string }
 type StaffLite = { id: string; full_name: string }
@@ -131,7 +132,7 @@ export default function AdminStaffRotaPage() {
         await Promise.all([loadGroups(), loadStaff()])
         await loadRota()
       } catch (e: unknown) {
-        setError(e instanceof Error ? e.message : 'Failed to load rota')
+        setError(e instanceof Error ? e.message : t(sT('errLoadRota')))
       } finally {
         setLoading(false)
       }

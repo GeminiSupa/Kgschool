@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { sT } from '@/i18n/sT'
 
 export default function TeacherAttendanceScanPage() {
   const { t } = useI18n()
@@ -21,7 +22,7 @@ export default function TeacherAttendanceScanPage() {
     setError('')
     setScanning(true)
     // QR code scanning is currently disabled in this port.
-    alert('QR code scanning will be implemented with vue-qrcode-reader library')
+    alert(t(sT('errQrNotImplemented')))
     setScanning(false)
   }
 

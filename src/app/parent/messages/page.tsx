@@ -14,6 +14,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { sT } from '@/i18n/sT'
 
 export default function ParentMessagesPage() {
   const { t } = useI18n()
@@ -68,7 +69,7 @@ export default function ParentMessagesPage() {
 
   const getPartnerName = (partnerId: string) => {
     const partner = recipients.find(p => p.id === partnerId)
-    return partner ? partner.full_name : 'Unbekannt'
+    return partner ? partner.full_name : t(sT('lblUnknown'))
   }
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -87,7 +88,7 @@ export default function ParentMessagesPage() {
       setShowCompose(false)
       setComposeForm({ recipient_id: '', content: '' })
     } catch (e: any) {
-      setComposeError(e.message || 'Fehler beim Senden')
+      setComposeError(e.message || t(sT('errSendMessage')))
     } finally {
       setComposing(false)
     }
@@ -153,7 +154,7 @@ export default function ParentMessagesPage() {
       </div>
 
       {error ? (
-        <ErrorAlert message={error.message || 'Fehler beim Laden der Nachrichten'} />
+        <ErrorAlert message={error.message || t(sT('errLoadMessages'))} />
       ) : displayMessages.length === 0 ? (
         <IOSCard className="p-16 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">💬</div>

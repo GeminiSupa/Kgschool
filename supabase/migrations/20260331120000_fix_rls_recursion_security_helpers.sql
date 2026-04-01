@@ -6,7 +6,7 @@
 CREATE OR REPLACE FUNCTION public.get_user_role()
 RETURNS TEXT
 LANGUAGE plpgsql
-STABLE
+VOLATILE
 SECURITY DEFINER
 SET search_path = public, auth
 AS $$
@@ -33,7 +33,7 @@ $$;
 CREATE OR REPLACE FUNCTION public.get_user_kita_id(user_id UUID)
 RETURNS UUID
 LANGUAGE plpgsql
-STABLE
+VOLATILE
 SECURITY DEFINER
 SET search_path = public
 AS $$
@@ -59,7 +59,7 @@ $$;
 CREATE OR REPLACE FUNCTION public.user_belongs_to_kita(user_id UUID, target_kita_id UUID)
 RETURNS BOOLEAN
 LANGUAGE plpgsql
-STABLE
+VOLATILE
 SECURITY DEFINER
 SET search_path = public
 AS $$

@@ -14,10 +14,13 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 type ProfileMap = Record<string, string>
 
 export default function AdminParentWorkDetailsPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const params = useParams<{ id: string }>()
   const taskId = params?.id
@@ -34,7 +37,7 @@ export default function AdminParentWorkDetailsPage() {
   useEffect(() => {
     const run = async () => {
       if (!taskId) {
-        setError('Task not found')
+        setError(t(sT('errNotFoundTask')))
         setLoading(false)
         return
       }
@@ -50,7 +53,7 @@ export default function AdminParentWorkDetailsPage() {
 
         if (taskError) throw taskError
         if (!taskData) {
-          setError('Task not found')
+          setError(t(sT('errNotFoundTask')))
           setTask(null)
           return
         }
@@ -67,37 +70,37 @@ export default function AdminParentWorkDetailsPage() {
         // Load submissions for this task.
         await parentWorkStore.fetchSubmissions(taskId, undefined, profile?.kita_id)
       } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : 'Failed to load task')
+        setError(err instanceof Error ? err.message : t(sT('errLoadTask')))
       } finally {
         setLoading(false)
       }
     }
 
     void run()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [taskId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- task load only on taskId; avoid refetch on store/profile churn
+  }, [taskId, t])
 
   const submissions = parentWorkStore.submissions
 
   const formatTaskType = (type: string) => {
     const types: Record<string, string> = {
-      cleaning: 'Cleaning',
-      cooking: 'Cooking',
-      maintenance: 'Maintenance',
-      gardening: 'Gardening',
-      administration: 'Administration',
-      other: 'Other',
+      cleaning: t(sT('pwTypeCleaning')),
+      cooking: t(sT('pwTypeCooking')),
+      maintenance: t(sT('pwTypeMaintenance')),
+      gardening: t(sT('pwTypeGardening')),
+      administration: t(sT('pwTypeAdministration')),
+      other: t(sT('pwTypeOther')),
     }
     return types[type] || type
   }
 
   const formatStatus = (status: ParentWorkTask['status']) => {
     const statuses: Record<string, string> = {
-      open: 'Open',
-      assigned: 'Assigned',
-      in_progress: 'In Progress',
-      completed: 'Completed',
-      cancelled: 'Cancelled',
+      open: t(sT('pwTaskOpen')),
+      assigned: t(sT('pwTaskAssigned')),
+      in_progress: t(sT('pwTaskInProgress')),
+      completed: t(sT('pwTaskCompleted')),
+      cancelled: t(sT('pwTaskCancelled')),
     }
     return statuses[status] || status
   }
@@ -125,16 +128,16 @@ export default function AdminParentWorkDetailsPage() {
 
   const formatSubmissionStatus = (status: ParentWorkSubmission['status']) => {
     const statuses: Record<string, string> = {
-      pending: 'Pending',
-      approved: 'Approved',
-      rejected: 'Rejected',
-      paid: 'Paid',
+      pending: t(sT('pwSubPending')),
+      approved: t(sT('pwSubApproved')),
+      rejected: t(sT('pwSubRejected')),
+      paid: t(sT('pwSubPaid')),
     }
     return statuses[status] || status
   }
 
   const getAssignedToName = (userId?: string) => {
-    if (!userId) return 'Unassigned'
+    if (!userId) return t(sT('loadingUnassigned'))
     return profiles[userId] || userId
   }
 
@@ -143,26 +146,26 @@ export default function AdminParentWorkDetailsPage() {
   const formatDate = (date: string) => new Date(date).toLocaleDateString()
 
   const approveSubmission = async (submissionId: string) => {
-    if (!confirm('Approve this submission?')) return
+    if (!confirm(t(sT('confirmApproveSubmission')))) return
     try {
       await parentWorkStore.approveSubmission(submissionId)
       await parentWorkStore.fetchSubmissions(taskId, undefined, profile?.kita_id)
-      alert('Submission approved!')
+      alert(t(sT('successSubmissionApproved')))
     } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'Failed to approve submission')
+      alert(err instanceof Error ? err.message : t(sT('errApproveSubmission')))
     }
   }
 
   const rejectSubmission = async (submissionId: string) => {
-    const reason = prompt('Reason for rejection (optional):')
+    const reason = prompt(t(sT('promptRejectReason')))
     if (reason === null) return
 
     try {
       await parentWorkStore.rejectSubmission(submissionId, reason || undefined)
       await parentWorkStore.fetchSubmissions(taskId, undefined, profile?.kita_id)
-      alert('Submission rejected!')
+      alert(t(sT('successSubmissionRejected')))
     } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'Failed to reject submission')
+      alert(err instanceof Error ? err.message : t(sT('errRejectSubmission')))
     }
   }
 
@@ -174,9 +177,9 @@ export default function AdminParentWorkDetailsPage() {
           onClick={() => router.push('/admin/parent-work')}
           className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
         >
-          ← Back to Parent Work Tasks
+          {t(sT('pwBackLink'))}
         </button>
-        <Heading size="xl">{task?.title || 'Task Details'}</Heading>
+        <Heading size="xl">{task?.title || t(sT('pwTaskDetails'))}</Heading>
       </div>
 
       {loading ? (
@@ -199,34 +202,36 @@ export default function AdminParentWorkDetailsPage() {
 
             <div className="grid grid-cols-2 gap-4 mt-6">
               <div>
-                <label className="text-sm font-medium text-gray-500">Description</label>
-                <p className="mt-1 text-gray-900">{task.description || 'No description'}</p>
+                <label className="text-sm font-medium text-gray-500">{t(sT('pwDescription'))}</label>
+                <p className="mt-1 text-gray-900">{task.description || t(sT('pwNoDescription'))}</p>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-500">Status</label>
+                <label className="text-sm font-medium text-gray-500">{t(sT('pwStatus'))}</label>
                 <p className="mt-1">
                   <span className={getStatusClass(task.status)}>{formatStatus(task.status)}</span>
                 </p>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-500">Hourly Rate</label>
+                <label className="text-sm font-medium text-gray-500">{t(sT('pwHourlyRate'))}</label>
                 <p className="mt-1 text-gray-900">€{task.hourly_rate.toFixed(2)}/hr</p>
               </div>
               {task.estimated_hours && (
                 <div>
-                  <label className="text-sm font-medium text-gray-500">Estimated Hours</label>
-                  <p className="mt-1 text-gray-900">{task.estimated_hours} hours</p>
+                  <label className="text-sm font-medium text-gray-500">{t(sT('pwEstimatedHours'))}</label>
+                  <p className="mt-1 text-gray-900">
+                    {task.estimated_hours} {t(sT('pwHoursUnit'))}
+                  </p>
                 </div>
               )}
               {task.assigned_to && (
                 <div>
-                  <label className="text-sm font-medium text-gray-500">Assigned To</label>
+                  <label className="text-sm font-medium text-gray-500">{t(sT('pwAssignedTo'))}</label>
                   <p className="mt-1 text-gray-900">{getAssignedToName(task.assigned_to)}</p>
                 </div>
               )}
               {task.due_date && (
                 <div>
-                  <label className="text-sm font-medium text-gray-500">Due Date</label>
+                  <label className="text-sm font-medium text-gray-500">{t(sT('pwDueDate'))}</label>
                   <p className="mt-1 text-gray-900">{formatDate(task.due_date)}</p>
                 </div>
               )}
@@ -234,7 +239,7 @@ export default function AdminParentWorkDetailsPage() {
 
             {task.notes && (
               <div className="mt-4">
-                <label className="text-sm font-medium text-gray-500">Notes</label>
+                <label className="text-sm font-medium text-gray-500">{t(sT('pwNotes'))}</label>
                 <p className="mt-1 text-gray-900">{task.notes}</p>
               </div>
             )}
@@ -242,33 +247,33 @@ export default function AdminParentWorkDetailsPage() {
 
           <IOSCard className="p-6 max-w-4xl mx-auto">
             <Heading size="md" className="mb-4">
-              Submissions
+              {t(sT('pwSubmissions'))}
             </Heading>
 
             {submissions.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">No submissions yet</div>
+              <div className="text-center py-8 text-gray-500">{t(sT('pwNoSubmissions'))}</div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Parent
+                        {t(sT('pwColParent'))}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Date
+                        {t(sT('pwColDate'))}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Hours
+                        {t(sT('pwColHours'))}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Amount
+                        {t(sT('pwColAmount'))}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
+                        {t(sT('pwColStatus'))}
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
+                        {t(sT('pwColActions'))}
                       </th>
                     </tr>
                   </thead>
@@ -300,14 +305,14 @@ export default function AdminParentWorkDetailsPage() {
                                 onClick={() => void approveSubmission(submission.id)}
                                 className="text-green-600 hover:text-green-900"
                               >
-                                Approve
+                                {t(sT('pwApprove'))}
                               </button>
                               <button
                                 type="button"
                                 onClick={() => void rejectSubmission(submission.id)}
                                 className="text-red-600 hover:text-red-900"
                               >
-                                Reject
+                                {t(sT('pwReject'))}
                               </button>
                             </div>
                           )}
@@ -322,7 +327,7 @@ export default function AdminParentWorkDetailsPage() {
         </div>
       ) : (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5 max-w-3xl mx-auto">
-          Task not found.
+          {t(sT('pwTaskNotFound'))}
         </IOSCard>
       )}
     </div>

@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { StaffForm } from '@/components/forms/StaffForm'
+import { sT } from '@/i18n/sT'
 
 export default function NewStaffPage() {
   const { t } = useI18n()
@@ -33,7 +34,7 @@ export default function NewStaffPage() {
       alert('Personalmitglied erfolgreich angelegt!')
       router.push(`/admin/staff/${result.user.id}`)
     } catch (error: any) {
-      alert(error.message || 'Fehler beim Speichern')
+      alert(error.message || t(sT('errSaveStaff')))
       console.error('Error creating staff:', error)
     } finally {
       setSubmitting(false)

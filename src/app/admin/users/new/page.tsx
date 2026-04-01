@@ -13,6 +13,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { sT } from '@/i18n/sT'
 
 export default function NewUserPage() {
   const { t } = useI18n()
@@ -60,7 +61,7 @@ export default function NewUserPage() {
         })
         
         const result = await response.json()
-        if (!response.ok) throw new Error(result.message || 'Fehler beim Erstellen des Benutzers')
+        if (!response.ok) throw new Error(result.message || t(sT('errCreateUser')))
         
         const newUserId = result.user?.id
         
@@ -108,7 +109,7 @@ export default function NewUserPage() {
            await Promise.all(uploadPromises)
         }
 
-        alert('Benutzer erfolgreich erstellt!')
+        alert(t(sT('successUserCreated')))
         router.push('/admin/users')
     } catch (e: any) {
         setError(e.message)

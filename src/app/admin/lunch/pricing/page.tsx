@@ -15,6 +15,7 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { sT } from '@/i18n/sT'
 
 type LunchPricing = {
   id: string
@@ -61,7 +62,7 @@ export default function AdminLunchPricingPage() {
       if (pricingError) throw pricingError
       setPricing((data as LunchPricing[]) || [])
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to load pricing')
+      setError(err instanceof Error ? err.message : t(sT('errLoadPricing')))
     } finally {
       setGroupsLoading(false)
       setLoading(false)

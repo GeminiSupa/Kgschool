@@ -9,6 +9,8 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { TeacherAssignmentList, type TeacherAssignmentListRef } from '@/components/common/TeacherAssignmentList'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 type ProfileLite = {
   id: string
@@ -29,6 +31,7 @@ function toISODate(d: Date) {
 }
 
 export default function AdminChildAssignTeachersPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const params = useParams()
   const childId = typeof params?.id === 'string' ? params.id : ''
@@ -92,13 +95,13 @@ export default function AdminChildAssignTeachersPage() {
 
       try {
         if (!childId) {
-          setError('Child not found')
+          setError(t(sT('errNotFoundChild')))
           return
         }
 
         const child = (await childrenStore.fetchChildById(childId)) as Child | null
         if (!child) {
-          setError('Child not found')
+          setError(t(sT('errNotFoundChild')))
           return
         }
         setChildName(`${child.first_name} ${child.last_name}`)
@@ -112,7 +115,7 @@ export default function AdminChildAssignTeachersPage() {
         if (staffErr) throw staffErr
         setStaffMembers((staffData || []) as ProfileLite[])
       } catch (e: unknown) {
-        setError(e instanceof Error ? e.message : 'Failed to load data')
+        setError(e instanceof Error ? e.message : t(sT('errLoadData')))
       } finally {
         setLoading(false)
         setStaffLoading(false)
@@ -121,7 +124,7 @@ export default function AdminChildAssignTeachersPage() {
 
     run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [childId])
+  }, [childId, t])
 
   useEffect(() => {
     if (!childId) return
@@ -130,18 +133,18 @@ export default function AdminChildAssignTeachersPage() {
   }, [childId])
 
   const validateForm = () => {
-    if (!form.staff_id) return 'Please select a staff member'
-    if (!form.assignment_type) return 'Please select an assignment type'
-    if (!form.start_date) return 'Please select a start date'
+    if (!form.staff_id) return t(sT('errAssignmentSelectStaff'))
+    if (!form.assignment_type) return t(sT('errAssignmentSelectType'))
+    if (!form.start_date) return t(sT('errAssignmentSelectStart'))
     if (form.end_date && form.end_date.trim() !== '') {
       const start = new Date(form.start_date)
       const end = new Date(form.end_date)
-      if (end < start) return 'End date must be after start date'
+      if (end < start) return t(sT('errAssignmentEndBeforeStart'))
     }
     const today = new Date()
     today.setHours(0, 0, 0, 0)
     const start = new Date(form.start_date)
-    if (start < today) return 'Start date cannot be in the past'
+    if (start < today) return t(sT('errAssignmentStartPast'))
     return ''
   }
 
@@ -165,12 +168,11 @@ export default function AdminChildAssignTeachersPage() {
 
     try {
       await staffAssignmentsStore.createAssignment(assignmentData)
-      alert('Assignment created successfully!')
+      alert(t(sT('successAssignmentCreated')))
       await refreshAssignments()
       resetCreateForm()
     } catch (e: unknown) {
-      const message =
-        e instanceof Error ? e.message : 'Failed to create assignment'
+      const message = e instanceof Error ? e.message : t(sT('errCreateAssignment'))
       alert(message)
     }
   }
@@ -195,24 +197,24 @@ export default function AdminChildAssignTeachersPage() {
 
     try {
       await staffAssignmentsStore.updateAssignment(editingAssignment.id, assignmentData)
-      alert('Assignment updated successfully!')
+      alert(t(sT('successAssignmentUpdated')))
       setEditingAssignment(null)
       await refreshAssignments()
       resetCreateForm()
     } catch (e: unknown) {
-      alert(e instanceof Error ? e.message : 'Failed to update assignment')
+      alert(e instanceof Error ? e.message : t(sT('errUpdateAssignment')))
     }
   }
 
   const handleDelete = async (assignment: StaffAssignment) => {
-    if (!confirm('Are you sure you want to remove this assignment?')) return
+    if (!confirm(t(sT('confirmRemoveAssignment')))) return
     try {
       await staffAssignmentsStore.deleteAssignment(assignment.id)
-      alert('Assignment removed successfully!')
+      alert(t(sT('successAssignmentRemoved')))
       await refreshAssignments()
       if (editingAssignment?.id === assignment.id) resetCreateForm()
     } catch (e: unknown) {
-      alert(e instanceof Error ? e.message : 'Failed to remove assignment')
+      alert(e instanceof Error ? e.message : t(sT('errRemoveAssignment')))
     }
   }
 

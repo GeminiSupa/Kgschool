@@ -8,12 +8,15 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 interface PageProps {
   params: Promise<{ id: string }>
 }
 
 export default function ChildProfilePage({ params }: PageProps) {
+  const { t } = useI18n()
   const { id } = use(params)
   const [child, setChild] = useState<any>(null)
   const [loading, setLoading] = useState(true)
@@ -35,7 +38,7 @@ export default function ChildProfilePage({ params }: PageProps) {
         .single()
       
       if (fetchError) throw fetchError
-      if (!data) throw new Error('Kind nicht gefunden')
+      if (!data) throw new Error(t(sT('errChildNotFound')))
       setChild(data)
     } catch (e: any) {
       console.error('Error loading child profile:', e)

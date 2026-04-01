@@ -10,6 +10,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSStatCard } from '@/components/common/IOSStatCard'
 import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 import { pT } from '@/i18n/pT'
 
 const ROUTE = 'parent.dashboard'
@@ -82,12 +83,18 @@ export default function ParentDashboardPage() {
             {t(pT(ROUTE, 'subtitle'))}
           </p>
         </div>
-        <div className="flex gap-3">
-          <Link href="/parent/messages" className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all">
-            Open Inbox
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/parent/messages"
+            className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-500/15 dark:shadow-indigo-900/40 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-background"
+          >
+            {t(pT(ROUTE, 'ctaInbox'))}
           </Link>
-          <Link href="/parent/leave/new" className="px-6 py-3 bg-white text-slate-700 border border-slate-200 rounded-2xl font-bold text-sm shadow-sm hover:bg-slate-50 transition-colors">
-            Register Absence
+          <Link
+            href="/parent/absences/new"
+            className="px-6 py-3 bg-background text-slate-700 dark:text-slate-200 border border-border rounded-2xl font-bold text-sm shadow-sm hover:bg-slate-50 dark:hover:bg-white/5 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-600 focus:ring-offset-2 dark:focus:ring-offset-background"
+          >
+            {t(pT(ROUTE, 'qaAbsence'))}
           </Link>
         </div>
       </div>
@@ -117,7 +124,7 @@ export default function ParentDashboardPage() {
         {todayMenu && (
           <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="flex items-center gap-4 mb-8">
-                <h2 className="text-sm font-black text-orange-600 uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionTodayMenu')) || 'Heutiges Menü 🍽️'}</h2>
+                <h2 className="text-sm font-black text-orange-600 uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionTodayMenu'))}</h2>
                 <div className="h-px flex-1 bg-slate-100"></div>
             </div>
             <Link href="/parent/lunch">
@@ -209,7 +216,7 @@ export default function ParentDashboardPage() {
                <IOSCard className="p-8 bg-linear-to-br from-indigo-900 to-indigo-800 border-0 text-white overflow-hidden relative group text-center">
                   <div className="absolute top-0 left-0 -ml-8 -mt-8 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
                   <h4 className="text-xl font-black mb-2 relative z-10">School Calendar</h4>
-                  <p className="text-indigo-100/70 text-sm mb-6 relative z-10 font-medium">Never miss an event or holiday!</p>
+                  <p className="text-indigo-100/70 text-sm mb-6 relative z-10 font-medium">{t(sT('parentCalendarTeaser'))}</p>
                   <Link href="/parent/calendar" className="inline-block w-full py-3 bg-white text-indigo-900 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white/90 transition-all relative z-10">Check Schedule</Link>
                </IOSCard>
             </div>

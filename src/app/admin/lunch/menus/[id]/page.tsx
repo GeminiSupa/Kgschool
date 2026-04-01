@@ -11,8 +11,11 @@ import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { useAuth } from '@/hooks/useAuth'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 export default function AdminLunchMenuDetailsPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const params = useParams<{ id: string }>()
   const menuId = params?.id
@@ -43,7 +46,7 @@ export default function AdminLunchMenuDetailsPage() {
   useEffect(() => {
     const run = async () => {
       if (!menuId) {
-        setError('Menu not found')
+        setError(t(sT('errNotFoundMenu')))
         setLoading(false)
         return
       }
@@ -60,7 +63,7 @@ export default function AdminLunchMenuDetailsPage() {
 
         if (menuError) throw menuError
         if (!menuData) {
-          setError('Menu not found')
+          setError(t(sT('errNotFoundMenu')))
           setMenu(null)
           return
         }
@@ -73,7 +76,7 @@ export default function AdminLunchMenuDetailsPage() {
 
         await childrenStore.fetchChildren(profile?.kita_id)
       } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : 'Failed to load menu')
+        setError(err instanceof Error ? err.message : t(sT('errLoadMenu')))
       } finally {
         setLoading(false)
       }
@@ -81,7 +84,7 @@ export default function AdminLunchMenuDetailsPage() {
 
     void run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [menuId])
+  }, [menuId, t])
 
   return (
     <div>

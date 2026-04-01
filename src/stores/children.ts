@@ -1,6 +1,15 @@
 import { create } from 'zustand'
 import { createClient } from '@/utils/supabase/client'
 import { getActiveKitaId } from '@/utils/tenant/client'
+import { useAuthStore } from '@/stores/auth'
+
+function formatSupabaseErr(err: unknown): string {
+  if (err == null) return 'unknown'
+  if (typeof err === 'string') return err
+  if (err instanceof Error) return err.message || String(err)
+  const o = err as { code?: string; message?: string; details?: string; hint?: string }
+  return [o.code, o.message, o.details, o.hint].filter(Boolean).join(' | ') || JSON.stringify(err)
+}
 
 export interface Child {
   id: string
@@ -35,22 +44,52 @@ export const useChildrenStore = create<ChildrenState>((set, get) => ({
     set({ loading: true, error: null })
 
     try {
+      let resolvedKitaId = kitaId ?? null
+      if (resolvedKitaId == null) {
+        resolvedKitaId = await getActiveKitaId()
+      }
+
+      const role = useAuthStore.getState().profile?.role
+
+      if (!resolvedKitaId && role && role !== 'parent') {
+        const msg =
+          'No Kita is assigned to your profile. Children cannot be loaded until default_kita_id or organization membership is set.'
+        console.warn('[fetchChildren]', msg)
+        set({ children: [], error: new Error(msg) })
+        return
+      }
+
+      const qs = resolvedKitaId ? `?kita_id=${encodeURIComponent(resolvedKitaId)}` : ''
+      const res = await fetch(`/api/kita/children${qs}`, {
+        credentials: 'same-origin',
+        cache: 'no-store',
+      })
+      if (res.ok) {
+        const payload: unknown = await res.json()
+        if (Array.isArray(payload)) {
+          set({ children: payload as Child[] })
+          return
+        }
+      }
+      console.warn('[fetchChildren] /api/kita/children not used (HTTP ' + res.status + '), client fallback')
+
       const supabase = createClient()
-      const resolvedKitaId = kitaId ?? (await getActiveKitaId())
       let query = supabase
         .from('children')
         .select('*')
         .order('first_name', { ascending: true })
 
-      if (resolvedKitaId) query = query.eq('kita_id', resolvedKitaId)
+      if (resolvedKitaId) {
+        query = query.eq('kita_id', resolvedKitaId)
+      }
 
       const { data, error } = await query
 
       if (error) throw error
       set({ children: data || [] })
-    } catch (e: any) {
-      console.error('Error fetching children:', e)
-      set({ error: e })
+    } catch (e: unknown) {
+      console.error('Error fetching children:', formatSupabaseErr(e), e)
+      set({ error: e instanceof Error ? e : new Error(formatSupabaseErr(e)) })
     } finally {
       set({ loading: false })
     }
@@ -67,8 +106,8 @@ export const useChildrenStore = create<ChildrenState>((set, get) => ({
 
       if (error) throw error
       return data as Child
-    } catch (e: any) {
-      console.error('Error fetching child:', e)
+    } catch (e: unknown) {
+      console.error('Error fetching child:', formatSupabaseErr(e), e)
       return null
     }
   },
@@ -100,9 +139,9 @@ export const useChildrenStore = create<ChildrenState>((set, get) => ({
 
       if (error) throw error
       set({ children: data || [] })
-    } catch (e: any) {
-      console.error('Error fetching children for teacher:', e)
-      set({ error: e })
+    } catch (e: unknown) {
+      console.error('Error fetching children for teacher:', formatSupabaseErr(e), e)
+      set({ error: e instanceof Error ? e : new Error(formatSupabaseErr(e)) })
     } finally {
       set({ loading: false })
     }

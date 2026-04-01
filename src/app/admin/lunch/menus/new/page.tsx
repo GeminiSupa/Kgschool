@@ -2,6 +2,7 @@
 
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { sT, fillTemplate } from '@/i18n/sT'
 
 const ROUTE = 'admin.lunch.menus.new'
 
@@ -71,8 +72,8 @@ export default function AdminLunchMenusNewPage() {
     } catch (err: any) {
       console.error('Error creating menu:', err)
       setError(
-        err.message || 
-        (err.code ? `Database Error: ${err.code}` : 'Failed to create menu')
+        err.message ||
+          (err.code ? fillTemplate(t(sT('errDatabase')), { code: err.code }) : t(sT('errCreateMenu')))
       )
     } finally {
       setLoading(false)

@@ -9,6 +9,8 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 type NutritionalForm = {
   calories: string
@@ -18,6 +20,7 @@ type NutritionalForm = {
 }
 
 export default function AdminLunchMenuEditPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const params = useParams<{ id: string }>()
   const menuId = params?.id
@@ -53,14 +56,14 @@ export default function AdminLunchMenuEditPage() {
 
   const handleDelete = async () => {
     if (!menuId) return
-    if (!confirm('Are you sure you want to delete this menu? This action cannot be undone.')) return
+    if (!confirm(t(sT('confirmDeleteMenu')))) return
     setSubmitting(true)
     setError('')
     try {
       await lunchStore.deleteMenu(menuId)
       router.push('/admin/lunch/menus')
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to delete menu')
+      setError(err instanceof Error ? err.message : t(sT('errDeleteMenu')))
     } finally {
       setSubmitting(false)
     }
@@ -69,7 +72,7 @@ export default function AdminLunchMenuEditPage() {
   useEffect(() => {
     const run = async () => {
       if (!menuId) {
-        setError('Menu not found')
+        setError(t(sT('errNotFoundMenu')))
         setLoading(false)
         return
       }
@@ -86,7 +89,7 @@ export default function AdminLunchMenuEditPage() {
 
         if (menuError) throw menuError
         if (!menuData) {
-          setError('Menu not found')
+          setError(t(sT('errNotFoundMenu')))
           setMenu(null)
           return
         }
@@ -109,7 +112,7 @@ export default function AdminLunchMenuEditPage() {
           fat: typed.nutritional_info?.fat ?? '',
         })
       } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : 'Failed to load menu')
+        setError(err instanceof Error ? err.message : t(sT('errLoadMenu')))
       } finally {
         setLoading(false)
       }
@@ -117,7 +120,7 @@ export default function AdminLunchMenuEditPage() {
 
     void run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [menuId])
+  }, [menuId, t])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -149,7 +152,7 @@ export default function AdminLunchMenuEditPage() {
 
       router.push(`/admin/lunch/menus/${menuId}`)
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to update menu')
+      setError(err instanceof Error ? err.message : t(sT('errUpdateMenu')))
     } finally {
       setSubmitting(false)
     }

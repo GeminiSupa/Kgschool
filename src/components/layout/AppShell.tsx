@@ -25,7 +25,7 @@ export function AppShell({
   return (
     <div className="flex flex-col min-h-screen relative overflow-hidden bg-background text-foreground transition-colors duration-500">
       {/* Mobile Header */}
-      <div className="md:hidden flex items-center justify-between px-4 py-3 bg-background/80backdrop-blur-xl border-b border-border sticky top-0 z-40">
+      <div className="md:hidden flex items-center justify-between px-4 py-3 bg-background/80 backdrop-blur-xl border-b border-border sticky top-0 z-40">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs ring-2 ring-indigo-100 dark:ring-white/10">KG</div>
           <span className="font-bold text-sm tracking-tight text-foreground">{t('brand.appTitle')}</span>

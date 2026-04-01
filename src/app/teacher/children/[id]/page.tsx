@@ -8,6 +8,8 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -25,6 +27,7 @@ type ChildDetail = {
 }
 
 export default function TeacherChildDetailPage({ params }: PageProps) {
+  const { t } = useI18n()
   const { id } = use(params)
   const supabase = useMemo(() => createClient(), [])
   const { user } = useAuth()
@@ -60,14 +63,14 @@ export default function TeacherChildDetailPage({ params }: PageProps) {
         .single()
 
       if (fetchError) throw fetchError
-      if (!data) throw new Error('Kind nicht gefunden')
+      if (!data) throw new Error(t(sT('errChildNotFound')))
       if (data.group_id && !teacherGroupIds.includes(data.group_id)) {
-        throw new Error('Zugriff verweigert: Dieses Kind gehoert nicht zu Ihren Gruppen.')
+        throw new Error(t(sT('errAccessDeniedChild')))
       }
 
       setChild(data as ChildDetail)
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Kind konnte nicht geladen werden.')
+      setError(e instanceof Error ? e.message : t(sT('errLoadChildDetail')))
     } finally {
       setLoading(false)
     }

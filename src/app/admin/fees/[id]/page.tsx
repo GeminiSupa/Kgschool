@@ -15,6 +15,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { useToastStore } from '@/stores/toast'
+import { sT } from '@/i18n/sT'
 
 export default function FeeDetailPage() {
   const { t } = useI18n()
@@ -114,15 +115,19 @@ export default function FeeDetailPage() {
         })
       })
 
-      if (!res.ok) throw new Error('AI Erinnerung konnte nicht generiert werden.')
+      if (!res.ok) throw new Error(t(sT('errAiReminder')))
 
       const data = await res.json()
       if (data.error) throw new Error(data.error)
       
       setReminderText(data.text)
-      toast.push({ type: 'success', title: 'AI Assistent', message: 'Erinnerung erfolgreich generiert!' })
+      toast.push({ type: 'success', title: 'AI Assistent', message: t(sT('successAiReminderGenerated')) })
     } catch (e: any) {
-      toast.push({ type: 'error', title: 'AI Assistent', message: e?.message || 'Fehler beim Generieren der Erinnerung.' })
+      toast.push({
+        type: 'error',
+        title: 'AI Assistent',
+        message: e?.message || t(sT('errAiReminder')),
+      })
     } finally {
       setIsGeneratingReminder(false)
     }

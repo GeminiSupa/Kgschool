@@ -10,6 +10,7 @@ import { createClient } from '@/utils/supabase/client'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { sT } from '@/i18n/sT'
 
 type StaffQualification = {
   id: string
@@ -103,7 +104,7 @@ export default function AdminStaffQualificationsPage() {
       try {
         await Promise.all([loadStaff(), loadQualifications()])
       } catch (e: unknown) {
-        setError(e instanceof Error ? e.message : 'Failed to load qualifications')
+        setError(e instanceof Error ? e.message : t(sT('errLoadQualifications')))
       } finally {
         setLoading(false)
       }

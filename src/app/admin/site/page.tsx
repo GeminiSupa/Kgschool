@@ -13,6 +13,7 @@ import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
+import { sT } from '@/i18n/sT'
 
 type SiteConfig = {
   brand?: { name?: string; tagline?: string }
@@ -51,7 +52,7 @@ export default function AdminSiteBuilderPage() {
         setLoading(true)
         setError('')
         const id = await getActiveKitaId()
-        if (!id) throw new Error('Keine Einrichtung gefunden (kita_id).')
+        if (!id) throw new Error(t(sT('errKitaNotFound')))
         setKitaId(id)
 
         // Pre-fill brand name from kitas table if available.
@@ -81,7 +82,7 @@ export default function AdminSiteBuilderPage() {
   const handleSave = async () => {
     if (!kitaId) return
     if (!slug.trim()) {
-      setError('Bitte geben Sie einen Slug an (z.B. „kita-musterstadt“).')
+      setError(t(sT('errSlugRequired')))
       return
     }
 
@@ -99,9 +100,9 @@ export default function AdminSiteBuilderPage() {
 
       const { error } = await supabase.from('kita_sites').upsert(payload as any, { onConflict: 'kita_id' })
       if (error) throw error
-      setSuccess('Gespeichert.')
+      setSuccess(t(sT('successSiteSaved')))
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Speichern fehlgeschlagen.'
+      const message = e instanceof Error ? e.message : t(sT('errSaveSite'))
       setError(message)
     } finally {
       setSaving(false)

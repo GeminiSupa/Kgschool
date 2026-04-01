@@ -2,6 +2,7 @@
 
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { sT } from '@/i18n/sT'
 
 const ROUTE = 'admin.calendar'
 
@@ -16,7 +17,8 @@ import { SlideOver } from '@/components/ui/SlideOver'
 import Link from 'next/link'
 
 export default function AdminCalendarPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
+  const calLocale = lang === 'de' ? 'de-DE' : lang === 'tr' ? 'tr-TR' : 'en-US'
 
   const { leaveRequests, fetchLeaveRequests } = useLeaveRequestsStore()
   const { leaveRequests: teacherRequests, fetchLeaveRequests: fetchTeacherRequests } = useTeacherLeaveRequestsStore()
@@ -87,16 +89,15 @@ export default function AdminCalendarPage() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-2">
             {t(pT(ROUTE))}
           </h1>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl">
-            Manage your school calendar, track absences, and schedule important events.
-          </p>
+          <p className="text-lg text-slate-500 font-medium max-w-2xl">{t(sT('calendarSubtitle'))}</p>
         </div>
         <div className="flex gap-3">
-          <button 
-                onClick={() => setIsSlideOverOpen(true)}
-                className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all"
+          <button
+            type="button"
+            onClick={() => setIsSlideOverOpen(true)}
+            className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all"
           >
-            Add New Event
+            {t(sT('addNewEvent'))}
           </button>
         </div>
       </div>
@@ -105,7 +106,9 @@ export default function AdminCalendarPage() {
         <div className="lg:col-span-3">
             <IOSCard className="p-10 border-slate-50 shadow-xl shadow-slate-200/40">
                 <div className="flex items-center justify-between mb-12">
-                    <h3 className="text-3xl font-black text-slate-900 tracking-tight">{new Date(currentYear, currentMonth).toLocaleString('de-DE', { month: 'long', year: 'numeric' })}</h3>
+                    <h3 className="text-3xl font-black text-slate-900 tracking-tight">
+                      {new Date(currentYear, currentMonth).toLocaleString(calLocale, { month: 'long', year: 'numeric' })}
+                    </h3>
                     <div className="flex gap-4">
                         <button className="w-10 h-10 flex items-center justify-center bg-slate-50 text-slate-400 rounded-xl hover:bg-indigo-600 hover:text-white transition-all shadow-sm">←</button>
                         <button className="w-10 h-10 flex items-center justify-center bg-slate-50 text-slate-400 rounded-xl hover:bg-indigo-600 hover:text-white transition-all shadow-sm">→</button>
@@ -138,32 +141,34 @@ export default function AdminCalendarPage() {
             <IOSCard className="p-8 border-indigo-100 bg-indigo-50/20 shadow-none">
                 <h4 className="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-6 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-indigo-400" />
-                    Today's Absences
+                    {t(sT('todaysAbsences'))}
                 </h4>
                 <div className="space-y-4">
-                    <p className="text-sm font-bold text-slate-400 italic">No reported absences for today.</p>
+                    <p className="text-sm font-bold text-slate-400 italic">{t(sT('noAbsencesToday'))}</p>
                 </div>
             </IOSCard>
 
             <IOSCard className="p-8 border-slate-50 shadow-xl shadow-slate-200/40">
-                <h4 className="text-[11px] font-black text-slate-300 uppercase tracking-widest mb-8">Upcoming Events</h4>
+                <h4 className="text-[11px] font-black text-slate-300 uppercase tracking-widest mb-8">{t(sT('upcomingEvents'))}</h4>
                 <div className="space-y-8">
                     {events.slice(0, 3).map(event => (
                         <div key={event.id} className="flex gap-6 items-center group cursor-pointer">
                             <div className="w-16 h-16 rounded-2xl bg-slate-50 flex flex-col items-center justify-center shrink-0 border border-slate-100 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
-                                <span className="text-[9px] font-black opacity-40 uppercase">{new Date(event.start_date).toLocaleString('de-DE', { month: 'short' })}</span>
+                                <span className="text-[9px] font-black opacity-40 uppercase">
+                                  {new Date(event.start_date).toLocaleString(calLocale, { month: 'short' })}
+                                </span>
                                 <span className="text-2xl font-black leading-none mt-1">{new Date(event.start_date).getDate()}</span>
                             </div>
                             <div className="min-w-0">
                                 <p className="text-lg font-black text-slate-900 group-hover:text-indigo-600 transition-colors tracking-tight truncate">{event.title}</p>
                                 <p className="text-[10px] font-black text-slate-400 uppercase mt-1 tracking-widest">
-                                    {new Date(event.start_date).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })}
+                                    {new Date(event.start_date).toLocaleTimeString(calLocale, { hour: '2-digit', minute: '2-digit' })}
                                 </p>
                             </div>
                         </div>
                     ))}
                     {events.length === 0 && (
-                        <p className="text-xs font-bold text-slate-400 italic">No upcoming events scheduled.</p>
+                        <p className="text-xs font-bold text-slate-400 italic">{t(sT('noUpcomingEvents'))}</p>
                     )}
                 </div>
             </IOSCard>
@@ -174,24 +179,24 @@ export default function AdminCalendarPage() {
       <SlideOver 
         isOpen={isSlideOverOpen} 
         onClose={() => setIsSlideOverOpen(false)} 
-        title="Add New Calendar Event"
+        title={t(sT('addCalendarEventSlideTitle'))}
       >
         <form onSubmit={handleAddEvent} className="space-y-8">
             <div className="space-y-3">
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Event Title</label>
+                <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('eventTitleLabel'))}</label>
                 <input 
                     type="text"
                     required
                     value={newEvent.title}
                     onChange={e => setNewEvent({...newEvent, title: e.target.value})}
-                    placeholder="e.g. Summer Festival"
+                    placeholder={t(sT('eventTitlePlaceholder'))}
                     className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
                 />
             </div>
 
             <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-3">
-                    <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Start Date</label>
+                    <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('startDateLabel'))}</label>
                     <input 
                         type="date"
                         required
@@ -201,7 +206,7 @@ export default function AdminCalendarPage() {
                     />
                 </div>
                 <div className="space-y-3">
-                    <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">End Date</label>
+                    <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('endDateLabel'))}</label>
                     <input 
                         type="date"
                         required
@@ -213,25 +218,25 @@ export default function AdminCalendarPage() {
             </div>
 
             <div className="space-y-3">
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">Event Type</label>
+                <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('eventTypeLabel'))}</label>
                 <select 
                     value={newEvent.holiday_type}
                     onChange={e => setNewEvent({...newEvent, holiday_type: e.target.value as any})}
                     className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-indigo-100 outline-none transition-all appearance-none"
                 >
-                    <option value="holiday">Holiday</option>
-                    <option value="vacation">Vacation</option>
-                    <option value="closure">Closure</option>
-                    <option value="training">Training</option>
-                    <option value="other">Other</option>
+                    <option value="holiday">{t(sT('eventTypeHoliday'))}</option>
+                    <option value="vacation">{t(sT('eventTypeVacation'))}</option>
+                    <option value="closure">{t(sT('eventTypeClosure'))}</option>
+                    <option value="training">{t(sT('eventTypeTraining'))}</option>
+                    <option value="other">{t(sT('eventTypeOther'))}</option>
                 </select>
             </div>
 
             <div className="space-y-6 pt-4">
                 <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="flex flex-col">
-                        <span className="text-sm font-black text-slate-900">Affects Billing</span>
-                        <span className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">Payment calculation impact</span>
+                        <span className="text-sm font-black text-slate-900">{t(sT('affectsBilling'))}</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{t(sT('affectsBillingHint'))}</span>
                     </div>
                     <input 
                         type="checkbox"
@@ -242,8 +247,8 @@ export default function AdminCalendarPage() {
                 </div>
                 <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="flex flex-col">
-                        <span className="text-sm font-black text-slate-900">Affects Attendance</span>
-                        <span className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">Tracking requirements</span>
+                        <span className="text-sm font-black text-slate-900">{t(sT('affectsAttendance'))}</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{t(sT('affectsAttendanceHint'))}</span>
                     </div>
                     <input 
                         type="checkbox"
@@ -259,7 +264,7 @@ export default function AdminCalendarPage() {
                     type="submit"
                     className="w-full py-5 bg-indigo-600 text-white rounded-3xl font-black text-sm uppercase tracking-widest shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all"
                 >
-                    {calendarLoading ? 'Saving Event...' : 'Confirm & Add Event'}
+                    {calendarLoading ? t(sT('savingEvent')) : t(sT('confirmAddEvent'))}
                 </button>
             </div>
         </form>

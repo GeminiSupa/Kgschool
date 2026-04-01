@@ -13,6 +13,7 @@ import { usePortfoliosStore } from '@/stores/portfolios'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { PortfolioForm } from '@/components/forms/PortfolioForm'
+import { sT } from '@/i18n/sT'
 
 export default function NewPortfolioPage() {
   const { t } = useI18n()
@@ -27,10 +28,10 @@ export default function NewPortfolioPage() {
     setSubmitting(true)
     try {
       await createPortfolio(data, user.id)
-      alert('Portfolio-Element erfolgreich erstellt!')
+      alert(t(sT('successTeacherPortfolioCreated')))
       router.push('/teacher/portfolios')
     } catch (e: any) {
-      alert(e.message || 'Fehler beim Erstellen')
+      alert(e.message || t(sT('errCreateTeacherPortfolio')))
     } finally {
       setSubmitting(false)
     }

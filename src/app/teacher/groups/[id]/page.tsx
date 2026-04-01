@@ -8,6 +8,8 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -28,6 +30,7 @@ type ChildItem = {
 }
 
 export default function TeacherGroupDetailPage({ params }: PageProps) {
+  const { t } = useI18n()
   const { id } = use(params)
   const supabase = useMemo(() => createClient(), [])
   const { user } = useAuth()
@@ -57,7 +60,7 @@ export default function TeacherGroupDetailPage({ params }: PageProps) {
         .maybeSingle()
 
       if (assignmentError) throw assignmentError
-      if (!assignment) throw new Error('Zugriff verweigert oder Gruppe nicht gefunden.')
+      if (!assignment) throw new Error(t(sT('errAccessDeniedGroup')))
 
       const { data: groupData, error: groupError } = await supabase
         .from('groups')
@@ -75,7 +78,7 @@ export default function TeacherGroupDetailPage({ params }: PageProps) {
       if (childrenError) throw childrenError
       setChildren((childrenData || []) as ChildItem[])
     } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : 'Gruppendetails konnten nicht geladen werden.')
+      setError(e instanceof Error ? e.message : t(sT('errLoadGroupDetail')))
     } finally {
       setLoading(false)
     }

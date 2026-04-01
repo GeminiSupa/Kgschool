@@ -10,10 +10,13 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 type ParentProfile = { id: string; full_name: string; role: string }
 
 export default function AdminParentWorkNewPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const parentWorkStore = useParentWorkStore()
   const supabase = createClient()
@@ -84,7 +87,7 @@ export default function AdminParentWorkNewPage() {
           setParents(profilesData || [])
         }
       } catch (err: unknown) {
-        setSubmitError(err instanceof Error ? err.message : 'Failed to load parents')
+        setSubmitError(err instanceof Error ? err.message : t(sT('errLoadParents')))
       } finally {
         setParentsLoading(false)
       }
@@ -118,7 +121,7 @@ export default function AdminParentWorkNewPage() {
       await parentWorkStore.createTask(taskData)
       router.push('/admin/parent-work')
     } catch (err: unknown) {
-      setSubmitError(err instanceof Error ? err.message : 'Failed to create task')
+      setSubmitError(err instanceof Error ? err.message : t(sT('errCreateTask')))
     } finally {
       setLoading(false)
     }
@@ -254,7 +257,7 @@ export default function AdminParentWorkNewPage() {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
               disabled={parentsLoading}
             >
-              <option value="">{parentsLoading ? 'Loading...' : 'Unassigned'}</option>
+              <option value="">{parentsLoading ? t(sT('loadingPlaceholder')) : t(sT('loadingUnassigned'))}</option>
               {parents.map((parent) => (
                 <option key={parent.id} value={parent.id}>
                   {parent.full_name}
@@ -285,15 +288,15 @@ export default function AdminParentWorkNewPage() {
               disabled={loading}
               className="px-4 py-2"
             >
-              Cancel
+              {t('ui.cancel')}
             </IOSButton>
             <IOSButton type="submit" variant="primary" disabled={loading} className="px-4 py-2">
               {loading ? (
                 <span className="inline-flex items-center gap-2">
-                  <LoadingSpinner size="sm" /> Creating...
+                  <LoadingSpinner size="sm" /> {t(sT('loadingCreating'))}
                 </span>
               ) : (
-                'Create Task'
+                t(sT('btnCreateTask'))
               )}
             </IOSButton>
           </div>

@@ -9,8 +9,11 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { ChildForm } from '@/components/forms/ChildForm'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 export default function ChildDetailPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const { id } = useParams()
   const supabase = createClient()
@@ -53,18 +56,18 @@ export default function ChildDetailPage() {
       setIsEditing(false)
       setChild({ ...child, ...formData })
     } catch (error: any) {
-      alert(error.message || 'Fehler beim Aktualisieren')
+      alert(error.message || t(sT('errUpdateGeneric')))
     } finally {
       setSubmitting(false)
     }
   }
 
   const handleDelete = async () => {
-    if (!confirm('Möchten Sie dieses Kind wirklich aus dem System entfernen? Diese Aktion kann nicht rückgängig gemacht werden.')) return
+    if (!confirm(t(sT('confirmDeleteChildPermanent')))) return
     try {
         const { error } = await supabase.from('children').delete().eq('id', id)
         if (error) throw error
-        alert('Profil gelöscht.')
+        alert(t(sT('successChildProfileDeleted')))
         router.push('/admin/children')
     } catch (e: any) {
         alert(e.message)
@@ -72,7 +75,10 @@ export default function ChildDetailPage() {
   }
 
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
-  if (!child) return <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">Kind nicht gefunden.</div>
+  if (!child)
+    return (
+      <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">{t(sT('errNotFoundChild'))}</div>
+    )
 
   return (
     <div className="max-w-5xl mx-auto pb-12">

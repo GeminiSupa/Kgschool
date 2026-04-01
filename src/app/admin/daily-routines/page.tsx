@@ -2,6 +2,7 @@
 
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { sT } from '@/i18n/sT'
 
 const ROUTE = 'admin.daily-routines'
 
@@ -37,13 +38,11 @@ export default function AdminDailyRoutinesPage() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-2">
             {t(pT(ROUTE))}
           </h1>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl">
-            Configure recurring activities, meal times, and pedagogical routines for your groups.
-          </p>
+          <p className="text-lg text-slate-500 font-medium max-w-2xl">{t(sT('dailyRoutinesListSubtitle'))}</p>
         </div>
         <div className="flex gap-3">
           <Link href="/admin/daily-routines/new" className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all">
-            Create Routine
+            {t(sT('createRoutine'))}
           </Link>
         </div>
       </div>
@@ -55,7 +54,7 @@ export default function AdminDailyRoutinesPage() {
                 onChange={(e) => setSelectedGroup(e.target.value)}
                 className="w-full pl-6 pr-12 py-3 bg-white border border-slate-100 rounded-2xl text-[11px] font-black text-slate-900 uppercase tracking-widest shadow-sm focus:ring-2 focus:ring-indigo-100 outline-none transition-all appearance-none cursor-pointer"
             >
-                <option value="">All Groups</option>
+                <option value="">{t(sT('allGroups'))}</option>
                 {groups.map(g => (
                     <option key={g.id} value={g.id}>{g.name}</option>
                 ))}
@@ -101,8 +100,8 @@ export default function AdminDailyRoutinesPage() {
       {dailyRoutines.length === 0 && !loading && (
         <IOSCard className="p-24 text-center border-dashed border-2 border-slate-200 bg-transparent shadow-none">
             <div className="text-6xl opacity-10 mb-6">📅</div>
-            <p className="text-slate-500 font-bold text-xl">No routines found for this criteria</p>
-            <p className="text-slate-400 mt-2 font-medium">Add your first pedagogical routine to get started.</p>
+            <p className="text-slate-500 font-bold text-xl">{t(sT('dailyRoutinesEmptyTitle'))}</p>
+            <p className="text-slate-400 mt-2 font-medium">{t(sT('dailyRoutinesEmptyHint'))}</p>
         </IOSCard>
       )}
     </div>

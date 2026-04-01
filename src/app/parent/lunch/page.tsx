@@ -15,6 +15,7 @@ import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { OrderDeadlineWarning } from '@/components/lunch/OrderDeadlineWarning'
+import { sT } from '@/i18n/sT'
 
 export default function ParentLunchPage() {
   const { t } = useI18n()
@@ -100,7 +101,7 @@ export default function ParentLunchPage() {
       })
       await fetchOrders(selectedChildId)
     } catch (e: any) {
-      alert(e.message || 'Fehler beim Bestellen')
+      alert(e.message || t(sT('errOrderLunch')))
     }
   }
 
@@ -109,13 +110,13 @@ export default function ParentLunchPage() {
     const order = selectedChildOrders.find(o => o.menu_id === menuId && o.status !== 'cancelled')
     if (!order) return
 
-    if (!confirm('Bestellung wirklich stornieren?')) return
+    if (!confirm(t(sT('confirmCancelLunchOrder')))) return
 
     try {
       await cancelOrder(order.id, user.id)
       await fetchOrders(selectedChildId)
     } catch (e: any) {
-      alert(e.message || 'Fehler beim Stornieren')
+      alert(e.message || t(sT('errCancelOrder')))
     }
   }
 

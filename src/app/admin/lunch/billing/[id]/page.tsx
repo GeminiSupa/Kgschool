@@ -9,6 +9,8 @@ import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 type MonthlyBilling = {
   id: string
@@ -58,6 +60,7 @@ type AuditLog = {
 }
 
 export default function AdminLunchBillingDetailPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const params = useParams<{ id: string }>()
   const billingId = params.id
@@ -90,10 +93,10 @@ export default function AdminLunchBillingDetailPage() {
 
   const formatAdjustmentType = (type: string) => {
     const map: Record<string, string> = {
-      amount: 'Amount Adjustment',
-      status: 'Status Change',
-      payment: 'Payment Update',
-      refund: 'Refund Adjustment',
+      amount: t(sT('billAdjAmount')),
+      status: t(sT('billAdjStatus')),
+      payment: t(sT('billAdjPayment')),
+      refund: t(sT('billAdjRefund')),
     }
     return map[type] || type
   }
@@ -101,7 +104,7 @@ export default function AdminLunchBillingDetailPage() {
   useEffect(() => {
     const run = async () => {
       if (!billingId) {
-        setError('Bill not found')
+        setError(t(sT('errNotFoundBill')))
         setLoading(false)
         return
       }
@@ -121,7 +124,7 @@ export default function AdminLunchBillingDetailPage() {
         if (billError) throw billError
         if (!billData) {
           setBill(null)
-          setError('Bill not found')
+          setError(t(sT('errNotFoundBill')))
           return
         }
 
@@ -164,7 +167,7 @@ export default function AdminLunchBillingDetailPage() {
           }
         }
       } catch (err: unknown) {
-        setError(err instanceof Error ? err.message : 'Failed to load bill')
+        setError(err instanceof Error ? err.message : t(sT('errLoadBill')))
       } finally {
         setLoading(false)
       }
@@ -172,9 +175,9 @@ export default function AdminLunchBillingDetailPage() {
 
     void run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [billingId])
+  }, [billingId, t])
 
-  const getAdminName = (adminId: string) => adminNames[adminId] || 'System'
+  const getAdminName = (adminId: string) => adminNames[adminId] || t(sT('labelSystem'))
 
   return (
     <div>
@@ -199,7 +202,7 @@ export default function AdminLunchBillingDetailPage() {
         <ErrorAlert message={error} />
       ) : !bill ? (
         <IOSCard className="p-8 text-center bg-gray-50/30 border-black/5 max-w-3xl mx-auto">
-          Bill not found.
+          {t(sT('errNotFoundBill'))}
         </IOSCard>
       ) : (
         <div className="space-y-6 max-w-6xl mx-auto px-2">

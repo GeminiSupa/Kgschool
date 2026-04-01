@@ -26,7 +26,7 @@ function formatFetchProfileError(err: unknown): string {
 
 export interface Profile {
   id: string
-  role: 'admin' | 'teacher' | 'parent' | 'kitchen' | 'support'
+  role: 'admin' | 'teacher' | 'parent' | 'kitchen' | 'support' | 'staff'
   full_name: string
   email: string
   phone?: string
@@ -40,6 +40,8 @@ export interface Profile {
 interface AuthState {
   user: User | null
   profile: Profile | null
+  /** True after first session check and, when logged in, profile fetch finished (success or failure). */
+  authHydrated: boolean
   loading: boolean
   setUser: (user: User | null) => void
   setProfile: (profile: Profile | null) => void
@@ -50,6 +52,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   profile: null,
+  authHydrated: false,
   loading: false,
 
   setUser: (user) => {
@@ -57,12 +60,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const currentUserId = get().user?.id
     if (!user) {
       clearCachedKitaId()
-      set({ user: null, profile: null })
+      set({ user: null, profile: null, authHydrated: true })
       return
     }
     if (currentUserId && currentUserId !== user.id) {
       clearCachedKitaId()
-      set({ user, profile: null })
+      set({ user, profile: null, authHydrated: false })
       return
     }
     set({ user })
@@ -77,54 +80,79 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       return
     }
 
+    const applyKitaFromMembership = (row: Record<string, unknown>) => {
+      const profileData = { ...row } as Record<string, unknown>
+      const om = profileData.organization_members as
+        | { kita_id?: string }
+        | { kita_id?: string }[]
+        | null
+        | undefined
+      const first =
+        Array.isArray(om) ? om[0] : om && typeof om === 'object' ? om : undefined
+      if (!profileData.kita_id && first?.kita_id) {
+        profileData.kita_id = first.kita_id
+      }
+      if (!profileData.kita_id && profileData.default_kita_id) {
+        profileData.kita_id = profileData.default_kita_id
+      }
+      if (!profileData.kita_id) {
+        console.warn(
+          `[fetchProfile] User ${user.email} has no assigned kita_id. Data access may be restricted by RLS.`,
+        )
+      }
+      delete profileData.organization_members
+      set({ profile: profileData as unknown as Profile })
+    }
+
     try {
       const supabase = createClient()
-      
-      // Fetch profile with an explicit check for kita_id
-      const { data, error } = await supabase
-        .from('profiles')
-        .select(`
-          *,
-          organization_members (
-            kita_id
-          )
-        `)
-        .eq('id', user.id)
-        .maybeSingle()
 
-      if (error) {
-        console.error(
-          `[fetchProfile] Database error: ${formatFetchProfileError(error)}`,
-        )
+      // 1) Server route uses service role — bypasses broken profiles RLS (42P17) entirely.
+      try {
+        const res = await fetch('/api/auth/my-profile', {
+          credentials: 'same-origin',
+          cache: 'no-store',
+        })
+        if (res.ok) {
+          const payload: unknown = await res.json()
+          if (payload === null) {
+            console.error('[fetchProfile] Profile not found for authenticated user (API).', {
+              userId: user.id,
+              email: user.email,
+            })
+            return
+          }
+          if (typeof payload === 'object' && payload !== null && 'id' in payload) {
+            applyKitaFromMembership(payload as Record<string, unknown>)
+            return
+          }
+        } else if (res.status !== 401) {
+          console.warn(`[fetchProfile] /api/auth/my-profile HTTP ${res.status}`)
+        }
+      } catch (apiErr) {
+        console.warn('[fetchProfile] /api/auth/my-profile failed:', apiErr)
+      }
+
+      // 2) DB RPC (row_security off inside function) — no direct .from('profiles') on the anon client.
+      const { data: hydrated, error: rpcError } = await supabase.rpc('get_my_profile_hydration')
+      if (!rpcError) {
+        if (hydrated != null && typeof hydrated === 'object') {
+          applyKitaFromMembership(hydrated as Record<string, unknown>)
+          return
+        }
+        console.error('[fetchProfile] Profile not found for authenticated user (RPC returned empty).', {
+          userId: user.id,
+          email: user.email,
+        })
         return
       }
-
-      if (data) {
-        const profileData = { ...data } as any
-        
-        // Use kita_id from organization_members if profile doesn't have it
-        if (!profileData.kita_id && data.organization_members && data.organization_members.length > 0) {
-          profileData.kita_id = data.organization_members[0].kita_id
-        }
-        
-        // Fallback to default_kita_id for backward compatibility
-        if (!profileData.kita_id && profileData.default_kita_id) {
-            profileData.kita_id = profileData.default_kita_id
-        }
-        
-        if (!profileData.kita_id) {
-          console.warn(`[fetchProfile] User ${user.email} has no assigned kita_id. Data access will be restricted by RLS.`)
-        }
-
-        set({ profile: profileData as Profile })
-      } else {
-        console.error(
-          '[fetchProfile] Profile not found for authenticated user.',
-          { userId: user.id, email: user.email },
-        )
-      }
+      console.error(
+        `[fetchProfile] get_my_profile_hydration failed (ensure migration is applied): ${formatFetchProfileError(rpcError)}`,
+      )
     } catch (e: unknown) {
       console.error('Unexpected error in fetchProfile:', e instanceof Error ? e.message : e)
+    } finally {
+      set({ authHydrated: true })
     }
   },
 
@@ -132,6 +160,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const supabase = createClient()
     await supabase.auth.signOut()
     clearCachedKitaId()
-    set({ user: null, profile: null })
+    set({ user: null, profile: null, authHydrated: true })
   }
 }))

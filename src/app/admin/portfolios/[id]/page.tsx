@@ -13,6 +13,7 @@ import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { sT } from '@/i18n/sT'
 
 export default function AdminPortfolioDetailsPage() {
   const { t } = useI18n()
@@ -39,14 +40,14 @@ export default function AdminPortfolioDetailsPage() {
         await Promise.all([portfoliosStore.fetchPortfolios(), childrenStore.fetchChildren()])
 
         if (!portfolioId) {
-          setError('Portfolio item not found.')
+          setError(t(sT('errNotFoundPortfolio')))
           setPortfolio(null)
           return
         }
 
         const found = portfoliosStore.portfolios.find((p) => p.id === portfolioId) || null
         if (!found) {
-          setError('Portfolio item not found.')
+          setError(t(sT('errNotFoundPortfolio')))
           setPortfolio(null)
           return
         }
@@ -61,7 +62,7 @@ export default function AdminPortfolioDetailsPage() {
 
     void run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [portfolioId])
+  }, [portfolioId, t])
 
   const getChildName = (childId: string) => {
     const c = children.find((ch) => ch.id === childId)

@@ -3,37 +3,46 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
+import { useI18n } from '@/i18n/I18nProvider'
+import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 
 export default function DashboardRedirect() {
   const router = useRouter()
+  const { t } = useI18n()
   const { profile, loading, user } = useAuth()
 
   useEffect(() => {
     if (loading) return
-    
-    // If no user is logged in, useAuth middleware might catch it, but just in case:
+
     if (!user) {
-      router.push('/login')
+      router.replace('/login')
       return
     }
 
-    const role = profile?.role
-    if (role === 'admin') router.push('/admin/dashboard')
-    else if (role === 'teacher') router.push('/teacher/dashboard')
-    else if (role === 'parent') router.push('/parent/dashboard')
-    else if (role === 'kitchen') router.push('/kitchen/dashboard')
-    else if (role === 'support') router.push('/support/dashboard')
-    else {
-      // Fallback if role is missing or not fully loaded
-      console.warn('No specific role found, staying on /dashboard')
+    // Profile must exist after hydration; otherwise session is invalid for app use.
+    if (!profile?.role) {
+      router.replace('/unauthorized')
+      return
     }
+
+    // Legacy / API-created rows may use `staff` — same app area as teachers.
+    const role = profile.role === 'staff' ? 'teacher' : profile.role
+
+    if (role === 'admin') router.replace('/admin/dashboard')
+    else if (role === 'teacher') router.replace('/teacher/dashboard')
+    else if (role === 'parent') router.replace('/parent/dashboard')
+    else if (role === 'kitchen') router.replace('/kitchen/dashboard')
+    else if (role === 'support') router.replace('/support/dashboard')
+    else router.replace('/unauthorized')
   }, [profile, loading, user, router])
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-        <p className="text-gray-500">Lade Dashboard...</p>
+    <div className="flex h-screen items-center justify-center bg-background px-4">
+      <div className="text-center max-w-sm">
+        <div className="mb-4 flex justify-center">
+          <LoadingSpinner color="border-aura-indigo" />
+        </div>
+        <p className="text-muted text-sm font-medium">{t('common.loadingDashboard')}</p>
       </div>
     </div>
   )

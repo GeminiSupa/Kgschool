@@ -13,6 +13,7 @@ import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { ChildForm } from '@/components/forms/ChildForm'
 import { useKita } from '@/hooks/useKita'
+import { sT } from '@/i18n/sT'
 
 export default function NewChildPage() {
   const { t } = useI18n()
@@ -37,11 +38,11 @@ export default function NewChildPage() {
         .single()
 
       if (error) throw error
-      alert('Kind erfolgreich angemeldet!')
+      alert(t(sT('successChildRegistered')))
       router.push(`/admin/children/${data.id}`)
     } catch (error: any) {
       console.error('Error creating child:', error)
-      alert(error.message || 'Fehler beim Erstellen des Profils')
+      alert(error.message || t(sT('errCreateChild')))
     } finally {
       setSubmitting(false)
     }

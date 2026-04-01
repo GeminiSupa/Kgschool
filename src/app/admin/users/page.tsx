@@ -2,6 +2,7 @@
 
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { sT } from '@/i18n/sT'
 
 const ROUTE = 'admin.users'
 
@@ -42,7 +43,7 @@ export default function AdminUsersPage() {
       if (err) throw err
       setUsers(data || [])
     } catch (e: any) {
-      setError(e.message || 'Fehler beim Laden der Benutzer')
+      setError(e.message || t(sT('errLoadUsers')))
     } finally {
       setLoading(false)
     }
@@ -77,13 +78,11 @@ export default function AdminUsersPage() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-2">
             {t(pT(ROUTE))}
           </h1>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl">
-            Manage your staff, parents, and administrative team from one place.
-          </p>
+          <p className="text-lg text-slate-500 font-medium max-w-2xl">{t(sT('usersListSubtitle'))}</p>
         </div>
         <div className="flex gap-3">
           <Link href="/admin/users/new" className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all">
-             Add New User
+            {t(sT('addNewUser'))}
           </Link>
         </div>
       </div>
@@ -100,7 +99,7 @@ export default function AdminUsersPage() {
                 : 'bg-white text-slate-400 border-slate-100 hover:border-slate-200 hover:text-slate-600'
             }`}
           >
-            {role || 'All Users'}
+            {role ? t(`roles.${role}`) : t(sT('allUsers'))}
           </button>
         ))}
       </div>
@@ -111,9 +110,11 @@ export default function AdminUsersPage() {
         <IOSCard className="p-24 text-center border-dashed border-2 border-slate-200 bg-transparent shadow-none">
           <div className="text-5xl opacity-20 mb-6">👤</div>
           <p className="text-slate-500 font-bold text-xl">
-            {selectedRole ? `No users found for "${selectedRole}"` : 'No users found in the system'}
+            {selectedRole
+              ? t(sT('noUsersForRole')).replace('{{role}}', t(`roles.${selectedRole}`))
+              : t(sT('noUsersSystem'))}
           </p>
-          <p className="text-slate-400 mt-2 font-medium">Try adjusting your filters or adding a new user.</p>
+          <p className="text-slate-400 mt-2 font-medium">{t(sT('tryAdjustFiltersUsers'))}</p>
         </IOSCard>
       ) : (
         <IOSCard className="p-0 overflow-hidden shadow-xl shadow-slate-200/40 border-slate-100">

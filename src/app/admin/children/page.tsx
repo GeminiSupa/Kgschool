@@ -2,6 +2,7 @@
 
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { sT } from '@/i18n/sT'
 
 const ROUTE = 'admin.children'
 
@@ -17,7 +18,8 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 
 export default function AdminChildrenPage() {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
+  const dateLocale = lang === 'de' ? 'de-DE' : lang === 'tr' ? 'tr-TR' : 'en-US'
 
   const router = useRouter()
   const { children, loading, error, fetchChildren } = useChildrenStore()
@@ -47,7 +49,7 @@ export default function AdminChildrenPage() {
   }
 
   const formatDate = (date: string) => {
-    return new Date(date).toLocaleDateString('de-DE')
+    return new Date(date).toLocaleDateString(dateLocale)
   }
 
   const getStatusBadge = (status: string) => {
@@ -78,13 +80,11 @@ export default function AdminChildrenPage() {
           <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-2">
             {t(pT(ROUTE))}
           </h1>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl">
-            Monitor all enrolled children and manage their group assignments.
-          </p>
+          <p className="text-lg text-slate-500 font-medium max-w-2xl">{t(sT('childrenListSubtitle'))}</p>
         </div>
         <div className="flex gap-3">
           <Link href="/admin/children/new" className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all">
-            Add New Child
+            {t(sT('addNewChild'))}
           </Link>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function AdminChildrenPage() {
             <div className="md:col-span-3 relative">
                 <input
                     type="text"
-                    placeholder="Search by name..."
+                    placeholder={t(sT('searchByNamePlaceholder'))}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-14 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 outline-none focus:ring-2 focus:ring-indigo-100 focus:bg-white transition-all placeholder:text-slate-400"
@@ -106,7 +106,7 @@ export default function AdminChildrenPage() {
                 onChange={(e) => setSelectedGroup(e.target.value)}
                 className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 outline-none focus:ring-2 focus:ring-indigo-100 focus:bg-white transition-all appearance-none cursor-pointer"
             >
-                <option value="">All Groups</option>
+                <option value="">{t(sT('allGroups'))}</option>
                 {groups.map(g => (
                     <option key={g.id} value={g.id}>{g.name}</option>
                 ))}
@@ -120,9 +120,9 @@ export default function AdminChildrenPage() {
         <IOSCard className="p-24 text-center border-dashed border-2 border-slate-200 bg-transparent shadow-none">
           <div className="text-6xl opacity-10 mb-6">👶</div>
           <p className="text-slate-500 font-bold text-xl">
-            {searchTerm || selectedGroup ? 'No children found for these filters' : 'No children registered in the system'}
+            {searchTerm || selectedGroup ? t(sT('noChildrenFiltered')) : t(sT('noChildrenSystem'))}
           </p>
-          <p className="text-slate-400 mt-2 font-medium">Try adjusting your filters or adding a new child.</p>
+          <p className="text-slate-400 mt-2 font-medium">{t(sT('tryAdjustFiltersChildren'))}</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

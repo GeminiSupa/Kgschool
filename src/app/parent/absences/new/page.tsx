@@ -15,6 +15,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { LeaveRequestForm } from '@/components/forms/LeaveRequestForm'
+import { sT } from '@/i18n/sT'
 
 export default function NewLeaveRequestPage() {
   const { t } = useI18n()
@@ -57,10 +58,10 @@ export default function NewLeaveRequestPage() {
         ...data,
         parent_id: user?.id
       })
-      alert('Abwesenheitsanfrage erfolgreich gesendet!')
+      alert(t(sT('successAbsenceRequestSent')))
       router.push('/parent/dashboard')
     } catch (e: any) {
-      alert(e.message || 'Fehler beim Senden der Anfrage')
+      alert(e.message || t(sT('errSubmitLeave')))
     } finally {
       setSubmitting(false)
     }

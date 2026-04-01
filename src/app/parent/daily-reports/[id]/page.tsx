@@ -15,6 +15,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
+import { sT } from '@/i18n/sT'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -78,7 +79,7 @@ export default function ParentDailyReportDetailPage({ params }: PageProps) {
   )
   if (!report) return (
     <div className="max-w-2xl mx-auto py-24 px-4 text-center">
-        <Heading size="lg">Bericht nicht gefunden</Heading>
+        <Heading size="lg">{t(sT('errNotFoundDailyReport'))}</Heading>
         <Link href="/parent/daily-reports" className="mt-4 inline-block text-[#667eea] font-medium font-fiori">← Zurück zur Übersicht</Link>
     </div>
   )

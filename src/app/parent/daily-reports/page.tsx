@@ -16,6 +16,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { sT } from '@/i18n/sT'
 
 export default function ParentDailyReportsPage() {
   const { t } = useI18n()
@@ -102,7 +103,7 @@ export default function ParentDailyReportsPage() {
       {loading || reportsLoading ? (
         <div className="flex justify-center py-24"><LoadingSpinner /></div>
       ) : error || reportsError ? (
-        <ErrorAlert message={error || reportsError?.message || 'Fehler beim Laden'} />
+        <ErrorAlert message={error || reportsError?.message || t(sT('errLoadData'))} />
       ) : filteredReports.length === 0 ? (
         <IOSCard className="p-12 text-center">
           <div className="text-5xl opacity-40 mb-4">✍️</div>

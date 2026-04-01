@@ -9,8 +9,11 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
+import { useI18n } from '@/i18n/I18nProvider'
+import { sT } from '@/i18n/sT'
 
 export default function KitchenOrdersPage() {
+  const { t } = useI18n()
   const supabase = useMemo(() => createClient(), [])
   const { getUserKitaId } = useKita()
 
@@ -35,7 +38,7 @@ export default function KitchenOrdersPage() {
         ])
         await fetchOrders()
       } catch (e: unknown) {
-        const message = e instanceof Error ? e.message : 'Failed to load orders'
+        const message = e instanceof Error ? e.message : t(sT('errLoadKitchenOrders'))
         setError(message)
       } finally {
         setLoading(false)
@@ -65,7 +68,7 @@ export default function KitchenOrdersPage() {
       if (err) throw err
       setOrders((data || []) as LunchOrder[])
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to load orders'
+      const message = e instanceof Error ? e.message : t(sT('errLoadKitchenOrders'))
       setError(message)
     } finally {
       setLoading(false)
@@ -79,7 +82,7 @@ export default function KitchenOrdersPage() {
 
       setOrders((prev) => prev.map((o) => (o.id === orderId ? ({ ...o, status } as LunchOrder) : o)))
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to update order status'
+      const message = e instanceof Error ? e.message : t(sT('errUpdateKitchenOrder'))
       alert(message)
     }
   }

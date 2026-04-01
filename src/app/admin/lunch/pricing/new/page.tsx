@@ -15,6 +15,7 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { sT } from '@/i18n/sT'
 
 type LunchPricingCreatePayload = {
   group_id: string
@@ -72,9 +73,9 @@ export default function AdminLunchPricingNewPage() {
     setSubmitting(true)
     setError('')
     try {
-      if (!form.group_id) throw new Error('Please select a group')
-      if (!(form.price_per_meal > 0)) throw new Error('Price per meal must be > 0')
-      if (!form.effective_from) throw new Error('Effective from is required')
+      if (!form.group_id) throw new Error(t(sT('errSelectGroup')))
+      if (!(form.price_per_meal > 0)) throw new Error(t(sT('errPriceMealPositive')))
+      if (!form.effective_from) throw new Error(t(sT('errEffectiveFromRequired')))
 
       const payload: LunchPricingCreatePayload = {
         ...form,
@@ -95,10 +96,10 @@ export default function AdminLunchPricingNewPage() {
           .eq('id', payload.group_id)
       }
 
-      alert('Pricing created successfully!')
+      alert(t(sT('successPricingCreated')))
       router.push('/admin/lunch/pricing')
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to create pricing')
+      setError(err instanceof Error ? err.message : t(sT('errCreatePricing')))
     } finally {
       setSubmitting(false)
     }

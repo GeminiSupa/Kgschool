@@ -12,8 +12,11 @@ import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { AttendanceBulkActions } from '@/components/attendance/AttendanceBulkActions'
 import { CheckInOutButton } from '@/components/attendance/CheckInOutButton'
 import { IOSCard } from '@/components/ui/IOSCard'
+import { useI18n } from '@/i18n/I18nProvider'
+import { fillTemplate, sT } from '@/i18n/sT'
 
 export default function SupportAttendancePage() {
+  const { t } = useI18n()
   const supabase = useMemo(() => createClient(), [])
   const { getUserKitaId } = useKita()
 
@@ -67,7 +70,7 @@ export default function SupportAttendancePage() {
         // Initial attendance
         await attendanceStore.fetchAttendance(undefined, selectedDate)
       } catch (e: unknown) {
-        const message = e instanceof Error ? e.message : 'Failed to load attendance'
+        const message = e instanceof Error ? e.message : t(sT('errLoadAttendance'))
         setError(message)
       } finally {
         setLoading(false)
@@ -84,7 +87,7 @@ export default function SupportAttendancePage() {
       try {
         await attendanceStore.fetchAttendance(undefined, selectedDate)
       } catch (e: unknown) {
-        const message = e instanceof Error ? e.message : 'Failed to load attendance'
+        const message = e instanceof Error ? e.message : t(sT('errLoadAttendance'))
         setError(message)
       } finally {
         setLoading(false)
@@ -131,11 +134,13 @@ export default function SupportAttendancePage() {
     if (selectedChildren.length === 0) return
     try {
       await attendanceStore.markBulkAttendance(selectedChildren, selectedDate, 'present')
-      alert(`Marked ${selectedChildren.length} children as present!`)
+      alert(
+        fillTemplate(t(sT('successMarkedPresentBatch')), { count: selectedChildren.length })
+      )
       setSelectedChildren([])
       await attendanceStore.fetchAttendance(undefined, selectedDate)
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to mark attendance'
+      const message = e instanceof Error ? e.message : t(sT('errMarkBulkAttendance'))
       alert(message)
     }
   }
@@ -150,7 +155,7 @@ export default function SupportAttendancePage() {
       })
       await attendanceStore.fetchAttendance(undefined, selectedDate)
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to mark present'
+      const message = e instanceof Error ? e.message : t(sT('errMarkPresent'))
       alert(message)
     }
   }
@@ -164,7 +169,7 @@ export default function SupportAttendancePage() {
       })
       await attendanceStore.fetchAttendance(undefined, selectedDate)
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to mark absent'
+      const message = e instanceof Error ? e.message : t(sT('errMarkAbsentStatus'))
       alert(message)
     }
   }
@@ -174,7 +179,7 @@ export default function SupportAttendancePage() {
       await attendanceStore.checkIn(childId, date)
       await attendanceStore.fetchAttendance(undefined, date)
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to check in'
+      const message = e instanceof Error ? e.message : t(sT('errCheckIn'))
       alert(message)
     }
   }
@@ -184,7 +189,7 @@ export default function SupportAttendancePage() {
       await attendanceStore.checkOut(childId, date)
       await attendanceStore.fetchAttendance(undefined, date)
     } catch (e: unknown) {
-      const message = e instanceof Error ? e.message : 'Failed to check out'
+      const message = e instanceof Error ? e.message : t(sT('errCheckOut'))
       alert(message)
     }
   }

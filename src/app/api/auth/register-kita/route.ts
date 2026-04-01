@@ -4,7 +4,11 @@ import { getAdminClient } from '@/utils/authz/tenantGuard'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { kitaName, fullName, email, password, phone } = body
+    const kitaName = typeof body.kitaName === 'string' ? body.kitaName.trim() : ''
+    const fullName = typeof body.fullName === 'string' ? body.fullName.trim() : ''
+    const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : ''
+    const password = typeof body.password === 'string' ? body.password : ''
+    const phone = typeof body.phone === 'string' ? body.phone.trim() : ''
 
     if (!kitaName || !fullName || !email || !password) {
       return NextResponse.json({ success: false, message: 'Missing required fields' }, { status: 400 })
@@ -45,7 +49,7 @@ export async function POST(request: Request) {
 
     const kitaId = kitaData.id
 
-    // 3. Create the user in Auth
+    // 3. Create the user in Auth (confirmed email so they can sign in immediately)
     const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
       email,
       password,
@@ -100,8 +104,8 @@ export async function POST(request: Request) {
       throw new Error(profileError.message || 'Failed to create user profile')
     }
 
-    // 5. Org membership (schema varies: org_role vs role; organization_id may be required)
-    const memberPayloads: Record<string, unknown>[] = [
+    // 5. Org membership — table uses org_role (not role); match admin user-create upsert
+    const { error: memberError } = await supabaseAdmin.from('organization_members').upsert(
       {
         profile_id: userId,
         organization_id: orgId,
@@ -109,26 +113,8 @@ export async function POST(request: Request) {
         org_role: 'admin',
         created_at: new Date().toISOString(),
       },
-      {
-        profile_id: userId,
-        organization_id: orgId,
-        kita_id: kitaId,
-        role: 'admin',
-        created_at: new Date().toISOString(),
-      },
-    ]
-
-    let memberError: { message: string } | null = null
-    for (const row of memberPayloads) {
-      const { error } = await supabaseAdmin
-        .from('organization_members')
-        .upsert(row as any, { onConflict: 'profile_id,kita_id' } as any)
-      if (!error) {
-        memberError = null
-        break
-      }
-      memberError = error
-    }
+      { onConflict: 'profile_id, organization_id' },
+    )
 
     if (memberError) {
       await supabaseAdmin.auth.admin.deleteUser(userId)
