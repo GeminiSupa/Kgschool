@@ -5,13 +5,33 @@ import { AppShell } from '@/components/layout/AppShell'
 import { AppSidebar } from '@/components/layout/AppSidebar'
 import { useAuth } from '@/hooks/useAuth'
 import { redirect } from 'next/navigation'
+import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 
 export default function ParentLayout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState(false)
   const { user, profile, loading } = useAuth()
 
-  // Basic parent role protection
-  if (!loading && (!user || profile?.role !== 'parent')) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    )
+  }
+
+  if (!user) {
+    redirect('/login')
+  }
+
+  if (!profile) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    )
+  }
+
+  if (profile.role !== 'parent') {
     redirect('/dashboard')
   }
 

@@ -102,8 +102,8 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative bg-slate-50 overflow-hidden">
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-linear-to-br from-indigo-200/40 to-fuchsia-200/40 blur-[80px]" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-linear-to-tl from-cyan-200/40 to-blue-200/40 blur-[100px]" />
+      <div className="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-linear-to-br from-indigo-200/40 to-fuchsia-200/40 blur-[80px]" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[350px] h-[350px] rounded-full bg-linear-to-tl from-cyan-200/40 to-blue-200/40 blur-[100px]" />
 
       <div className="relative z-10 w-full max-w-lg mb-12 mt-12">
         <div className="text-center mb-8">

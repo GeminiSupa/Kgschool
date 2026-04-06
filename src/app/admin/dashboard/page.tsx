@@ -99,22 +99,22 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-mesh-light -mt-8 -mx-8 px-8 py-12 animate-in fade-in duration-1000">
-      <div className="max-w-7xl mx-auto">
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 px-4">
+    <div className="min-h-screen bg-mesh-light animate-in fade-in duration-1000">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 md:mb-16 px-0">
           <div className="space-y-2">
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-aura-indigo/60">{t(pT(ROUTE, 'headerEyebrow'))}</h4>
-            <h1 className="text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight leading-none">
+            <h1 className="text-3xl md:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight leading-none">
               {t(pT(ROUTE, 'greetingHello'))}{' '}
               <span className="text-aura-indigo">{t('roles.admin')}</span>
             </h1>
-            <p className="text-lg text-slate-400 font-medium">{t(pT(ROUTE, 'tagline'))}</p>
+            <p className="text-base md:text-lg text-slate-400 font-medium">{t(pT(ROUTE, 'tagline'))}</p>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <ThemeToggle />
             <Link
               href="/admin/children/new"
-              className="px-8 py-4 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-3xl font-black text-xs uppercase tracking-widest shadow-2xl hover:-translate-y-1 transition-all active:scale-95"
+              className="px-5 md:px-8 py-3 md:py-4 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-3xl font-black text-xs uppercase tracking-widest shadow-2xl hover:-translate-y-1 transition-all active:scale-95 whitespace-nowrap"
             >
               {t(pT(ROUTE, 'addChild'))}
             </Link>
@@ -128,8 +128,8 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6 px-2">
-          <div className="md:col-span-2 lg:col-span-2 aspect-square">
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6">
+          <div className="md:col-span-2 lg:col-span-2 min-h-[180px]">
             <GlassStatCard title={t(pT(ROUTE, 'statChildren'))} value={stats.totalChildren} icon="👶" color="indigo" />
           </div>
 
@@ -210,7 +210,7 @@ export default function AdminDashboardPage() {
                   <Settings className="w-4 h-4" strokeWidth={2} aria-hidden />
                 </span>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+              <div className="grid grid-cols-3 sm:grid-cols-5 gap-4">
                 {quickLinks.map((link) => (
                   <Link key={link.href} href={link.href} className="group flex flex-col items-center">
                     <div

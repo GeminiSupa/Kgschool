@@ -83,15 +83,33 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans overflow-x-hidden">
-      <div className="absolute top-0 left-0 right-0 z-50 p-6 flex justify-between items-center max-w-7xl mx-auto">
+      <div className="absolute top-0 left-0 right-0 z-50 px-4 md:px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-linear-to-br from-indigo-500 to-fuchsia-500 rounded-xl flex items-center justify-center shadow-lg">
             <span className="text-white text-xl font-bold">{t('brand.shortName')}</span>
           </div>
-          <span className="font-bold text-xl tracking-tight text-slate-800 font-display">{t('brand.appTitle')}</span>
+          <span className="font-bold text-lg md:text-xl tracking-tight text-slate-800 font-display hidden sm:block">{t('brand.appTitle')}</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <LanguageSwitcher />
+          <Link href="/login">
+            <IOSButton
+              variant="secondary"
+              size="small"
+              className="bg-white/90 backdrop-blur-md border-indigo-100 text-indigo-700 hover:bg-indigo-50 text-xs font-bold"
+            >
+              {t('home.marketingCtaLogin')}
+            </IOSButton>
+          </Link>
+          <Link href="/register" className="hidden sm:block">
+            <IOSButton
+              variant="primary"
+              size="small"
+              className="bg-linear-to-r from-indigo-600 to-fuchsia-600 border-0 text-xs font-bold"
+            >
+              {t('home.marketingCtaRegister')}
+            </IOSButton>
+          </Link>
         </div>
       </div>
 
@@ -107,7 +125,7 @@ export default function Home() {
             <span className="text-sm font-medium text-indigo-800">{t('home.marketingHeroBadge')}</span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold font-display tracking-tight text-slate-900 leading-[1.1] mb-8 animate-[fadeInUp_1s_ease_out]">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold font-display tracking-tight text-slate-900 leading-[1.1] mb-8 animate-[fadeInUp_1s_ease_out]">
             {t('home.marketingHeroLead')} <br />
             <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-fuchsia-600">
               {t('home.marketingHeroAccent')}
@@ -154,13 +172,13 @@ export default function Home() {
 
       <section className="py-12 border-y border-slate-200 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-slate-100">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {stats.map((stat, i) => (
-              <div key={i} className="text-center px-4">
-                <div className="text-3xl md:text-4xl font-extrabold text-slate-800 mb-2 tracking-tight">
+              <div key={i} className={`text-center px-4 py-2 ${i % 2 === 1 && i < 3 ? 'border-l border-slate-100' : ''} ${i >= 2 ? 'border-t border-slate-100 md:border-t-0' : ''} md:border-l md:first:border-l-0`}>
+                <div className="text-2xl md:text-4xl font-extrabold text-slate-800 mb-2 tracking-tight">
                   {t(stat.valueKey)}
                 </div>
-                <div className="text-sm font-medium text-slate-500">{t(stat.labelKey)}</div>
+                <div className="text-xs md:text-sm font-medium text-slate-500">{t(stat.labelKey)}</div>
               </div>
             ))}
           </div>
@@ -264,7 +282,7 @@ export default function Home() {
             </div>
             <span className="font-semibold text-slate-900 tracking-tight font-display">{t('brand.appTitle')}</span>
           </div>
-          <nav className="flex flex-wrap gap-6 text-sm font-medium text-slate-500" aria-label="Footer">
+          <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm font-medium text-slate-500" aria-label="Footer">
             <Link href="/privacy" className="hover:text-indigo-600 transition-colors">
               {t('common.privacy')}
             </Link>

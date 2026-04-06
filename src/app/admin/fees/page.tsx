@@ -102,21 +102,22 @@ export default function AdminFeesPage() {
           <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
           <p className="text-sm text-gray-500 mt-1">Übersicht und Verwaltung aller monatlichen Gebühren.</p>
         </div>
-        <div className="flex gap-3">
-          <IOSButton variant="secondary" className="px-5 py-2.5 text-sm font-bold flex items-center gap-2" onClick={exportFilteredCsv}>
+        <div className="flex flex-wrap gap-2">
+          <IOSButton variant="secondary" className="px-4 py-2.5 text-sm font-bold flex items-center gap-2" onClick={exportFilteredCsv}>
             <span>📥</span>
-            <span>CSV Export</span>
+            <span className="hidden sm:inline">CSV Export</span>
+            <span className="sm:hidden">CSV</span>
           </IOSButton>
           <Link href="/admin/fees/config">
-            <IOSButton variant="secondary" className="px-5 py-2.5 text-sm font-bold flex items-center gap-2">
+            <IOSButton variant="secondary" className="px-4 py-2.5 text-sm font-bold flex items-center gap-2">
               <span>⚙️</span>
-              <span>Konfiguration</span>
+              <span className="hidden sm:inline">Konfiguration</span>
             </IOSButton>
           </Link>
           <Link href="/admin/fees/generate">
-            <IOSButton variant="primary" className="px-6 py-2.5 text-sm font-bold flex items-center gap-2">
+            <IOSButton variant="primary" className="px-4 py-2.5 text-sm font-bold flex items-center gap-2">
               <span>➕</span>
-              <span>Gebühren generieren</span>
+              <span>Generieren</span>
             </IOSButton>
           </Link>
         </div>
@@ -179,6 +180,7 @@ export default function AdminFeesPage() {
       ) : (
         <IOSCard className="p-0 overflow-hidden shadow-sm border-black/5">
             <div className="overflow-x-auto">
+              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest px-6 py-3 bg-gray-50/80 md:hidden">← Tabelle seitwärts scrollen</p>
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="bg-gray-50/50">

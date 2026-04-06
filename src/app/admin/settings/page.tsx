@@ -9,8 +9,6 @@ import React from 'react'
 import Link from 'next/link'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
-import { IOSButton } from '@/components/ui/IOSButton'
-
 export default function AdminSettingsPage() {
   const { t } = useI18n()
 
@@ -60,6 +58,31 @@ export default function AdminSettingsPage() {
                     <span className="text-lg opacity-30 group-hover:translate-x-1 group-hover:opacity-100 transition-all">→</span>
                 </div>
             </Link>
+        </IOSCard>
+
+        <IOSCard className="p-8 border-black/5 shadow-sm">
+          <h3 className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-6">Hilfe & Dokumentation</h3>
+          <Link
+            href="/docs"
+            className="block p-5 bg-white border border-black/5 rounded-2xl hover:border-[#667eea]/50 hover:shadow-xl hover:shadow-indigo-500/5 transition-all group"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-black shadow-lg shadow-slate-500/20">
+                  MD
+                </div>
+                <div>
+                  <p className="text-sm font-black text-gray-900 group-hover:text-[#667eea] transition-colors">
+                    Handbuch & Präsentation
+                  </p>
+                  <p className="text-[10px] font-bold text-gray-400">
+                    Markdown-Dateien herunterladen (PDF / Folien)
+                  </p>
+                </div>
+              </div>
+              <span className="text-lg opacity-30 group-hover:translate-x-1 group-hover:opacity-100 transition-all">→</span>
+            </div>
+          </Link>
         </IOSCard>
 
         {/* Application Info */}

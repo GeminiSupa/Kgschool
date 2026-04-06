@@ -43,38 +43,60 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
 
   const role = profile?.role
   const navItems: NavItem[] = []
-  
+
+  // Admin grouped sections — rendered separately for section labels
+  type NavSection = { label: string; items: NavItem[] }
+  const adminSections: NavSection[] = []
+
   const iconProps = { size: 20, className: "shrink-0 transition-transform duration-200 group-hover:scale-110" }
 
   if (!role) {
     navItems.push({ path: '/dashboard', labelKey: 'nav.gen.dashboard', icon: <LayoutDashboard {...iconProps} /> })
   } else if (role === 'admin') {
+    // Core navigation (no section header — shown at top)
     navItems.push(
       { path: '/admin/dashboard', labelKey: 'nav.admin.dashboard', icon: <LayoutDashboard {...iconProps} /> },
       { path: '/admin/setup', labelKey: 'nav.admin.setup', icon: <Settings {...iconProps} /> },
       { path: '/admin/site', labelKey: 'nav.admin.site', icon: <Globe {...iconProps} /> },
-      { path: '/admin/children', labelKey: 'nav.admin.children', icon: <Baby {...iconProps} /> },
-      { path: '/admin/groups', labelKey: 'nav.admin.groups', icon: <Users {...iconProps} /> },
-      { path: '/admin/staff', labelKey: 'nav.admin.staff', icon: <Briefcase {...iconProps} /> },
-      { path: '/admin/users', labelKey: 'nav.admin.users', icon: <User {...iconProps} /> },
-      { path: '/admin/attendance', labelKey: 'nav.admin.attendance', icon: <CheckSquare {...iconProps} /> },
-      { path: '/admin/calendar', labelKey: 'nav.admin.calendar', icon: <CalendarDays {...iconProps} /> },
-      { path: '/admin/applications', labelKey: 'nav.admin.applications', icon: <ClipboardList {...iconProps} /> },
-      { path: '/admin/contracts', labelKey: 'nav.admin.contracts', icon: <FileText {...iconProps} /> },
-      { path: '/admin/consents', labelKey: 'nav.admin.consents', icon: <CheckCircle {...iconProps} /> },
-      { path: '/admin/daily-reports', labelKey: 'nav.admin.dailyReports', icon: <FileSignature {...iconProps} /> },
-      { path: '/admin/observations', labelKey: 'nav.admin.observations', icon: <Eye {...iconProps} /> },
-      { path: '/admin/portfolios', labelKey: 'nav.admin.portfolios', icon: <Book {...iconProps} /> },
-      { path: '/admin/learning-themes', labelKey: 'nav.admin.learningThemes', icon: <Palette {...iconProps} /> },
-      { path: '/admin/daily-routines', labelKey: 'nav.admin.dailyRoutines', icon: <Clock {...iconProps} /> },
-      { path: '/admin/lunch/menus', labelKey: 'nav.admin.lunchMenus', icon: <Utensils {...iconProps} /> },
-      { path: '/admin/lunch/billing', labelKey: 'nav.admin.lunchBilling', icon: <Receipt {...iconProps} /> },
-      { path: '/admin/fees', labelKey: 'nav.admin.fees', icon: <CreditCard {...iconProps} /> },
-      { path: '/admin/parent-work', labelKey: 'nav.admin.parentWork', icon: <Wrench {...iconProps} /> },
-      { path: '/admin/leave', labelKey: 'nav.admin.leave', icon: <Umbrella {...iconProps} /> },
-      { path: '/admin/hr/payroll', labelKey: 'nav.admin.hrPayroll', icon: <Briefcase {...iconProps} /> },
-      { path: '/admin/messages', labelKey: 'nav.admin.messages', icon: <MessageSquare {...iconProps} /> },
-      { path: '/admin/settings', labelKey: 'nav.admin.settings', icon: <Settings {...iconProps} /> }
+    )
+    adminSections.push(
+      {
+        label: 'Management',
+        items: [
+          { path: '/admin/children', labelKey: 'nav.admin.children', icon: <Baby {...iconProps} /> },
+          { path: '/admin/groups', labelKey: 'nav.admin.groups', icon: <Users {...iconProps} /> },
+          { path: '/admin/staff', labelKey: 'nav.admin.staff', icon: <Briefcase {...iconProps} /> },
+          { path: '/admin/users', labelKey: 'nav.admin.users', icon: <User {...iconProps} /> },
+          { path: '/admin/attendance', labelKey: 'nav.admin.attendance', icon: <CheckSquare {...iconProps} /> },
+          { path: '/admin/calendar', labelKey: 'nav.admin.calendar', icon: <CalendarDays {...iconProps} /> },
+        ],
+      },
+      {
+        label: 'Classroom',
+        items: [
+          { path: '/admin/applications', labelKey: 'nav.admin.applications', icon: <ClipboardList {...iconProps} /> },
+          { path: '/admin/contracts', labelKey: 'nav.admin.contracts', icon: <FileText {...iconProps} /> },
+          { path: '/admin/consents', labelKey: 'nav.admin.consents', icon: <CheckCircle {...iconProps} /> },
+          { path: '/admin/daily-reports', labelKey: 'nav.admin.dailyReports', icon: <FileSignature {...iconProps} /> },
+          { path: '/admin/observations', labelKey: 'nav.admin.observations', icon: <Eye {...iconProps} /> },
+          { path: '/admin/portfolios', labelKey: 'nav.admin.portfolios', icon: <Book {...iconProps} /> },
+          { path: '/admin/learning-themes', labelKey: 'nav.admin.learningThemes', icon: <Palette {...iconProps} /> },
+          { path: '/admin/daily-routines', labelKey: 'nav.admin.dailyRoutines', icon: <Clock {...iconProps} /> },
+        ],
+      },
+      {
+        label: 'Finance & HR',
+        items: [
+          { path: '/admin/lunch/menus', labelKey: 'nav.admin.lunchMenus', icon: <Utensils {...iconProps} /> },
+          { path: '/admin/lunch/billing', labelKey: 'nav.admin.lunchBilling', icon: <Receipt {...iconProps} /> },
+          { path: '/admin/fees', labelKey: 'nav.admin.fees', icon: <CreditCard {...iconProps} /> },
+          { path: '/admin/parent-work', labelKey: 'nav.admin.parentWork', icon: <Wrench {...iconProps} /> },
+          { path: '/admin/leave', labelKey: 'nav.admin.leave', icon: <Umbrella {...iconProps} /> },
+          { path: '/admin/hr/payroll', labelKey: 'nav.admin.hrPayroll', icon: <Briefcase {...iconProps} /> },
+          { path: '/admin/messages', labelKey: 'nav.admin.messages', icon: <MessageSquare {...iconProps} /> },
+          { path: '/admin/settings', labelKey: 'nav.admin.settings', icon: <Settings {...iconProps} /> },
+        ],
+      },
     )
   } else if (role === 'teacher') {
     navItems.push(
@@ -150,39 +172,84 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
         </div>
       </div>
       
-      <nav className="flex-1 px-4 py-8 space-y-1 overflow-y-auto custom-scrollbar">
+      <nav className="flex-1 px-4 py-4 overflow-y-auto custom-scrollbar">
         {loading ? (
-          Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="h-11 px-4 rounded-xl bg-slate-50 animate-pulse mb-2"></div>
-          ))
+          <div className="space-y-2 py-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="h-11 px-4 rounded-xl bg-slate-50 animate-pulse"></div>
+            ))}
+          </div>
         ) : (
-          navItems.map((item) => {
-            const active = isActive(item.path)
-            return (
-              <Link
-                key={item.path}
-                href={item.path}
-                className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 mb-1 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900/40 ${
-                  active 
-                    ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm dark:bg-indigo-950/60 dark:text-indigo-200' 
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-slate-100'
-                } ${isCollapsed ? 'justify-center px-0' : ''}`}
-                title={isCollapsed ? t(item.labelKey) : undefined}
-              >
-                {active && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-600 rounded-r-full" />
-                )}
-                
-                <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-slate-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors'}`}>
-                  {item.icon}
-                </span>
-                
+          <>
+            {/* Core nav items (always flat, no section label) */}
+            <div className="space-y-0.5 py-3">
+              {navItems.map((item) => {
+                const active = isActive(item.path)
+                return (
+                  <Link
+                    key={item.path}
+                    href={item.path}
+                    className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900/40 ${
+                      active
+                        ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm dark:bg-indigo-950/60 dark:text-indigo-200'
+                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-slate-100'
+                    } ${isCollapsed ? 'justify-center px-0' : ''}`}
+                    title={isCollapsed ? t(item.labelKey) : undefined}
+                  >
+                    {active && (
+                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-600 rounded-r-full" />
+                    )}
+                    <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-slate-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors'}`}>
+                      {item.icon}
+                    </span>
+                    {!isCollapsed && (
+                      <span className="truncate flex-1 tracking-tight">{t(item.labelKey)}</span>
+                    )}
+                  </Link>
+                )
+              })}
+            </div>
+
+            {/* Admin grouped sections with labels */}
+            {adminSections.map((section) => (
+              <div key={section.label}>
                 {!isCollapsed && (
-                  <span className="truncate flex-1 tracking-tight">{t(item.labelKey)}</span>
+                  <div className="mt-4 mb-1 px-3 flex items-center gap-2">
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">{section.label}</span>
+                    <div className="flex-1 h-px bg-slate-100 dark:bg-white/5" />
+                  </div>
                 )}
-              </Link>
-            )
-          })
+                {isCollapsed && <div className="my-2 mx-2 h-px bg-slate-100 dark:bg-white/5" />}
+                <div className="space-y-0.5">
+                  {section.items.map((item) => {
+                    const active = isActive(item.path)
+                    return (
+                      <Link
+                        key={item.path}
+                        href={item.path}
+                        className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900/40 ${
+                          active
+                            ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm dark:bg-indigo-950/60 dark:text-indigo-200'
+                            : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-slate-100'
+                        } ${isCollapsed ? 'justify-center px-0' : ''}`}
+                        title={isCollapsed ? t(item.labelKey) : undefined}
+                      >
+                        {active && (
+                          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-600 rounded-r-full" />
+                        )}
+                        <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-slate-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors'}`}>
+                          {item.icon}
+                        </span>
+                        {!isCollapsed && (
+                          <span className="truncate flex-1 tracking-tight">{t(item.labelKey)}</span>
+                        )}
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
+          </>
         )}
       </nav>
 

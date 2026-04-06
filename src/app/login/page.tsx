@@ -120,6 +120,15 @@ export default function LoginPage() {
               )}
             </IOSButton>
 
+            <div className="text-center mt-3">
+              <Link
+                href="/auth/forgot-password"
+                className="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors"
+              >
+                {t('login.forgotPassword') || 'Forgot password?'}
+              </Link>
+            </div>
+
             {error && !error.includes('email') && !error.includes('Email') && !error.includes('password') && !error.includes('Password') && (
               <div
                 className="flex items-center gap-2.5 p-3 px-4 bg-red-500/10 backdrop-blur-[10px] border border-red-500/25 rounded-xl text-red-600 dark:text-red-400 text-sm animate-[shake_0.4s_ease]"

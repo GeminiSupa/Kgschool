@@ -7,7 +7,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 interface IOSButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost'
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
   size?: 'small' | 'medium' | 'large'
 }
 
