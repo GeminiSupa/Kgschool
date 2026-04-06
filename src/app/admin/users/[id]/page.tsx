@@ -9,6 +9,8 @@ import React, { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { IOSCard } from '@/components/ui/IOSCard'
@@ -59,6 +61,19 @@ export default function EditUserPage() {
 
   const fetchUser = async () => {
     try {
+        const uid = String(id)
+        const kitaId = await getActiveKitaId()
+        if (!kitaId) {
+          setError(t(sT('errKitaNotFound')))
+          return
+        }
+        const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+        if (!tenantIds.includes(uid)) {
+          setError(t(sT('errAccessDeniedGroup')))
+          router.replace('/admin/users')
+          return
+        }
+
         const { data, error: err } = await supabase
           .from('profiles')
           .select('*, employment_details(*), user_documents(*)')

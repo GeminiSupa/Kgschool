@@ -8,6 +8,8 @@ const ROUTE = 'admin.leave.teachers.id'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useTeacherLeaveRequestsStore, type TeacherLeaveRequest } from '@/stores/teacherLeaveRequests'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
@@ -64,14 +66,25 @@ export default function AdminTeacherLeaveRequestDetailPage() {
         const found = teacherLeaveRequestsStore.leaveRequests.find((r) => r.id === requestId) || null
         setRequest(found)
 
-        const { data, error: teachersErr } = await supabase
-          .from('profiles')
-          .select('id, full_name')
-          .eq('role', 'teacher')
-          .order('full_name')
+        const kitaId = await getActiveKitaId()
+        if (!kitaId) {
+          setTeachers([])
+        } else {
+          const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+          if (tenantIds.length === 0) {
+            setTeachers([])
+          } else {
+            const { data, error: teachersErr } = await supabase
+              .from('profiles')
+              .select('id, full_name')
+              .in('id', tenantIds)
+              .eq('role', 'teacher')
+              .order('full_name')
 
-        if (teachersErr) throw teachersErr
-        setTeachers((data || []) as TeacherLite[])
+            if (teachersErr) throw teachersErr
+            setTeachers((data || []) as TeacherLite[])
+          }
+        }
       } catch (e: unknown) {
         setError(e instanceof Error ? e.message : 'Failed to load request')
       } finally {

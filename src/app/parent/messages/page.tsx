@@ -7,6 +7,8 @@ const ROUTE = 'parent.messages'
 
 import React, { useEffect, useState, useMemo } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useAuth } from '@/hooks/useAuth'
 import { useMessagesStore } from '@/stores/messages'
 import { Heading } from '@/components/ui/Heading'
@@ -42,11 +44,21 @@ export default function ParentMessagesPage() {
   const fetchRecipients = async () => {
     setRecipientsLoading(true)
     try {
-      // Fetch teachers and admins that the parent might need to message
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) {
+        setRecipients([])
+        return
+      }
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      if (tenantIds.length === 0) {
+        setRecipients([])
+        return
+      }
       const { data, error: fetchError } = await supabase
         .from('profiles')
         .select('id, full_name, role')
-        .in('role', ['admin', 'teacher', 'staff'])
+        .in('id', tenantIds)
+        .in('role', ['admin', 'teacher', 'support', 'kitchen'])
         .order('full_name')
       
       if (fetchError) throw fetchError

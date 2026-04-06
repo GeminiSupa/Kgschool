@@ -12,7 +12,9 @@ create table if not exists public.kita_sites (
 alter table public.kita_sites enable row level security;
 
 -- Admins of a kita can manage that kita's site config.
-create policy if not exists "kita_sites_admin_manage"
+-- (PostgreSQL has no CREATE POLICY IF NOT EXISTS — drop then create for idempotent runs.)
+drop policy if exists "kita_sites_admin_manage" on public.kita_sites;
+create policy "kita_sites_admin_manage"
 on public.kita_sites
 for all
 using (
@@ -37,7 +39,8 @@ with check (
 );
 
 -- Public can read published sites by slug.
-create policy if not exists "kita_sites_public_read_published"
+drop policy if exists "kita_sites_public_read_published" on public.kita_sites;
+create policy "kita_sites_public_read_published"
 on public.kita_sites
 for select
 using (published = true);

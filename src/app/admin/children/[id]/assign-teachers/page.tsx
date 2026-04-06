@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useChildrenStore, type Child } from '@/stores/children'
 import { useStaffAssignmentsStore, type StaffAssignment } from '@/stores/staffAssignments'
 import { Heading } from '@/components/ui/Heading'
@@ -106,14 +107,25 @@ export default function AdminChildAssignTeachersPage() {
         }
         setChildName(`${child.first_name} ${child.last_name}`)
 
-        const { data: staffData, error: staffErr } = await supabase
-          .from('profiles')
-          .select('id, full_name, role')
-          .in('role', ['teacher', 'support'])
-          .order('full_name')
+        const kitaId = child.kita_id
+        if (!kitaId) {
+          setStaffMembers([])
+        } else {
+          const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+          if (tenantIds.length === 0) {
+            setStaffMembers([])
+          } else {
+            const { data: staffData, error: staffErr } = await supabase
+              .from('profiles')
+              .select('id, full_name, role')
+              .in('id', tenantIds)
+              .in('role', ['teacher', 'support'])
+              .order('full_name')
 
-        if (staffErr) throw staffErr
-        setStaffMembers((staffData || []) as ProfileLite[])
+            if (staffErr) throw staffErr
+            setStaffMembers((staffData || []) as ProfileLite[])
+          }
+        }
       } catch (e: unknown) {
         setError(e instanceof Error ? e.message : t(sT('errLoadData')))
       } finally {

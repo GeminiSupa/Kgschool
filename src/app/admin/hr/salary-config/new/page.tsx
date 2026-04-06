@@ -8,6 +8,8 @@ const ROUTE = 'admin.hr.salary-config.new'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useSalaryConfigStore, type SalaryConfig } from '@/stores/salaryConfig'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
@@ -40,9 +42,21 @@ export default function AdminSalaryConfigNewPage() {
         setStaffLoading(true)
         setError('')
 
+        const kitaId = await getActiveKitaId()
+        if (!kitaId) {
+          setStaff([])
+          return
+        }
+        const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+        if (tenantIds.length === 0) {
+          setStaff([])
+          return
+        }
+
         const { data } = await supabase
           .from('profiles')
           .select('id, full_name, role')
+          .in('id', tenantIds)
           .in('role', ['teacher', 'support', 'kitchen'])
           .order('full_name')
 

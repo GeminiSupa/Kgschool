@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useChildrenStore } from '@/stores/children'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
@@ -151,11 +153,14 @@ export default function AdminLunchBillingDetailPage() {
         setAuditLog(typedAudit)
 
         const adminIds = Array.from(new Set(typedAudit.map((l) => l.adjusted_by).filter(Boolean)))
-        if (adminIds.length > 0) {
+        const kitaId = await getActiveKitaId()
+        const tenantIds = kitaId ? await getProfileIdsForKita(supabase, kitaId) : []
+        const scopedAdminIds = adminIds.filter((id) => tenantIds.includes(id))
+        if (scopedAdminIds.length > 0) {
           const { data: adminsData, error: adminsError } = await supabase
             .from('profiles')
             .select('id, full_name')
-            .in('id', adminIds)
+            .in('id', scopedAdminIds)
 
           if (!adminsError && adminsData) {
             setAdminNames(

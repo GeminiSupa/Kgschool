@@ -10,6 +10,8 @@ import React, { useEffect, useState, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
@@ -33,12 +35,25 @@ export default function AdminUsersPage() {
     setLoading(true)
     setError(null)
     try {
-      let query = supabase.from('profiles').select('*')
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) {
+        setUsers([])
+        setError(t(sT('errKitaNotFound')))
+        return
+      }
+
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      if (tenantIds.length === 0) {
+        setUsers([])
+        return
+      }
+
+      let query = supabase.from('profiles').select('*').in('id', tenantIds)
       if (selectedRole) {
         query = query.eq('role', selectedRole)
       }
       query = query.order('created_at', { ascending: false })
-      
+
       const { data, error: err } = await query
       if (err) throw err
       setUsers(data || [])

@@ -8,6 +8,8 @@ const ROUTE = 'admin.hr.payroll.generate'
 import React, { useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useSalaryConfigStore } from '@/stores/salaryConfig'
 import { Heading } from '@/components/ui/Heading'
 import { IOSButton } from '@/components/ui/IOSButton'
@@ -43,9 +45,21 @@ export default function AdminPayrollGeneratePage() {
       setError('')
       setPreview(null)
 
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) {
+        setPreview({ staffCount: 0, totalAmount: 0 })
+        return
+      }
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      if (tenantIds.length === 0) {
+        setPreview({ staffCount: 0, totalAmount: 0 })
+        return
+      }
+
       const { data: staff } = await supabase
         .from('profiles')
         .select('id')
+        .in('id', tenantIds)
         .in('role', ['teacher', 'support', 'kitchen'])
 
       const staffList = staff || []

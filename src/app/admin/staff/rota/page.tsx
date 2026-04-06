@@ -7,6 +7,8 @@ const ROUTE = 'admin.staff.rota'
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
@@ -95,9 +97,23 @@ export default function AdminStaffRotaPage() {
   }
 
   const loadStaff = async () => {
+    const kitaId = await getActiveKitaId()
+    if (!kitaId) {
+      setStaffList([])
+      setStaffMap({})
+      return
+    }
+    const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+    if (tenantIds.length === 0) {
+      setStaffList([])
+      setStaffMap({})
+      return
+    }
+
     const { data, error: sErr } = await supabase
       .from('profiles')
       .select('id, full_name')
+      .in('id', tenantIds)
       .in('role', ['teacher', 'support'])
       .order('full_name')
 

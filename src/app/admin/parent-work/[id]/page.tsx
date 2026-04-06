@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useAuth } from '@/hooks/useAuth'
 import {
   useParentWorkStore,
@@ -46,10 +48,11 @@ export default function AdminParentWorkDetailsPage() {
       setError('')
 
       try {
-        const [{ data: taskData, error: taskError }, profilesRes] = await Promise.all([
-          supabase.from('parent_work_tasks').select('*').eq('id', taskId).maybeSingle(),
-          supabase.from('profiles').select('id, full_name'),
-        ])
+        const { data: taskData, error: taskError } = await supabase
+          .from('parent_work_tasks')
+          .select('*')
+          .eq('id', taskId)
+          .maybeSingle()
 
         if (taskError) throw taskError
         if (!taskData) {
@@ -60,12 +63,23 @@ export default function AdminParentWorkDetailsPage() {
 
         setTask(taskData as ParentWorkTask)
 
-        setProfiles(
-          (profilesRes.data || []).reduce<ProfileMap>((acc, p) => {
-            acc[p.id] = p.full_name
-            return acc
-          }, {})
-        )
+        const kitaForScope =
+          (taskData as ParentWorkTask).kita_id || profile?.kita_id || (await getActiveKitaId())
+        if (kitaForScope) {
+          const tenantIds = await getProfileIdsForKita(supabase, kitaForScope)
+          const { data: profs } =
+            tenantIds.length > 0
+              ? await supabase.from('profiles').select('id, full_name').in('id', tenantIds)
+              : { data: [] as { id: string; full_name: string }[] }
+          setProfiles(
+            (profs || []).reduce<ProfileMap>((acc, p) => {
+              acc[p.id] = p.full_name
+              return acc
+            }, {})
+          )
+        } else {
+          setProfiles({})
+        }
 
         // Load submissions for this task.
         await parentWorkStore.fetchSubmissions(taskId, undefined, profile?.kita_id)

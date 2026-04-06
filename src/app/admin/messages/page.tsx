@@ -9,6 +9,8 @@ const ROUTE = 'admin.messages'
 import React, { useEffect, useState, useMemo } from 'react'
 import Link from 'next/link'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useAuthStore } from '@/stores/auth'
 import { useMessagesStore } from '@/stores/messages'
 import { Heading } from '@/components/ui/Heading'
@@ -32,12 +34,27 @@ export default function AdminMessagesPage() {
 
   useEffect(() => {
     if (!user?.id) return
-    Promise.all([
-      fetchMessages(user.id, 'all'),
-      supabase.from('profiles').select('*').neq('id', user.id).order('full_name').then(({ data }) => {
-        setProfiles(data || [])
-      })
-    ])
+    const run = async () => {
+      await fetchMessages(user.id, 'all')
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) {
+        setProfiles([])
+        return
+      }
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      const recipientIds = tenantIds.filter((tid) => tid !== user.id)
+      if (recipientIds.length === 0) {
+        setProfiles([])
+        return
+      }
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .in('id', recipientIds)
+        .order('full_name')
+      setProfiles(data || [])
+    }
+    void run()
   }, [user?.id, fetchMessages, supabase])
 
   const displayMessages = useMemo(() => {

@@ -192,6 +192,23 @@ CREATE POLICY "Admins can view all profiles" ON profiles
     EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
   );
 
+-- Idempotent: allow re-running this script without "policy already exists"
+DROP POLICY IF EXISTS "Parents can view their own children" ON children;
+DROP POLICY IF EXISTS "Admins can manage all children" ON children;
+DROP POLICY IF EXISTS "Authenticated users can view groups" ON groups;
+DROP POLICY IF EXISTS "Admins can manage groups" ON groups;
+DROP POLICY IF EXISTS "Parents can view their children's attendance" ON attendance;
+DROP POLICY IF EXISTS "Teachers and admins can manage attendance" ON attendance;
+DROP POLICY IF EXISTS "Users can view their own messages" ON messages;
+DROP POLICY IF EXISTS "Users can send messages" ON messages;
+DROP POLICY IF EXISTS "Users can update their received messages" ON messages;
+DROP POLICY IF EXISTS "Users can view their own notifications" ON notifications;
+DROP POLICY IF EXISTS "Users can update their own notifications" ON notifications;
+DROP POLICY IF EXISTS "Authenticated users can view menus" ON lunch_menus;
+DROP POLICY IF EXISTS "Kitchen staff and admins can manage menus" ON lunch_menus;
+DROP POLICY IF EXISTS "Parents can view and manage their children's orders" ON lunch_orders;
+DROP POLICY IF EXISTS "Parents can view their children's allergies" ON allergies;
+
 -- Children policies
 CREATE POLICY "Parents can view their own children" ON children
   FOR SELECT USING (

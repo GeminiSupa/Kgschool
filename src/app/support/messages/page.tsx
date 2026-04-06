@@ -2,6 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useAuth } from '@/hooks/useAuth'
 import { useMessagesStore, type Message } from '@/stores/messages'
 import type { Profile } from '@/stores/auth'
@@ -39,10 +41,21 @@ export default function SupportMessagesPage() {
   const fetchProfiles = async () => {
     try {
       setProfilesLoading(true)
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) {
+        setProfiles([])
+        return
+      }
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      if (tenantIds.length === 0) {
+        setProfiles([])
+        return
+      }
       const { data, error: fetchErr } = await supabase
         .from('profiles')
         .select('id, full_name, role')
-        .in('role', ['parent', 'teacher', 'admin', 'kitchen'])
+        .in('id', tenantIds)
+        .in('role', ['parent', 'teacher', 'admin', 'kitchen', 'support'])
         .order('full_name')
 
       if (fetchErr) throw fetchErr

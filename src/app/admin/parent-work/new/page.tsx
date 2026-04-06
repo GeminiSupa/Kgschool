@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
 import { useParentWorkStore, type ParentWorkTask } from '@/stores/parentWork'
-import { useKita } from '@/hooks/useKita'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSButton } from '@/components/ui/IOSButton'
@@ -20,7 +21,6 @@ export default function AdminParentWorkNewPage() {
   const router = useRouter()
   const parentWorkStore = useParentWorkStore()
   const supabase = createClient()
-  const { getUserKitaId } = useKita()
 
   const [loading, setLoading] = useState(false)
   const [submitError, setSubmitError] = useState('')
@@ -53,39 +53,26 @@ export default function AdminParentWorkNewPage() {
         setParentsLoading(true)
         setSubmitError('')
 
-        const kitaId = await getUserKitaId()
-        if (kitaId) {
-          const { data: membersData, error: membersError } = await supabase
-            .from('organization_members')
-            .select('profile_id')
-            .eq('kita_id', kitaId)
-
-          if (membersError) throw membersError
-
-          const ids = membersData?.map((m) => m.profile_id).filter(Boolean) || []
-          if (ids.length === 0) {
-            setParents([])
-            return
-          }
-
-          const { data: profilesData, error: profilesError } = await supabase
-            .from('profiles')
-            .select('id, full_name, role')
-            .in('id', ids)
-
-          if (profilesError) throw profilesError
-
-          setParents((profilesData || []).filter((p) => p.role === 'parent'))
-        } else {
-          const { data: profilesData, error: profilesError } = await supabase
-            .from('profiles')
-            .select('id, full_name, role')
-            .eq('role', 'parent')
-            .order('full_name')
-
-          if (profilesError) throw profilesError
-          setParents(profilesData || [])
+        const kitaId = await getActiveKitaId()
+        if (!kitaId) {
+          setParents([])
+          return
         }
+
+        const ids = await getProfileIdsForKita(supabase, kitaId)
+        if (ids.length === 0) {
+          setParents([])
+          return
+        }
+
+        const { data: profilesData, error: profilesError } = await supabase
+          .from('profiles')
+          .select('id, full_name, role')
+          .in('id', ids)
+
+        if (profilesError) throw profilesError
+
+        setParents((profilesData || []).filter((p) => p.role === 'parent').sort((a, b) => (a.full_name || '').localeCompare(b.full_name || '')))
       } catch (err: unknown) {
         setSubmitError(err instanceof Error ? err.message : t(sT('errLoadParents')))
       } finally {

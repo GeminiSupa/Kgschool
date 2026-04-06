@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { CreateParentModal } from '@/components/modals/CreateParentModal'
 
 interface ParentSelectorProps {
@@ -16,22 +18,44 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
   const [searching, setSearching] = useState(false)
   const [selectedParents, setSelectedParents] = useState<any[]>([])
   const [showCreateModal, setShowCreateModal] = useState(false)
+  const [tenantProfileIds, setTenantProfileIds] = useState<string[] | null>(null)
 
-  // Load selected parents initially
+  useEffect(() => {
+    const run = async () => {
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) {
+        setTenantProfileIds([])
+        return
+      }
+      const ids = await getProfileIdsForKita(supabase, kitaId)
+      setTenantProfileIds(ids)
+    }
+    void run()
+  }, [supabase])
+
+  // Load selected parents initially (only if linked to this Kita)
   useEffect(() => {
     async function loadSelected() {
-      if (value && value.length > 0) {
-        const { data } = await supabase
-          .from('profiles')
-          .select('*')
-          .in('id', value)
-          .eq('role', 'parent')
-        
-        setSelectedParents(data || [])
+      if (tenantProfileIds === null) return
+      if (!value?.length) {
+        setSelectedParents([])
+        return
       }
+      const allowed = value.filter((id) => tenantProfileIds.includes(id))
+      if (allowed.length === 0) {
+        setSelectedParents([])
+        return
+      }
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .in('id', allowed)
+        .eq('role', 'parent')
+
+      setSelectedParents(data || [])
     }
-    loadSelected()
-  }, [supabase, value])
+    void loadSelected()
+  }, [supabase, value, tenantProfileIds])
 
   const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const q = e.target.value
@@ -44,9 +68,15 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
 
     setSearching(true)
     try {
+      if (!tenantProfileIds || tenantProfileIds.length === 0) {
+        setSearchResults([])
+        return
+      }
+
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
+        .in('id', tenantProfileIds)
         .eq('role', 'parent')
         .or(`email.ilike.%${q}%,full_name.ilike.%${q}%`)
         .limit(10)

@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 
 export interface Staff {
   id: string
@@ -29,9 +31,21 @@ export const useStaffStore = create<StaffState>((set) => ({
     set({ loading: true, error: null })
     try {
       const supabase = createClient()
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) {
+        set({ staff: [] })
+        return
+      }
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      if (tenantIds.length === 0) {
+        set({ staff: [] })
+        return
+      }
+
       let query = supabase
         .from('profiles')
         .select('*')
+        .in('id', tenantIds)
         .in('role', ['teacher', 'kitchen', 'support', 'admin'])
 
       if (role) {
@@ -54,6 +68,11 @@ export const useStaffStore = create<StaffState>((set) => ({
   fetchStaffById: async (id: string) => {
     try {
       const supabase = createClient()
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) return null
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      if (!tenantIds.includes(id)) return null
+
       const { data, error } = await supabase
         .from('profiles')
         .select('*')

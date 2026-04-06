@@ -145,10 +145,7 @@ CREATE TABLE IF NOT EXISTS food_flat_rates (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Update lunch_billing_items with new fields
-ALTER TABLE lunch_billing_items ADD COLUMN IF NOT EXISTS cancellation_deadline_met BOOLEAN;
-ALTER TABLE lunch_billing_items ADD COLUMN IF NOT EXISTS billing_reason TEXT CHECK (billing_reason IN ('present', 'ordered', 'cancellation_after_deadline', 'flat_rate_allocation', 'uninformed_absence'));
-ALTER TABLE lunch_billing_items ADD COLUMN IF NOT EXISTS cancellation_timestamp TIMESTAMP WITH TIME ZONE;
+-- lunch_billing_items extra columns: applied in add-lunch-billing.sql (after CREATE TABLE)
 
 -- ============================================================================
 -- 5. DSGVO COMPLIANCE (Consents, Data Retention, Access Logs)
@@ -213,14 +210,8 @@ CREATE TABLE IF NOT EXISTS parent_work_quota (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Update parent_work_tasks with payment type
-ALTER TABLE parent_work_tasks ADD COLUMN IF NOT EXISTS payment_type TEXT NOT NULL DEFAULT 'direct_payment' CHECK (payment_type IN ('direct_payment', 'fee_credit', 'voluntary'));
-ALTER TABLE parent_work_tasks ADD COLUMN IF NOT EXISTS kita_id UUID REFERENCES kitas(id) ON DELETE CASCADE;
-
--- Update parent_work_submissions to link to quota
-ALTER TABLE parent_work_submissions ADD COLUMN IF NOT EXISTS quota_id UUID REFERENCES parent_work_quota(id) ON DELETE SET NULL;
-ALTER TABLE parent_work_submissions ADD COLUMN IF NOT EXISTS fee_credit_applied BOOLEAN DEFAULT FALSE;
-ALTER TABLE parent_work_submissions ADD COLUMN IF NOT EXISTS fee_credit_amount DECIMAL(10, 2);
+-- parent_work_tasks / parent_work_submissions extra columns: applied in add-parent-work-system.sql
+-- (those tables are created there; parent_work_quota above must exist first for submission FKs)
 
 -- ============================================================================
 -- 7. STAFF MANAGEMENT (Qualifications, Schedules, Betreuungsschlüssel)
@@ -429,23 +420,8 @@ CREATE POLICY "Users can view guardians in their kita" ON child_guardians
 -- 11. TRIGGERS FOR AUTO-UPDATES
 -- ============================================================================
 
--- Update parent_work_quota when submission is approved
-CREATE OR REPLACE FUNCTION update_parent_work_quota()
-RETURNS TRIGGER AS $$
-BEGIN
-  IF NEW.status = 'approved' AND OLD.status != 'approved' AND NEW.quota_id IS NOT NULL THEN
-    UPDATE parent_work_quota
-    SET completed_hours = completed_hours + NEW.hours_worked
-    WHERE id = NEW.quota_id;
-  END IF;
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_update_parent_work_quota
-  AFTER UPDATE ON parent_work_submissions
-  FOR EACH ROW
-  EXECUTE FUNCTION update_parent_work_quota();
+-- parent_work_quota trigger on parent_work_submissions: see add-parent-work-system.sql
+-- (parent_work_submissions is created there)
 
 -- Auto-create access log on sensitive operations
 CREATE OR REPLACE FUNCTION log_child_access()

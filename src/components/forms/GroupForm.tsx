@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { IOSInput } from '@/components/ui/IOSInput'
 import { IOSButton } from '@/components/ui/IOSButton'
 
@@ -26,9 +28,26 @@ export function GroupForm({ group, onSubmit, onCancel, loading }: GroupFormProps
   })
 
   useEffect(() => {
-    supabase.from('profiles').select('*').eq('role', 'teacher').order('full_name').then(({ data }) => {
+    const run = async () => {
+      const kitaId = await getActiveKitaId()
+      if (!kitaId) {
+        setTeachers([])
+        return
+      }
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      if (tenantIds.length === 0) {
+        setTeachers([])
+        return
+      }
+      const { data } = await supabase
+        .from('profiles')
+        .select('*')
+        .in('id', tenantIds)
+        .eq('role', 'teacher')
+        .order('full_name')
       setTeachers(data || [])
-    })
+    }
+    void run()
   }, [supabase])
 
   const handleSubmit = (e: React.FormEvent) => {

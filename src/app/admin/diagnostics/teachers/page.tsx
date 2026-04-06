@@ -7,6 +7,7 @@ const ROUTE = 'admin.diagnostics.teachers'
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useAuth } from '@/hooks/useAuth'
 import { useKita } from '@/hooks/useKita'
 import { Heading } from '@/components/ui/Heading'
@@ -67,9 +68,20 @@ export default function AdminDiagnosticsTeachersPage() {
   const check1_AllTeachers = async () => {
     setCheck1Loading(true)
     try {
+      const kitaId = await getUserKitaId()
+      if (!kitaId) {
+        setAllTeachers([])
+        return
+      }
+      const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+      if (tenantIds.length === 0) {
+        setAllTeachers([])
+        return
+      }
       const { data, error } = await supabase
         .from('profiles')
         .select('id, full_name, email, role')
+        .in('id', tenantIds)
         .in('role', ['teacher', 'support'])
         .order('full_name')
 

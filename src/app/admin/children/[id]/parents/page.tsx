@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useChildrenStore, type Child } from '@/stores/children'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
@@ -36,6 +37,7 @@ export default function AdminChildParentsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [searching, setSearching] = useState(false)
   const [searchResults, setSearchResults] = useState<ProfileLite[]>([])
+  const [tenantProfileIds, setTenantProfileIds] = useState<string[]>([])
 
   const [showCreateModal, setShowCreateModal] = useState(false)
 
@@ -56,6 +58,13 @@ export default function AdminChildParentsPage() {
       }
 
       setChildName(`${child.first_name} ${child.last_name}`)
+
+      if (child.kita_id) {
+        const ids = await getProfileIdsForKita(supabase, child.kita_id)
+        setTenantProfileIds(ids)
+      } else {
+        setTenantProfileIds([])
+      }
 
       const parentIds = child.parent_ids || []
       setCurrentParentIds(parentIds)
@@ -99,9 +108,15 @@ export default function AdminChildParentsPage() {
     setSearching(true)
 
     try {
+      if (tenantProfileIds.length === 0) {
+        setSearchResults([])
+        return
+      }
+
       const { data, error: searchErr } = await supabase
         .from('profiles')
         .select('id, full_name, email')
+        .in('id', tenantProfileIds)
         .eq('role', 'parent')
         .or(`email.ilike.%${q}%,full_name.ilike.%${q}%`)
         .limit(10)
@@ -119,6 +134,11 @@ export default function AdminChildParentsPage() {
   const addParent = async (parentId: string) => {
     if (!parentId) {
       alert(t(sT('errInvalidParentId')))
+      return
+    }
+
+    if (tenantProfileIds.length > 0 && !tenantProfileIds.includes(parentId)) {
+      alert(t(sT('errAccessDeniedGroup')))
       return
     }
 

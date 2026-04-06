@@ -20,6 +20,10 @@ CREATE TABLE IF NOT EXISTS parent_work_tasks (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Extra columns (from add-german-kita-features; table must exist first)
+ALTER TABLE parent_work_tasks ADD COLUMN IF NOT EXISTS payment_type TEXT NOT NULL DEFAULT 'direct_payment' CHECK (payment_type IN ('direct_payment', 'fee_credit', 'voluntary'));
+ALTER TABLE parent_work_tasks ADD COLUMN IF NOT EXISTS kita_id UUID REFERENCES kitas(id) ON DELETE CASCADE;
+
 -- 2. Parent Work Submissions Table
 CREATE TABLE IF NOT EXISTS parent_work_submissions (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -39,6 +43,11 @@ CREATE TABLE IF NOT EXISTS parent_work_submissions (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+-- Link submissions to quota (parent_work_quota is created in add-german-kita-features, which runs before this migration)
+ALTER TABLE parent_work_submissions ADD COLUMN IF NOT EXISTS quota_id UUID REFERENCES parent_work_quota(id) ON DELETE SET NULL;
+ALTER TABLE parent_work_submissions ADD COLUMN IF NOT EXISTS fee_credit_applied BOOLEAN DEFAULT FALSE;
+ALTER TABLE parent_work_submissions ADD COLUMN IF NOT EXISTS fee_credit_amount DECIMAL(10, 2);
 
 -- 3. Parent Work Payments Table
 CREATE TABLE IF NOT EXISTS parent_work_payments (
@@ -176,3 +185,22 @@ CREATE TRIGGER trigger_update_parent_work_payments_updated_at
   BEFORE UPDATE ON parent_work_payments
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
+
+-- Update parent_work_quota when a submission is approved (from add-german-kita-features)
+CREATE OR REPLACE FUNCTION update_parent_work_quota()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.status = 'approved' AND (OLD.status IS DISTINCT FROM 'approved') AND NEW.quota_id IS NOT NULL THEN
+    UPDATE parent_work_quota
+    SET completed_hours = completed_hours + NEW.hours_worked
+    WHERE id = NEW.quota_id;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trigger_update_parent_work_quota ON parent_work_submissions;
+CREATE TRIGGER trigger_update_parent_work_quota
+  AFTER UPDATE ON parent_work_submissions
+  FOR EACH ROW
+  EXECUTE FUNCTION update_parent_work_quota();

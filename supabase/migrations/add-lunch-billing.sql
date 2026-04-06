@@ -70,6 +70,11 @@ CREATE TABLE IF NOT EXISTS lunch_billing_items (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Extra columns (were in add-german-kita-features; must run after table exists)
+ALTER TABLE lunch_billing_items ADD COLUMN IF NOT EXISTS cancellation_deadline_met BOOLEAN;
+ALTER TABLE lunch_billing_items ADD COLUMN IF NOT EXISTS billing_reason TEXT CHECK (billing_reason IN ('present', 'ordered', 'cancellation_after_deadline', 'flat_rate_allocation', 'uninformed_absence'));
+ALTER TABLE lunch_billing_items ADD COLUMN IF NOT EXISTS cancellation_timestamp TIMESTAMP WITH TIME ZONE;
+
 -- Update existing tables
 ALTER TABLE lunch_orders ADD COLUMN IF NOT EXISTS billing_item_id UUID REFERENCES lunch_billing_items(id) ON DELETE SET NULL;
 ALTER TABLE groups ADD COLUMN IF NOT EXISTS lunch_price_per_meal DECIMAL(10, 2);

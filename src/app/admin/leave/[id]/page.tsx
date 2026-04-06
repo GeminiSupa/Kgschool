@@ -8,6 +8,7 @@ const ROUTE = 'admin.leave.id'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { createClient } from '@/utils/supabase/client'
+import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { useLeaveRequestsStore, type LeaveRequest } from '@/stores/leaveRequests'
 import { useChildrenStore, type Child } from '@/stores/children'
 import { Heading } from '@/components/ui/Heading'
@@ -64,6 +65,18 @@ export default function AdminLeaveRequestDetailPage() {
         setRequest(found)
 
         if (!found) return
+
+        const child = (await childrenStore.fetchChildById(found.child_id)) as Child | null
+        const kitaId = child?.kita_id
+        if (!kitaId) {
+          setParentName('')
+          return
+        }
+        const tenantIds = await getProfileIdsForKita(supabase, kitaId)
+        if (!tenantIds.includes(found.parent_id)) {
+          setParentName('')
+          return
+        }
 
         const { data, error: parentErr } = await supabase
           .from('profiles')
