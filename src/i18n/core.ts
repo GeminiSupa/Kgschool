@@ -212,6 +212,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       emailRequired: 'E-Mail ist erforderlich',
       passwordRequired: 'Passwort ist erforderlich',
       loginFailed: 'Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.',
+      forgotPassword: 'Passwort vergessen?',
     },
     apply: {
       title: 'Platzanfrage',
@@ -450,6 +451,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       emailRequired: 'Email is required',
       passwordRequired: 'Password is required',
       loginFailed: 'Login failed. Please try again.',
+      forgotPassword: 'Forgot password?',
     },
     apply: {
       title: 'Application',
@@ -688,6 +690,7 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       emailRequired: 'E-posta gerekli',
       passwordRequired: 'Şifre gerekli',
       loginFailed: 'Giriş başarısız. Lütfen tekrar deneyin.',
+      forgotPassword: 'Şifrenizi mi unuttunuz?',
     },
     apply: {
       title: 'Başvuru',

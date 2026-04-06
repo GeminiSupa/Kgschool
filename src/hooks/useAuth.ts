@@ -22,8 +22,6 @@ export const useAuth = () => {
   }
 
   const logout = async () => {
-    const { error } = await supabase.auth.signOut()
-    if (error) throw error
     await storeLogout()
     if (typeof window !== 'undefined') {
       window.location.assign('/login')
