@@ -113,24 +113,24 @@ export default function SupportReportsPage() {
           className="grid grid-cols-1 md:grid-cols-3 gap-4"
         >
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Start Date</label>
             <input
               type="date"
               value={reportForm.startDate}
               onChange={(e) => setReportForm((p) => ({ ...p, startDate: e.target.value }))}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border-2 border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">End Date</label>
             <input
               type="date"
               value={reportForm.endDate}
               onChange={(e) => setReportForm((p) => ({ ...p, endDate: e.target.value }))}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border-2 border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
             />
           </div>
 
@@ -138,7 +138,7 @@ export default function SupportReportsPage() {
             <button
               type="submit"
               disabled={generating}
-              className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+              className="min-h-11 w-full rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 disabled:opacity-50 dark:focus-visible:ring-indigo-500/50"
             >
               {generating ? 'Generating...' : 'Generate Report'}
             </button>
@@ -158,47 +158,47 @@ export default function SupportReportsPage() {
             <Heading size="md" className="mb-4">
               Summary
             </Heading>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-blue-50 rounded-md">
-                <p className="text-sm text-gray-600">Total Days</p>
-                <p className="text-2xl font-bold text-gray-900">{reportData.totalDays}</p>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+              <div className="rounded-xl border border-indigo-200/60 bg-indigo-500/10 p-4 dark:border-indigo-500/20 dark:bg-indigo-950/40">
+                <p className="text-sm text-ui-muted">Total Days</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-slate-50">{reportData.totalDays}</p>
               </div>
-              <div className="p-4 bg-green-50 rounded-md">
-                <p className="text-sm text-gray-600">Present Days</p>
-                <p className="text-2xl font-bold text-gray-900">{reportData.presentDays}</p>
+              <div className="rounded-xl border border-emerald-200/60 bg-emerald-500/10 p-4 dark:border-emerald-500/20 dark:bg-emerald-950/40">
+                <p className="text-sm text-ui-muted">Present Days</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-slate-50">{reportData.presentDays}</p>
               </div>
-              <div className="p-4 bg-red-50 rounded-md">
-                <p className="text-sm text-gray-600">Absent Days</p>
-                <p className="text-2xl font-bold text-gray-900">{reportData.absentDays}</p>
+              <div className="rounded-xl border border-red-200/60 bg-red-500/10 p-4 dark:border-red-500/20 dark:bg-red-950/40">
+                <p className="text-sm text-ui-muted">Absent Days</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-slate-50">{reportData.absentDays}</p>
               </div>
-              <div className="p-4 bg-yellow-50 rounded-md">
-                <p className="text-sm text-gray-600">Attendance Rate</p>
-                <p className="text-2xl font-bold text-gray-900">{reportData.attendanceRate}%</p>
+              <div className="rounded-xl border border-amber-200/60 bg-amber-500/10 p-4 dark:border-amber-500/20 dark:bg-amber-950/40">
+                <p className="text-sm text-ui-muted">Attendance Rate</p>
+                <p className="text-2xl font-bold text-slate-900 dark:text-slate-50">{reportData.attendanceRate}%</p>
               </div>
             </div>
           </IOSCard>
 
           <IOSCard className="p-0 overflow-hidden">
-            <Heading size="md" className="p-6 border-b">
+            <Heading size="md" className="border-b border-border p-6">
               Daily Breakdown
             </Heading>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-border">
+                <thead className="bg-slate-50 dark:bg-white/5">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Present</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Absent</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Rate</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Date</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Present</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Absent</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Rate</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="divide-y divide-border bg-background">
                   {reportData.dailyBreakdown.map((day) => (
-                    <tr key={day.date} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{formatDate(day.date)}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">{day.present}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600">{day.absent}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{day.rate}%</td>
+                    <tr key={day.date} className="hover:bg-slate-50 dark:hover:bg-white/5">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">{formatDate(day.date)}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-emerald-600 dark:text-emerald-400">{day.present}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">{day.absent}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">{day.rate}%</td>
                     </tr>
                   ))}
                 </tbody>

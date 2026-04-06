@@ -70,7 +70,7 @@ export const NapRecordForm = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="child_id" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="child_id" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Kind <span className="text-red-500">*</span>
         </label>
         <select
@@ -91,7 +91,7 @@ export const NapRecordForm = ({
       </div>
 
       <div>
-        <label htmlFor="nap_date" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="nap_date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Datum <span className="text-red-500">*</span>
         </label>
         <input
@@ -106,7 +106,7 @@ export const NapRecordForm = ({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="start_time" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="start_time" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Beginn
           </label>
           <input
@@ -118,7 +118,7 @@ export const NapRecordForm = ({
           />
         </div>
         <div>
-          <label htmlFor="end_time" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="end_time" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Ende
           </label>
           <input
@@ -132,7 +132,7 @@ export const NapRecordForm = ({
       </div>
 
       <div>
-        <label htmlFor="duration_minutes" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="duration_minutes" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Dauer (Minuten)
         </label>
         <input
@@ -147,7 +147,7 @@ export const NapRecordForm = ({
       </div>
 
       <div>
-        <label htmlFor="notes" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="notes" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Notizen
         </label>
         <textarea

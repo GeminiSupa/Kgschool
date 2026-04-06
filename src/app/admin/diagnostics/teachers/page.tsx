@@ -151,7 +151,7 @@ export default function AdminDiagnosticsTeachersPage() {
     <div className="space-y-6">
       <div className="mb-6">
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-600 mt-2">
+        <p className="text-sm text-ui-muted mt-2">
           Use this page to check why teachers might not be appearing in the dropdown.
         </p>
       </div>
@@ -163,15 +163,15 @@ export default function AdminDiagnosticsTeachersPage() {
         <div className="space-y-2">
           <div className="flex justify-between">
             <span className="font-medium">User ID:</span>
-            <span className="text-gray-600">{userInfo.userId || 'Not found'}</span>
+            <span className="text-ui-muted">{userInfo.userId || 'Not found'}</span>
           </div>
           <div className="flex justify-between">
             <span className="font-medium">User Role:</span>
-            <span className="text-gray-600">{userInfo.role || 'Not found'}</span>
+            <span className="text-ui-muted">{userInfo.role || 'Not found'}</span>
           </div>
           <div className="flex justify-between">
             <span className="font-medium">User Kita ID:</span>
-            <span className="text-gray-600">{userInfo.kitaId || 'Not found'}</span>
+            <span className="text-ui-muted">{userInfo.kitaId || 'Not found'}</span>
           </div>
         </div>
       </IOSCard>
@@ -182,7 +182,7 @@ export default function AdminDiagnosticsTeachersPage() {
         </Heading>
 
         {check1Loading ? (
-          <div className="text-center py-4 text-gray-500">Loading...</div>
+          <div className="text-center py-4 text-ui-soft">Loading...</div>
         ) : (
           <div className="space-y-3">
             <div className="flex justify-between items-center">
@@ -204,7 +204,7 @@ export default function AdminDiagnosticsTeachersPage() {
                   {allTeachers.map((teacher) => (
                     <div key={teacher.id} className="p-2 bg-gray-50 rounded text-sm">
                       <p className="font-medium">{teacher.full_name}</p>
-                      <p className="text-xs text-gray-600">
+                      <p className="text-xs text-ui-muted">
                         Role: {teacher.role || 'N/A'} | ID: {teacher.id}
                       </p>
                     </div>
@@ -225,12 +225,12 @@ export default function AdminDiagnosticsTeachersPage() {
           Check 2: Teachers in Organization Members
         </Heading>
         {check2Loading ? (
-          <div className="text-center py-4 text-gray-500">Loading...</div>
+          <div className="text-center py-4 text-ui-soft">Loading...</div>
         ) : (
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="font-medium">Your Kita ID:</span>
-              <span className="text-gray-600">{userInfo.kitaId || 'Not set'}</span>
+              <span className="text-ui-muted">{userInfo.kitaId || 'Not set'}</span>
             </div>
 
             <div className="flex justify-between items-center">
@@ -252,7 +252,7 @@ export default function AdminDiagnosticsTeachersPage() {
                   {orgTeachers.map((teacher) => (
                     <div key={teacher.id} className="p-2 bg-gray-50 rounded text-sm">
                       <p className="font-medium">{teacher.full_name}</p>
-                      <p className="text-xs text-gray-600">
+                      <p className="text-xs text-ui-muted">
                         Role: {teacher.role || 'N/A'} | Profile ID: {teacher.profile_id}
                       </p>
                     </div>
@@ -274,7 +274,7 @@ export default function AdminDiagnosticsTeachersPage() {
         </Heading>
 
         {check3Loading ? (
-          <div className="text-center py-4 text-gray-500">Loading...</div>
+          <div className="text-center py-4 text-ui-soft">Loading...</div>
         ) : (
           <div className="space-y-3">
             <div className="flex justify-between items-center">
@@ -308,7 +308,7 @@ export default function AdminDiagnosticsTeachersPage() {
                   {groupsWithoutKita.map((group) => (
                     <div key={group.id} className="p-2 bg-yellow-50 rounded text-sm">
                       <p className="font-medium">{group.name}</p>
-                      <p className="text-xs text-gray-600">ID: {group.id}</p>
+                      <p className="text-xs text-ui-muted">ID: {group.id}</p>
                     </div>
                   ))}
                 </div>

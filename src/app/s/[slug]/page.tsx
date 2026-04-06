@@ -70,12 +70,12 @@ export default function PublicKitaSitePage({ params }: { params: { slug: string 
   const brandName = config?.brand?.name || fallback.brand?.name || 'Kita'
 
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-white text-slate-900 dark:text-slate-50">
       <header className="border-b border-gray-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-5">
           <div className="min-w-0">
             <p className="truncate text-sm font-black tracking-tight">{brandName}</p>
-            <p className="truncate text-xs text-gray-500">{config?.brand?.tagline || fallback.brand?.tagline}</p>
+            <p className="truncate text-xs text-ui-soft">{config?.brand?.tagline || fallback.brand?.tagline}</p>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/apply" className="rounded-xl border border-gray-200 px-4 py-2 text-sm font-semibold hover:bg-gray-50">
@@ -114,7 +114,7 @@ export default function PublicKitaSitePage({ params }: { params: { slug: string 
           {(config?.sections || fallback.sections || []).map((s) => (
             <article key={s.id} className="rounded-2xl border border-gray-200 p-6">
               <h2 className="text-lg font-black tracking-tight">{s.title}</h2>
-              <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-gray-600">{s.body}</p>
+              <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-ui-muted">{s.body}</p>
             </article>
           ))}
         </div>
@@ -124,21 +124,21 @@ export default function PublicKitaSitePage({ params }: { params: { slug: string 
         <div className="mx-auto max-w-6xl px-6 py-14">
           <div className="rounded-2xl border border-gray-200 bg-white p-6 md:p-8">
             <h2 className="text-lg font-black tracking-tight">Kontakt</h2>
-            <div className="mt-4 grid gap-3 text-sm text-gray-700 md:grid-cols-3">
+            <div className="mt-4 grid gap-3 text-sm text-slate-700 dark:text-slate-200 md:grid-cols-3">
               <div className="rounded-xl bg-gray-50 px-4 py-3">
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">E-Mail</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-ui-soft">E-Mail</p>
                 <p className="mt-1 font-semibold">{config?.contact?.email || '—'}</p>
               </div>
               <div className="rounded-xl bg-gray-50 px-4 py-3">
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Telefon</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-ui-soft">Telefon</p>
                 <p className="mt-1 font-semibold">{config?.contact?.phone || '—'}</p>
               </div>
               <div className="rounded-xl bg-gray-50 px-4 py-3">
-                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Adresse</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-ui-soft">Adresse</p>
                 <p className="mt-1 font-semibold">{config?.contact?.address || '—'}</p>
               </div>
             </div>
-            <p className="mt-6 text-xs text-gray-500">
+            <p className="mt-6 text-xs text-ui-soft">
               Hinweis: Inhalte werden durch die Einrichtung gepflegt. Datenschutz/Impressum finden Sie in der Plattform.
             </p>
           </div>
@@ -146,16 +146,16 @@ export default function PublicKitaSitePage({ params }: { params: { slug: string 
       </section>
 
       <footer className="border-t border-gray-200 bg-white">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-6 text-sm text-gray-600">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-6 py-6 text-sm text-ui-muted">
           <p>{brandName}</p>
           <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-gray-900">
+            <Link href="/privacy" className="hover:text-slate-900 dark:text-slate-50">
               Datenschutz
             </Link>
-            <Link href="/imprint" className="hover:text-gray-900">
+            <Link href="/imprint" className="hover:text-slate-900 dark:text-slate-50">
               Impressum
             </Link>
-            <Link href="/security" className="hover:text-gray-900">
+            <Link href="/security" className="hover:text-slate-900 dark:text-slate-50">
               Sicherheit
             </Link>
           </div>

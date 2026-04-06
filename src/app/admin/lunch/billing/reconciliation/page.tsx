@@ -73,7 +73,7 @@ export default function AdminLunchBillingReconciliationPage() {
   return (
     <div className="max-w-7xl mx-auto pb-12">
       <div className="mb-6">
-        <Link href="/admin/lunch/billing" className="text-gray-600 hover:text-gray-900 mb-4 inline-block">
+        <Link href="/admin/lunch/billing" className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block">
           ← Back to Billing
         </Link>
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
@@ -82,7 +82,7 @@ export default function AdminLunchBillingReconciliationPage() {
       <IOSCard className="bg-white rounded-lg shadow p-6 mb-6 max-w-3xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Month</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Month</label>
             <select
               value={filters.month}
               onChange={(e) => setFilters((p) => ({ ...p, month: Number(e.target.value) }))}
@@ -99,7 +99,7 @@ export default function AdminLunchBillingReconciliationPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Year</label>
             <input
               value={filters.year}
               onChange={(e) => setFilters((p) => ({ ...p, year: Number(e.target.value) }))}
@@ -138,24 +138,24 @@ export default function AdminLunchBillingReconciliationPage() {
             </Heading>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
-                <p className="text-sm text-gray-600">Total Bills</p>
+                <p className="text-sm text-ui-muted">Total Bills</p>
                 <p className="text-2xl font-semibold">{reconciliation.summary.totalBills}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Expected Total</p>
+                <p className="text-sm text-ui-muted">Expected Total</p>
                 <p className="text-2xl font-semibold text-green-600">€{reconciliation.summary.expectedTotal.toFixed(2)}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Actual Total</p>
+                <p className="text-sm text-ui-muted">Actual Total</p>
                 <p className="text-2xl font-semibold text-blue-600">€{reconciliation.summary.actualTotal.toFixed(2)}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Difference</p>
+                <p className="text-sm text-ui-muted">Difference</p>
                 <p
                   className={[
                     'text-2xl font-semibold',
                     Math.abs(reconciliation.summary.difference) < 0.01
-                      ? 'text-gray-600'
+                      ? 'text-ui-muted'
                       : reconciliation.summary.difference > 0
                         ? 'text-red-600'
                         : 'text-green-600',
@@ -176,19 +176,19 @@ export default function AdminLunchBillingReconciliationPage() {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Child</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Expected</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actual</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Difference</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Issue</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Child</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Expected</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Actual</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Difference</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Issue</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {reconciliation.discrepancies.map((disc) => (
                       <tr key={disc.billId} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 text-sm text-gray-900">{disc.childName}</td>
-                        <td className="px-4 py-3 text-sm text-gray-600">€{disc.expected.toFixed(2)}</td>
-                        <td className="px-4 py-3 text-sm text-gray-600">€{disc.actual.toFixed(2)}</td>
+                        <td className="px-4 py-3 text-sm text-slate-900 dark:text-slate-50">{disc.childName}</td>
+                        <td className="px-4 py-3 text-sm text-ui-muted">€{disc.expected.toFixed(2)}</td>
+                        <td className="px-4 py-3 text-sm text-ui-muted">€{disc.actual.toFixed(2)}</td>
                         <td
                           className={[
                             'px-4 py-3 text-sm font-medium',
@@ -197,7 +197,7 @@ export default function AdminLunchBillingReconciliationPage() {
                         >
                           €{disc.difference.toFixed(2)}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-600">{disc.issue}</td>
+                        <td className="px-4 py-3 text-sm text-ui-muted">{disc.issue}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -251,19 +251,19 @@ export default function AdminLunchBillingReconciliationPage() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Child</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Expected</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actual</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Child</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Expected</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Actual</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Status</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {reconciliation.bills.map((bill: any) => (
                     <tr key={bill.billId} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm text-gray-900">{bill.childName}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600">€{bill.expected.toFixed(2)}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600">€{bill.actual.toFixed(2)}</td>
+                      <td className="px-4 py-3 text-sm text-slate-900 dark:text-slate-50">{bill.childName}</td>
+                      <td className="px-4 py-3 text-sm text-ui-muted">€{bill.expected.toFixed(2)}</td>
+                      <td className="px-4 py-3 text-sm text-ui-muted">€{bill.actual.toFixed(2)}</td>
                       <td className="px-4 py-3">
                         <span
                           className={[

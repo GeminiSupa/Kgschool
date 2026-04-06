@@ -84,8 +84,8 @@ export default function AdminSetupPage() {
   return (
     <div className="max-w-5xl mx-auto pb-12">
       <div className="mb-10">
-        <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Go-Live Checkliste für Ihre Kita.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Go-Live Checkliste für Ihre Kita.</p>
       </div>
 
       {error && (
@@ -158,7 +158,7 @@ export default function AdminSetupPage() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <p className="text-[10px] font-black text-black/30 uppercase tracking-widest">Website & Platzanfrage</p>
-                <p className="mt-2 text-sm text-gray-600">Richten Sie Ihre öffentliche Seite ein und verbinden Sie sie mit dem Bewerbungsprozess.</p>
+                <p className="mt-2 text-sm text-ui-muted">Richten Sie Ihre öffentliche Seite ein und verbinden Sie sie mit dem Bewerbungsprozess.</p>
               </div>
               <Link href="/admin/site" className="rounded-2xl bg-[#667eea] px-5 py-3 text-xs font-black text-white uppercase tracking-widest shadow-lg shadow-indigo-500/20 hover:scale-[1.02] transition-transform">
                 Website bearbeiten

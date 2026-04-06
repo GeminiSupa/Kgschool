@@ -53,7 +53,7 @@ export const CheckInOutButton = ({
           Check-Out
         </IOSButton>
       ) || checkOutTime && (
-        <div className="px-3 py-1.5 text-xs font-bold bg-gray-50 text-gray-700 rounded-lg border border-gray-100 flex items-center">
+        <div className="px-3 py-1.5 text-xs font-bold bg-gray-50 text-slate-700 dark:text-slate-200 rounded-lg border border-gray-100 flex items-center">
           ⬆️ {formatTime(checkOutTime)}
         </div>
       )}

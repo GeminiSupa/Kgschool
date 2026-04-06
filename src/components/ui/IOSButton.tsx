@@ -24,17 +24,18 @@ export function IOSButton({
     ghost: 'bg-transparent text-muted hover:bg-slate-100 dark:hover:bg-white/5 hover:text-foreground',
     danger: 'bg-red-500 text-white shadow-lg shadow-red-200/50 hover:bg-red-600 focus:ring-red-500',
   }
+  /* Min heights meet ~44–48px touch targets (mobile-first) */
   const sizes = {
-    small: 'px-3 py-1.5 text-xs',
-    medium: 'px-6 py-2.5 text-sm',
-    large: 'px-8 py-3.5 text-base',
+    small: 'min-h-11 px-4 py-2 text-xs',
+    medium: 'min-h-11 px-6 py-2.5 text-sm',
+    large: 'min-h-12 px-6 py-3.5 text-base',
   }
 
   return (
     <button
       {...props}
       className={cn(
-        'inline-flex items-center justify-center rounded-2xl font-bold transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2',
+        'box-border inline-flex max-w-full items-center justify-center gap-2 rounded-2xl font-bold whitespace-normal wrap-break-word text-center transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:focus-visible:ring-offset-background',
         variants[variant as keyof typeof variants] || variants.primary,
         sizes[size as keyof typeof sizes] || sizes.medium,
         className

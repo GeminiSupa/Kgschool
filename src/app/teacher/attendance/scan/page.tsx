@@ -29,11 +29,11 @@ export default function TeacherAttendanceScanPage() {
   return (
     <div>
       <div className="mb-6">
-        <Link href="/teacher/attendance" className="text-gray-600 hover:text-gray-900 mb-4 inline-block">
+        <Link href="/teacher/attendance" className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block">
           ← Back to Attendance
         </Link>
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
-        <p className="text-gray-600 mt-2">QR code scanning has been disabled. Please use the manual attendance system.</p>
+        <p className="text-ui-muted mt-2">QR code scanning has been disabled. Please use the manual attendance system.</p>
       </div>
 
       <IOSCard className="p-6 max-w-md mx-auto">

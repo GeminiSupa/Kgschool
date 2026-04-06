@@ -84,7 +84,7 @@ export default function AdminLunchPricingPage() {
   return (
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex justify-between items-center mb-6 gap-4">
-        <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
         <Link href="/admin/lunch/pricing/new">
           <IOSButton className="px-4 py-2 text-sm font-black bg-[#667eea] text-white border-none">
             ➕ Add Pricing
@@ -109,9 +109,9 @@ export default function AdminLunchPricingPage() {
               <div key={price.id} className="p-6 hover:bg-gray-50 transition-colors">
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex-1">
-                    <p className="text-lg font-medium text-gray-900">{getGroupName(price.group_id)}</p>
-                    <p className="text-sm text-gray-600 mt-1">€{price.price_per_meal.toFixed(2)} per meal</p>
-                    <p className="text-xs text-gray-500 mt-2">
+                    <p className="text-lg font-medium text-slate-900 dark:text-slate-50">{getGroupName(price.group_id)}</p>
+                    <p className="text-sm text-ui-muted mt-1">€{price.price_per_meal.toFixed(2)} per meal</p>
+                    <p className="text-xs text-ui-soft mt-2">
                       Effective: {formatDate(price.effective_from)}
                       {price.effective_to ? ` - ${formatDate(price.effective_to)}` : ' (Current)'}
                     </p>

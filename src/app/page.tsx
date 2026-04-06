@@ -297,7 +297,7 @@ export default function Home() {
             </Link>
           </nav>
         </div>
-        <div className="max-w-7xl mx-auto px-6 mt-8 text-center md:text-left text-sm text-slate-400">
+        <div className="max-w-7xl mx-auto px-6 mt-8 text-center md:text-left text-sm text-ui-soft">
           © {new Date().getFullYear()} {t('home.marketingFooterRights')}
         </div>
       </footer>

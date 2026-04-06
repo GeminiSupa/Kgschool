@@ -74,12 +74,17 @@ export default function SupportChildrenPage() {
       </Heading>
 
       <div className="mb-4">
+        <label htmlFor="support-children-search" className="sr-only">
+          Search children
+        </label>
         <input
+          id="support-children-search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          type="text"
+          type="search"
           placeholder="Search children..."
-          className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          autoComplete="off"
+          className="min-h-11 w-full max-w-md rounded-lg border-2 border-border bg-background px-4 py-2 text-sm outline-none transition-colors placeholder:text-muted focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
         />
       </div>
 
@@ -92,24 +97,24 @@ export default function SupportChildrenPage() {
       ) : (
         <IOSCard className="p-0 overflow-hidden">
           {filteredChildren.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">No children found.</div>
+            <div className="p-8 text-center text-ui-soft">No children found.</div>
           ) : (
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-border">
               {filteredChildren.map((child) => (
-                <div key={child.id} className="p-4 hover:bg-gray-50 transition-colors">
+                <div key={child.id} className="p-4 transition-colors hover:bg-slate-50 dark:hover:bg-white/5">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-slate-900 dark:text-slate-50">
                         {child.first_name} {child.last_name}
                       </p>
-                      <p className="text-sm text-gray-600 mt-1">Group: {getGroupName(child.group_id) || 'Unassigned'}</p>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-sm text-ui-muted mt-1">Group: {getGroupName(child.group_id) || 'Unassigned'}</p>
+                      <p className="text-xs text-ui-soft mt-1">
                         DOB: {formatDate(child.date_of_birth)} | Status: {child.status}
                       </p>
                     </div>
                     <Link
-                      href={`/parent/children/${child.id}`}
-                      className="px-3 py-1 text-sm bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors"
+                      href={`/support/children/${child.id}`}
+                      className="inline-flex min-h-10 items-center justify-center rounded-lg bg-indigo-500/10 px-3 py-2 text-sm font-semibold text-indigo-800 transition-colors hover:bg-indigo-500/15 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50"
                     >
                       View Details
                     </Link>

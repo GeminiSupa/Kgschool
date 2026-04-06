@@ -118,7 +118,7 @@ export default function TeacherObservationDetailPage({ params }: PageProps) {
           >
             ← Zurück zu Beobachtungen
           </Link>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
         </div>
         {!isEditing && (
           <div className="flex items-center gap-2">
@@ -152,12 +152,12 @@ export default function TeacherObservationDetailPage({ params }: PageProps) {
           <div className="divide-y divide-black/5">
             <div className="p-6">
               <h3 className="text-xs font-bold text-black/40 uppercase tracking-wider mb-2">Kind</h3>
-              <p className="text-lg font-bold text-gray-900">{getChildName(observation.child_id)}</p>
+              <p className="text-lg font-bold text-slate-900 dark:text-slate-50">{getChildName(observation.child_id)}</p>
             </div>
 
             <div className="p-6">
               <h3 className="text-xs font-bold text-black/40 uppercase tracking-wider mb-2">Datum</h3>
-              <p className="text-base font-semibold text-gray-800">{formatDate(observation.observation_date)}</p>
+              <p className="text-base font-semibold text-slate-800 dark:text-slate-100">{formatDate(observation.observation_date)}</p>
             </div>
 
             {observation.development_area && (
@@ -172,13 +172,13 @@ export default function TeacherObservationDetailPage({ params }: PageProps) {
             {observation.context && (
               <div className="p-6">
                 <h3 className="text-xs font-bold text-black/40 uppercase tracking-wider mb-2">Kontext</h3>
-                <p className="text-base text-gray-700 italic font-medium">"{observation.context}"</p>
+                <p className="text-base text-slate-700 dark:text-slate-200 italic font-medium">"{observation.context}"</p>
               </div>
             )}
 
             <div className="p-6">
               <h3 className="text-xs font-bold text-black/40 uppercase tracking-wider mb-2">Beschreibung</h3>
-              <p className="text-base text-gray-800 leading-relaxed whitespace-pre-wrap font-medium">
+              <p className="text-base text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-wrap font-medium">
                 {observation.description}
               </p>
             </div>

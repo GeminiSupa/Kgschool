@@ -51,7 +51,7 @@ export default function AdminGroupsPage() {
         <IOSCard className="p-24 text-center border-dashed border-2 border-slate-200 bg-transparent shadow-none">
           <div className="text-6xl opacity-10 mb-6">🏫</div>
           <p className="text-slate-500 font-bold text-xl">{t(sT('noGroupsSystem'))}</p>
-          <p className="text-slate-400 mt-2 font-medium">{t(sT('noGroupsHint'))}</p>
+          <p className="text-ui-soft mt-2 font-medium">{t(sT('noGroupsHint'))}</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -70,7 +70,7 @@ export default function AdminGroupsPage() {
                                 </span>
                             </div>
                             <h3 className="text-2xl font-black text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors tracking-tight">{group.name}</h3>
-                            <p className="text-sm font-bold text-slate-400 mb-10 line-clamp-2 leading-relaxed">{group.description || 'No description provided for this group.'}</p>
+                            <p className="text-sm font-bold text-ui-soft mb-10 line-clamp-2 leading-relaxed">{group.description || 'No description provided for this group.'}</p>
                             
                             <div className="grid grid-cols-2 gap-6 pt-8 border-t border-slate-50">
                                 <div>

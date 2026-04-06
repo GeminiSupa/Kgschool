@@ -76,7 +76,7 @@ export default function AdminLearningThemesNewPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/learning-themes')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Learning Themes
         </button>
@@ -94,7 +94,7 @@ export default function AdminLearningThemesNewPage() {
           className="space-y-4"
         >
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="title" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Title <span className="text-red-500">*</span>
             </label>
             <input
@@ -109,7 +109,7 @@ export default function AdminLearningThemesNewPage() {
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="description" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Description
             </label>
             <textarea
@@ -124,7 +124,7 @@ export default function AdminLearningThemesNewPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="start_date" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="start_date" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Start Date
               </label>
               <input
@@ -136,7 +136,7 @@ export default function AdminLearningThemesNewPage() {
               />
             </div>
             <div>
-              <label htmlFor="end_date" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="end_date" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 End Date
               </label>
               <input
@@ -150,7 +150,7 @@ export default function AdminLearningThemesNewPage() {
           </div>
 
           <div>
-            <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="status" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Status <span className="text-red-500">*</span>
             </label>
             <select
@@ -167,7 +167,7 @@ export default function AdminLearningThemesNewPage() {
           </div>
 
           <div>
-            <label htmlFor="learning_areas" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="learning_areas" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Learning Areas (one per line)
             </label>
             <textarea
@@ -181,7 +181,7 @@ export default function AdminLearningThemesNewPage() {
           </div>
 
           <div>
-            <label htmlFor="activities" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="activities" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Activities (one per line)
             </label>
             <textarea
@@ -198,7 +198,7 @@ export default function AdminLearningThemesNewPage() {
             <button
               type="button"
               onClick={() => router.push('/admin/learning-themes')}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 text-slate-700 dark:text-slate-200 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
               disabled={submitting}
             >
               Cancel

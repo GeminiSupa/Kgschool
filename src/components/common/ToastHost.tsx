@@ -17,7 +17,7 @@ export function ToastHost() {
   const styleByType: Record<string, string> = {
     success: 'border-emerald-200 bg-emerald-50 text-emerald-900',
     error: 'border-red-200 bg-red-50 text-red-900',
-    info: 'border-gray-200 bg-white text-gray-900',
+    info: 'border-gray-200 bg-white text-slate-900 dark:text-slate-50',
   }
 
   return (

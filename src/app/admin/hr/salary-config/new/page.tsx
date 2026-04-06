@@ -79,7 +79,7 @@ export default function AdminSalaryConfigNewPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/hr/salary-config')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Salary Config
         </button>
@@ -96,7 +96,7 @@ export default function AdminSalaryConfigNewPage() {
         ) : (
           <div className="space-y-4">
             <div>
-              <label htmlFor="staff_id" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="staff_id" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Staff Member <span className="text-red-500">*</span>
               </label>
               <select

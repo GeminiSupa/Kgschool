@@ -229,11 +229,11 @@ export function ChildForm({ child, groups: initialGroups, onSubmit, onCancel, lo
 
         {form.group_id && selectedGroupTeachers.length > 0 && (
           <div className="mt-2 p-3 bg-black/5 rounded-xl">
-            <p className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Zugewiesene Lehrer:</p>
+            <p className="text-xs font-semibold text-ui-soft mb-2 uppercase tracking-wider">Zugewiesene Lehrer:</p>
             <div className="flex flex-wrap gap-2">
               {selectedGroupTeachers.map((teacher) => (
-                <span key={teacher.id} className="px-2 py-1 bg-white/80 rounded-lg text-xs font-medium text-gray-700 shadow-sm">
-                  {teacher.full_name} <span className="text-gray-400">({teacher.role === 'primary' ? 'Primary' : teacher.role})</span>
+                <span key={teacher.id} className="px-2 py-1 bg-white/80 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-200 shadow-sm">
+                  {teacher.full_name} <span className="text-ui-soft">({teacher.role === 'primary' ? 'Primary' : teacher.role})</span>
                 </span>
               ))}
             </div>

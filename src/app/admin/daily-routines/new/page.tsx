@@ -109,7 +109,7 @@ export default function AdminDailyRoutinesNewPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/daily-routines')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Daily Routines
         </button>
@@ -127,7 +127,7 @@ export default function AdminDailyRoutinesNewPage() {
           className="space-y-4"
         >
           <div>
-            <label htmlFor="group_id" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="group_id" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Group <span className="text-red-500">*</span>
             </label>
             <select
@@ -147,7 +147,7 @@ export default function AdminDailyRoutinesNewPage() {
           </div>
 
           <div>
-            <label htmlFor="routine_name" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="routine_name" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Routine Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -163,7 +163,7 @@ export default function AdminDailyRoutinesNewPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="start_time" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="start_time" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Start Time <span className="text-red-500">*</span>
               </label>
               <input
@@ -176,7 +176,7 @@ export default function AdminDailyRoutinesNewPage() {
               />
             </div>
             <div>
-              <label htmlFor="end_time" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="end_time" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 End Time
               </label>
               <input
@@ -190,7 +190,7 @@ export default function AdminDailyRoutinesNewPage() {
           </div>
 
           <div>
-            <label htmlFor="day_of_week" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="day_of_week" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Day of Week (leave empty for every day)
             </label>
             <select
@@ -214,7 +214,7 @@ export default function AdminDailyRoutinesNewPage() {
           </div>
 
           <div>
-            <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="location" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Location
             </label>
             <input
@@ -228,7 +228,7 @@ export default function AdminDailyRoutinesNewPage() {
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="description" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Description
             </label>
             <textarea
@@ -245,7 +245,7 @@ export default function AdminDailyRoutinesNewPage() {
             <button
               type="button"
               onClick={() => router.push('/admin/daily-routines')}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 text-slate-700 dark:text-slate-200 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
             >
               Cancel
             </button>

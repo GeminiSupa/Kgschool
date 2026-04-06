@@ -55,7 +55,7 @@ function getAbsenceClass(type?: string | null) {
     training: 'px-2 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-800',
     other: 'px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800',
   }
-  return classes[type || ''] || 'px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800'
+  return classes[type || ''] || 'px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-slate-800 dark:text-slate-100'
 }
 
 export default function AdminStaffRotaPage() {
@@ -152,7 +152,7 @@ export default function AdminStaffRotaPage() {
     <div>
       <div className="mb-6">
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
-        <p className="text-gray-600 mt-2">Manage daily staff assignments and absences</p>
+        <p className="text-ui-muted mt-2">Manage daily staff assignments and absences</p>
       </div>
 
       {loading ? (
@@ -167,7 +167,7 @@ export default function AdminStaffRotaPage() {
         <div className="space-y-6">
           <div className="bg-white rounded-lg shadow p-4 flex gap-4 flex-wrap">
             <div>
-              <label htmlFor="group_filter" className="block text-xs text-gray-500 mb-1">
+              <label htmlFor="group_filter" className="block text-xs text-ui-soft mb-1">
                 Group
               </label>
               <select
@@ -186,7 +186,7 @@ export default function AdminStaffRotaPage() {
             </div>
 
             <div>
-              <label htmlFor="date_filter" className="block text-xs text-gray-500 mb-1">
+              <label htmlFor="date_filter" className="block text-xs text-ui-soft mb-1">
                 Date
               </label>
               <input
@@ -199,7 +199,7 @@ export default function AdminStaffRotaPage() {
             </div>
 
             <div>
-              <label htmlFor="date_range_start" className="block text-xs text-gray-500 mb-1">
+              <label htmlFor="date_range_start" className="block text-xs text-ui-soft mb-1">
                 Start Date
               </label>
               <input
@@ -212,7 +212,7 @@ export default function AdminStaffRotaPage() {
             </div>
 
             <div>
-              <label htmlFor="date_range_end" className="block text-xs text-gray-500 mb-1">
+              <label htmlFor="date_range_end" className="block text-xs text-ui-soft mb-1">
                 End Date
               </label>
               <input
@@ -229,28 +229,28 @@ export default function AdminStaffRotaPage() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Group</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Staff</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Time</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Replacement</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Date</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Group</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Staff</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Time</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Replacement</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {rota.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
+                    <td colSpan={6} className="px-6 py-12 text-center text-ui-soft">
                       No rota entries found
                     </td>
                   </tr>
                 ) : (
                   rota.map((entry) => (
                     <tr key={entry.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{formatDate(entry.date)}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{groupsMap[entry.group_id] || entry.group_id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{staffMap[entry.staff_id] || entry.staff_id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">{formatDate(entry.date)}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">{groupsMap[entry.group_id] || entry.group_id}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">{staffMap[entry.staff_id] || entry.staff_id}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-ui-soft">
                         {entry.start_time && entry.end_time ? `${formatTime(entry.start_time)} - ${formatTime(entry.end_time)}` : '-'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -260,7 +260,7 @@ export default function AdminStaffRotaPage() {
                           <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">Present</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-ui-soft">
                         {entry.replacement_staff_id ? (staffMap[entry.replacement_staff_id] || entry.replacement_staff_id) : '-'}
                       </td>
                     </tr>

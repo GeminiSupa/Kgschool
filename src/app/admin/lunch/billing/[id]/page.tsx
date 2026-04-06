@@ -185,7 +185,7 @@ export default function AdminLunchBillingDetailPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/lunch/billing')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Billing
         </button>
@@ -209,21 +209,21 @@ export default function AdminLunchBillingDetailPage() {
           <IOSCard className="p-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-600">Child</label>
-                <p className="mt-1 text-lg text-gray-900">{getChildName(bill.child_id)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Child</label>
+                <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{getChildName(bill.child_id)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Period</label>
-                <p className="mt-1 text-lg text-gray-900">
+                <label className="block text-sm font-medium text-ui-muted">Period</label>
+                <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">
                   {getMonthName(bill.month)} {bill.year}
                 </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Total Amount</label>
-                <p className="mt-1 text-lg text-gray-900">€{bill.total_amount.toFixed(2)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Total Amount</label>
+                <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">€{bill.total_amount.toFixed(2)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Status</label>
+                <label className="block text-sm font-medium text-ui-muted">Status</label>
                 <span
                   className={[
                     'inline-block mt-1 px-3 py-1 text-sm font-medium rounded-full',
@@ -241,20 +241,20 @@ export default function AdminLunchBillingDetailPage() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t mt-4">
               <div>
-                <label className="block text-sm font-medium text-gray-600">Paid Amount</label>
-                <p className="mt-1 text-lg text-gray-900">€{bill.paid_amount.toFixed(2)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Paid Amount</label>
+                <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">€{bill.paid_amount.toFixed(2)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Refund Amount</label>
+                <label className="block text-sm font-medium text-ui-muted">Refund Amount</label>
                 <p className="mt-1 text-lg text-green-600">€{bill.refund_amount.toFixed(2)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Due Date</label>
-                <p className="mt-1 text-lg text-gray-900">{formatDate(bill.due_date)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Due Date</label>
+                <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{formatDate(bill.due_date)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Billing Date</label>
-                <p className="mt-1 text-lg text-gray-900">{formatDate(bill.billing_date)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Billing Date</label>
+                <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{formatDate(bill.billing_date)}</p>
               </div>
             </div>
           </IOSCard>
@@ -264,29 +264,29 @@ export default function AdminLunchBillingDetailPage() {
               Billing Items
             </Heading>
             {items.length === 0 ? (
-              <div className="text-gray-500 text-sm">No billing items found.</div>
+              <div className="text-ui-soft text-sm">No billing items found.</div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Price</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Refundable</th>
-                      <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Refunded</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Date</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Price</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Type</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Refundable</th>
+                      <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Refunded</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {items.map((item) => (
                       <tr key={item.id} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                           {formatDate(item.date)}
                         </td>
-                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                           €{item.meal_price.toFixed(2)}
                         </td>
-                        <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-ui-soft">
                           {item.is_informed_absence
                             ? 'Informed Absence'
                             : item.order_id
@@ -297,7 +297,7 @@ export default function AdminLunchBillingDetailPage() {
                           <span
                             className={[
                               'inline-block mt-1 px-3 py-1 text-xs font-medium rounded-full',
-                              item.is_refundable ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800',
+                              item.is_refundable ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-slate-800 dark:text-slate-100',
                             ].join(' ')}
                           >
                             {item.is_refundable ? 'Yes' : 'No'}
@@ -307,7 +307,7 @@ export default function AdminLunchBillingDetailPage() {
                           <span
                             className={[
                               'inline-block mt-1 px-3 py-1 text-xs font-medium rounded-full',
-                              item.refunded ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800',
+                              item.refunded ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-slate-800 dark:text-slate-100',
                             ].join(' ')}
                           >
                             {item.refunded ? 'Yes' : 'No'}
@@ -326,42 +326,42 @@ export default function AdminLunchBillingDetailPage() {
               Adjustment History
             </Heading>
             {auditLog.length === 0 ? (
-              <div className="text-gray-500 text-sm">No adjustments have been made to this bill.</div>
+              <div className="text-ui-soft text-sm">No adjustments have been made to this bill.</div>
             ) : (
               <div className="space-y-3">
                 {auditLog.map((log) => (
                   <div key={log.id} className="p-4 bg-gray-50 rounded-md border border-gray-200">
                     <div className="flex items-start justify-between mb-2 gap-4">
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">{formatAdjustmentType(log.adjustment_type)}</p>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-sm font-medium text-slate-900 dark:text-slate-50">{formatAdjustmentType(log.adjustment_type)}</p>
+                        <p className="text-xs text-ui-soft mt-1">
                           Adjusted by {getAdminName(log.adjusted_by)} on {formatDateTime(log.created_at)}
                         </p>
                       </div>
                     </div>
                     {log.previous_total_amount !== log.new_total_amount && (
-                      <p className="text-sm text-gray-700">
+                      <p className="text-sm text-slate-700 dark:text-slate-200">
                         <span className="font-medium">Total Amount:</span>{' '}
                         <span className="line-through text-red-600 ml-2">€{log.previous_total_amount.toFixed(2)}</span>
                         <span className="text-green-600 ml-2">→ €{log.new_total_amount.toFixed(2)}</span>
                       </p>
                     )}
                     {log.previous_paid_amount !== log.new_paid_amount && (
-                      <p className="text-sm text-gray-700 mt-1">
+                      <p className="text-sm text-slate-700 dark:text-slate-200 mt-1">
                         <span className="font-medium">Paid Amount:</span>{' '}
                         <span className="line-through text-red-600 ml-2">€{log.previous_paid_amount.toFixed(2)}</span>
                         <span className="text-green-600 ml-2">→ €{log.new_paid_amount.toFixed(2)}</span>
                       </p>
                     )}
                     {log.previous_refund_amount !== log.new_refund_amount && (
-                      <p className="text-sm text-gray-700 mt-1">
+                      <p className="text-sm text-slate-700 dark:text-slate-200 mt-1">
                         <span className="font-medium">Refund Amount:</span>{' '}
                         <span className="line-through text-red-600 ml-2">€{log.previous_refund_amount.toFixed(2)}</span>
                         <span className="text-green-600 ml-2">→ €{log.new_refund_amount.toFixed(2)}</span>
                       </p>
                     )}
-                    {log.reason && <div className="mt-2 text-sm text-gray-600">Reason: {log.reason}</div>}
-                    {log.notes && <div className="mt-1 text-xs text-gray-500">{log.notes}</div>}
+                    {log.reason && <div className="mt-2 text-sm text-ui-muted">Reason: {log.reason}</div>}
+                    {log.notes && <div className="mt-1 text-xs text-ui-soft">{log.notes}</div>}
                   </div>
                 ))}
               </div>

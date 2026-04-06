@@ -61,7 +61,7 @@ export const PortfolioForm = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="child_id" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="child_id" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Kind <span className="text-red-500">*</span>
         </label>
         <select
@@ -82,7 +82,7 @@ export const PortfolioForm = ({
       </div>
 
       <div>
-        <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="title" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Titel <span className="text-red-500">*</span>
         </label>
         <input
@@ -98,7 +98,7 @@ export const PortfolioForm = ({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="portfolio_type" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="portfolio_type" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Typ <span className="text-red-500">*</span>
           </label>
           <select
@@ -118,7 +118,7 @@ export const PortfolioForm = ({
         </div>
 
         <div>
-          <label htmlFor="date" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Datum <span className="text-red-500">*</span>
           </label>
           <input
@@ -133,7 +133,7 @@ export const PortfolioForm = ({
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="description" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Kurze Beschreibung
         </label>
         <textarea
@@ -147,7 +147,7 @@ export const PortfolioForm = ({
       </div>
 
       <div>
-        <label htmlFor="content" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="content" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Detaillierter Inhalt / Notizen
         </label>
         <textarea

@@ -67,7 +67,7 @@ export function ImageUpload({
 
   return (
     <div className="space-y-4">
-      {label && <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest ml-1">{label}</label>}
+      {label && <label className="block text-[11px] font-black text-ui-soft uppercase tracking-widest ml-1">{label}</label>}
       <div 
         onClick={() => fileInputRef.current?.click()}
         className={`relative cursor-pointer group overflow-hidden border-2 border-dashed border-black/5 rounded-[24px] transition-all hover:border-indigo-400/50 hover:bg-indigo-50/30 bg-gray-50/50 ${
@@ -98,7 +98,7 @@ export function ImageUpload({
         accept="image/*" 
         className="hidden" 
       />
-      <p className="text-[10px] text-gray-400 font-medium ml-1 italic">* Max. Dateigröße 2MB. Erlaubte Formate: JPG, PNG, WEBP.</p>
+      <p className="text-[10px] text-ui-soft font-medium ml-1 italic">* Max. Dateigröße 2MB. Erlaubte Formate: JPG, PNG, WEBP.</p>
     </div>
   )
 }

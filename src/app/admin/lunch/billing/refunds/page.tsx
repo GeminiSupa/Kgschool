@@ -152,14 +152,14 @@ export default function AdminLunchBillingRefundsPage() {
   return (
     <div className="max-w-7xl mx-auto pb-12">
       <div className="mb-6">
-        <Link href="/admin/lunch/billing" className="text-gray-600 hover:text-gray-900 mb-4 inline-block">
+        <Link href="/admin/lunch/billing" className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block">
           ← Back to Billing
         </Link>
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
       </div>
 
       <IOSCard className="bg-white rounded-lg shadow p-6 mb-6 max-w-4xl mx-auto">
-        <p className="text-gray-600 mb-4">
+        <p className="text-ui-muted mb-4">
           Refundable items are informed absences from previous months that were notified before the deadline.
         </p>
         <IOSButton
@@ -178,7 +178,7 @@ export default function AdminLunchBillingRefundsPage() {
           <LoadingSpinner />
         </div>
       ) : refundableItems.length === 0 ? (
-        <IOSCard className="bg-white rounded-lg shadow p-8 text-center text-gray-500 max-w-4xl mx-auto">
+        <IOSCard className="bg-white rounded-lg shadow p-8 text-center text-ui-soft max-w-4xl mx-auto">
           No refundable items found.
         </IOSCard>
       ) : (
@@ -186,7 +186,7 @@ export default function AdminLunchBillingRefundsPage() {
           <div className="p-4 bg-gray-50 border-b flex items-center justify-between gap-4">
             <div>
               <p className="font-medium">Total Refundable Amount: €{totalRefundAmount.toFixed(2)}</p>
-              <p className="text-sm text-gray-600">{refundableItems.length} items</p>
+              <p className="text-sm text-ui-muted">{refundableItems.length} items</p>
             </div>
             <IOSButton
               type="button"
@@ -203,11 +203,11 @@ export default function AdminLunchBillingRefundsPage() {
               <div key={item.id} className="p-6 hover:bg-gray-50 transition-colors">
                 <div className="flex items-center justify-between gap-6">
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">{getChildName(item.child_id)}</p>
-                    <p className="text-sm text-gray-600 mt-1">
+                    <p className="font-medium text-slate-900 dark:text-slate-50">{getChildName(item.child_id)}</p>
+                    <p className="text-sm text-ui-muted mt-1">
                       Date: {formatDate(item.date)} | Amount: €{Number(item.meal_price).toFixed(2)}
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-ui-soft mt-1">
                       Billing: {getMonthName(item.billing_month || 1)} {item.billing_year || new Date().getFullYear()}
                     </p>
                   </div>
@@ -223,7 +223,7 @@ export default function AdminLunchBillingRefundsPage() {
                         Process Refund
                       </IOSButton>
                     ) : (
-                      <span className="px-3 py-1 text-sm bg-gray-100 text-gray-600 rounded-md">Refunded</span>
+                      <span className="px-3 py-1 text-sm bg-gray-100 text-ui-muted rounded-md">Refunded</span>
                     )}
                   </div>
                 </div>

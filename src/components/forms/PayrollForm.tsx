@@ -188,7 +188,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="month" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="month" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Month <span className="text-red-500">*</span>
           </label>
           <select
@@ -207,7 +207,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
         </div>
 
         <div>
-          <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="year" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Year <span className="text-red-500">*</span>
           </label>
           <input
@@ -225,7 +225,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="base_salary" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="base_salary" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Base Salary (€) <span className="text-red-500">*</span>
           </label>
           <input
@@ -241,7 +241,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
         </div>
 
         <div>
-          <label htmlFor="overtime_hours" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="overtime_hours" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Overtime Hours
           </label>
           <input
@@ -258,7 +258,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="overtime_rate" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="overtime_rate" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Overtime Rate (€/hour)
           </label>
           <input
@@ -273,7 +273,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
         </div>
 
         <div>
-          <label htmlFor="overtime_amount" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="overtime_amount" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Overtime Amount (€)
           </label>
           <input
@@ -290,7 +290,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="bonuses" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="bonuses" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Bonuses (€)
           </label>
           <input
@@ -305,7 +305,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
         </div>
 
         <div>
-          <label htmlFor="deductions" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="deductions" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Deductions (€)
           </label>
           <input
@@ -322,7 +322,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="tax_amount" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="tax_amount" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Tax Amount (€)
           </label>
           <input
@@ -337,7 +337,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
         </div>
 
         <div>
-          <label htmlFor="net_salary" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="net_salary" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Net Salary (€) <span className="text-red-500">*</span>
           </label>
           <input
@@ -354,7 +354,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
       </div>
 
       <div>
-        <label htmlFor="status" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="status" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
           Status <span className="text-red-500">*</span>
         </label>
         <select
@@ -371,7 +371,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
       </div>
 
       <div>
-        <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="notes" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
           Notes
         </label>
         <textarea

@@ -206,8 +206,8 @@ export default function TeacherAttendancePage() {
     <div className="max-w-4xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Erfassen Sie die tägliche Anwesenheit der Kinder</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Erfassen Sie die tägliche Anwesenheit der Kinder</p>
         </div>
         <div className="flex items-center gap-3">
           <input
@@ -243,7 +243,7 @@ export default function TeacherAttendancePage() {
       ) : children.length === 0 ? (
         <IOSCard className="p-12 text-center">
           <div className="text-5xl opacity-40 mb-4">👥</div>
-          <p className="text-gray-500 font-medium">Keine Kinder in Ihren Gruppen gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Kinder in Ihren Gruppen gefunden.</p>
         </IOSCard>
       ) : (
         <div className="grid gap-4">
@@ -280,7 +280,7 @@ export default function TeacherAttendancePage() {
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-gray-900 truncate">{child.first_name} {child.last_name}</h4>
+                      <h4 className="font-bold text-slate-900 dark:text-slate-50 truncate">{child.first_name} {child.last_name}</h4>
                       {sub && (
                         <p className="text-xs text-red-600 font-bold mt-0.5">
                           Abwesend: {sub.reason}

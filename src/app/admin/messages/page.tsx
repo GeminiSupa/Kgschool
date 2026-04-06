@@ -76,7 +76,7 @@ export default function AdminMessagesPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
       </div>
 
       {/* Tabs */}
@@ -88,7 +88,7 @@ export default function AdminMessagesPage() {
             className={`px-4 py-3 font-semibold text-sm capitalize border-b-2 transition-colors ${
               activeTab === tab
                 ? 'border-[#667eea] text-[#667eea]'
-                : 'border-transparent text-gray-600 hover:text-gray-900'
+                : 'border-transparent text-ui-muted hover:text-slate-900 dark:text-slate-50'
             }`}
           >
             {tab === 'inbox' ? 'Eingang' : 'Gesendet'}
@@ -114,7 +114,7 @@ export default function AdminMessagesPage() {
       ) : (
         <IOSCard className="overflow-hidden p-0">
           {displayMessages.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">
+            <div className="p-8 text-center text-ui-soft">
               <div className="text-5xl opacity-40 mb-4">{activeTab === 'inbox' ? '📬' : '📤'}</div>
               <p className="font-medium">
                 {activeTab === 'inbox' ? 'Keine Nachrichten im Posteingang' : 'Keine gesendeten Nachrichten'}
@@ -127,11 +127,11 @@ export default function AdminMessagesPage() {
                   className={`block p-5 hover:bg-white/60 transition-colors ${!msg.read_at && activeTab === 'inbox' ? 'bg-blue-50/40' : ''}`}>
                   <div className="flex items-center justify-between">
                     <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-semibold text-gray-900 ${!msg.read_at && activeTab === 'inbox' ? 'font-bold' : ''}`}>
+                      <p className={`text-sm font-semibold text-slate-900 dark:text-slate-50 ${!msg.read_at && activeTab === 'inbox' ? 'font-bold' : ''}`}>
                         {activeTab === 'inbox' ? getName(msg.sender_id) : getName(msg.recipient_id)}
                       </p>
-                      <p className="text-sm text-gray-600 mt-1 line-clamp-1 overflow-hidden">{msg.content}</p>
-                      <p className="text-xs text-gray-400 mt-1.5">{formatDateTime(msg.created_at)}</p>
+                      <p className="text-sm text-ui-muted mt-1 line-clamp-1 overflow-hidden">{msg.content}</p>
+                      <p className="text-xs text-ui-soft mt-1.5">{formatDateTime(msg.created_at)}</p>
                     </div>
                     {!msg.read_at && activeTab === 'inbox' && (
                       <div className="ml-4 flex-shrink-0 w-2.5 h-2.5 bg-[#667eea] rounded-full" />
@@ -151,15 +151,15 @@ export default function AdminMessagesPage() {
           <div className="bg-white/95 rounded-2xl shadow-2xl max-w-2xl w-full border border-white/20 overflow-hidden">
             <div className="p-6">
               <div className="flex justify-between items-center mb-5">
-                <h3 className="text-xl font-bold text-gray-900">Nachricht verfassen</h3>
-                <button onClick={() => setShowCompose(false)} className="text-gray-400 hover:text-gray-700">✕</button>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50">Nachricht verfassen</h3>
+                <button onClick={() => setShowCompose(false)} className="text-ui-soft hover:text-slate-700 dark:text-slate-200">✕</button>
               </div>
               <form onSubmit={handleSend} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Empfänger *</label>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Empfänger *</label>
                   <select required value={composeForm.recipient_id}
                     onChange={e => setComposeForm({ ...composeForm, recipient_id: e.target.value })}
-                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#667eea] outline-none text-gray-900">
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#667eea] outline-none text-slate-900 dark:text-slate-50">
                     <option value="">Empfänger auswählen</option>
                     {profiles.map(p => (
                       <option key={p.id} value={p.id}>{p.full_name} ({p.role})</option>
@@ -167,18 +167,18 @@ export default function AdminMessagesPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">Nachricht *</label>
+                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Nachricht *</label>
                   <textarea required rows={6} value={composeForm.content}
                     onChange={e => setComposeForm({ ...composeForm, content: e.target.value })}
                     placeholder="Ihre Nachricht..."
-                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#667eea] outline-none resize-none text-gray-900" />
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#667eea] outline-none resize-none text-slate-900 dark:text-slate-50" />
                 </div>
                 {composeError && (
                   <div className="p-3 bg-red-50 border border-red-100 text-red-700 rounded-xl text-sm">{composeError}</div>
                 )}
                 <div className="flex justify-end gap-3 pt-2">
                   <button type="button" onClick={() => setShowCompose(false)}
-                    className="px-5 py-2.5 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors">
+                    className="px-5 py-2.5 text-slate-700 dark:text-slate-200 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors">
                     Abbrechen
                   </button>
                   <button type="submit" disabled={composeLoading}

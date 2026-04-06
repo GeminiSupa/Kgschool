@@ -53,7 +53,7 @@ export default function AdminLearningThemeDetailPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/learning-themes')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Learning Themes
         </button>
@@ -69,24 +69,24 @@ export default function AdminLearningThemeDetailPage() {
           <ErrorAlert message={error} />
         </div>
       ) : !theme ? (
-        <div className="p-8 text-center text-gray-500">Learning theme not found.</div>
+        <div className="p-8 text-center text-ui-soft">Learning theme not found.</div>
       ) : (
         <div className="bg-white rounded-lg shadow p-6 max-w-3xl">
           <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Title</h3>
-              <p className="mt-1 text-lg text-gray-900">{theme.title}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Title</h3>
+              <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{theme.title}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Status</h3>
+              <h3 className="text-sm font-medium text-ui-soft">Status</h3>
               <span
                 className={[
                   'px-2 py-1 text-xs rounded',
                   theme.status === 'active'
                     ? 'bg-green-100 text-green-700'
                     : theme.status === 'completed'
-                      ? 'bg-gray-100 text-gray-700'
+                      ? 'bg-gray-100 text-slate-700 dark:text-slate-200'
                       : 'bg-blue-100 text-blue-700',
                 ].join(' ')}
               >
@@ -96,14 +96,14 @@ export default function AdminLearningThemeDetailPage() {
 
             {theme.description && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Description</h3>
-                <p className="mt-1 text-gray-900 whitespace-pre-wrap">{theme.description}</p>
+                <h3 className="text-sm font-medium text-ui-soft">Description</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50 whitespace-pre-wrap">{theme.description}</p>
               </div>
             )}
 
             {theme.learning_areas && theme.learning_areas.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Learning Areas</h3>
+                <h3 className="text-sm font-medium text-ui-soft">Learning Areas</h3>
                 <div className="mt-1 flex flex-wrap gap-2">
                   {theme.learning_areas.map((area) => (
                     <span key={area} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
@@ -116,8 +116,8 @@ export default function AdminLearningThemeDetailPage() {
 
             {theme.activities && theme.activities.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Activities</h3>
-                <ul className="mt-1 list-disc list-inside text-gray-900">
+                <h3 className="text-sm font-medium text-ui-soft">Activities</h3>
+                <ul className="mt-1 list-disc list-inside text-slate-900 dark:text-slate-50">
                   {theme.activities.map((activity) => (
                     <li key={activity}>{activity}</li>
                   ))}

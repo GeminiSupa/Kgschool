@@ -111,7 +111,7 @@ export default function AdminLunchPricingNewPage() {
         <button
           type="button"
           onClick={handleCancel}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Pricing
         </button>
@@ -128,7 +128,7 @@ export default function AdminLunchPricingNewPage() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="group_id" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="group_id" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Group <span className="text-red-500">*</span>
               </label>
               <select
@@ -148,7 +148,7 @@ export default function AdminLunchPricingNewPage() {
             </div>
 
             <div>
-              <label htmlFor="price_per_meal" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="price_per_meal" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Price per Meal (€) <span className="text-red-500">*</span>
               </label>
               <input
@@ -165,7 +165,7 @@ export default function AdminLunchPricingNewPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="effective_from" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="effective_from" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                   Effective From <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -178,7 +178,7 @@ export default function AdminLunchPricingNewPage() {
                 />
               </div>
               <div>
-                <label htmlFor="effective_to" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="effective_to" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                   Effective To (Optional)
                 </label>
                 <input
@@ -193,7 +193,7 @@ export default function AdminLunchPricingNewPage() {
                   type="date"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                 />
-                <p className="text-xs text-gray-500 mt-1">Leave empty for ongoing pricing</p>
+                <p className="text-xs text-ui-soft mt-1">Leave empty for ongoing pricing</p>
               </div>
             </div>
 

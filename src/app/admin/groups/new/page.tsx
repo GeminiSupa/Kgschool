@@ -42,8 +42,8 @@ export default function NewGroupPage() {
         >
           ← Zurück zur Liste
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Definieren Sie Name, Kapazität und Altersbereich der neuen Gruppe.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Definieren Sie Name, Kapazität und Altersbereich der neuen Gruppe.</p>
       </div>
 
       <IOSCard className="p-8 shadow-2xl shadow-indigo-900/5 border-black/5">

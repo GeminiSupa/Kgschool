@@ -108,7 +108,7 @@ export default function AdminLunchBillingReportsPage() {
   return (
     <div className="max-w-7xl mx-auto pb-12">
       <div className="mb-6">
-        <Link href="/admin/lunch/billing" className="text-gray-600 hover:text-gray-900 mb-4 inline-block">
+        <Link href="/admin/lunch/billing" className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block">
           ← Zurück zur Abrechnung
         </Link>
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
@@ -117,7 +117,7 @@ export default function AdminLunchBillingReportsPage() {
       <IOSCard className="bg-white rounded-lg shadow p-4 mb-6 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Startmonat</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Startmonat</label>
             <select
               value={filters.startMonth}
               onChange={(e) => setFilters((p) => ({ ...p, startMonth: Number(e.target.value) }))}
@@ -134,7 +134,7 @@ export default function AdminLunchBillingReportsPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Startjahr</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Startjahr</label>
             <input
               value={filters.startYear}
               onChange={(e) => setFilters((p) => ({ ...p, startYear: Number(e.target.value) }))}
@@ -143,7 +143,7 @@ export default function AdminLunchBillingReportsPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Endmonat</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Endmonat</label>
             <select
               value={filters.endMonth}
               onChange={(e) => setFilters((p) => ({ ...p, endMonth: Number(e.target.value) }))}
@@ -160,7 +160,7 @@ export default function AdminLunchBillingReportsPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Endjahr</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Endjahr</label>
             <input
               value={filters.endYear}
               onChange={(e) => setFilters((p) => ({ ...p, endYear: Number(e.target.value) }))}
@@ -201,20 +201,20 @@ export default function AdminLunchBillingReportsPage() {
             </Heading>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="p-4 bg-blue-50 rounded-md">
-                <p className="text-sm text-gray-600">Umsatz (gesamt)</p>
+                <p className="text-sm text-ui-muted">Umsatz (gesamt)</p>
                 <p className="text-2xl font-bold text-blue-600">€{reportData.totalRevenue.toFixed(2)}</p>
               </div>
               <div className="p-4 bg-green-50 rounded-md">
-                <p className="text-sm text-gray-600">Bezahlt</p>
+                <p className="text-sm text-ui-muted">Bezahlt</p>
                 <p className="text-2xl font-bold text-green-600">€{reportData.totalPaid.toFixed(2)}</p>
               </div>
               <div className="p-4 bg-yellow-50 rounded-md">
-                <p className="text-sm text-gray-600">Erstattungen</p>
+                <p className="text-sm text-ui-muted">Erstattungen</p>
                 <p className="text-2xl font-bold text-yellow-600">€{reportData.totalRefunds.toFixed(2)}</p>
               </div>
               <div className="p-4 bg-gray-50 rounded-md">
-                <p className="text-sm text-gray-600">Offen</p>
-                <p className="text-2xl font-bold text-gray-600">€{reportData.pendingAmount.toFixed(2)}</p>
+                <p className="text-sm text-ui-muted">Offen</p>
+                <p className="text-2xl font-bold text-ui-muted">€{reportData.pendingAmount.toFixed(2)}</p>
               </div>
             </div>
           </IOSCard>
@@ -227,20 +227,20 @@ export default function AdminLunchBillingReportsPage() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">
                       Monat/Jahr
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">
                       Umsatz
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Bezahlt</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Bezahlt</th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">
                       Erstattungen
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">
                       Pending
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">
                       Bills Count
                     </th>
                   </tr>
@@ -248,10 +248,10 @@ export default function AdminLunchBillingReportsPage() {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {reportData.monthlyBreakdown.map((m) => (
                     <tr key={`${m.month}-${m.year}`} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                         {getMonthName(m.month)} {m.year}
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                         €{m.totalRevenue.toFixed(2)}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-green-600">
@@ -260,10 +260,10 @@ export default function AdminLunchBillingReportsPage() {
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-yellow-600">
                         €{m.totalRefunds.toFixed(2)}
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-ui-muted">
                         €{(m.pendingAmount || 0).toFixed(2)}
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{m.billsCount}</td>
+                      <td className="px-4 py-3 whitespace-nowrap text-sm text-ui-soft">{m.billsCount}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -273,7 +273,7 @@ export default function AdminLunchBillingReportsPage() {
         </div>
       ) : (
         !loading && (
-          <IOSCard className="bg-white rounded-lg shadow p-8 text-center text-gray-500 max-w-6xl mx-auto">
+          <IOSCard className="bg-white rounded-lg shadow p-8 text-center text-ui-soft max-w-6xl mx-auto">
             Select date range and click "Generate Report" to view billing reports.
           </IOSCard>
         )

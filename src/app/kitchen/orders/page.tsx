@@ -123,23 +123,23 @@ export default function KitchenOrdersPage() {
       ) : (
         <IOSCard className="p-0 overflow-hidden">
           {orders.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">No orders for this date.</div>
+            <div className="p-8 text-center text-ui-soft">No orders for this date.</div>
           ) : (
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-border">
               {orders.map((order) => (
-                <div key={order.id} className="p-6 hover:bg-gray-50 transition-colors">
+                <div key={order.id} className="p-6 transition-colors hover:bg-slate-50 dark:hover:bg-white/5">
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-2">
-                        <p className="font-medium text-gray-900">{getChildName(order.child_id)}</p>
+                        <p className="font-medium text-slate-900 dark:text-slate-50">{getChildName(order.child_id)}</p>
                         {order.auto_created && (
-                          <span className="px-2 py-1 text-xs font-medium bg-orange-100 text-orange-800 rounded-full">
+                          <span className="rounded-full bg-orange-100 px-2 py-1 text-xs font-medium text-orange-800 dark:bg-orange-950/50 dark:text-orange-200">
                             Auto-created
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600 mt-1">{getMenuName(order.menu_id)}</p>
-                      <p className="text-xs text-gray-500 mt-2">Order Date: {formatDate(order.order_date)}</p>
+                      <p className="text-sm text-ui-muted mt-1">{getMenuName(order.menu_id)}</p>
+                      <p className="text-xs text-ui-soft mt-2">Order Date: {formatDate(order.order_date)}</p>
                       {order.status === 'cancelled' && (
                         <p className="text-xs text-red-600 mt-1">Cancelled</p>
                       )}
@@ -148,16 +148,16 @@ export default function KitchenOrdersPage() {
                     <div className="flex items-center gap-4">
                       <span
                         className={[
-                          'px-3 py-1 text-sm font-medium rounded-full',
+                          'rounded-full px-3 py-1 text-sm font-medium',
                           order.status === 'served'
-                            ? 'bg-green-100 text-green-800'
+                            ? 'bg-green-100 text-green-800 dark:bg-green-950/50 dark:text-green-200'
                             : order.status === 'prepared'
-                              ? 'bg-blue-100 text-blue-800'
+                              ? 'bg-blue-100 text-blue-800 dark:bg-blue-950/50 dark:text-blue-200'
                               : order.status === 'confirmed'
-                                ? 'bg-yellow-100 text-yellow-800'
+                                ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950/50 dark:text-yellow-200'
                                 : order.status === 'cancelled'
-                                  ? 'bg-red-100 text-red-800'
-                                  : 'bg-gray-100 text-gray-800',
+                                  ? 'bg-red-100 text-red-800 dark:bg-red-950/50 dark:text-red-200'
+                                  : 'bg-slate-100 text-slate-800 dark:bg-white/10 dark:text-slate-100',
                         ].join(' ')}
                       >
                         {order.status}
@@ -166,8 +166,9 @@ export default function KitchenOrdersPage() {
                       <div className="flex gap-2">
                         {order.status === 'confirmed' && (
                           <button
+                            type="button"
                             onClick={() => updateOrderStatus(order.id, 'prepared')}
-                            className="px-3 py-1 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                            className="min-h-10 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
                           >
                             Mark Prepared
                           </button>
@@ -175,8 +176,9 @@ export default function KitchenOrdersPage() {
 
                         {order.status === 'prepared' && (
                           <button
+                            type="button"
                             onClick={() => updateOrderStatus(order.id, 'served')}
-                            className="px-3 py-1 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                            className="min-h-10 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/60"
                           >
                             Mark Served
                           </button>

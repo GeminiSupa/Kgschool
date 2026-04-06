@@ -17,8 +17,8 @@ export default function ParentAbsencesPage() {
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">
             Melden Sie neue Abwesenheiten und behalten Sie den Überblick.
           </p>
         </div>
@@ -30,7 +30,7 @@ export default function ParentAbsencesPage() {
       </div>
 
       <IOSCard className="p-6">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-ui-muted">
           Ihre Abwesenheitsmeldungen werden im Bereich <strong>Anwesenheit</strong> und in den Tagesdaten automatisch
           berücksichtigt. Nutzen Sie den Button oben, um direkt eine neue Meldung einzureichen.
         </p>

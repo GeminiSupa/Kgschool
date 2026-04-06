@@ -250,8 +250,8 @@ export default function EditUserPage() {
                 <img src={form.avatar_url} alt="Avatar" className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md" />
             )}
             <div>
-                <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))} - {form.full_name}</Heading>
-                <p className="text-sm text-gray-500 mt-1">Passen Sie die Informationen und Zugriffsrechte dieses Benutzers an.</p>
+                <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))} - {form.full_name}</Heading>
+                <p className="text-sm text-ui-soft mt-1">Passen Sie die Informationen und Zugriffsrechte dieses Benutzers an.</p>
             </div>
         </div>
       </div>
@@ -262,15 +262,15 @@ export default function EditUserPage() {
                 <form id="edit-form" onSubmit={handleSubmit} className="space-y-8">
                     {/* Core Info */}
                     <div>
-                        <h3 className="text-lg font-black tracking-tight text-gray-900 mb-6">🔑 Account-Daten</h3>
+                        <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-slate-50 mb-6">🔑 Account-Daten</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Vollständiger Name</label>
-                                <input type="text" value={form.full_name} onChange={(e) => setForm(prev => ({ ...prev, full_name: e.target.value }))} required className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="text" value={form.full_name} onChange={(e) => setForm(prev => ({ ...prev, full_name: e.target.value }))} required className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                             </div>
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Rolle</label>
-                                <select value={form.role} onChange={(e) => setForm(prev => ({ ...prev, role: e.target.value }))} required className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
+                                <select value={form.role} onChange={(e) => setForm(prev => ({ ...prev, role: e.target.value }))} required className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
                                     <option value="parent">Elternteil</option>
                                     <option value="teacher">Pädagogische Fachkraft</option>
                                     <option value="admin">Administrator</option>
@@ -280,7 +280,7 @@ export default function EditUserPage() {
                             </div>
                             <div className="md:col-span-2">
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Email Adresse (Nicht änderbar)</label>
-                                <input type="email" value={form.email} disabled className="w-full px-5 py-3 bg-gray-100 border border-black/5 rounded-2xl text-sm font-bold text-gray-400 cursor-not-allowed" />
+                                <input type="email" value={form.email} disabled className="w-full px-5 py-3 bg-gray-100 border border-black/5 rounded-2xl text-sm font-bold text-ui-soft cursor-not-allowed" />
                             </div>
                         </div>
                     </div>
@@ -289,24 +289,24 @@ export default function EditUserPage() {
 
                     {/* Personal Info */}
                     <div>
-                        <h3 className="text-lg font-black tracking-tight text-gray-900 mb-6">👤 Persönliche Daten</h3>
+                        <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-slate-50 mb-6">👤 Persönliche Daten</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="md:col-span-2">
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Adresse</label>
-                                <input type="text" value={form.address} onChange={(e) => setForm(prev => ({ ...prev, address: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="text" value={form.address} onChange={(e) => setForm(prev => ({ ...prev, address: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                             </div>
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Geburtsdatum</label>
-                                <input type="date" value={form.date_of_birth} onChange={(e) => setForm(prev => ({ ...prev, date_of_birth: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="date" value={form.date_of_birth} onChange={(e) => setForm(prev => ({ ...prev, date_of_birth: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                             </div>
                             <div></div>
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Notfallkontakt Name</label>
-                                <input type="text" value={form.emergency_contact_name} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_name: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="text" value={form.emergency_contact_name} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_name: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                             </div>
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Notfallkontakt Telefon</label>
-                                <input type="text" value={form.emergency_contact_phone} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_phone: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="text" value={form.emergency_contact_phone} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_phone: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                             </div>
                         </div>
                     </div>
@@ -320,11 +320,11 @@ export default function EditUserPage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-indigo-50/30 p-6 rounded-2xl border border-indigo-100">
                                     <div>
                                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Vertragsbeginn</label>
-                                        <input type="date" value={employment.start_date} onChange={(e) => setEmployment(prev => ({ ...prev, start_date: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                        <input type="date" value={employment.start_date} onChange={(e) => setEmployment(prev => ({ ...prev, start_date: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Vertragsart</label>
-                                        <select value={employment.contract_type} onChange={(e) => setEmployment(prev => ({ ...prev, contract_type: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
+                                        <select value={employment.contract_type} onChange={(e) => setEmployment(prev => ({ ...prev, contract_type: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
                                             <option value="">Bitte wählen...</option>
                                             <option value="Vollzeit">Vollzeit</option>
                                             <option value="Teilzeit">Teilzeit</option>
@@ -333,11 +333,11 @@ export default function EditUserPage() {
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Wochenstunden</label>
-                                        <input type="number" value={employment.weekly_hours} onChange={(e) => setEmployment(prev => ({ ...prev, weekly_hours: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                        <input type="number" value={employment.weekly_hours} onChange={(e) => setEmployment(prev => ({ ...prev, weekly_hours: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Qualifikationen</label>
-                                        <input type="text" value={employment.qualifications} onChange={(e) => setEmployment(prev => ({ ...prev, qualifications: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                        <input type="text" value={employment.qualifications} onChange={(e) => setEmployment(prev => ({ ...prev, qualifications: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                                     </div>
                                 </div>
                             </div>
@@ -346,7 +346,7 @@ export default function EditUserPage() {
 
                     <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl border border-black/5 mt-8">
                         <input type="checkbox" id="active" checked={form.active} onChange={(e) => setForm(prev => ({ ...prev, active: e.target.checked }))} className="w-5 h-5 rounded border-gray-300 text-[#667eea] focus:ring-[#667eea]" />
-                        <label htmlFor="active" className="text-sm font-bold text-gray-700">Account ist aktiv</label>
+                        <label htmlFor="active" className="text-sm font-bold text-slate-700 dark:text-slate-200">Account ist aktiv</label>
                     </div>
 
                     {error && (
@@ -359,7 +359,7 @@ export default function EditUserPage() {
 
             {/* Document Management Section */}
             <IOSCard className="p-8 shadow-sm border-black/5">
-                <h3 className="text-lg font-black tracking-tight text-gray-900 mb-6">📄 Dokumente</h3>
+                <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-slate-50 mb-6">📄 Dokumente</h3>
                 
                 {/* Existing Documents List */}
                 {documents.length > 0 && (
@@ -368,8 +368,8 @@ export default function EditUserPage() {
                         {documents.map(doc => (
                             <div key={doc.id} className="flex items-center justify-between p-4 rounded-xl border border-black/5 bg-gray-50">
                                 <div>
-                                    <p className="font-bold text-sm text-gray-800">{doc.document_type}</p>
-                                    <p className="text-[10px] text-gray-400 mt-0.5">{new Date(doc.uploaded_at).toLocaleDateString()}</p>
+                                    <p className="font-bold text-sm text-slate-800 dark:text-slate-100">{doc.document_type}</p>
+                                    <p className="text-[10px] text-ui-soft mt-0.5">{new Date(doc.uploaded_at).toLocaleDateString()}</p>
                                 </div>
                                 <div className="flex gap-2">
                                     <button onClick={() => viewDocument(doc.file_path)} type="button" className="px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-indigo-100">
@@ -389,8 +389,8 @@ export default function EditUserPage() {
                     <p className="text-[10px] font-black text-black/40 uppercase tracking-widest mb-2">Neue Dokumente hochladen</p>
                     <div className="p-4 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-between">
                         <div>
-                            <p className="text-sm font-bold text-gray-800">Neues Profilbild</p>
-                            <p className="text-[10px] text-gray-500">Ersetzt das alte Bild</p>
+                            <p className="text-sm font-bold text-slate-800 dark:text-slate-100">Neues Profilbild</p>
+                            <p className="text-[10px] text-ui-soft">Ersetzt das alte Bild</p>
                         </div>
                         <input type="file" accept="image/*" onChange={(e) => setFiles(prev => ({ ...prev, avatar: e.target.files?.[0] || null }))} className="text-xs" />
                     </div>
@@ -398,13 +398,13 @@ export default function EditUserPage() {
                         <>
                             <div className="p-4 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-bold text-gray-800">Neuer Arbeitsvertrag</p>
+                                    <p className="text-sm font-bold text-slate-800 dark:text-slate-100">Neuer Arbeitsvertrag</p>
                                 </div>
                                 <input type="file" accept="application/pdf" onChange={(e) => setFiles(prev => ({ ...prev, contract: e.target.files?.[0] || null }))} className="text-xs" />
                             </div>
                             <div className="p-4 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-bold text-gray-800">Neues Gesundheitszeugnis</p>
+                                    <p className="text-sm font-bold text-slate-800 dark:text-slate-100">Neues Gesundheitszeugnis</p>
                                 </div>
                                 <input type="file" accept="application/pdf" onChange={(e) => setFiles(prev => ({ ...prev, health_cert: e.target.files?.[0] || null }))} className="text-xs" />
                             </div>
@@ -425,7 +425,7 @@ export default function EditUserPage() {
                 <h3 className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-6">Status</h3>
                 <div className="flex items-center gap-3">
                     <div className={`w-3 h-3 rounded-full animate-pulse ${form.active ? 'bg-green-500' : 'bg-red-500'}`}></div>
-                    <span className="text-xs font-black uppercase tracking-widest text-gray-800">{form.active ? 'Aktiv' : 'Deaktiviert'}</span>
+                    <span className="text-xs font-black uppercase tracking-widest text-slate-800 dark:text-slate-100">{form.active ? 'Aktiv' : 'Deaktiviert'}</span>
                 </div>
             </IOSCard>
 

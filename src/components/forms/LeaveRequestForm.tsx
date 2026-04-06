@@ -66,7 +66,7 @@ export const LeaveRequestForm = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <label htmlFor="child_id" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="child_id" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Kind <span className="text-red-500">*</span>
         </label>
         <select
@@ -87,7 +87,7 @@ export const LeaveRequestForm = ({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="start_date" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="start_date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Startdatum <span className="text-red-500">*</span>
           </label>
           <input
@@ -102,7 +102,7 @@ export const LeaveRequestForm = ({
         </div>
 
         <div>
-          <label htmlFor="end_date" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="end_date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Enddatum <span className="text-red-500">*</span>
           </label>
           <input
@@ -118,7 +118,7 @@ export const LeaveRequestForm = ({
       </div>
 
       <div>
-        <label htmlFor="leave_type" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="leave_type" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Art der Abwesenheit <span className="text-red-500">*</span>
         </label>
         <select
@@ -136,7 +136,7 @@ export const LeaveRequestForm = ({
       </div>
 
       <div>
-        <label htmlFor="reason" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="reason" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Grund <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -151,7 +151,7 @@ export const LeaveRequestForm = ({
       </div>
 
       <div>
-        <label htmlFor="notes" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="notes" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Zusätzliche Anmerkungen (Optional)
         </label>
         <textarea

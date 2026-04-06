@@ -34,7 +34,7 @@ export function GroupCapacityIndicator({ current, max }: GroupCapacityIndicatorP
     <div className="flex items-center gap-2">
       <div className="flex-1">
         <div className="flex items-center justify-between mb-1">
-          <span className="text-sm font-medium text-gray-700">Capacity</span>
+          <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Capacity</span>
           <span className={`text-sm font-medium ${capacityClass}`}>
             {current} / {max}
           </span>

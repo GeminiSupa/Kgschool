@@ -93,7 +93,7 @@ export default function ParentDailyReportDetailPage({ params }: PageProps) {
         >
           ← Zurück zu Tagesberichten
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2">{t(pT(ROUTE))}</Heading>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">{t(pT(ROUTE))}</Heading>
       </div>
 
       <IOSCard className="p-0 overflow-hidden shadow-xl border-black/5 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -106,10 +106,10 @@ export default function ParentDailyReportDetailPage({ params }: PageProps) {
                 {formatDate(report.report_date)}
             </span>
           </div>
-          <h1 className="text-4xl font-black text-gray-900 mb-8 tracking-tighter leading-tight">{report.title}</h1>
+          <h1 className="text-4xl font-black text-slate-900 dark:text-slate-50 mb-8 tracking-tighter leading-tight">{report.title}</h1>
           
           <div className="prose prose-lg max-w-none">
-            <p className="text-xl text-gray-700 leading-relaxed font-medium whitespace-pre-wrap select-text selection:bg-[#667eea]/20">
+            <p className="text-xl text-slate-700 dark:text-slate-200 leading-relaxed font-medium whitespace-pre-wrap select-text selection:bg-[#667eea]/20">
               {report.content}
             </p>
           </div>
@@ -120,7 +120,7 @@ export default function ParentDailyReportDetailPage({ params }: PageProps) {
             <h3 className="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] mb-4">Heute durchgeführte Aktivitäten</h3>
             <div className="flex flex-wrap gap-2">
               {report.activities.map((activity: string, idx: number) => (
-                <div key={idx} className="px-5 py-2.5 bg-white text-gray-800 text-sm font-bold rounded-2xl border border-black/5 shadow-sm hover:scale-105 transition-transform cursor-default">
+                <div key={idx} className="px-5 py-2.5 bg-white text-slate-800 dark:text-slate-100 text-sm font-bold rounded-2xl border border-black/5 shadow-sm hover:scale-105 transition-transform cursor-default">
                   ✨ {activity}
                 </div>
               ))}
@@ -135,7 +135,7 @@ export default function ParentDailyReportDetailPage({ params }: PageProps) {
                 <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-xl shadow-inner border border-blue-100">☀️</div>
                 <div>
                   <h3 className="text-[10px] font-black text-black/30 uppercase tracking-wider mb-1">Wetter heute</h3>
-                  <p className="text-lg font-bold text-gray-800">{report.weather}</p>
+                  <p className="text-lg font-bold text-slate-800 dark:text-slate-100">{report.weather}</p>
                 </div>
               </div>
             )}
@@ -144,7 +144,7 @@ export default function ParentDailyReportDetailPage({ params }: PageProps) {
                 <div className="w-12 h-12 rounded-2xl bg-purple-50 flex items-center justify-center text-xl shadow-inner border border-purple-100">🎉</div>
                 <div>
                   <h3 className="text-[10px] font-black text-black/30 uppercase tracking-wider mb-1">Besonderes Ereignis</h3>
-                  <p className="text-lg font-bold text-gray-800">{report.special_events}</p>
+                  <p className="text-lg font-bold text-slate-800 dark:text-slate-100">{report.special_events}</p>
                 </div>
               </div>
             )}

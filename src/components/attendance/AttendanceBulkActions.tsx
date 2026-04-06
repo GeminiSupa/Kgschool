@@ -40,7 +40,7 @@ export const AttendanceBulkActions = ({
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <span className="text-sm font-semibold text-gray-700 group-hover:text-gray-900 transition-colors">Alle auswählen</span>
+            <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:text-slate-50 transition-colors">Alle auswählen</span>
           </label>
           <span className="text-sm font-bold text-[#667eea] bg-[#667eea]/10 px-2 py-0.5 rounded-full">
             {selectedCount} ausgewählt

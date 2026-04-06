@@ -66,19 +66,19 @@ export default function ForgotPasswordPage() {
 
             {sent ? (
               <>
-                <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 tracking-tight">
+                <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-50 mb-2 tracking-tight">
                   Check your email
                 </h1>
-                <p className="text-gray-600 text-sm md:text-base">
+                <p className="text-ui-muted text-sm md:text-base">
                   We sent a password reset link to <strong>{email}</strong>. Check your inbox and spam folder.
                 </p>
               </>
             ) : (
               <>
-                <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2 tracking-tight">
+                <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-50 mb-2 tracking-tight">
                   Forgot password?
                 </h1>
-                <p className="text-gray-600 text-sm md:text-base">
+                <p className="text-ui-muted text-sm md:text-base">
                   Enter your email and we'll send you a reset link.
                 </p>
               </>

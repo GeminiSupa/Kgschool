@@ -59,7 +59,7 @@ export default function AdminDailyRoutinesPage() {
                     <option key={g.id} value={g.id}>{g.name}</option>
                 ))}
             </select>
-            <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+            <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-ui-soft">
                 ▼
             </div>
         </div>
@@ -77,7 +77,7 @@ export default function AdminDailyRoutinesPage() {
                         <div className="flex-1 min-w-0">
                             <h3 className="text-xl font-black text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors tracking-tight truncate">{routine.routine_name}</h3>
                             <div className="flex flex-wrap items-center gap-4">
-                                <span className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                <span className="flex items-center gap-2 text-[10px] font-black text-ui-soft uppercase tracking-widest">
                                     <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
                                     {routine.location || 'Classroom'}
                                 </span>
@@ -101,7 +101,7 @@ export default function AdminDailyRoutinesPage() {
         <IOSCard className="p-24 text-center border-dashed border-2 border-slate-200 bg-transparent shadow-none">
             <div className="text-6xl opacity-10 mb-6">📅</div>
             <p className="text-slate-500 font-bold text-xl">{t(sT('dailyRoutinesEmptyTitle'))}</p>
-            <p className="text-slate-400 mt-2 font-medium">{t(sT('dailyRoutinesEmptyHint'))}</p>
+            <p className="text-ui-soft mt-2 font-medium">{t(sT('dailyRoutinesEmptyHint'))}</p>
         </IOSCard>
       )}
     </div>

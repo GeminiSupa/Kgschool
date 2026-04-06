@@ -35,8 +35,8 @@ export default function AdminLunchMenusPage() {
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <div>
-          <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Verwalten Sie die täglichen Menüs für Ihre Kita.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Verwalten Sie die täglichen Menüs für Ihre Kita.</p>
         </div>
         <Link href="/admin/lunch/menus/new">
           <IOSButton className="px-6 py-2.5 text-sm font-black uppercase tracking-widest bg-black text-white border-none shadow-xl shadow-black/10">
@@ -62,7 +62,7 @@ export default function AdminLunchMenusPage() {
       ) : menus.length === 0 ? (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
           <div className="text-6xl opacity-10 mb-6">🍽️</div>
-          <p className="text-gray-400 font-bold max-w-xs mx-auto">Keine Menüs für diesen Zeitraum vorhanden.</p>
+          <p className="text-ui-soft font-bold max-w-xs mx-auto">Keine Menüs für diesen Zeitraum vorhanden.</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -81,8 +81,8 @@ export default function AdminLunchMenusPage() {
                         </div>
                     </div>
                     <div className="p-8">
-                        <h3 className="text-xl font-black text-gray-900 mb-3 group-hover:text-[#667eea] transition-colors">{menu.meal_name}</h3>
-                        <p className="text-sm text-gray-500 line-clamp-2 mb-6 font-medium leading-relaxed">{menu.description || 'Keine Beschreibung vorhanden.'}</p>
+                        <h3 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-3 group-hover:text-[#667eea] transition-colors">{menu.meal_name}</h3>
+                        <p className="text-sm text-ui-soft line-clamp-2 mb-6 font-medium leading-relaxed">{menu.description || 'Keine Beschreibung vorhanden.'}</p>
                         
                         <div className="flex flex-wrap gap-2 mb-8">
                             {menu.allergens?.map(a => (

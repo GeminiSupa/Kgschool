@@ -64,7 +64,7 @@ export default function AdminLearningThemesPage() {
                     <option key={g.id} value={g.id}>{g.name}</option>
                 ))}
             </select>
-            <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+            <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-ui-soft">
                 ▼
             </div>
         </div>
@@ -94,7 +94,7 @@ export default function AdminLearningThemesPage() {
                             <p className="text-[10px] font-black text-indigo-600 uppercase tracking-widest leading-none">{getGroupName(theme.group_id || '')}</p>
                         </div>
                         <h3 className="text-2xl font-black text-slate-900 mb-4 group-hover:text-indigo-600 transition-colors tracking-tight">{theme.title}</h3>
-                        <p className="text-sm text-slate-400 line-clamp-2 mb-10 font-medium leading-relaxed">{theme.description}</p>
+                        <p className="text-sm text-ui-soft line-clamp-2 mb-10 font-medium leading-relaxed">{theme.description}</p>
                         
                         <div className="flex gap-4 pt-8 border-t border-slate-50">
                              <Link href={`/admin/learning-themes/edit/${theme.id}`} className="flex-1 py-3 bg-slate-50 hover:bg-slate-900 hover:text-white text-slate-600 text-[10px] font-black uppercase tracking-widest text-center rounded-xl transition-all shadow-sm">
@@ -113,7 +113,7 @@ export default function AdminLearningThemesPage() {
         <IOSCard className="p-24 text-center border-dashed border-2 border-slate-200 bg-transparent shadow-none">
             <div className="text-6xl opacity-10 mb-6">📚</div>
             <p className="text-slate-500 font-bold text-xl">{t(sT('learningThemesEmptyTitle'))}</p>
-            <p className="text-slate-400 mt-2 font-medium">{t(sT('learningThemesEmptyHint'))}</p>
+            <p className="text-ui-soft mt-2 font-medium">{t(sT('learningThemesEmptyHint'))}</p>
         </IOSCard>
       )}
     </div>

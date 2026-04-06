@@ -61,8 +61,8 @@ export default function TeacherLeaveIndexPage() {
     <div className="max-w-4xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Verwalten Sie Ihre Abwesenheiten und Urlaubsanträge.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Verwalten Sie Ihre Abwesenheiten und Urlaubsanträge.</p>
         </div>
         <Link href="/teacher/leave/new">
           <IOSButton variant="primary" className="px-6 py-2.5 text-sm font-bold flex items-center gap-2">
@@ -78,7 +78,7 @@ export default function TeacherLeaveIndexPage() {
             key={status}
             onClick={() => setFilterStatus(status as any)}
             className={`px-5 py-2 rounded-xl text-sm font-bold transition-all duration-300 capitalize ${
-              filterStatus === status ? 'bg-white text-[#667eea] shadow-sm' : 'text-gray-500 hover:text-gray-700'
+              filterStatus === status ? 'bg-white text-[#667eea] shadow-sm' : 'text-ui-soft hover:text-slate-700 dark:text-slate-200'
             }`}
           >
             {status === 'all' ? 'Alle' : status === 'pending' ? 'Ausstehend' : status === 'approved' ? 'Genehmigt' : 'Abgelehnt'}
@@ -91,7 +91,7 @@ export default function TeacherLeaveIndexPage() {
       ) : filteredRequests.length === 0 ? (
         <IOSCard className="p-16 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">🏖️</div>
-          <p className="text-gray-500 font-medium">Keine Urlaubsanträge gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Urlaubsanträge gefunden.</p>
         </IOSCard>
       ) : (
         <div className="grid gap-4">
@@ -114,18 +114,18 @@ export default function TeacherLeaveIndexPage() {
                     </div>
                     
                     <div className="flex items-center gap-2 mb-3">
-                        <span className="text-gray-400">📅</span>
-                        <span className="text-sm font-black text-gray-900">
+                        <span className="text-ui-soft">📅</span>
+                        <span className="text-sm font-black text-slate-900 dark:text-slate-50">
                           {new Date(request.start_date).toLocaleDateString('de-DE')} - {new Date(request.end_date).toLocaleDateString('de-DE')}
                         </span>
                     </div>
                     
-                    <p className="text-sm font-medium text-gray-600 leading-relaxed">{request.reason}</p>
+                    <p className="text-sm font-medium text-ui-muted leading-relaxed">{request.reason}</p>
                     
                     {request.admin_notes && (
                         <div className="mt-4 p-3 bg-gray-50 rounded-xl border border-gray-100">
-                            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Anmerkung der Leitung</p>
-                            <p className="text-sm text-gray-700 font-medium">{request.admin_notes}</p>
+                            <p className="text-[10px] font-black text-ui-soft uppercase tracking-widest mb-1">Anmerkung der Leitung</p>
+                            <p className="text-sm text-slate-700 dark:text-slate-200 font-medium">{request.admin_notes}</p>
                         </div>
                     )}
                   </div>

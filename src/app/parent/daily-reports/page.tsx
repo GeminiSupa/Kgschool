@@ -87,8 +87,8 @@ export default function ParentDailyReportsPage() {
   return (
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-8">
-        <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Erfahren Sie, was Ihre Kinder heute erlebt haben</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Erfahren Sie, was Ihre Kinder heute erlebt haben</p>
       </div>
 
       <div className="mb-6 flex items-center gap-3">
@@ -107,7 +107,7 @@ export default function ParentDailyReportsPage() {
       ) : filteredReports.length === 0 ? (
         <IOSCard className="p-12 text-center">
           <div className="text-5xl opacity-40 mb-4">✍️</div>
-          <p className="text-gray-500 font-medium">Keine Tagesberichte für dieses Datum gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Tagesberichte für dieses Datum gefunden.</p>
         </IOSCard>
       ) : (
         <div className="space-y-6">
@@ -117,7 +117,7 @@ export default function ParentDailyReportsPage() {
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
-                      <h3 className="text-xl font-bold text-gray-900">{report.title}</h3>
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50">{report.title}</h3>
                       <span className="px-2.5 py-0.5 bg-[#667eea]/10 text-[#667eea] text-xs font-bold rounded-full border border-[#667eea]/10">
                         {getGroupName(report.group_id)}
                       </span>
@@ -125,7 +125,7 @@ export default function ParentDailyReportsPage() {
                     <p className="text-xs font-bold text-black/40 uppercase tracking-widest mb-4">
                       {formatDate(report.report_date)}
                     </p>
-                    <p className="text-gray-700 leading-relaxed font-medium mb-6">
+                    <p className="text-slate-700 dark:text-slate-200 leading-relaxed font-medium mb-6">
                       {report.content}
                     </p>
                     
@@ -134,7 +134,7 @@ export default function ParentDailyReportsPage() {
                         <h4 className="text-xs font-bold text-black/40 uppercase tracking-widest mb-3">Aktivitäten des Tages</h4>
                         <div className="flex flex-wrap gap-2">
                           {report.activities.map((activity: string, idx: number) => (
-                            <span key={idx} className="px-3 py-1.5 bg-gray-50 text-gray-700 text-xs font-bold rounded-xl border border-black/5">
+                            <span key={idx} className="px-3 py-1.5 bg-gray-50 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl border border-black/5">
                               ✨ {activity}
                             </span>
                           ))}
@@ -175,7 +175,7 @@ export default function ParentDailyReportsPage() {
                       ))}
                     </div>
                     {report.photos.length > 4 && (
-                      <p className="text-[10px] font-bold text-gray-400 mt-2">+{report.photos.length - 4} weitere Fotos</p>
+                      <p className="text-[10px] font-bold text-ui-soft mt-2">+{report.photos.length - 4} weitere Fotos</p>
                     )}
                   </div>
                 )}

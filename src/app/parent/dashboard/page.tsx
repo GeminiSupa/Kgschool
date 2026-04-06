@@ -139,7 +139,7 @@ export default function ParentDashboardPage() {
                   <div className="p-8 flex-1">
                     <div className="flex items-center gap-3 mb-3">
                       <span className="px-3 py-1 bg-orange-100 text-orange-600 text-[10px] font-black uppercase tracking-widest rounded-full">Mittagessen</span>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Heute, {new Date().toLocaleDateString('de-DE')}</span>
+                      <span className="text-[10px] font-bold text-ui-soft uppercase tracking-widest">Heute, {new Date().toLocaleDateString('de-DE')}</span>
                     </div>
                     <h3 className="text-2xl font-black text-slate-900 mb-2 group-hover:text-orange-600 transition-colors uppercase italic">{todayMenu.meal_name}</h3>
                     <p className="text-slate-500 font-medium leading-relaxed line-clamp-2 max-w-2xl">{todayMenu.description || 'Keine Beschreibung vorhanden.'}</p>
@@ -177,7 +177,7 @@ export default function ParentDashboardPage() {
                           </h4>
                           <div className="flex items-center gap-2 mt-1">
                             <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            <p className="text-[10px] font-black text-ui-soft uppercase tracking-widest">
                               {child.groups?.name || t(pT(ROUTE, 'noGroup'))}
                             </p>
                           </div>
@@ -198,7 +198,7 @@ export default function ParentDashboardPage() {
           {/* Quick Access - 4 cols */}
           <div className="lg:col-span-4">
             <div className="flex items-center gap-4 mb-8">
-                <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionQuickAccess'))}</h2>
+                <h2 className="text-sm font-black text-ui-soft uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionQuickAccess'))}</h2>
                 <div className="h-px flex-1 bg-slate-100"></div>
             </div>
             <IOSCard className="p-4 bg-slate-50/50 border-slate-50">
@@ -253,10 +253,10 @@ function QuickActionLink({
       <div className={`w-10 h-10 flex items-center justify-center rounded-xl text-lg ${colorClasses[color] || 'bg-gray-100'} shadow-sm border border-black/5 group-hover:scale-110 transition-transform`}>
         {icon}
       </div>
-      <span className="font-bold text-gray-700 text-sm group-hover:text-gray-900 transition-colors">
+      <span className="font-bold text-slate-700 dark:text-slate-200 text-sm group-hover:text-slate-900 dark:text-slate-50 transition-colors">
         {t(pT(ROUTE, labelKey))}
       </span>
-      <div className="ml-auto text-gray-300 group-hover:text-gray-500 transition-colors">
+      <div className="ml-auto text-gray-300 group-hover:text-ui-soft transition-colors">
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
         </svg>

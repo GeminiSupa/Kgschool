@@ -118,7 +118,7 @@ export default function TeacherDailyReportDetailPage({ params }: PageProps) {
           >
             ← Zurück zu Tagesberichten
           </Link>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
         </div>
         {!isEditing && (
           <div className="flex items-center gap-2">
@@ -160,8 +160,8 @@ export default function TeacherDailyReportDetailPage({ params }: PageProps) {
                   {formatDate(report.report_date)}
                 </span>
               </div>
-              <h1 className="text-3xl font-black text-gray-900 mb-6 tracking-tight">{report.title}</h1>
-              <p className="text-lg text-gray-700 leading-relaxed font-medium whitespace-pre-wrap">
+              <h1 className="text-3xl font-black text-slate-900 dark:text-slate-50 mb-6 tracking-tight">{report.title}</h1>
+              <p className="text-lg text-slate-700 dark:text-slate-200 leading-relaxed font-medium whitespace-pre-wrap">
                 {report.content}
               </p>
             </div>
@@ -171,7 +171,7 @@ export default function TeacherDailyReportDetailPage({ params }: PageProps) {
                 <h3 className="text-xs font-bold text-black/40 uppercase tracking-widest mb-4">Heute durchgeführte Aktivitäten</h3>
                 <div className="flex flex-wrap gap-2">
                   {report.activities.map((activity: string, idx: number) => (
-                    <span key={idx} className="px-4 py-2 bg-white text-gray-800 text-sm font-bold rounded-xl border border-black/5 shadow-sm">
+                    <span key={idx} className="px-4 py-2 bg-white text-slate-800 dark:text-slate-100 text-sm font-bold rounded-xl border border-black/5 shadow-sm">
                       ✨ {activity}
                     </span>
                   ))}
@@ -184,13 +184,13 @@ export default function TeacherDailyReportDetailPage({ params }: PageProps) {
                 {report.weather && (
                   <div>
                     <h3 className="text-xs font-bold text-black/40 uppercase tracking-widest mb-2">Wetter</h3>
-                    <p className="text-base font-bold text-gray-800">☀️ {report.weather}</p>
+                    <p className="text-base font-bold text-slate-800 dark:text-slate-100">☀️ {report.weather}</p>
                   </div>
                 )}
                 {report.special_events && (
                   <div>
                     <h3 className="text-xs font-bold text-black/40 uppercase tracking-widest mb-2">Besondere Ereignisse</h3>
-                    <p className="text-base font-bold text-gray-800">🎉 {report.special_events}</p>
+                    <p className="text-base font-bold text-slate-800 dark:text-slate-100">🎉 {report.special_events}</p>
                   </div>
                 )}
               </div>

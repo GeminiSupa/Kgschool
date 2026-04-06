@@ -59,14 +59,14 @@ export default function ParentChildrenIndexPage() {
   return (
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-8">
-        <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Verwalten Sie die Profile Ihrer Kinder.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Verwalten Sie die Profile Ihrer Kinder.</p>
       </div>
 
       {myChildren.length === 0 ? (
         <IOSCard className="p-12 text-center">
           <div className="text-5xl opacity-40 mb-4">👶</div>
-          <p className="text-gray-500 font-medium">Noch keine Kinder registriert.</p>
+          <p className="text-ui-soft font-medium">Noch keine Kinder registriert.</p>
         </IOSCard>
       ) : (
         <div className="grid gap-4">
@@ -79,7 +79,7 @@ export default function ParentChildrenIndexPage() {
                       {child.first_name[0]}{child.last_name[0]}
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#667eea] transition-colors">
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50 group-hover:text-[#667eea] transition-colors">
                         {child.first_name} {child.last_name}
                       </h3>
                       <p className="text-sm font-bold text-[#667eea] bg-[#667eea]/10 px-3 py-0.5 rounded-full border border-[#667eea]/10 inline-block mt-1">
@@ -89,7 +89,7 @@ export default function ParentChildrenIndexPage() {
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <span className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full border ${child.status === 'active' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-500 border-gray-200'}`}>
+                    <span className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full border ${child.status === 'active' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-ui-soft border-gray-200'}`}>
                       {child.status === 'active' ? 'Aktiv' : 'Inaktiv'}
                     </span>
                     <div className="text-gray-300 group-hover:text-[#667eea] transition-colors">

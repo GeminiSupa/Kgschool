@@ -24,8 +24,8 @@ export default function ParentCalendarPage() {
   return (
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-10 text-center">
-        <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Wichtige Ereignisse und Schließfächer Ihrer Kita.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Wichtige Ereignisse und Schließfächer Ihrer Kita.</p>
       </div>
 
       <div className="space-y-8">
@@ -38,8 +38,8 @@ export default function ParentCalendarPage() {
                         <span className="text-xl font-black leading-none">12</span>
                     </div>
                     <div>
-                        <h4 className="text-lg font-black text-gray-900 mb-1">Sommerfest</h4>
-                        <p className="text-sm text-gray-500 font-medium">Gemeinsames Grillen im Garten mit allen Eltern und Kindern.</p>
+                        <h4 className="text-lg font-black text-slate-900 dark:text-slate-50 mb-1">Sommerfest</h4>
+                        <p className="text-sm text-ui-soft font-medium">Gemeinsames Grillen im Garten mit allen Eltern und Kindern.</p>
                         <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mt-2">🕒 14:00 - 18:00 Uhr</p>
                     </div>
                 </IOSCard>
@@ -50,8 +50,8 @@ export default function ParentCalendarPage() {
                         <span className="text-xl font-black leading-none">01</span>
                     </div>
                     <div>
-                        <h4 className="text-lg font-black text-gray-900 mb-1">Kita geschlossen</h4>
-                        <p className="text-sm text-gray-500 font-medium">Tag der Arbeit. Die Kita bleibt an diesem Tag geschlossen.</p>
+                        <h4 className="text-lg font-black text-slate-900 dark:text-slate-50 mb-1">Kita geschlossen</h4>
+                        <p className="text-sm text-ui-soft font-medium">Tag der Arbeit. Die Kita bleibt an diesem Tag geschlossen.</p>
                         <p className="text-[10px] font-black text-amber-400 uppercase tracking-widest mt-2">📅 Ganztägig</p>
                     </div>
                 </IOSCard>

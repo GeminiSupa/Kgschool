@@ -126,8 +126,8 @@ export default function GenerateFeesPage() {
         >
           ← Zurück zu Gebühren
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Erstellen Sie die monatlichen Abrechnungen automatisiert auf Basis der Konfiguration.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Erstellen Sie die monatlichen Abrechnungen automatisiert auf Basis der Konfiguration.</p>
       </div>
 
       <IOSCard className="p-8 shadow-2xl shadow-indigo-900/5">
@@ -139,7 +139,7 @@ export default function GenerateFeesPage() {
                 value={form.month}
                 onChange={(e) => { setForm(prev => ({ ...prev, month: parseInt(e.target.value) })); setPreview(null) }}
                 required
-                className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
               >
                 {[...Array(12)].map((_, i) => (
                   <option key={i + 1} value={i + 1}>{getMonthName(i + 1)}</option>
@@ -155,7 +155,7 @@ export default function GenerateFeesPage() {
                 required
                 min={2020}
                 max={2100}
-                className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
               />
             </div>
           </div>
@@ -171,14 +171,14 @@ export default function GenerateFeesPage() {
                         className={`px-4 py-3 rounded-xl text-xs font-black uppercase tracking-widest border transition-all ${
                             form.feeTypes.includes(type) 
                             ? 'bg-[#667eea] text-white border-[#667eea] shadow-lg shadow-blue-500/20' 
-                            : 'bg-white text-gray-400 border-black/5 hover:border-black/10'
+                            : 'bg-white text-ui-soft border-black/5 hover:border-black/10'
                         }`}
                     >
                         {type === 'tuition' ? 'Grundgebühr' : type === 'activities' ? 'Aktivitäten' : 'Sonstiges'}
                     </button>
                 ))}
             </div>
-            <p className="text-[10px] font-bold text-gray-400 mt-4 leading-relaxed">
+            <p className="text-[10px] font-bold text-ui-soft mt-4 leading-relaxed">
                 Hinweis: Verpflegungsgebühren werden separat über das Mittagessen-Modul abgerechnet.
             </p>
           </div>

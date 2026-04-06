@@ -129,22 +129,22 @@ export default function NewUserPage() {
         >
           ← Zurück zu Benutzern
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Legen Sie ein neues Konto für Personal oder Eltern an und laden Sie wichtige Dokumente hoch.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Legen Sie ein neues Konto für Personal oder Eltern an und laden Sie wichtige Dokumente hoch.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Account Data */}
         <IOSCard className="p-8 shadow-sm border-black/5">
-            <h3 className="text-lg font-black tracking-tight text-gray-900 mb-6">🔑 Account-Daten</h3>
+            <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-slate-50 mb-6">🔑 Account-Daten</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Vollständiger Name *</label>
-                    <input type="text" value={form.full_name} onChange={(e) => setForm(prev => ({ ...prev, full_name: e.target.value }))} required placeholder="z.B. Maria Musterfrau" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                    <input type="text" value={form.full_name} onChange={(e) => setForm(prev => ({ ...prev, full_name: e.target.value }))} required placeholder="z.B. Maria Musterfrau" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                 </div>
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Rolle *</label>
-                    <select value={form.role} onChange={(e) => setForm(prev => ({ ...prev, role: e.target.value as any }))} required className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
+                    <select value={form.role} onChange={(e) => setForm(prev => ({ ...prev, role: e.target.value as any }))} required className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
                         <option value="parent">Elternteil</option>
                         <option value="teacher">Pädagogische Fachkraft</option>
                         <option value="admin">Administrator</option>
@@ -154,37 +154,37 @@ export default function NewUserPage() {
                 </div>
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Email Adresse *</label>
-                    <input type="email" value={form.email} onChange={(e) => setForm(prev => ({ ...prev, email: e.target.value }))} required placeholder="email@beispiel.de" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                    <input type="email" value={form.email} onChange={(e) => setForm(prev => ({ ...prev, email: e.target.value }))} required placeholder="email@beispiel.de" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                 </div>
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Initialpasswort *</label>
-                    <input type="password" value={form.password} onChange={(e) => setForm(prev => ({ ...prev, password: e.target.value }))} required placeholder="Mind. 8 Zeichen" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                    <input type="password" value={form.password} onChange={(e) => setForm(prev => ({ ...prev, password: e.target.value }))} required placeholder="Mind. 8 Zeichen" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                 </div>
             </div>
         </IOSCard>
 
         {/* Personal Details */}
         <IOSCard className="p-8 shadow-sm border-black/5">
-            <h3 className="text-lg font-black tracking-tight text-gray-900 mb-6">👤 Persönliche Daten</h3>
+            <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-slate-50 mb-6">👤 Persönliche Daten</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Adresse</label>
-                    <input type="text" value={form.address} onChange={(e) => setForm(prev => ({ ...prev, address: e.target.value }))} placeholder="Musterstraße 1, 12345 Stadt" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                    <input type="text" value={form.address} onChange={(e) => setForm(prev => ({ ...prev, address: e.target.value }))} placeholder="Musterstraße 1, 12345 Stadt" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                 </div>
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Geburtsdatum</label>
-                    <input type="date" value={form.date_of_birth} onChange={(e) => setForm(prev => ({ ...prev, date_of_birth: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                    <input type="date" value={form.date_of_birth} onChange={(e) => setForm(prev => ({ ...prev, date_of_birth: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                 </div>
                 <div>
                      {/* Empty space for layout balance */}
                 </div>
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Notfallkontakt Name</label>
-                    <input type="text" value={form.emergency_contact_name} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_name: e.target.value }))} placeholder="Max Mustermann" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                    <input type="text" value={form.emergency_contact_name} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_name: e.target.value }))} placeholder="Max Mustermann" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                 </div>
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Notfallkontakt Telefon</label>
-                    <input type="text" value={form.emergency_contact_phone} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_phone: e.target.value }))} placeholder="0123 456789" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                    <input type="text" value={form.emergency_contact_phone} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_phone: e.target.value }))} placeholder="0123 456789" className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                 </div>
             </div>
         </IOSCard>
@@ -196,11 +196,11 @@ export default function NewUserPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Vertragsbeginn</label>
-                        <input type="date" value={form.start_date} onChange={(e) => setForm(prev => ({ ...prev, start_date: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                        <input type="date" value={form.start_date} onChange={(e) => setForm(prev => ({ ...prev, start_date: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                     </div>
                     <div>
                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Vertragsart</label>
-                        <select value={form.contract_type} onChange={(e) => setForm(prev => ({ ...prev, contract_type: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
+                        <select value={form.contract_type} onChange={(e) => setForm(prev => ({ ...prev, contract_type: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
                             <option value="">Bitte wählen...</option>
                             <option value="Vollzeit">Vollzeit</option>
                             <option value="Teilzeit">Teilzeit</option>
@@ -209,11 +209,11 @@ export default function NewUserPage() {
                     </div>
                     <div>
                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Wochenstunden</label>
-                        <input type="number" value={form.weekly_hours} onChange={(e) => setForm(prev => ({ ...prev, weekly_hours: e.target.value }))} placeholder="z.B. 40" className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                        <input type="number" value={form.weekly_hours} onChange={(e) => setForm(prev => ({ ...prev, weekly_hours: e.target.value }))} placeholder="z.B. 40" className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                     </div>
                     <div>
                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Qualifikationen</label>
-                        <input type="text" value={form.qualifications} onChange={(e) => setForm(prev => ({ ...prev, qualifications: e.target.value }))} placeholder="Erzieher/in, Erste Hilfe etc." className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                        <input type="text" value={form.qualifications} onChange={(e) => setForm(prev => ({ ...prev, qualifications: e.target.value }))} placeholder="Erzieher/in, Erste Hilfe etc." className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
                     </div>
                 </div>
             </IOSCard>
@@ -221,12 +221,12 @@ export default function NewUserPage() {
 
         {/* Document Uploads */}
         <IOSCard className="p-8 shadow-sm border-black/5">
-            <h3 className="text-lg font-black tracking-tight text-gray-900 mb-6">📄 Dokumente Hochladen</h3>
+            <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-slate-50 mb-6">📄 Dokumente Hochladen</h3>
             <div className="space-y-6">
                 <div className="p-4 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-between">
                     <div>
-                        <p className="text-sm font-bold text-gray-800">Profilbild</p>
-                        <p className="text-xs text-gray-500">Empfohlen: Quadratisch, max 2MB (.jpg, .png)</p>
+                        <p className="text-sm font-bold text-slate-800 dark:text-slate-100">Profilbild</p>
+                        <p className="text-xs text-ui-soft">Empfohlen: Quadratisch, max 2MB (.jpg, .png)</p>
                     </div>
                     <input type="file" accept="image/*" onChange={(e) => setFiles(prev => ({ ...prev, avatar: e.target.files?.[0] || null }))} className="text-sm" />
                 </div>
@@ -235,16 +235,16 @@ export default function NewUserPage() {
                     <>
                         <div className="p-4 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-bold text-gray-800">Arbeitsvertrag (PDF)</p>
-                                <p className="text-xs text-gray-500">Max 5MB</p>
+                                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">Arbeitsvertrag (PDF)</p>
+                                <p className="text-xs text-ui-soft">Max 5MB</p>
                             </div>
                             <input type="file" accept="application/pdf" onChange={(e) => setFiles(prev => ({ ...prev, contract: e.target.files?.[0] || null }))} className="text-sm" />
                         </div>
                         
                         <div className="p-4 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 flex items-center justify-between">
                             <div>
-                                <p className="text-sm font-bold text-gray-800">Gesundheitszeugnis (PDF)</p>
-                                <p className="text-xs text-gray-500">Max 5MB</p>
+                                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">Gesundheitszeugnis (PDF)</p>
+                                <p className="text-xs text-ui-soft">Max 5MB</p>
                             </div>
                             <input type="file" accept="application/pdf" onChange={(e) => setFiles(prev => ({ ...prev, health_cert: e.target.files?.[0] || null }))} className="text-sm" />
                         </div>

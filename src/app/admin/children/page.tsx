@@ -55,7 +55,7 @@ export default function AdminChildrenPage() {
   const getStatusBadge = (status: string) => {
     const styles: Record<string, string> = {
       active: 'bg-green-50 text-green-700 border-green-100',
-      inactive: 'bg-gray-50 text-gray-500 border-gray-100',
+      inactive: 'bg-gray-50 text-ui-soft border-gray-100',
       pending: 'bg-amber-50 text-amber-700 border-amber-100'
     }
     const labels: Record<string, string> = {
@@ -97,9 +97,9 @@ export default function AdminChildrenPage() {
                     placeholder={t(sT('searchByNamePlaceholder'))}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-14 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 outline-none focus:ring-2 focus:ring-indigo-100 focus:bg-white transition-all placeholder:text-slate-400"
+                    className="w-full pl-14 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 outline-none focus:ring-2 focus:ring-indigo-100 focus:bg-white transition-all placeholder:text-muted"
                 />
-                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xl">🔍</span>
+                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-ui-soft text-xl">🔍</span>
             </div>
             <select
                 value={selectedGroup}
@@ -122,7 +122,7 @@ export default function AdminChildrenPage() {
           <p className="text-slate-500 font-bold text-xl">
             {searchTerm || selectedGroup ? t(sT('noChildrenFiltered')) : t(sT('noChildrenSystem'))}
           </p>
-          <p className="text-slate-400 mt-2 font-medium">{t(sT('tryAdjustFiltersChildren'))}</p>
+          <p className="text-ui-soft mt-2 font-medium">{t(sT('tryAdjustFiltersChildren'))}</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -145,7 +145,7 @@ export default function AdminChildrenPage() {
                                 </h3>
                                 <div className="flex items-center gap-2 mt-1">
                                     <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{getGroupName(child.group_id)}</p>
+                                    <p className="text-[10px] font-black text-ui-soft uppercase tracking-widest">{getGroupName(child.group_id)}</p>
                                 </div>
                             </div>
                             

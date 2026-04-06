@@ -83,14 +83,14 @@ export default function AdminWaitlistPage() {
         >
           ← Zurück zu Anmeldungen
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Verwalten Sie Prioritäten und Positionen für die Platzvergabe.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Verwalten Sie Prioritäten und Positionen für die Platzvergabe.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
             <IOSCard className="p-6 bg-white border-black/5 shadow-sm">
                 <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-1">Einträge Gesamt</p>
-                <p className="text-2xl font-black text-gray-900">{waitlist.length}</p>
+                <p className="text-2xl font-black text-slate-900 dark:text-slate-50">{waitlist.length}</p>
             </IOSCard>
             <IOSCard className="p-6 bg-indigo-50/50 border-indigo-100 shadow-sm">
                 <p className="text-[10px] font-black text-indigo-700/40 uppercase tracking-widest mb-1">Nächste Position</p>
@@ -103,7 +103,7 @@ export default function AdminWaitlistPage() {
       ) : waitlist.length === 0 ? (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
           <div className="text-6xl opacity-10 mb-6">📉</div>
-          <p className="text-gray-400 font-bold max-w-xs mx-auto">Die Warteliste ist aktuell leer.</p>
+          <p className="text-ui-soft font-bold max-w-xs mx-auto">Die Warteliste ist aktuell leer.</p>
         </IOSCard>
       ) : (
         <IOSCard className="p-0 overflow-hidden shadow-sm border-black/5">
@@ -135,14 +135,14 @@ export default function AdminWaitlistPage() {
                                     <td className="px-6 py-5">
                                         {app ? (
                                             <div>
-                                                <p className="text-sm font-black text-gray-900 leading-tight">{app.child_first_name} {app.child_last_name}</p>
-                                                <p className="text-[10px] font-bold text-gray-400">DOB: {new Date(app.child_date_of_birth).toLocaleDateString()}</p>
+                                                <p className="text-sm font-black text-slate-900 dark:text-slate-50 leading-tight">{app.child_first_name} {app.child_last_name}</p>
+                                                <p className="text-[10px] font-bold text-ui-soft">DOB: {new Date(app.child_date_of_birth).toLocaleDateString()}</p>
                                             </div>
                                         ) : (
                                             <span className="text-xs text-red-400 font-bold italic">Unbekannte Anmeldung</span>
                                         )}
                                     </td>
-                                    <td className="px-6 py-5 text-xs font-black text-gray-800">
+                                    <td className="px-6 py-5 text-xs font-black text-slate-800 dark:text-slate-100">
                                         {app ? new Date(app.preferred_start_date).toLocaleDateString() : '-'}
                                     </td>
                                     <td className="px-6 py-5">

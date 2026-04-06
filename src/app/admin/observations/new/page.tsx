@@ -62,7 +62,7 @@ export default function AdminObservationsNewPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/observations')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Observations
         </button>

@@ -62,12 +62,12 @@ export default function TeacherObservationsNewPage() {
         <button
           type="button"
           onClick={handleCancel}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Zurück zu Beobachtungen
         </button>
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-600 mt-1">Dokumentieren Sie die Entwicklung eines Kindes</p>
+        <p className="text-sm text-ui-muted mt-1">Dokumentieren Sie die Entwicklung eines Kindes</p>
       </div>
 
       <IOSCard className="max-w-3xl p-6">

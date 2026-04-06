@@ -66,8 +66,8 @@ export default function FeeConfigListPage() {
           >
             ← Zurück zu Gebühren
           </Link>
-          <Heading size="xl" className="text-gray-900 mt-2">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Legen Sie Standardbeträge für verschiedene Gruppen und Gebührenarten fest.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Legen Sie Standardbeträge für verschiedene Gruppen und Gebührenarten fest.</p>
         </div>
         <Link href="/admin/fees/config/new">
           <IOSButton variant="primary" className="px-6 py-2.5 text-sm font-bold flex items-center gap-2">
@@ -82,7 +82,7 @@ export default function FeeConfigListPage() {
       ) : configs.length === 0 ? (
         <IOSCard className="p-16 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">⚙️</div>
-          <p className="text-gray-500 font-medium">Keine Gebühren-Konfigurationen gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Gebühren-Konfigurationen gefunden.</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -94,25 +94,25 @@ export default function FeeConfigListPage() {
                                 {formatFeeType(config.fee_type)}
                             </span>
                             <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button onClick={() => router.push(`/admin/fees/config/${config.id}`)} className="p-1.5 text-gray-400 hover:text-[#667eea]">
+                                <button onClick={() => router.push(`/admin/fees/config/${config.id}`)} className="p-1.5 text-ui-soft hover:text-[#667eea]">
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
                                 </button>
-                                <button onClick={() => handleDelete(config.id)} className="p-1.5 text-gray-400 hover:text-red-500">
+                                <button onClick={() => handleDelete(config.id)} className="p-1.5 text-ui-soft hover:text-red-500">
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                 </button>
                             </div>
                         </div>
-                        <h4 className="text-3xl font-black text-gray-900 mb-1 tracking-tight">€{config.amount.toFixed(2)}</h4>
-                        <p className="text-sm font-bold text-gray-500 mb-6">{getGroupName(config.group_id)}</p>
+                        <h4 className="text-3xl font-black text-slate-900 dark:text-slate-50 mb-1 tracking-tight">€{config.amount.toFixed(2)}</h4>
+                        <p className="text-sm font-bold text-ui-soft mb-6">{getGroupName(config.group_id)}</p>
                         
                         <div className="pt-4 border-t border-black/5">
                             <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-1.5">Gültig ab</p>
-                            <p className="text-xs font-bold text-gray-700 italic">{new Date(config.effective_from).toLocaleDateString('de-DE')}</p>
+                            <p className="text-xs font-bold text-slate-700 dark:text-slate-200 italic">{new Date(config.effective_from).toLocaleDateString('de-DE')}</p>
                         </div>
                     </div>
                     {config.notes && (
                         <div className="px-6 py-3 bg-gray-50/50 border-t border-black/5 mt-2">
-                             <p className="text-[10px] text-gray-400 italic line-clamp-1">{config.notes}</p>
+                             <p className="text-[10px] text-ui-soft italic line-clamp-1">{config.notes}</p>
                         </div>
                     )}
                 </IOSCard>

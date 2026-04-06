@@ -62,7 +62,7 @@ export default function StaffDetailPage() {
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
   if (!member)
     return (
-      <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">{t(sT('errNotFoundStaff'))}</div>
+      <div className="max-w-4xl mx-auto py-12 text-center text-ui-soft">{t(sT('errNotFoundStaff'))}</div>
     )
 
   return (
@@ -76,7 +76,7 @@ export default function StaffDetailPage() {
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
             <div>
-                <Heading size="xl" className="text-gray-900 tracking-tight">{member.full_name}</Heading>
+                <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{member.full_name}</Heading>
                 <div className="flex items-center gap-3 mt-2">
                     <span className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-widest rounded-md border ${
                         member.role === 'teacher' ? 'bg-indigo-50 text-indigo-600 border-indigo-100' :
@@ -85,7 +85,7 @@ export default function StaffDetailPage() {
                     }`}>
                         {member.role === 'teacher' ? 'Erzieher' : member.role === 'kitchen' ? 'Küche' : 'Administrator'}
                     </span>
-                    <span className="text-sm font-bold text-gray-400">Personal-E-Mail: {member.email}</span>
+                    <span className="text-sm font-bold text-ui-soft">Personal-E-Mail: {member.email}</span>
                 </div>
             </div>
             {!isEditing && (
@@ -123,8 +123,8 @@ export default function StaffDetailPage() {
                             </div>
                             <div>
                                 <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-1">Mitarbeiter Profil</p>
-                                <h2 className="text-2xl font-black text-gray-900">{member.full_name}</h2>
-                                <p className="text-sm font-bold text-gray-400 mt-1">{member.email}</p>
+                                <h2 className="text-2xl font-black text-slate-900 dark:text-slate-50">{member.full_name}</h2>
+                                <p className="text-sm font-bold text-ui-soft mt-1">{member.email}</p>
                             </div>
                         </div>
 
@@ -132,20 +132,20 @@ export default function StaffDetailPage() {
                             <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-6">Persönliche Informationen</p>
                             <div className="grid grid-cols-2 gap-8 text-left">
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Voller Name</p>
-                                    <p className="text-base font-black text-gray-900">{member.full_name}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Voller Name</p>
+                                    <p className="text-base font-black text-slate-900 dark:text-slate-50">{member.full_name}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">E-Mail Adresse</p>
-                                    <p className="text-base font-black text-gray-900">{member.email}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">E-Mail Adresse</p>
+                                    <p className="text-base font-black text-slate-900 dark:text-slate-50">{member.email}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Telefonnummer</p>
-                                    <p className="text-base font-black text-gray-900">{member.phone || '-'}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Telefonnummer</p>
+                                    <p className="text-base font-black text-slate-900 dark:text-slate-50">{member.phone || '-'}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Mitglied seit</p>
-                                    <p className="text-base font-black text-gray-900">{new Date(member.created_at).toLocaleDateString('de-DE')}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Mitglied seit</p>
+                                    <p className="text-base font-black text-slate-900 dark:text-slate-50">{new Date(member.created_at).toLocaleDateString('de-DE')}</p>
                                 </div>
                             </div>
                         </div>
@@ -154,11 +154,11 @@ export default function StaffDetailPage() {
                             <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-6">Qualifikationen & Dokumente</p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="p-4 bg-gray-50 rounded-2xl border border-black/5 flex items-center justify-between group cursor-pointer hover:bg-white transition-all">
-                                    <span className="text-xs font-black text-gray-700">Arbeitsvertrag.pdf</span>
+                                    <span className="text-xs font-black text-slate-700 dark:text-slate-200">Arbeitsvertrag.pdf</span>
                                     <span className="text-[10px] font-black text-[#667eea] opacity-0 group-hover:opacity-100 transition-opacity">ÖFFNEN</span>
                                 </div>
                                 <div className="p-4 bg-gray-50 rounded-2xl border border-black/5 flex items-center justify-between group cursor-pointer hover:bg-white transition-all">
-                                    <span className="text-xs font-black text-gray-700">Gesundheitszeugnis.pdf</span>
+                                    <span className="text-xs font-black text-slate-700 dark:text-slate-200">Gesundheitszeugnis.pdf</span>
                                     <span className="text-[10px] font-black text-[#667eea] opacity-0 group-hover:opacity-100 transition-opacity">ÖFFNEN</span>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@ export default function StaffDetailPage() {
         <div className="space-y-8">
             <IOSCard className="p-8 border-black/5 shadow-sm">
                 <h3 className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-6">Gruppenzuweisung</h3>
-                <p className="text-xs text-gray-400 italic mb-6">Dieser Mitarbeiter ist aktuell den folgenden Gruppen zugewiesen:</p>
+                <p className="text-xs text-ui-soft italic mb-6">Dieser Mitarbeiter ist aktuell den folgenden Gruppen zugewiesen:</p>
                 <div className="space-y-2">
                     <div className="p-3 bg-indigo-50 text-indigo-700 rounded-xl text-[10px] font-black uppercase tracking-widest border border-indigo-100">
                         Bärengruppe (U3)

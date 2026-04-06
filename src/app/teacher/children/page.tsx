@@ -106,12 +106,12 @@ export default function TeacherChildrenPage() {
     <div className="max-w-5xl mx-auto pb-12">
       <div className="mb-8">
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Alle Kinder aus Ihren aktuell zugewiesenen Gruppen.</p>
+        <p className="text-sm text-ui-soft mt-1">Alle Kinder aus Ihren aktuell zugewiesenen Gruppen.</p>
       </div>
 
       {children.length === 0 ? (
         <IOSCard className="p-8 text-center">
-          <p className="text-gray-500 font-medium">Keine Kinder in Ihren Gruppen gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Kinder in Ihren Gruppen gefunden.</p>
         </IOSCard>
       ) : (
         <div className="grid gap-4">
@@ -125,10 +125,10 @@ export default function TeacherChildrenPage() {
                       {child.last_name[0]}
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#667eea] transition-colors">
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50 group-hover:text-[#667eea] transition-colors">
                         {child.first_name} {child.last_name}
                       </h3>
-                      <p className="text-xs sm:text-sm text-gray-500">
+                      <p className="text-xs sm:text-sm text-ui-soft">
                         {child.groups?.name || (child.group_id ? groupMap[child.group_id] : '') || 'Keine Gruppe'}
                       </p>
                     </div>
@@ -136,7 +136,7 @@ export default function TeacherChildrenPage() {
                   <span
                     className={[
                       'px-2.5 py-1 text-xs font-semibold rounded-full w-fit',
-                      child.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600',
+                      child.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-ui-muted',
                     ].join(' ')}
                   >
                     {child.status === 'active' ? 'Aktiv' : child.status}

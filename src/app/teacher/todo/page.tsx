@@ -96,8 +96,8 @@ export default function TeacherTodoPage() {
   return (
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-10">
-        <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Hier finden Sie alle anstehenden Aufgaben und Erinnerungen für heute.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Hier finden Sie alle anstehenden Aufgaben und Erinnerungen für heute.</p>
       </div>
 
       {pendingTasks.length === 0 ? (
@@ -124,7 +124,7 @@ export default function TeacherTodoPage() {
                                     </div>
                                     <div>
                                         <div className="flex items-center gap-3 mb-1">
-                                            <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight leading-none">{task.title}</h3>
+                                            <h3 className="text-lg font-black text-slate-900 dark:text-slate-50 uppercase tracking-tight leading-none">{task.title}</h3>
                                             <span className={`px-2 py-0.5 text-[8px] font-black uppercase rounded border ${
                                                 task.priority === 'high' ? 'bg-red-50 text-red-600 border-red-100' :
                                                 task.priority === 'medium' ? 'bg-amber-50 text-amber-600 border-amber-100' :
@@ -133,7 +133,7 @@ export default function TeacherTodoPage() {
                                                 {task.priority}
                                             </span>
                                         </div>
-                                        <p className="text-sm font-bold text-gray-400">{task.description}</p>
+                                        <p className="text-sm font-bold text-ui-soft">{task.description}</p>
                                     </div>
                                 </div>
                                 <span className="text-2xl opacity-10 group-hover:opacity-100 group-hover:translate-x-2 transition-all">→</span>
@@ -150,11 +150,11 @@ export default function TeacherTodoPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="p-6 bg-gray-50/50 border border-black/5 rounded-[32px] flex items-center gap-4 opacity-40">
                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xs">📔</div>
-                <p className="text-xs font-black text-gray-500">Portfolio-Einträge (Woche)</p>
+                <p className="text-xs font-black text-ui-soft">Portfolio-Einträge (Woche)</p>
             </div>
             <div className="p-6 bg-gray-50/50 border border-black/5 rounded-[32px] flex items-center gap-4 opacity-40">
                 <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xs">👶</div>
-                <p className="text-xs font-black text-gray-500">Beobachtungsbogen (Monat)</p>
+                <p className="text-xs font-black text-ui-soft">Beobachtungsbogen (Monat)</p>
             </div>
         </div>
       </div>

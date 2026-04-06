@@ -108,7 +108,7 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
 
       {searchResults.length > 0 && (
         <div className="border border-black/10 rounded-xl p-3 max-h-48 overflow-y-auto bg-white/50 backdrop-blur">
-          <p className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Search Results</p>
+          <p className="text-xs font-semibold text-ui-soft mb-2 uppercase tracking-wider">Search Results</p>
           <div className="space-y-1">
             {searchResults.map((parent) => {
               const isAdded = selectedParents.some((p) => p.id === parent.id)
@@ -118,8 +118,8 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
                   className="flex items-center justify-between p-2 hover:bg-white rounded-lg transition-colors border border-transparent shadow-sm"
                 >
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">{parent.full_name}</p>
-                    <p className="text-xs text-gray-500">{parent.email}</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-slate-50">{parent.full_name}</p>
+                    <p className="text-xs text-ui-soft">{parent.email}</p>
                   </div>
                   <button
                     type="button"
@@ -127,7 +127,7 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
                     disabled={isAdded}
                     className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
                       isAdded
-                        ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                        ? 'bg-gray-200 text-ui-soft cursor-not-allowed'
                         : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm'
                     }`}
                   >
@@ -142,7 +142,7 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
 
       {selectedParents.length > 0 && (
         <div className="border border-black/10 rounded-xl p-3 bg-white/50 backdrop-blur">
-          <p className="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">Selected Parents</p>
+          <p className="text-xs font-semibold text-ui-soft mb-2 uppercase tracking-wider">Selected Parents</p>
           <div className="space-y-2">
             {selectedParents.map((parent) => (
               <div
@@ -167,7 +167,7 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
       )}
 
       {searchQuery && searchResults.length === 0 && !searching && (
-        <p className="text-sm text-gray-500 font-medium">No parents found. Create a new parent account.</p>
+        <p className="text-sm text-ui-soft font-medium">No parents found. Create a new parent account.</p>
       )}
 
       {showCreateModal && (

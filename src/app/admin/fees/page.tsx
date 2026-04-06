@@ -99,8 +99,8 @@ export default function AdminFeesPage() {
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Übersicht und Verwaltung aller monatlichen Gebühren.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Übersicht und Verwaltung aller monatlichen Gebühren.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <IOSButton variant="secondary" className="px-4 py-2.5 text-sm font-bold flex items-center gap-2" onClick={exportFilteredCsv}>
@@ -131,7 +131,7 @@ export default function AdminFeesPage() {
               name="month"
               value={filters.month}
               onChange={handleFilterChange}
-              className="w-full px-4 py-2.5 bg-white border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+              className="w-full px-4 py-2.5 bg-white border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
             >
               <option value="0">Alle Monate</option>
               {[...Array(12)].map((_, i) => (
@@ -146,7 +146,7 @@ export default function AdminFeesPage() {
               type="number"
               value={filters.year}
               onChange={handleFilterChange}
-              className="w-full px-4 py-2.5 bg-white border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+              className="w-full px-4 py-2.5 bg-white border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
             />
           </div>
           <div>
@@ -155,7 +155,7 @@ export default function AdminFeesPage() {
               name="status"
               value={filters.status}
               onChange={handleFilterChange}
-              className="w-full px-4 py-2.5 bg-white border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+              className="w-full px-4 py-2.5 bg-white border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
             >
               <option value="">Alle Status</option>
               <option value="pending">Ausstehend</option>
@@ -175,12 +175,12 @@ export default function AdminFeesPage() {
       ) : filteredFees.length === 0 ? (
         <IOSCard className="p-16 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">💰</div>
-          <p className="text-gray-500 font-medium">Keine Gebühren für die gewählten Filter gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Gebühren für die gewählten Filter gefunden.</p>
         </IOSCard>
       ) : (
         <IOSCard className="p-0 overflow-hidden shadow-sm border-black/5">
             <div className="overflow-x-auto">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest px-6 py-3 bg-gray-50/80 md:hidden">← Tabelle seitwärts scrollen</p>
+              <p className="text-[10px] text-ui-soft font-bold uppercase tracking-widest px-6 py-3 bg-gray-50/80 md:hidden">← Tabelle seitwärts scrollen</p>
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="bg-gray-50/50">
@@ -193,23 +193,23 @@ export default function AdminFeesPage() {
                             <th className="px-6 py-4 text-[10px] font-black text-black/30 uppercase tracking-widest border-b border-black/5"></th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-black/5 font-medium text-sm text-gray-700">
+                    <tbody className="divide-y divide-black/5 font-medium text-sm text-slate-700 dark:text-slate-200">
                         {filteredFees.map(fee => (
                             <tr key={fee.id} className="hover:bg-gray-50/80 transition-colors group">
-                                <td className="px-6 py-5 font-black text-gray-900 group-hover:text-[#667eea] transition-colors">{getChildName(fee.child_id)}</td>
+                                <td className="px-6 py-5 font-black text-slate-900 dark:text-slate-50 group-hover:text-[#667eea] transition-colors">{getChildName(fee.child_id)}</td>
                                 <td className="px-6 py-5 whitespace-nowrap">{getMonthName(fee.month)} {fee.year}</td>
                                 <td className="px-6 py-5 whitespace-nowrap">
-                                    <span className="px-2 py-0.5 bg-gray-100 text-[10px] font-black text-gray-600 rounded-md uppercase tracking-widest">
+                                    <span className="px-2 py-0.5 bg-gray-100 text-[10px] font-black text-ui-muted rounded-md uppercase tracking-widest">
                                         {formatFeeType(fee.fee_type)}
                                     </span>
                                 </td>
-                                <td className="px-6 py-5 font-black text-gray-900">€{fee.amount.toFixed(2)}</td>
-                                <td className="px-6 py-5 whitespace-nowrap text-gray-400">{new Date(fee.due_date).toLocaleDateString('de-DE')}</td>
+                                <td className="px-6 py-5 font-black text-slate-900 dark:text-slate-50">€{fee.amount.toFixed(2)}</td>
+                                <td className="px-6 py-5 whitespace-nowrap text-ui-soft">{new Date(fee.due_date).toLocaleDateString('de-DE')}</td>
                                 <td className="px-6 py-5 whitespace-nowrap">
                                     <span className={`px-2.5 py-1 text-[9px] font-black uppercase tracking-widest rounded-md ${
                                         fee.status === 'paid' ? 'bg-green-50 text-green-700 border border-green-100' :
                                         fee.status === 'overdue' ? 'bg-red-50 text-red-700 border border-red-100' :
-                                        fee.status === 'waived' ? 'bg-gray-50 text-gray-500 border border-gray-100' :
+                                        fee.status === 'waived' ? 'bg-gray-50 text-ui-soft border border-gray-100' :
                                         'bg-amber-50 text-amber-700 border border-amber-100'
                                     }`}>
                                         {fee.status === 'paid' ? 'Bezahlt' : fee.status === 'overdue' ? 'Fällig' : fee.status === 'waived' ? 'Erlassen' : 'Offen'}

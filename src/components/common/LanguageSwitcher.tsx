@@ -12,17 +12,27 @@ export function LanguageSwitcher({ className = '' }: { className?: string }) {
   const { lang, setLang, t } = useI18n()
 
   return (
-    <div className={`inline-flex items-center gap-1 rounded-xl border border-gray-200 bg-white/90 p-1 ${className}`}>
-      <span className="px-2 text-[10px] font-black uppercase tracking-widest text-gray-500">{t('common.language')}</span>
+    <div
+      role="group"
+      aria-label={t('common.language')}
+      className={`inline-flex max-w-full flex-wrap items-center justify-center gap-1 rounded-xl border border-gray-200 bg-white/90 p-1 dark:border-white/15 dark:bg-white/5 ${className}`}
+    >
+      <span className="px-2 text-[10px] font-black uppercase tracking-widest text-ui-muted">
+        {t('common.language')}
+      </span>
       {options.map((o) => (
         <button
           key={o.id}
           type="button"
           onClick={() => setLang(o.id)}
           className={[
-            'rounded-lg px-2.5 py-1 text-[10px] font-black uppercase tracking-widest transition-colors',
-            lang === o.id ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-100',
+            'min-h-11 min-w-11 touch-manipulation rounded-lg px-3 py-2 text-[10px] font-black uppercase tracking-widest transition-colors sm:min-h-0 sm:min-w-0 sm:px-2.5 sm:py-1',
+            lang === o.id
+              ? 'bg-gray-900 text-white dark:bg-slate-100 dark:text-slate-900'
+              : 'text-slate-700 dark:text-slate-200 hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-white/10',
           ].join(' ')}
+          aria-pressed={lang === o.id}
+          aria-label={`${t('common.language')}: ${o.label}`}
         >
           {o.label}
         </button>
@@ -30,4 +40,3 @@ export function LanguageSwitcher({ className = '' }: { className?: string }) {
     </div>
   )
 }
-

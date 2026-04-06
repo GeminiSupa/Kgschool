@@ -81,10 +81,10 @@ export function CreateParentModal({ onClose, onCreated }: CreateParentModalProps
       <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl max-w-md w-full border border-white/20 animate-[fadeInUp_0.3s_ease-out]">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-bold text-gray-900">Create New Parent</h3>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50">Create New Parent</h3>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="text-ui-soft hover:text-slate-800 dark:hover:text-slate-100 transition-colors"
             >
               ✕
             </button>
@@ -92,7 +92,7 @@ export function CreateParentModal({ onClose, onCreated }: CreateParentModalProps
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Full Name *</label>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Full Name *</label>
               <input
                 type="text"
                 required
@@ -103,7 +103,7 @@ export function CreateParentModal({ onClose, onCreated }: CreateParentModalProps
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Email *</label>
               <input
                 type="email"
                 required
@@ -114,7 +114,7 @@ export function CreateParentModal({ onClose, onCreated }: CreateParentModalProps
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Password *</label>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Password *</label>
               <input
                 type="password"
                 required
@@ -127,7 +127,7 @@ export function CreateParentModal({ onClose, onCreated }: CreateParentModalProps
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Confirm Password *</label>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Confirm Password *</label>
               <input
                 type="password"
                 required
@@ -142,7 +142,7 @@ export function CreateParentModal({ onClose, onCreated }: CreateParentModalProps
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Phone</label>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Phone</label>
               <input
                 type="tel"
                 value={form.phone}
@@ -161,7 +161,7 @@ export function CreateParentModal({ onClose, onCreated }: CreateParentModalProps
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2.5 text-gray-700 bg-gray-100/80 hover:bg-gray-200 rounded-xl transition-colors font-medium"
+                className="px-5 py-2.5 text-slate-700 dark:text-slate-200 bg-gray-100/80 hover:bg-gray-200 rounded-xl transition-colors font-medium"
               >
                 Cancel
               </button>

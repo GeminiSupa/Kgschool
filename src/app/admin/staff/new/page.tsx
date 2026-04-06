@@ -50,8 +50,8 @@ export default function NewStaffPage() {
         >
           ← Zurück zum Personal
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Legen Sie ein neues Konto für einen Mitarbeiter an.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Legen Sie ein neues Konto für einen Mitarbeiter an.</p>
       </div>
 
       <IOSCard className="p-10 shadow-2xl shadow-indigo-900/5 border-black/5">

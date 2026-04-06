@@ -6,17 +6,17 @@ export const metadata = {
 
 export default function ImprintPage() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-white text-slate-900 dark:text-slate-50">
       <div className="mx-auto max-w-4xl px-6 py-12">
         <Link href="/" className="text-sm text-indigo-700 hover:text-indigo-900">
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">Impressum</h1>
-        <p className="mt-3 text-sm text-gray-600">
+        <p className="mt-3 text-sm text-ui-muted">
           Platzhalter-Vorlage. Bitte vor Veroeffentlichung mit Ihren echten Unternehmensdaten ersetzen.
         </p>
 
-        <section className="mt-8 space-y-4 text-sm leading-6 text-gray-700">
+        <section className="mt-8 space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-200">
           <p>
             <strong>Anbieter:</strong>
             <br />

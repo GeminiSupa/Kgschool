@@ -240,14 +240,14 @@ export default function AdminChildAssignTeachersPage() {
         <button
           type="button"
           onClick={() => router.push(`/admin/children/${childId}`)}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Child Details
         </button>
         <Heading size="xl" className="mb-2">
           Assign Teachers to Child
         </Heading>
-        {childName && <p className="text-sm text-gray-500">{childName}</p>}
+        {childName && <p className="text-sm text-ui-soft">{childName}</p>}
       </div>
 
       <div className="space-y-6">
@@ -278,7 +278,7 @@ export default function AdminChildAssignTeachersPage() {
             className="space-y-4"
           >
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Staff Member <span className="text-red-500">*</span>
               </label>
               <select
@@ -297,7 +297,7 @@ export default function AdminChildAssignTeachersPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Assignment Type <span className="text-red-500">*</span>
               </label>
               <select
@@ -313,7 +313,7 @@ export default function AdminChildAssignTeachersPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                   Start Date <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -325,7 +325,7 @@ export default function AdminChildAssignTeachersPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">End Date (Optional)</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">End Date (Optional)</label>
                 <input
                   type="date"
                   value={form.end_date}
@@ -336,7 +336,7 @@ export default function AdminChildAssignTeachersPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Notes</label>
               <textarea
                 value={form.notes}
                 onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))}
@@ -351,7 +351,7 @@ export default function AdminChildAssignTeachersPage() {
                 <button
                   type="button"
                   onClick={() => resetCreateForm()}
-                  className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                  className="px-4 py-2 text-slate-700 dark:text-slate-200 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
                 >
                   Cancel Edit
                 </button>
@@ -368,7 +368,7 @@ export default function AdminChildAssignTeachersPage() {
                 <button
                   type="button"
                   onClick={() => resetCreateForm()}
-                  className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                  className="px-4 py-2 text-slate-700 dark:text-slate-200 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
                 >
                   Cancel
                 </button>
@@ -388,7 +388,7 @@ export default function AdminChildAssignTeachersPage() {
             <Heading size="md" className="mb-4">
               Editing Assignment
             </Heading>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-ui-muted">
               Updating the selected assignment. Click <b>Save Update</b> to persist changes.
             </p>
           </div>

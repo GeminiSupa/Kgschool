@@ -134,7 +134,7 @@ export default function FeeDetailPage() {
   }
 
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
-  if (!fee) return <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">Gebühr nicht gefunden.</div>
+  if (!fee) return <div className="max-w-4xl mx-auto py-12 text-center text-ui-soft">Gebühr nicht gefunden.</div>
 
   const totalPaid = payments.reduce((sum, p) => sum + p.amount, 0)
   const remaining = Math.max(0, fee.amount - totalPaid)
@@ -147,8 +147,8 @@ export default function FeeDetailPage() {
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
             <div>
-                <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-                <p className="text-sm font-bold text-gray-500 mt-1">{getChildName(fee.child_id)} • {new Date(2000, fee.month - 1).toLocaleString('de-DE', { month: 'long' })} {fee.year}</p>
+                <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+                <p className="text-sm font-bold text-ui-soft mt-1">{getChildName(fee.child_id)} • {new Date(2000, fee.month - 1).toLocaleString('de-DE', { month: 'long' })} {fee.year}</p>
             </div>
             <div className={`px-4 py-2 rounded-2xl border font-black text-xs uppercase tracking-widest ${
                 fee.status === 'paid' ? 'bg-green-50 text-green-700 border-green-100' :
@@ -166,11 +166,11 @@ export default function FeeDetailPage() {
                 <div className="grid grid-cols-2 gap-8 mb-8">
                     <div>
                         <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-1.5">Gebührenart</p>
-                        <p className="text-lg font-black text-gray-900 capitalize">{fee.fee_type}</p>
+                        <p className="text-lg font-black text-slate-900 dark:text-slate-50 capitalize">{fee.fee_type}</p>
                     </div>
                     <div>
                         <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-1.5">Fälligkeitsdatum</p>
-                        <p className="text-lg font-black text-gray-900">{new Date(fee.due_date).toLocaleDateString('de-DE')}</p>
+                        <p className="text-lg font-black text-slate-900 dark:text-slate-50">{new Date(fee.due_date).toLocaleDateString('de-DE')}</p>
                     </div>
                 </div>
                 <div className="flex items-end justify-between p-6 bg-[#f2f2f7] rounded-3xl border border-black/5">
@@ -180,7 +180,7 @@ export default function FeeDetailPage() {
                     </div>
                     <div className="text-right">
                         <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-1">Bereits bezahlt</p>
-                        <p className="text-xl font-bold text-gray-900">€{totalPaid.toFixed(2)}</p>
+                        <p className="text-xl font-bold text-slate-900 dark:text-slate-50">€{totalPaid.toFixed(2)}</p>
                     </div>
                 </div>
             </IOSCard>
@@ -188,14 +188,14 @@ export default function FeeDetailPage() {
             <IOSCard className="p-8 border-black/5 shadow-indigo-900/5">
                 <h3 className="text-xs font-black text-black/30 uppercase tracking-widest mb-6 border-b border-black/5 pb-4">Zahlungshistorie</h3>
                 {payments.length === 0 ? (
-                    <p className="text-center py-8 text-gray-400 font-medium">Noch keine Zahlungen erfasst.</p>
+                    <p className="text-center py-8 text-ui-soft font-medium">Noch keine Zahlungen erfasst.</p>
                 ) : (
                     <div className="space-y-4">
                         {payments.map(p => (
                             <div key={p.id} className="flex items-center justify-between p-4 bg-gray-50/50 rounded-2xl border border-black/5">
                                 <div>
-                                    <p className="text-sm font-black text-gray-800">€{p.amount.toFixed(2)}</p>
-                                    <p className="text-[10px] text-gray-400 font-bold">{new Date(p.payment_date).toLocaleDateString('de-DE')} • {p.payment_method || 'Zahlung'}</p>
+                                    <p className="text-sm font-black text-slate-800 dark:text-slate-100">€{p.amount.toFixed(2)}</p>
+                                    <p className="text-[10px] text-ui-soft font-bold">{new Date(p.payment_date).toLocaleDateString('de-DE')} • {p.payment_method || 'Zahlung'}</p>
                                 </div>
                                 <span className="text-[10px] font-black text-[#667eea] uppercase">Erfolgreich</span>
                             </div>
@@ -218,7 +218,7 @@ export default function FeeDetailPage() {
                                 max={remaining}
                                 value={paymentAmount}
                                 onChange={(e) => setPaymentAmount(parseFloat(e.target.value) || 0)}
-                                className="w-full px-4 py-3 bg-gray-50 border border-black/5 rounded-2xl text-lg font-black text-gray-900 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                                className="w-full px-4 py-3 bg-gray-50 border border-black/5 rounded-2xl text-lg font-black text-slate-900 dark:text-slate-50 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
                             />
                         </div>
                         <IOSButton type="submit" disabled={submitting || paymentAmount <= 0} className="w-full py-3 font-black text-xs uppercase tracking-widest">
@@ -237,7 +237,7 @@ export default function FeeDetailPage() {
                         </IOSButton>
                     )}
                     {fee.status !== 'waived' && (
-                        <IOSButton variant="secondary" onClick={() => handleStatusUpdate('waived')} className="w-full py-2.5 text-[10px] font-black uppercase tracking-widest text-gray-500 border-gray-100">
+                        <IOSButton variant="secondary" onClick={() => handleStatusUpdate('waived')} className="w-full py-2.5 text-[10px] font-black uppercase tracking-widest text-ui-soft border-gray-100">
                             Gebühr erlassen
                         </IOSButton>
                     )}
@@ -252,7 +252,7 @@ export default function FeeDetailPage() {
                     <h3 className="text-xs font-black text-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                         <span>✨</span> AI Zahlungserinnerung
                     </h3>
-                    <p className="text-xs text-gray-500 mb-4 font-medium">Lassen Sie die AI eine professionelle Zahlungserinnerung an die Eltern schreiben.</p>
+                    <p className="text-xs text-ui-soft mb-4 font-medium">Lassen Sie die AI eine professionelle Zahlungserinnerung an die Eltern schreiben.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
                         <IOSButton variant="secondary" onClick={() => handleGenerateReminder('friendly')} disabled={isGeneratingReminder} className="w-full py-2 text-[10px] font-black uppercase tracking-widest text-indigo-600 border-indigo-100 hover:bg-indigo-50">
                             {isGeneratingReminder ? <LoadingSpinner size="sm" /> : 'Freundlich'}
@@ -268,7 +268,7 @@ export default function FeeDetailPage() {
                                 value={reminderText}
                                 onChange={(e) => setReminderText(e.target.value)}
                                 rows={6}
-                                className="w-full px-4 py-3 bg-white border border-black/10 rounded-2xl text-sm font-medium text-gray-900 outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none shadow-sm"
+                                className="w-full px-4 py-3 bg-white border border-black/10 rounded-2xl text-sm font-medium text-slate-900 dark:text-slate-50 outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none shadow-sm"
                             />
                             <div className="mt-3 flex justify-end">
                                 <IOSButton variant="primary" onClick={() => { navigator.clipboard.writeText(reminderText); toast.push({ type: 'success', title: 'Kopiert', message: 'Text in Zwischenablage kopiert.' }) }} className="py-2 px-4 text-xs font-black uppercase tracking-widest bg-indigo-600 hover:bg-indigo-700">

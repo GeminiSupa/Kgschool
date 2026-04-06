@@ -77,7 +77,7 @@ export default function ChildDetailPage() {
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
   if (!child)
     return (
-      <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">{t(sT('errNotFoundChild'))}</div>
+      <div className="max-w-4xl mx-auto py-12 text-center text-ui-soft">{t(sT('errNotFoundChild'))}</div>
     )
 
   return (
@@ -91,16 +91,16 @@ export default function ChildDetailPage() {
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
             <div>
-                <Heading size="xl" className="text-gray-900 tracking-tight">{child.first_name} {child.last_name}</Heading>
+                <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{child.first_name} {child.last_name}</Heading>
                 <div className="flex items-center gap-3 mt-2">
                     <span className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-widest rounded-md border ${
                         child.status === 'active' ? 'bg-green-50 text-green-700 border-green-100' :
-                        child.status === 'inactive' ? 'bg-gray-50 text-gray-500 border-gray-100' :
+                        child.status === 'inactive' ? 'bg-gray-50 text-ui-soft border-gray-100' :
                         'bg-amber-50 text-amber-700 border-amber-100'
                     }`}>
                         {child.status}
                     </span>
-                    <span className="text-sm font-bold text-gray-400">ID: {child.id.split('-')[0]}</span>
+                    <span className="text-sm font-bold text-ui-soft">ID: {child.id.split('-')[0]}</span>
                 </div>
             </div>
             {!isEditing && (
@@ -135,20 +135,20 @@ export default function ChildDetailPage() {
                             <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-4">Stammdaten</p>
                             <div className="grid grid-cols-2 gap-8">
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Vorname</p>
-                                    <p className="text-base font-black text-gray-900">{child.first_name}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Vorname</p>
+                                    <p className="text-base font-black text-slate-900 dark:text-slate-50">{child.first_name}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Nachname</p>
-                                    <p className="text-base font-black text-gray-900">{child.last_name}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Nachname</p>
+                                    <p className="text-base font-black text-slate-900 dark:text-slate-50">{child.last_name}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Geburtsdatum</p>
-                                    <p className="text-base font-black text-gray-900">{new Date(child.date_of_birth).toLocaleDateString('de-DE')}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Geburtsdatum</p>
+                                    <p className="text-base font-black text-slate-900 dark:text-slate-50">{new Date(child.date_of_birth).toLocaleDateString('de-DE')}</p>
                                 </div>
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Einschulung</p>
-                                    <p className="text-base font-black text-gray-900">{new Date(child.enrollment_date).toLocaleDateString('de-DE')}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Einschulung</p>
+                                    <p className="text-base font-black text-slate-900 dark:text-slate-50">{new Date(child.enrollment_date).toLocaleDateString('de-DE')}</p>
                                 </div>
                             </div>
                         </div>
@@ -157,12 +157,12 @@ export default function ChildDetailPage() {
                             <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-4">Verwaltung</p>
                             <div className="p-6 bg-[#f2f2f7] rounded-3xl border border-black/5 flex items-center justify-between">
                                 <div>
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Gruppenzuordnung</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Gruppenzuordnung</p>
                                     <p className="text-lg font-black text-[#667eea]">{child.group_id || 'Nicht zugewiesen'}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-xs font-bold text-gray-400 mb-1">Zuletzt aktualisiert</p>
-                                    <p className="text-xs font-black text-gray-900">{new Date(child.updated_at).toLocaleDateString('de-DE')}</p>
+                                    <p className="text-xs font-bold text-ui-soft mb-1">Zuletzt aktualisiert</p>
+                                    <p className="text-xs font-black text-slate-900 dark:text-slate-50">{new Date(child.updated_at).toLocaleDateString('de-DE')}</p>
                                 </div>
                             </div>
                         </div>
@@ -180,7 +180,7 @@ export default function ChildDetailPage() {
                             <div key={pid} className="flex items-center gap-3 p-3 bg-gray-50 rounded-2xl border border-black/5">
                                 <div className="w-8 h-8 rounded-full bg-[#667eea]/10 text-[#667eea] flex items-center justify-center text-[10px] font-black">👤</div>
                                 <div className="flex-1 truncate">
-                                    <p className="text-xs font-black text-gray-800 truncate">ID: {pid.split('-')[0]}</p>
+                                    <p className="text-xs font-black text-slate-800 dark:text-slate-100 truncate">ID: {pid.split('-')[0]}</p>
                                     <Link href={`/admin/users/${pid}`} className="text-[9px] font-black uppercase text-[#667eea] hover:underline transition-all">Profil ansehen</Link>
                                 </div>
                             </div>

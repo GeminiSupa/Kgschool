@@ -39,40 +39,40 @@ export default function SupportPayrollPage() {
       ) : (
         <IOSCard className="p-0 overflow-hidden">
           {myPayroll.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">No payroll records found.</div>
+            <div className="p-8 text-center text-ui-soft">No payroll records found.</div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-border">
+                <thead className="bg-slate-50 dark:bg-white/5">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Period</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Base Salary</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Overtime</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Bonuses</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Deductions</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Net Salary</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Period</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Base Salary</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Overtime</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Bonuses</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Deductions</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Net Salary</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Status</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="divide-y divide-border bg-background">
                   {myPayroll.map((record) => (
-                    <tr key={record.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <tr key={record.id} className="hover:bg-slate-50 dark:hover:bg-white/5">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-50">
                         {getMonthName(record.month)} {record.year}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                         €{record.base_salary.toFixed(2)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                         €{record.overtime_amount.toFixed(2)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-emerald-600 dark:text-emerald-400">
                         €{record.bonuses.toFixed(2)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600 dark:text-red-400">
                         €{record.deductions.toFixed(2)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-50">
                         €{record.net_salary.toFixed(2)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -80,10 +80,10 @@ export default function SupportPayrollPage() {
                           className={[
                             'px-2 py-1 text-xs font-medium rounded-full',
                             record.status === 'paid'
-                              ? 'bg-green-100 text-green-800'
+                              ? 'bg-green-100 text-green-800 dark:bg-green-950/50 dark:text-green-200'
                               : record.status === 'approved'
-                                ? 'bg-blue-100 text-blue-800'
-                                : 'bg-yellow-100 text-yellow-800',
+                                ? 'bg-blue-100 text-blue-800 dark:bg-blue-950/50 dark:text-blue-200'
+                                : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950/50 dark:text-yellow-200',
                           ].join(' ')}
                         >
                           {record.status}

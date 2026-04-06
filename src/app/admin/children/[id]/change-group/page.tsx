@@ -237,7 +237,7 @@ export default function AdminChildChangeGroupPage() {
         <button
           type="button"
           onClick={() => router.push(`/admin/children/${childId}`)}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Child Details
         </button>
@@ -254,14 +254,14 @@ export default function AdminChildChangeGroupPage() {
             {currentGroup ? (
               <div className="space-y-2">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Current Group</p>
-                  <p className="mt-1 text-gray-900 font-medium">
+                  <p className="text-sm font-medium text-ui-muted">Current Group</p>
+                  <p className="mt-1 text-slate-900 dark:text-slate-50 font-medium">
                     {currentGroup.name} ({currentGroup.age_range})
                   </p>
                 </div>
                 {currentGroupTeachers.length > 0 && (
                   <div>
-                    <p className="text-sm font-medium text-gray-600 mb-1">Current Teachers</p>
+                    <p className="text-sm font-medium text-ui-muted mb-1">Current Teachers</p>
                     <div className="flex flex-wrap gap-2">
                       {currentGroupTeachers.map((teacher, idx) => (
                         <span key={teacher.id || String(idx)} className="px-2 py-1 text-xs bg-gray-100 rounded">
@@ -273,7 +273,7 @@ export default function AdminChildChangeGroupPage() {
                 )}
               </div>
             ) : (
-              <p className="text-gray-500">Child is not currently assigned to a group.</p>
+              <p className="text-ui-soft">Child is not currently assigned to a group.</p>
             )}
           </div>
 
@@ -283,7 +283,7 @@ export default function AdminChildChangeGroupPage() {
             </Heading>
 
             <div className="mb-4">
-              <label htmlFor="new_group_id" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="new_group_id" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Group <span className="text-red-500">*</span>
               </label>
 
@@ -324,7 +324,7 @@ export default function AdminChildChangeGroupPage() {
                         <span className="font-medium">
                           {suggestion.group.name} ({suggestion.group.age_range})
                         </span>
-                        <span className="text-xs text-gray-600">{suggestion.reason}</span>
+                        <span className="text-xs text-ui-muted">{suggestion.reason}</span>
                       </div>
                     </button>
                   ))}
@@ -343,7 +343,7 @@ export default function AdminChildChangeGroupPage() {
 
             {selectedGroupTeachers.length > 0 && (
               <div className="mb-4 p-2 bg-gray-50 rounded-md">
-                <p className="text-xs font-medium text-gray-700 mb-1">Teachers in New Group:</p>
+                <p className="text-xs font-medium text-slate-700 dark:text-slate-200 mb-1">Teachers in New Group:</p>
                 <div className="flex flex-wrap gap-1">
                   {selectedGroupTeachers.map((teacher, idx) => (
                     <span key={teacher.id || String(idx)} className="text-xs px-2 py-0.5 bg-white rounded border border-gray-200">
@@ -356,7 +356,7 @@ export default function AdminChildChangeGroupPage() {
             )}
 
             <div className="mb-4">
-              <label htmlFor="transfer_date" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="transfer_date" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Transfer Date <span className="text-red-500">*</span>
               </label>
 
@@ -371,7 +371,7 @@ export default function AdminChildChangeGroupPage() {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="notes" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Notes
               </label>
               <textarea
@@ -408,7 +408,7 @@ export default function AdminChildChangeGroupPage() {
               <button
                 type="button"
                 onClick={() => router.push(`/admin/children/${childId}`)}
-                className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+                className="px-4 py-2 text-slate-700 dark:text-slate-200 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
               >
                 Cancel
               </button>

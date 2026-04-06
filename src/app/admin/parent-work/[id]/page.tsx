@@ -107,7 +107,7 @@ export default function AdminParentWorkDetailsPage() {
 
   const getStatusClass = (status: ParentWorkTask['status']) => {
     const classes: Record<string, string> = {
-      open: 'px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800',
+      open: 'px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-slate-800 dark:text-slate-100',
       assigned: 'px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800',
       in_progress: 'px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800',
       completed: 'px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800',
@@ -175,7 +175,7 @@ export default function AdminParentWorkDetailsPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/parent-work')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           {t(sT('pwBackLink'))}
         </button>
@@ -195,52 +195,52 @@ export default function AdminParentWorkDetailsPage() {
           <IOSCard className="p-6 max-w-4xl mx-auto">
             <div className="flex justify-between items-start mb-4 gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">{task.title}</h2>
-                <p className="text-gray-600 mt-1">{formatTaskType(task.task_type)}</p>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50">{task.title}</h2>
+                <p className="text-ui-muted mt-1">{formatTaskType(task.task_type)}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mt-6">
               <div>
-                <label className="text-sm font-medium text-gray-500">{t(sT('pwDescription'))}</label>
-                <p className="mt-1 text-gray-900">{task.description || t(sT('pwNoDescription'))}</p>
+                <label className="text-sm font-medium text-ui-soft">{t(sT('pwDescription'))}</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{task.description || t(sT('pwNoDescription'))}</p>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-500">{t(sT('pwStatus'))}</label>
+                <label className="text-sm font-medium text-ui-soft">{t(sT('pwStatus'))}</label>
                 <p className="mt-1">
                   <span className={getStatusClass(task.status)}>{formatStatus(task.status)}</span>
                 </p>
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-500">{t(sT('pwHourlyRate'))}</label>
-                <p className="mt-1 text-gray-900">€{task.hourly_rate.toFixed(2)}/hr</p>
+                <label className="text-sm font-medium text-ui-soft">{t(sT('pwHourlyRate'))}</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">€{task.hourly_rate.toFixed(2)}/hr</p>
               </div>
               {task.estimated_hours && (
                 <div>
-                  <label className="text-sm font-medium text-gray-500">{t(sT('pwEstimatedHours'))}</label>
-                  <p className="mt-1 text-gray-900">
+                  <label className="text-sm font-medium text-ui-soft">{t(sT('pwEstimatedHours'))}</label>
+                  <p className="mt-1 text-slate-900 dark:text-slate-50">
                     {task.estimated_hours} {t(sT('pwHoursUnit'))}
                   </p>
                 </div>
               )}
               {task.assigned_to && (
                 <div>
-                  <label className="text-sm font-medium text-gray-500">{t(sT('pwAssignedTo'))}</label>
-                  <p className="mt-1 text-gray-900">{getAssignedToName(task.assigned_to)}</p>
+                  <label className="text-sm font-medium text-ui-soft">{t(sT('pwAssignedTo'))}</label>
+                  <p className="mt-1 text-slate-900 dark:text-slate-50">{getAssignedToName(task.assigned_to)}</p>
                 </div>
               )}
               {task.due_date && (
                 <div>
-                  <label className="text-sm font-medium text-gray-500">{t(sT('pwDueDate'))}</label>
-                  <p className="mt-1 text-gray-900">{formatDate(task.due_date)}</p>
+                  <label className="text-sm font-medium text-ui-soft">{t(sT('pwDueDate'))}</label>
+                  <p className="mt-1 text-slate-900 dark:text-slate-50">{formatDate(task.due_date)}</p>
                 </div>
               )}
             </div>
 
             {task.notes && (
               <div className="mt-4">
-                <label className="text-sm font-medium text-gray-500">{t(sT('pwNotes'))}</label>
-                <p className="mt-1 text-gray-900">{task.notes}</p>
+                <label className="text-sm font-medium text-ui-soft">{t(sT('pwNotes'))}</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{task.notes}</p>
               </div>
             )}
           </IOSCard>
@@ -251,28 +251,28 @@ export default function AdminParentWorkDetailsPage() {
             </Heading>
 
             {submissions.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">{t(sT('pwNoSubmissions'))}</div>
+              <div className="text-center py-8 text-ui-soft">{t(sT('pwNoSubmissions'))}</div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase tracking-wider">
                         {t(sT('pwColParent'))}
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase tracking-wider">
                         {t(sT('pwColDate'))}
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase tracking-wider">
                         {t(sT('pwColHours'))}
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase tracking-wider">
                         {t(sT('pwColAmount'))}
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase tracking-wider">
                         {t(sT('pwColStatus'))}
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase tracking-wider">
                         {t(sT('pwColActions'))}
                       </th>
                     </tr>
@@ -280,16 +280,16 @@ export default function AdminParentWorkDetailsPage() {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {submissions.map((submission) => (
                       <tr key={submission.id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                           {getParentName(submission.parent_id)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                           {formatDate(submission.work_date)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                           {submission.hours_worked}h
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                           €{(submission.payment_amount || 0).toFixed(2)}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">

@@ -6,24 +6,24 @@ export const metadata = {
 
 export default function DpaPage() {
   return (
-    <main className="min-h-screen bg-white text-gray-900">
+    <main className="min-h-screen bg-white text-slate-900 dark:text-slate-50">
       <div className="mx-auto max-w-4xl px-6 py-12">
         <Link href="/" className="text-sm text-indigo-700 hover:text-indigo-900">
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">AVV / Data Processing Agreement</h1>
-        <p className="mt-3 text-sm text-gray-600">
+        <p className="mt-3 text-sm text-ui-muted">
           Vorlage fuer den Abschluss eines Auftragsverarbeitungsvertrags (Art. 28 DSGVO).
         </p>
 
-        <section className="mt-8 space-y-4 text-sm leading-6 text-gray-700">
-          <h2 className="text-xl font-semibold text-gray-900">Leistungsrahmen</h2>
+        <section className="mt-8 space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-200">
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Leistungsrahmen</h2>
           <p>
             KG School verarbeitet personenbezogene Daten ausschliesslich im Auftrag und auf dokumentierte Weisung der
             verantwortlichen Stelle.
           </p>
 
-          <h2 className="text-xl font-semibold text-gray-900">Mindestinhalte des AVV</h2>
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Mindestinhalte des AVV</h2>
           <ul className="list-disc space-y-1 pl-5">
             <li>Gegenstand, Dauer, Art und Zweck der Verarbeitung</li>
             <li>Kategorien betroffener Personen und Daten</li>
@@ -33,7 +33,7 @@ export default function DpaPage() {
             <li>Unterstuetzung bei Betroffenenanfragen und Vorfallmanagement</li>
           </ul>
 
-          <h2 className="text-xl font-semibold text-gray-900">Anfrageprozess</h2>
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Anfrageprozess</h2>
           <p>
             Senden Sie Ihre AVV-Anfrage an <strong>dpa@kgschool.de</strong>. Sie erhalten eine Vertragsvorlage,
             TOM-Anlage und die aktuelle Subunternehmerliste.

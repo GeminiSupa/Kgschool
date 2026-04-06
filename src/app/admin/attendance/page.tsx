@@ -65,14 +65,14 @@ export default function AdminAttendancePage() {
   return (
     <div className="max-w-7xl mx-auto pb-12">
       <div className="mb-10">
-        <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Überwachen Sie die tägliche Anwesenheit aller Kinder in Echtzeit.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Überwachen Sie die tägliche Anwesenheit aller Kinder in Echtzeit.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
         <IOSCard className="p-6 bg-white border-black/5 shadow-sm">
             <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-1">Gesamt erwartet</p>
-            <p className="text-2xl font-black text-gray-900">{stats.total}</p>
+            <p className="text-2xl font-black text-slate-900 dark:text-slate-50">{stats.total}</p>
         </IOSCard>
         <IOSCard className="p-6 bg-green-50/50 border-green-100 shadow-sm">
             <p className="text-[10px] font-black text-green-700/40 uppercase tracking-widest mb-1">Anwesend</p>
@@ -99,7 +99,7 @@ export default function AdminAttendancePage() {
               <select
                   value={selectedGroup}
                   onChange={(e) => setSelectedGroup(e.target.value)}
-                  className="px-4 py-2 bg-white border border-black/5 rounded-xl text-xs font-black uppercase tracking-widest text-gray-900 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                  className="px-4 py-2 bg-white border border-black/5 rounded-xl text-xs font-black uppercase tracking-widest text-slate-900 dark:text-slate-50 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
               >
                   <option value="">Alle Gruppen</option>
                   {groups.map(g => (
@@ -116,7 +116,7 @@ export default function AdminAttendancePage() {
       ) : filteredAttendance.length === 0 ? (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
           <div className="text-6xl opacity-10 mb-6">📋</div>
-          <p className="text-gray-400 font-bold max-w-xs mx-auto">Keine Anwesenheitsdaten für diesen Tag und Filter vorhanden.</p>
+          <p className="text-ui-soft font-bold max-w-xs mx-auto">Keine Anwesenheitsdaten für diesen Tag und Filter vorhanden.</p>
         </IOSCard>
       ) : (
         <IOSCard className="p-0 overflow-hidden shadow-sm border-black/5">
@@ -139,16 +139,16 @@ export default function AdminAttendancePage() {
                                         <div className="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center text-xs font-black text-black/20 italic">
                                             {getChildName(record.child_id).charAt(0)}
                                         </div>
-                                        <span className="font-black text-gray-900 underline-offset-4 decoration-[#667eea]/30 hover:underline">{getChildName(record.child_id)}</span>
+                                        <span className="font-black text-slate-900 dark:text-slate-50 underline-offset-4 decoration-[#667eea]/30 hover:underline">{getChildName(record.child_id)}</span>
                                     </div>
                                 </td>
                                 <td className="px-6 py-5">
-                                    <span className="px-2 py-0.5 bg-gray-50 text-[9px] font-black text-gray-400 rounded-md border border-black/5">
+                                    <span className="px-2 py-0.5 bg-gray-50 text-[9px] font-black text-ui-soft rounded-md border border-black/5">
                                         {getChildGroup(record.child_id) || 'Unbekannt'}
                                     </span>
                                 </td>
-                                <td className="px-6 py-5 text-sm font-bold text-gray-800 italic">{formatTime(record.check_in_time)}</td>
-                                <td className="px-6 py-5 text-sm font-bold text-gray-400">{formatTime(record.check_out_time)}</td>
+                                <td className="px-6 py-5 text-sm font-bold text-slate-800 dark:text-slate-100 italic">{formatTime(record.check_in_time)}</td>
+                                <td className="px-6 py-5 text-sm font-bold text-ui-soft">{formatTime(record.check_out_time)}</td>
                                 <td className="px-6 py-5">
                                     <span className={`px-2.5 py-1 text-[9px] font-black uppercase tracking-widest rounded-md border ${
                                         record.status === 'present' ? 'bg-green-50 text-green-700 border-green-100' :

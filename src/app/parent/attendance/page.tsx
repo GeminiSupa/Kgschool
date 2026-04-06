@@ -89,8 +89,8 @@ export default function ParentAttendancePage() {
     <div className="max-w-4xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Status der Anwesenheit Ihrer Kinder</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Status der Anwesenheit Ihrer Kinder</p>
         </div>
         <Link href="/parent/leave/new">
           <IOSButton variant="primary" className="px-5 py-2.5 text-sm font-bold flex items-center gap-2">
@@ -116,7 +116,7 @@ export default function ParentAttendancePage() {
       ) : filteredAttendance.length === 0 ? (
         <IOSCard className="p-12 text-center">
           <div className="text-5xl opacity-40 mb-4">📅</div>
-          <p className="text-gray-500 font-medium">Keine Anwesenheitsdaten für dieses Datum gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Anwesenheitsdaten für dieses Datum gefunden.</p>
         </IOSCard>
       ) : (
         <div className="grid gap-4">
@@ -128,8 +128,8 @@ export default function ParentAttendancePage() {
                     {getChildName(record.child_id)[0]}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">{getChildName(record.child_id)}</h3>
-                    <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-sm font-medium text-gray-500">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50">{getChildName(record.child_id)}</h3>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-sm font-medium text-ui-soft">
                       <p className="flex items-center gap-1.5">
                         <span className="text-xs">⬇️</span> In: {record.check_in_time ? formatTime(record.check_in_time) : '--:--'}
                       </p>
@@ -141,11 +141,11 @@ export default function ParentAttendancePage() {
                 </div>
                 
                 <div className="flex flex-col items-end gap-2">
-                  <span className={`px-4 py-1.5 text-xs font-black uppercase tracking-widest rounded-full border ${statusColors[record.status] || 'bg-gray-50 text-gray-700 border-gray-100'}`}>
+                  <span className={`px-4 py-1.5 text-xs font-black uppercase tracking-widest rounded-full border ${statusColors[record.status] || 'bg-gray-50 text-slate-700 dark:text-slate-200 border-gray-100'}`}>
                     {statusLabels[record.status] || record.status}
                   </span>
                   {record.notes && (
-                    <p className="text-xs font-medium text-gray-400 italic mt-1 max-w-[200px] text-right">
+                    <p className="text-xs font-medium text-ui-soft italic mt-1 max-w-[200px] text-right">
                       "{record.notes}"
                     </p>
                   )}

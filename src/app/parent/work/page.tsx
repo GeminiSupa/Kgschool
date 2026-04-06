@@ -31,8 +31,8 @@ export default function ParentWorkPage() {
   return (
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-10 text-center">
-        <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Übernehmen Sie Aufgaben und melden Sie Ihre Arbeitsstunden.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Übernehmen Sie Aufgaben und melden Sie Ihre Arbeitsstunden.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
@@ -50,8 +50,8 @@ export default function ParentWorkPage() {
 
             <IOSCard className="p-8 border-black/5 flex flex-col justify-center items-center text-center">
                 <div className="w-12 h-12 rounded-2xl bg-gray-50 text-black flex items-center justify-center text-xl mb-4 border border-black/5">✍️</div>
-                <h3 className="text-lg font-black text-gray-900 mb-2">Stunden melden</h3>
-                <p className="text-xs text-gray-400 font-medium mb-6">Tragen Sie geleistete Arbeit hier ein.</p>
+                <h3 className="text-lg font-black text-slate-900 dark:text-slate-50 mb-2">Stunden melden</h3>
+                <p className="text-xs text-ui-soft font-medium mb-6">Tragen Sie geleistete Arbeit hier ein.</p>
                 <IOSButton className="w-full py-3 bg-black text-white border-none text-[10px] font-black uppercase tracking-widest">Jetzt melden</IOSButton>
             </IOSCard>
       </div>
@@ -63,10 +63,10 @@ export default function ParentWorkPage() {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
-                                <h4 className="text-lg font-black text-gray-900">{task.title}</h4>
-                                <span className="px-2 py-1 bg-gray-50 text-gray-400 text-[9px] font-black uppercase rounded-md border border-black/5">{task.task_type}</span>
+                                <h4 className="text-lg font-black text-slate-900 dark:text-slate-50">{task.title}</h4>
+                                <span className="px-2 py-1 bg-gray-50 text-ui-soft text-[9px] font-black uppercase rounded-md border border-black/5">{task.task_type}</span>
                             </div>
-                            <p className="text-sm text-gray-500 font-medium line-clamp-2">{task.description}</p>
+                            <p className="text-sm text-ui-soft font-medium line-clamp-2">{task.description}</p>
                         </div>
                         <IOSButton variant="secondary" className="px-8 py-3 text-[10px] font-black uppercase tracking-widest border-black/5 bg-gray-50 hover:bg-white text-black">Übernehmen</IOSButton>
                     </div>

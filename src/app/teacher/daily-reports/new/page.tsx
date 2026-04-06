@@ -41,8 +41,8 @@ export default function NewDailyReportPage() {
         >
           ← Zurück zu Tagesberichten
         </Link>
-        <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Teilen Sie die Erlebnisse des Tages mit den Eltern</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Teilen Sie die Erlebnisse des Tages mit den Eltern</p>
       </div>
 
       <IOSCard className="p-8">

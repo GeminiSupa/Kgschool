@@ -136,13 +136,13 @@ export default function ParentLunchPage() {
   return (
     <div className="max-w-5xl mx-auto pb-12">
       <div className="mb-8">
-        <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Verwalten Sie die Mahlzeiten für Ihre Kinder.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Verwalten Sie die Mahlzeiten für Ihre Kinder.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <div className="lg:col-span-1">
-          <Heading size="sm" className="mb-4 text-gray-800 uppercase tracking-widest text-[10px] font-black">Kind auswählen</Heading>
+          <Heading size="sm" className="mb-4 text-slate-800 dark:text-slate-100 uppercase tracking-widest text-[10px] font-black">Kind auswählen</Heading>
           <div className="grid gap-2">
             {myChildren.map(child => (
               <button
@@ -160,7 +160,7 @@ export default function ParentLunchPage() {
                   {child.first_name[0]}{child.last_name[0]}
                 </div>
                 <div className="text-left">
-                  <p className={`text-sm font-bold ${selectedChildId === child.id ? 'text-[#667eea]' : 'text-gray-700'}`}>
+                  <p className={`text-sm font-bold ${selectedChildId === child.id ? 'text-[#667eea]' : 'text-slate-700 dark:text-slate-200'}`}>
                     {child.first_name}
                   </p>
                   <p className="text-[10px] font-bold text-black/30 uppercase tracking-wider">{child.last_name}</p>
@@ -178,8 +178,8 @@ export default function ParentLunchPage() {
           )}
 
           <div className="flex items-center justify-between mb-6">
-            <Heading size="md" className="text-gray-800">Speiseplan</Heading>
-            <div className="px-3 py-1 bg-gray-100 rounded-full text-[10px] font-black text-gray-500 uppercase tracking-widest border border-black/5">
+            <Heading size="md" className="text-slate-800 dark:text-slate-100">Speiseplan</Heading>
+            <div className="px-3 py-1 bg-gray-100 rounded-full text-[10px] font-black text-ui-soft uppercase tracking-widest border border-black/5">
               Nächste 14 Tage
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function ParentLunchPage() {
           ) : menus.length === 0 ? (
             <IOSCard className="p-12 text-center bg-gray-50/50">
               <div className="text-5xl opacity-40 mb-4">🍽️</div>
-              <p className="text-gray-500 font-medium">Momentan ist kein Speiseplan verfügbar.</p>
+              <p className="text-ui-soft font-medium">Momentan ist kein Speiseplan verfügbar.</p>
             </IOSCard>
           ) : (
             <div className="grid gap-5">
@@ -209,8 +209,8 @@ export default function ParentLunchPage() {
                                <span className="px-2 py-0.5 bg-green-50 text-green-600 text-[10px] font-black uppercase tracking-wider rounded-md border border-green-100">Heute</span>
                              )}
                           </div>
-                          <h4 className="text-xl font-black text-gray-900 mb-2 tracking-tight">{menu.meal_name}</h4>
-                          <p className="text-sm font-medium text-gray-600 leading-relaxed mb-4">{menu.description}</p>
+                          <h4 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-2 tracking-tight">{menu.meal_name}</h4>
+                          <p className="text-sm font-medium text-ui-muted leading-relaxed mb-4">{menu.description}</p>
                           
                           {menu.allergens && menu.allergens.length > 0 && (
                             <div className="flex flex-wrap gap-1.5">

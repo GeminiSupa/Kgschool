@@ -69,7 +69,7 @@ export default function ParentBillingPage() {
     paid: 'bg-green-50 text-green-700 border-green-100',
     pending: 'bg-amber-50 text-amber-700 border-amber-100',
     overdue: 'bg-red-50 text-red-700 border-red-100',
-    waived: 'bg-gray-50 text-gray-500 border-gray-100'
+    waived: 'bg-gray-50 text-ui-soft border-gray-100'
   }
 
   const statusLabels: Record<string, string> = {
@@ -96,14 +96,14 @@ export default function ParentBillingPage() {
   return (
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-8">
-        <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Status Ihrer monatlichen Gebühren und Zahlungen.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Status Ihrer monatlichen Gebühren und Zahlungen.</p>
       </div>
 
       {fees.length === 0 ? (
         <IOSCard className="p-12 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">💰</div>
-          <p className="text-gray-500 font-medium">Bisher wurden keine Abrechnungen erstellt.</p>
+          <p className="text-ui-soft font-medium">Bisher wurden keine Abrechnungen erstellt.</p>
         </IOSCard>
       ) : (
         <div className="grid gap-5">
@@ -116,17 +116,17 @@ export default function ParentBillingPage() {
                        <span className="text-xs font-bold text-black/40 uppercase tracking-widest">
                           {getMonthName(fee.month)} {fee.year}
                        </span>
-                       <span className="px-2 py-0.5 bg-gray-100 text-gray-500 text-[10px] font-black uppercase tracking-wider rounded-md border border-black/5">
+                       <span className="px-2 py-0.5 bg-gray-100 text-ui-soft text-[10px] font-black uppercase tracking-wider rounded-md border border-black/5">
                           {feeTypeLabels[fee.fee_type] || fee.fee_type}
                        </span>
                     </div>
                     <div className="flex items-baseline gap-2 mb-4">
-                        <h4 className="text-2xl font-black text-gray-900 tracking-tighter">€{fee.amount.toFixed(2)}</h4>
-                        <span className="text-sm font-bold text-gray-400">für {getChildName(fee.child_id)}</span>
+                        <h4 className="text-2xl font-black text-slate-900 dark:text-slate-50 tracking-tighter">€{fee.amount.toFixed(2)}</h4>
+                        <span className="text-sm font-bold text-ui-soft">für {getChildName(fee.child_id)}</span>
                     </div>
                     
                     <div className="flex items-center gap-4 text-xs font-bold">
-                        <div className="flex items-center gap-1.5 text-gray-500">
+                        <div className="flex items-center gap-1.5 text-ui-soft">
                             <span>📅</span> Fällig am {new Date(fee.due_date).toLocaleDateString('de-DE')}
                         </div>
                         {fee.paid_at && (

@@ -17,8 +17,8 @@ export default function SignupPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
               <span className="text-3xl">🔒</span>
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Kontenerstellung eingeschränkt</h1>
-            <p className="text-gray-600">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-2">Kontenerstellung eingeschränkt</h1>
+            <p className="text-ui-muted">
               Benutzerkonten können aus Sicherheitsgründen nur von Administratoren erstellt werden.
             </p>
           </div>
@@ -37,17 +37,17 @@ export default function SignupPage() {
               Zur Anmeldung
             </IOSButton>
 
-            <Link href="/" className="block text-center text-gray-600 hover:text-gray-800 text-sm">
+            <Link href="/" className="block text-center text-ui-muted hover:text-slate-800 dark:text-slate-100 text-sm">
               ← Zurück zur Startseite
             </Link>
-            <div className="flex justify-center gap-4 text-xs text-gray-500">
-              <Link href="/privacy" className="hover:text-gray-700">
+            <div className="flex justify-center gap-4 text-xs text-ui-soft">
+              <Link href="/privacy" className="hover:text-slate-700 dark:text-slate-200">
                 Datenschutz
               </Link>
-              <Link href="/imprint" className="hover:text-gray-700">
+              <Link href="/imprint" className="hover:text-slate-700 dark:text-slate-200">
                 Impressum
               </Link>
-              <Link href="/security" className="hover:text-gray-700">
+              <Link href="/security" className="hover:text-slate-700 dark:text-slate-200">
                 Sicherheit
               </Link>
             </div>

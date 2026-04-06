@@ -43,8 +43,8 @@ export default function AdminContractsPage() {
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <div>
-          <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Verwalten Sie Verträge, Stundenkontingente und Gebühreneinstufungen.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Verwalten Sie Verträge, Stundenkontingente und Gebühreneinstufungen.</p>
         </div>
         <Link href="/admin/contracts/new">
           <IOSButton className="px-6 py-2.5 text-sm font-black uppercase tracking-widest bg-black text-white border-none shadow-xl shadow-black/10">
@@ -61,7 +61,7 @@ export default function AdminContractsPage() {
                     className={`px-5 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all duration-300 ${
                         selectedStatus === s 
                         ? 'bg-black text-white border-black shadow-lg shadow-black/10' 
-                        : 'bg-white text-gray-400 border-black/5 hover:border-black/10'
+                        : 'bg-white text-ui-soft border-black/5 hover:border-black/10'
                     }`}
                 >
                     {s === 'active' ? 'Aktiv' : s === 'pending' ? 'Entwurf' : 'Beendet'}
@@ -74,7 +74,7 @@ export default function AdminContractsPage() {
       ) : contracts.length === 0 ? (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
           <div className="text-6xl opacity-10 mb-6">📝</div>
-          <p className="text-gray-400 font-bold max-w-xs mx-auto">Keine Verträge in dieser Kategorie gefunden.</p>
+          <p className="text-ui-soft font-bold max-w-xs mx-auto">Keine Verträge in dieser Kategorie gefunden.</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -85,7 +85,7 @@ export default function AdminContractsPage() {
                     <div className="relative z-10">
                         <div className="flex justify-between items-start mb-6">
                             <div>
-                                <h3 className="text-lg font-black text-gray-900">{getChildName(contract.child_id)}</h3>
+                                <h3 className="text-lg font-black text-slate-900 dark:text-slate-50">{getChildName(contract.child_id)}</h3>
                                 <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mt-0.5">{contract.contract_number}</p>
                             </div>
                             <span className={`px-2 py-0.5 text-[9px] font-black uppercase rounded border ${
@@ -98,17 +98,17 @@ export default function AdminContractsPage() {
                         <div className="grid grid-cols-2 gap-4 mb-8">
                             <div className="p-4 bg-gray-50/50 rounded-2xl border border-black/5">
                                 <p className="text-[9px] font-black text-black/30 uppercase tracking-widest mb-1">Stunden</p>
-                                <p className="text-sm font-black text-gray-800">{contract.betreuung_hours_type}h / Woche</p>
+                                <p className="text-sm font-black text-slate-800 dark:text-slate-100">{contract.betreuung_hours_type}h / Woche</p>
                             </div>
                             <div className="p-4 bg-gray-50/50 rounded-2xl border border-black/5">
                                 <p className="text-[9px] font-black text-black/30 uppercase tracking-widest mb-1">Einstufung</p>
-                                <p className="text-sm font-black text-gray-800 uppercase">{contract.fee_category}</p>
+                                <p className="text-sm font-black text-slate-800 dark:text-slate-100 uppercase">{contract.fee_category}</p>
                             </div>
                         </div>
 
                         <div className="flex gap-2">
                              <IOSButton variant="secondary" className="flex-1 py-3 text-[10px] font-black uppercase tracking-widest border-black/5 bg-gray-50 hover:bg-white">Vertrag ansehen</IOSButton>
-                             <IOSButton className="py-3 px-6 text-[10px] font-black uppercase tracking-widest border-black/5 bg-white text-gray-400 group-hover:text-black hover:border-black/20">Bearbeiten</IOSButton>
+                             <IOSButton className="py-3 px-6 text-[10px] font-black uppercase tracking-widest border-black/5 bg-white text-ui-soft group-hover:text-black hover:border-black/20">Bearbeiten</IOSButton>
                         </div>
                     </div>
                 </IOSCard>

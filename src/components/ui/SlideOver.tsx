@@ -30,14 +30,16 @@ export const SlideOver: React.FC<SlideOverProps> = ({ isOpen, onClose, title, ch
       
       <div className="fixed inset-y-0 right-0 max-w-full flex">
         <div className={`w-screen max-w-md transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <div className="h-full flex flex-col bg-white shadow-2xl">
-            <div className="px-6 py-8 border-b border-slate-50 flex items-center justify-between">
-              <h2 className="text-xl font-black text-slate-900 tracking-tight">{title}</h2>
-              <button 
+          <div className="h-full flex flex-col bg-background text-foreground shadow-2xl">
+            <div className="px-6 py-8 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-black tracking-tight">{title}</h2>
+              <button
+                type="button"
                 onClick={onClose}
-                className="p-2 hover:bg-slate-50 rounded-xl text-slate-400 transition-colors"
+                aria-label="Close"
+                className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-xl text-ui-soft transition-colors hover:bg-slate-50 dark:hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40"
               >
-                ✕
+                <span aria-hidden>✕</span>
               </button>
             </div>
             

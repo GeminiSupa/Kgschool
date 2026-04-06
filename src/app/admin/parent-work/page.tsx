@@ -35,8 +35,8 @@ export default function AdminParentWorkPage() {
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <div>
-          <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Verwalten Sie Arbeitsstunden und Aufgaben für Eltern.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Verwalten Sie Arbeitsstunden und Aufgaben für Eltern.</p>
         </div>
         <Link href="/admin/parent-work/new">
           <IOSButton className="px-6 py-2.5 text-sm font-black uppercase tracking-widest bg-black text-white border-none shadow-xl shadow-black/10">
@@ -49,7 +49,7 @@ export default function AdminParentWorkPage() {
             <button 
                 onClick={() => setActiveTab('tasks')}
                 className={`px-8 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all duration-300 ${
-                    activeTab === 'tasks' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-gray-400 border-black/5 hover:border-black/10'
+                    activeTab === 'tasks' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-ui-soft border-black/5 hover:border-black/10'
                 }`}
             >
                 Aufgaben
@@ -57,7 +57,7 @@ export default function AdminParentWorkPage() {
             <button 
                 onClick={() => setActiveTab('submissions')}
                 className={`px-8 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all duration-300 ${
-                    activeTab === 'submissions' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-gray-400 border-black/5 hover:border-black/10'
+                    activeTab === 'submissions' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-ui-soft border-black/5 hover:border-black/10'
                 }`}
             >
                 Stundenmeldungen
@@ -71,18 +71,18 @@ export default function AdminParentWorkPage() {
                         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
                             <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-3">
-                                    <h3 className="text-xl font-black text-gray-900 leading-tight">{task.title}</h3>
+                                    <h3 className="text-xl font-black text-slate-900 dark:text-slate-50 leading-tight">{task.title}</h3>
                                     <span className="px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[10px] font-black uppercase tracking-widest rounded-md border border-indigo-100/50">{task.task_type}</span>
                                 </div>
-                                <p className="text-sm text-gray-500 line-clamp-2 font-medium mb-4 max-w-2xl">{task.description}</p>
+                                <p className="text-sm text-ui-soft line-clamp-2 font-medium mb-4 max-w-2xl">{task.description}</p>
                                 <div className="flex flex-wrap gap-x-8 gap-y-2">
                                     <div className="flex flex-col">
                                         <span className="text-[9px] font-black text-black/20 uppercase tracking-widest">Vergütung</span>
-                                        <span className="text-sm font-black text-gray-800">{task.hourly_rate}€ / h</span>
+                                        <span className="text-sm font-black text-slate-800 dark:text-slate-100">{task.hourly_rate}€ / h</span>
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[9px] font-black text-black/20 uppercase tracking-widest">Status</span>
-                                        <span className="text-sm font-black text-gray-800 uppercase">{task.status}</span>
+                                        <span className="text-sm font-black text-slate-800 dark:text-slate-100 uppercase">{task.status}</span>
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@ export default function AdminParentWorkPage() {
                     <IOSCard key={sub.id} className="p-8 border-black/5">
                          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                             <div className="flex-1">
-                                <h3 className="text-lg font-black text-gray-900 mb-1">Stundeneintrag</h3>
+                                <h3 className="text-lg font-black text-slate-900 dark:text-slate-50 mb-1">Stundeneintrag</h3>
                                 <div className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] font-black text-black/30 uppercase tracking-widest">
                                     <span>📅 {new Date(sub.work_date).toLocaleDateString()}</span>
                                     <span className="text-[#667eea]">🕒 {sub.hours_worked} Stunden</span>

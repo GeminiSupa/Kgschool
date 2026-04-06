@@ -50,8 +50,8 @@ export default function AdminObservationsPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Dokumentieren Sie die Entwicklung der Kinder</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Dokumentieren Sie die Entwicklung der Kinder</p>
         </div>
         <Link href="/admin/observations/new">
           <IOSButton variant="primary" className="inline-flex items-center gap-2 text-sm px-4 py-2">
@@ -89,7 +89,7 @@ export default function AdminObservationsPage() {
           {observations.length === 0 ? (
             <div className="p-8 text-center">
               <div className="text-5xl opacity-40 mb-4">🔍</div>
-              <p className="font-semibold text-gray-700">Keine Beobachtungen gefunden</p>
+              <p className="font-semibold text-slate-700 dark:text-slate-200">Keine Beobachtungen gefunden</p>
             </div>
           ) : (
             <div className="divide-y divide-black/5">
@@ -98,18 +98,18 @@ export default function AdminObservationsPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-1.5 flex-wrap">
-                        <h3 className="text-base font-bold text-gray-900">{getChildName(obs.child_id)}</h3>
+                        <h3 className="text-base font-bold text-slate-900 dark:text-slate-50">{getChildName(obs.child_id)}</h3>
                         {obs.development_area && (
                           <span className={`px-2 py-0.5 text-xs font-semibold rounded-full ${devAreaColors[obs.development_area] || 'bg-blue-100 text-blue-700'}`}>
                             {obs.development_area}
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-gray-500 mb-2 font-medium">📅 {formatDate(obs.observation_date)}</p>
-                      {obs.context && <p className="text-sm text-gray-500 mb-1 italic">{obs.context}</p>}
-                      <p className="text-sm text-gray-700 line-clamp-2">{obs.description}</p>
+                      <p className="text-xs text-ui-soft mb-2 font-medium">📅 {formatDate(obs.observation_date)}</p>
+                      {obs.context && <p className="text-sm text-ui-soft mb-1 italic">{obs.context}</p>}
+                      <p className="text-sm text-slate-700 dark:text-slate-200 line-clamp-2">{obs.description}</p>
                       {obs.photos?.length > 0 && (
-                        <p className="text-xs text-gray-400 mt-2">📷 {obs.photos.length} Foto{obs.photos.length > 1 ? 's' : ''}</p>
+                        <p className="text-xs text-ui-soft mt-2">📷 {obs.photos.length} Foto{obs.photos.length > 1 ? 's' : ''}</p>
                       )}
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">

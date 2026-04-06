@@ -45,8 +45,8 @@ export default function TeacherDailyReportsIndexPage() {
     <div className="max-w-4xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Verwalten Sie die täglichen Berichte für Eltern</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Verwalten Sie die täglichen Berichte für Eltern</p>
         </div>
         <Link href="/teacher/daily-reports/new">
           <IOSButton variant="primary" className="px-5 py-2.5 text-sm font-bold flex items-center gap-2">
@@ -72,7 +72,7 @@ export default function TeacherDailyReportsIndexPage() {
       ) : reports.length === 0 ? (
         <IOSCard className="p-12 text-center">
           <div className="text-5xl opacity-40 mb-4">📝</div>
-          <p className="text-gray-500 font-medium">Keine Tagesberichte für dieses Datum gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Tagesberichte für dieses Datum gefunden.</p>
         </IOSCard>
       ) : (
         <div className="grid gap-5">
@@ -82,7 +82,7 @@ export default function TeacherDailyReportsIndexPage() {
                 <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
-                      <h3 className="text-xl font-bold text-gray-900 truncate">{report.title}</h3>
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50 truncate">{report.title}</h3>
                       <span className="px-2.5 py-0.5 bg-[#667eea]/10 text-[#667eea] text-xs font-bold rounded-full border border-[#667eea]/10">
                         {getGroupName(report.group_id)}
                       </span>
@@ -90,18 +90,18 @@ export default function TeacherDailyReportsIndexPage() {
                     <p className="text-xs font-bold text-black/40 uppercase tracking-widest mb-4">
                       {formatDate(report.report_date)}
                     </p>
-                    <p className="text-gray-700 line-clamp-2 mb-4 leading-relaxed font-medium">
+                    <p className="text-slate-700 dark:text-slate-200 line-clamp-2 mb-4 leading-relaxed font-medium">
                       {report.content}
                     </p>
                     {report.activities && report.activities.length > 0 && (
                       <div className="flex flex-wrap gap-2 mb-4">
                         {report.activities.slice(0, 3).map((activity: string, idx: number) => (
-                          <span key={idx} className="px-2 py-1 bg-gray-50 text-gray-600 text-[10px] font-bold rounded-lg border border-gray-100">
+                          <span key={idx} className="px-2 py-1 bg-gray-50 text-ui-muted text-[10px] font-bold rounded-lg border border-gray-100">
                             #{activity}
                           </span>
                         ))}
                         {report.activities.length > 3 && (
-                          <span className="text-[10px] font-bold text-gray-400">+{report.activities.length - 3}</span>
+                          <span className="text-[10px] font-bold text-ui-soft">+{report.activities.length - 3}</span>
                         )}
                       </div>
                     )}

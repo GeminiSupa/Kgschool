@@ -53,7 +53,7 @@ export default function TeacherObservationsPage() {
       <div className="flex justify-between items-center mb-6 gap-4">
         <div>
           <Heading size="xl">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-600 mt-1">Dokumentieren Sie die Entwicklung der Kinder</p>
+          <p className="text-sm text-ui-muted mt-1">Dokumentieren Sie die Entwicklung der Kinder</p>
         </div>
         <Link href="/teacher/observations/new" className="inline-flex items-center gap-2">
           <IOSButton className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors shadow-sm">
@@ -100,7 +100,7 @@ export default function TeacherObservationsPage() {
       ) : (
         <div className="bg-white rounded-lg shadow overflow-hidden">
           {observations.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">Keine Beobachtungen gefunden.</div>
+            <div className="p-8 text-center text-ui-soft">Keine Beobachtungen gefunden.</div>
           ) : (
             <div className="divide-y divide-gray-200">
               {observations.map((observation) => (
@@ -108,19 +108,19 @@ export default function TeacherObservationsPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-medium text-gray-900">{getChildName(observation.child_id)}</h3>
+                        <h3 className="text-lg font-medium text-slate-900 dark:text-slate-50">{getChildName(observation.child_id)}</h3>
                         {observation.development_area && (
                           <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
                             {observation.development_area}
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-gray-600 mb-2">{formatDate(observation.observation_date)}</p>
-                      {observation.context && <p className="text-sm text-gray-500 mb-2 italic">{observation.context}</p>}
-                      <p className="text-gray-700 mb-3">{observation.description}</p>
+                      <p className="text-sm text-ui-muted mb-2">{formatDate(observation.observation_date)}</p>
+                      {observation.context && <p className="text-sm text-ui-soft mb-2 italic">{observation.context}</p>}
+                      <p className="text-slate-700 dark:text-slate-200 mb-3">{observation.description}</p>
                       {observation.photos && observation.photos.length > 0 && (
                         <div className="mt-2">
-                          <span className="text-xs text-gray-500">📷 {observation.photos.length} Fotos</span>
+                          <span className="text-xs text-ui-soft">📷 {observation.photos.length} Fotos</span>
                         </div>
                       )}
                     </div>

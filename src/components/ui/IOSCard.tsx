@@ -25,7 +25,7 @@ export function IOSCard({ elevated = true, blur = false, className, children, on
         className
       )}
     >
-      <div className="absolute inset-0 bg-linear-to-b from-white/10 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-white/10 to-transparent pointer-events-none dark:from-white/[0.04]" />
       {children}
     </div>
   )

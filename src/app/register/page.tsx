@@ -83,8 +83,8 @@ export default function RegisterPage() {
               🎉
             </span>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 font-display">{t(sT('registrationSuccessTitle'))}</h2>
-          <p className="text-gray-600 mb-8">{t(sT('registrationSuccessBody'))}</p>
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-4 font-display">{t(sT('registrationSuccessTitle'))}</h2>
+          <p className="text-ui-muted mb-8">{t(sT('registrationSuccessBody'))}</p>
           {autoLoginHint ? (
             <p className="text-sm text-amber-800 bg-amber-50 border border-amber-100 rounded-xl p-4 mb-6 text-left">
               {t(sT('registrationAutoLoginFailed'))}{' '}
@@ -120,7 +120,7 @@ export default function RegisterPage() {
         <IOSCard className="p-8 md:p-10 shadow-2xl shadow-indigo-900/5 border border-white">
           <form onSubmit={handleRegister} className="space-y-6" noValidate>
             <div className="pb-6 mb-6 top-1 border-b border-slate-100">
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">{t(sT('orgDetailSection'))}</h3>
+              <h3 className="text-sm font-bold text-ui-soft uppercase tracking-widest mb-4">{t(sT('orgDetailSection'))}</h3>
               <IOSInput
                 id="kitaName"
                 label={t(sT('kitaNameLabel'))}
@@ -132,7 +132,7 @@ export default function RegisterPage() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">{t(sT('ownerAccountSection'))}</h3>
+              <h3 className="text-sm font-bold text-ui-soft uppercase tracking-widest mb-2">{t(sT('ownerAccountSection'))}</h3>
               <IOSInput
                 id="fullName"
                 label={t(sT('fullNameLabel'))}

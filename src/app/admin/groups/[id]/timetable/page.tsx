@@ -66,7 +66,7 @@ export default function GroupTimetablePage() {
   }
 
   if (loading && !group) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
-  if (!group) return <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">{t(sT('groupNotFound'))}</div>
+  if (!group) return <div className="max-w-4xl mx-auto py-12 text-center text-ui-soft">{t(sT('groupNotFound'))}</div>
 
   const days = [
     { key: 'monday', labelKey: 'dayMon' as const },
@@ -95,7 +95,7 @@ export default function GroupTimetablePage() {
               <div key={key} className="flex items-center justify-between p-6 bg-slate-50 rounded-3xl border border-slate-100 group hover:bg-white hover:border-indigo-100 transition-all shadow-sm">
                 <div className="flex flex-col">
                   <span className="text-lg font-black text-slate-900">{t(sT(labelKey))}</span>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">{t(sT('operationalDay'))}</span>
+                  <span className="text-[10px] font-bold text-ui-soft uppercase tracking-widest mt-1">{t(sT('operationalDay'))}</span>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input 
@@ -111,7 +111,7 @@ export default function GroupTimetablePage() {
           </div>
 
           <div className="space-y-3 pt-6 border-t border-slate-50">
-            <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('notesSpecialLabel'))}</label>
+            <label className="text-[11px] font-black text-ui-soft uppercase tracking-widest ml-1">{t(sT('notesSpecialLabel'))}</label>
             <textarea 
               value={localTimetable.notes}
               onChange={(e) => setLocalTimetable({...localTimetable, notes: e.target.value})}

@@ -77,7 +77,7 @@ export default function AdminPortfolioDetailsPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/portfolios')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Portfolios
         </button>
@@ -93,49 +93,49 @@ export default function AdminPortfolioDetailsPage() {
           <ErrorAlert message={error} />
         </div>
       ) : !portfolio ? (
-        <IOSCard className="p-8 text-center text-gray-500 max-w-3xl mx-auto">
+        <IOSCard className="p-8 text-center text-ui-soft max-w-3xl mx-auto">
           Portfolio item not found.
         </IOSCard>
       ) : (
         <IOSCard className="p-6 max-w-3xl mx-auto">
           <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Title</h3>
-              <p className="mt-1 text-lg text-gray-900">{portfolio.title}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Title</h3>
+              <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{portfolio.title}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Child</h3>
-              <p className="mt-1 text-lg text-gray-900">{getChildName(portfolio.child_id)}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Child</h3>
+              <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{getChildName(portfolio.child_id)}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Type</h3>
-              <p className="mt-1 text-lg text-gray-900">{portfolio.portfolio_type}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Type</h3>
+              <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{portfolio.portfolio_type}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Date</h3>
-              <p className="mt-1 text-lg text-gray-900">{formatDate(portfolio.date)}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Date</h3>
+              <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{formatDate(portfolio.date)}</p>
             </div>
 
             {portfolio.description && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Description</h3>
-                <p className="mt-1 text-gray-900">{portfolio.description}</p>
+                <h3 className="text-sm font-medium text-ui-soft">Description</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{portfolio.description}</p>
               </div>
             )}
 
             {portfolio.content && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Content</h3>
-                <pre className="mt-1 text-gray-900 whitespace-pre-wrap font-sans text-sm">{portfolio.content}</pre>
+                <h3 className="text-sm font-medium text-ui-soft">Content</h3>
+                <pre className="mt-1 text-slate-900 dark:text-slate-50 whitespace-pre-wrap font-sans text-sm">{portfolio.content}</pre>
               </div>
             )}
 
             {portfolio.attachments && portfolio.attachments.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-2">Attachments</h3>
+                <h3 className="text-sm font-medium text-ui-soft mb-2">Attachments</h3>
                 <div className="grid grid-cols-3 gap-2">
                   {portfolio.attachments.map((attachment) => (
                     // eslint-disable-next-line @next/next/no-img-element

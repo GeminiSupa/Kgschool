@@ -76,8 +76,8 @@ export default function NewLeaveRequestPage() {
         >
           ← Zurück zum Dashboard
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Informieren Sie uns über die geplante Abwesenheit Ihres Kindes.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Informieren Sie uns über die geplante Abwesenheit Ihres Kindes.</p>
       </div>
 
       {loading ? (

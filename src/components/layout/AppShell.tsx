@@ -32,11 +32,11 @@ export function AppShell({
         </div>
         <button
           type="button"
-          className="p-2 -mr-2 rounded-xl text-muted hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+          className="inline-flex min-h-11 min-w-11 -mr-2 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-slate-100 dark:hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 dark:focus-visible:ring-indigo-500/50"
           onClick={() => setMobileSidebarOpen(true)}
           aria-label={t('shell.openMenu')}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <line x1="4" y1="12" x2="20" y2="12"></line>
             <line x1="4" y1="6" x2="20" y2="6"></line>
             <line x1="4" y1="18" x2="20" y2="18"></line>
@@ -70,11 +70,11 @@ export function AppShell({
                 </div>
                 <button
                   type="button"
-                  className="rounded-xl p-2 text-muted hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-slate-100 dark:hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 dark:focus-visible:ring-indigo-500/50"
                   onClick={() => setMobileSidebarOpen(false)}
                   aria-label={t('shell.closeMenu')}
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>

@@ -103,7 +103,7 @@ export const DailyReportForm = ({
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="group_id" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="group_id" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Gruppe <span className="text-red-500">*</span>
           </label>
           <select
@@ -130,7 +130,7 @@ export const DailyReportForm = ({
         </div>
 
         <div>
-          <label htmlFor="report_date" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="report_date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Datum <span className="text-red-500">*</span>
           </label>
           <input
@@ -145,7 +145,7 @@ export const DailyReportForm = ({
       </div>
 
       <div>
-        <label htmlFor="title" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="title" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Titel <span className="text-red-500">*</span>
         </label>
         <input
@@ -161,7 +161,7 @@ export const DailyReportForm = ({
 
       <div>
         <div className="flex justify-between items-center mb-1.5">
-          <label htmlFor="content" className="block text-sm font-semibold text-gray-700">
+          <label htmlFor="content" className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
             Inhalt <span className="text-red-500">*</span>
           </label>
           <button
@@ -185,7 +185,7 @@ export const DailyReportForm = ({
       </div>
 
       <div>
-        <label htmlFor="activities" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="activities" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Aktivitäten (eine pro Zeile)
         </label>
         <textarea
@@ -200,7 +200,7 @@ export const DailyReportForm = ({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="weather" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="weather" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Wetter
           </label>
           <input
@@ -214,7 +214,7 @@ export const DailyReportForm = ({
         </div>
 
         <div>
-          <label htmlFor="special_events" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="special_events" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Besondere Ereignisse
           </label>
           <input

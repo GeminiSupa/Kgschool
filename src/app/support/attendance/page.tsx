@@ -205,20 +205,22 @@ export default function SupportAttendancePage() {
           value={selectedDate}
           type="date"
           onChange={(e) => setSelectedDate(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="min-h-11 rounded-lg border-2 border-border bg-background px-4 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
         />
 
         {bulkMode ? (
           <button
+            type="button"
             onClick={exitBulkMode}
-            className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+            className="min-h-11 rounded-lg bg-slate-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400/60 dark:bg-slate-500 dark:hover:bg-slate-600"
           >
             Exit Bulk Mode
           </button>
         ) : (
           <button
+            type="button"
             onClick={enterBulkMode}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="min-h-11 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
           >
             Bulk Mode
           </button>
@@ -234,7 +236,7 @@ export default function SupportAttendancePage() {
       ) : (
         <IOSCard className="p-0 overflow-hidden">
           {children.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">No active children found.</div>
+            <div className="p-8 text-center text-ui-soft">No active children found.</div>
           ) : (
             <>
               {bulkMode && (
@@ -247,25 +249,25 @@ export default function SupportAttendancePage() {
                 />
               )}
 
-              <div className="divide-y divide-gray-200">
+              <div className="divide-y divide-border">
                 {children.map((child) => (
-                  <div key={child.id} className="p-4 flex items-center justify-between">
+                  <div key={child.id} className="flex items-center justify-between p-4 transition-colors hover:bg-slate-50/80 dark:hover:bg-white/5">
                     <div className="flex items-center gap-3 flex-1">
                       {bulkMode && (
                         <input
                           type="checkbox"
                           checked={selectedChildren.includes(child.id)}
                           onChange={() => toggleChildSelection(child.id)}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="rounded border-border text-indigo-600 focus:ring-indigo-500"
                         />
                       )}
 
                       <div className="flex-1">
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-slate-900 dark:text-slate-50">
                           {child.first_name} {child.last_name}
                         </p>
 
-                        {child.group_id && <p className="text-xs text-gray-500 mt-1">Group: {getGroupName(child.group_id) || 'Unassigned'}</p>}
+                        {child.group_id && <p className="text-xs text-ui-soft mt-1">Group: {getGroupName(child.group_id) || 'Unassigned'}</p>}
 
                         {getCheckInTime(child.id) && (
                           <p className="text-xs text-blue-600 mt-1">
@@ -294,24 +296,26 @@ export default function SupportAttendancePage() {
                         />
 
                         <button
+                          type="button"
                           onClick={() => markPresent(child.id)}
                           className={[
-                            'px-3 py-1 text-sm rounded-md transition-colors',
+                            'min-h-10 rounded-lg px-3 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50',
                             getAttendanceStatus(child.id) === 'present'
-                              ? 'bg-green-600 text-white'
-                              : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
+                              ? 'bg-emerald-600 text-white dark:bg-emerald-500'
+                              : 'bg-slate-200 text-slate-800 hover:bg-slate-300 dark:bg-white/10 dark:text-slate-100 dark:hover:bg-white/15',
                           ].join(' ')}
                         >
                           Present
                         </button>
 
                         <button
+                          type="button"
                           onClick={() => markAbsent(child.id)}
                           className={[
-                            'px-3 py-1 text-sm rounded-md transition-colors',
+                            'min-h-10 rounded-lg px-3 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400/50',
                             getAttendanceStatus(child.id) === 'absent'
-                              ? 'bg-red-600 text-white'
-                              : 'bg-gray-200 text-gray-700 hover:bg-gray-300',
+                              ? 'bg-red-600 text-white dark:bg-red-500'
+                              : 'bg-slate-200 text-slate-800 hover:bg-slate-300 dark:bg-white/10 dark:text-slate-100 dark:hover:bg-white/15',
                           ].join(' ')}
                         >
                           Absent

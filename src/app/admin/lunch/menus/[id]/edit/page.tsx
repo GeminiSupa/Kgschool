@@ -164,14 +164,14 @@ export default function AdminLunchMenuEditPage() {
         <button
           type="button"
           onClick={() => router.push(`/admin/lunch/menus/${menuId}`)}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Menu
         </button>
         <Heading size="xl" className="mb-1">
           Edit Lunch Menu
         </Heading>
-        <p className="text-sm text-gray-500">Update menu details, allergens, and nutritional information</p>
+        <p className="text-sm text-ui-soft">Update menu details, allergens, and nutritional information</p>
       </div>
 
       {loading && !menu ? (
@@ -186,7 +186,7 @@ export default function AdminLunchMenuEditPage() {
         <IOSCard className="max-w-2xl p-6 mx-auto">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="date" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Date <span className="text-red-500">*</span>
               </label>
               <input
@@ -200,7 +200,7 @@ export default function AdminLunchMenuEditPage() {
             </div>
 
             <div>
-              <label htmlFor="meal_name" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="meal_name" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Meal Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -215,7 +215,7 @@ export default function AdminLunchMenuEditPage() {
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="description" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Description
               </label>
               <textarea
@@ -229,7 +229,7 @@ export default function AdminLunchMenuEditPage() {
             </div>
 
             <div>
-              <label htmlFor="allergens" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="allergens" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Allergens (comma-separated)
               </label>
               <input
@@ -240,7 +240,7 @@ export default function AdminLunchMenuEditPage() {
                 className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 placeholder="e.g. Nuts, Dairy, Gluten"
               />
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="text-xs text-ui-soft mt-2">
                 Enter allergens separated by commas. Common allergens: Gluten, Dairy, Nuts, Eggs, Fish, Soy
               </p>
               {allergensInput.trim().length > 0 && (
@@ -265,7 +265,7 @@ export default function AdminLunchMenuEditPage() {
               </Heading>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="calories" className="block text-xs font-semibold text-gray-700 mb-1">
+                  <label htmlFor="calories" className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Calories
                   </label>
                   <input
@@ -279,7 +279,7 @@ export default function AdminLunchMenuEditPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="protein" className="block text-xs font-semibold text-gray-700 mb-1">
+                  <label htmlFor="protein" className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Protein
                   </label>
                   <input
@@ -292,7 +292,7 @@ export default function AdminLunchMenuEditPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="carbs" className="block text-xs font-semibold text-gray-700 mb-1">
+                  <label htmlFor="carbs" className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Carbohydrates
                   </label>
                   <input
@@ -305,7 +305,7 @@ export default function AdminLunchMenuEditPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="fat" className="block text-xs font-semibold text-gray-700 mb-1">
+                  <label htmlFor="fat" className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Fat
                   </label>
                   <input
@@ -321,7 +321,7 @@ export default function AdminLunchMenuEditPage() {
             </div>
 
             <div>
-              <label htmlFor="photo_url" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="photo_url" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Photo URL (Optional)
               </label>
               <input
@@ -332,7 +332,7 @@ export default function AdminLunchMenuEditPage() {
                 className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                 placeholder="https://example.com/photo.jpg"
               />
-              <p className="text-xs text-gray-500 mt-2">Enter a URL to an image of the meal</p>
+              <p className="text-xs text-ui-soft mt-2">Enter a URL to an image of the meal</p>
               {form.photo_url && (
                 <div className="mt-3">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -355,7 +355,7 @@ export default function AdminLunchMenuEditPage() {
               <button
                 type="button"
                 onClick={() => router.push(`/admin/lunch/menus/${menuId}`)}
-                className="px-6 py-2.5 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition-all"
+                className="px-6 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition-all"
                 disabled={submitting}
               >
                 Cancel

@@ -82,7 +82,7 @@ export default function PortfolioDetailPage() {
   if (!portfolio && !portfoliosLoading)
     return (
       <div className="max-w-4xl mx-auto py-12 text-center">
-        <p className="text-gray-500">{t(sT('errNotFoundPortfolio'))}</p>
+        <p className="text-ui-soft">{t(sT('errNotFoundPortfolio'))}</p>
       </div>
     )
 
@@ -97,12 +97,12 @@ export default function PortfolioDetailPage() {
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
           <div>
-            <Heading size="xl" className="text-gray-900 tracking-tight">{portfolio.title}</Heading>
+            <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{portfolio.title}</Heading>
             <div className="flex items-center gap-3 mt-2">
                 <span className="px-2 py-0.5 bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest rounded-md border border-blue-100">
                   {getPortfolioTypeLabel(portfolio.portfolio_type)}
                 </span>
-                <span className="text-sm font-bold text-gray-400">{getChildName(portfolio.child_id)} • {new Date(portfolio.date).toLocaleDateString('de-DE')}</span>
+                <span className="text-sm font-bold text-ui-soft">{getChildName(portfolio.child_id)} • {new Date(portfolio.date).toLocaleDateString('de-DE')}</span>
             </div>
           </div>
           <div className="flex gap-3">
@@ -133,14 +133,14 @@ export default function PortfolioDetailPage() {
             {portfolio.description && (
                 <div className="mb-10">
                     <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-3">Zusammenfassung</p>
-                    <p className="text-lg font-medium text-gray-700 leading-relaxed italic">{portfolio.description}</p>
+                    <p className="text-lg font-medium text-slate-700 dark:text-slate-200 leading-relaxed italic">{portfolio.description}</p>
                 </div>
             )}
             
             {portfolio.content && (
                 <div className="mb-10">
                     <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-3">Details & Beobachtungen</p>
-                    <div className="text-base text-gray-600 leading-relaxed whitespace-pre-wrap font-medium">{portfolio.content}</div>
+                    <div className="text-base text-ui-muted leading-relaxed whitespace-pre-wrap font-medium">{portfolio.content}</div>
                 </div>
             )}
             
@@ -149,7 +149,7 @@ export default function PortfolioDetailPage() {
                     <div className="w-8 h-8 rounded-full bg-[#667eea] flex items-center justify-center text-white text-xs font-black">?</div>
                     <div>
                         <p className="text-[10px] font-black text-black/30 uppercase tracking-widest">Erstellt von</p>
-                        <p className="text-xs font-bold text-gray-700 italic">Pädagogische Fachkraft</p>
+                        <p className="text-xs font-bold text-slate-700 dark:text-slate-200 italic">Pädagogische Fachkraft</p>
                     </div>
                 </div>
                 <p className="text-[10px] font-black text-black/30 uppercase tracking-widest">Zuletzt aktualisiert: {new Date(portfolio.updated_at).toLocaleDateString('de-DE')}</p>

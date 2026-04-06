@@ -77,7 +77,7 @@ export default function AdminSalaryConfigEditPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/hr/salary-config')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Salary Config
         </button>
@@ -103,7 +103,7 @@ export default function AdminSalaryConfigEditPage() {
         </IOSCard>
       ) : (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
-          <p className="text-gray-400 font-bold">No configuration found.</p>
+          <p className="text-ui-soft font-bold">No configuration found.</p>
         </IOSCard>
       )}
     </div>

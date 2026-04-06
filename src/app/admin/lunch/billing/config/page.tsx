@@ -82,7 +82,7 @@ export default function AdminLunchBillingConfigPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/lunch/billing')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Billing
         </button>
@@ -99,7 +99,7 @@ export default function AdminLunchBillingConfigPage() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="deadline_hours" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="deadline_hours" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Informed Absence Deadline (Hours)
               </label>
               <input
@@ -112,7 +112,7 @@ export default function AdminLunchBillingConfigPage() {
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-ui-soft mt-1">
                 Number of hours before 8 AM on the absence date that parents must notify.
                 For example, 16 hours means parents must notify by 4 PM the day before.
               </p>

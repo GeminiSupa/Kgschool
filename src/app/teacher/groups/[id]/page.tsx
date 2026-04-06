@@ -109,15 +109,15 @@ export default function TeacherGroupDetailPage({ params }: PageProps) {
         <Heading size="xl" className="mt-2">
           {group?.name || 'Gruppe'}
         </Heading>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-ui-soft mt-1">
           {group?.age_range || 'Altersbereich nicht gesetzt'} · Kapazitaet: {group?.capacity ?? '-'}
         </p>
       </div>
 
       <IOSCard className="p-5">
-        <h3 className="text-sm font-semibold text-gray-800 mb-3">Kinder in dieser Gruppe</h3>
+        <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-100 mb-3">Kinder in dieser Gruppe</h3>
         {children.length === 0 ? (
-          <p className="text-sm text-gray-500">Keine Kinder in dieser Gruppe gefunden.</p>
+          <p className="text-sm text-ui-soft">Keine Kinder in dieser Gruppe gefunden.</p>
         ) : (
           <div className="space-y-2">
             {children.map((child) => (
@@ -126,10 +126,10 @@ export default function TeacherGroupDetailPage({ params }: PageProps) {
                 href={`/teacher/children/${child.id}`}
                 className="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-3 hover:bg-gray-50"
               >
-                <span className="font-medium text-gray-900">
+                <span className="font-medium text-slate-900 dark:text-slate-50">
                   {child.first_name} {child.last_name}
                 </span>
-                <span className="text-xs text-gray-500">{child.status}</span>
+                <span className="text-xs text-ui-soft">{child.status}</span>
               </Link>
             ))}
           </div>

@@ -81,8 +81,8 @@ export default function TeacherPortfoliosPage() {
     <div className="max-w-6xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Dokumentieren Sie die Entwicklung und Erlebnisse der Kinder.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Dokumentieren Sie die Entwicklung und Erlebnisse der Kinder.</p>
         </div>
         <Link href="/teacher/portfolios/new">
           <IOSButton variant="primary" className="px-6 py-2.5 text-sm font-bold flex items-center gap-2">
@@ -97,7 +97,7 @@ export default function TeacherPortfoliosPage() {
         <select
           value={selectedChildId}
           onChange={handleChildChange}
-          className="w-full max-w-xs px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="w-full max-w-xs px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
         >
           <option value="">Alle Kinder</option>
           {children.map(child => (
@@ -113,7 +113,7 @@ export default function TeacherPortfoliosPage() {
       ) : portfolios.length === 0 ? (
         <IOSCard className="p-16 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">📔</div>
-          <p className="text-gray-500 font-medium">Bisher wurden keine Portfolio-Einträge erstellt.</p>
+          <p className="text-ui-soft font-medium">Bisher wurden keine Portfolio-Einträge erstellt.</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -143,13 +143,13 @@ export default function TeacherPortfoliosPage() {
                    </div>
                 )}
                 
-                <h3 className="text-lg font-black text-gray-900 group-hover:text-[#667eea] transition-colors line-clamp-1 mb-1 tracking-tight">
+                <h3 className="text-lg font-black text-slate-900 dark:text-slate-50 group-hover:text-[#667eea] transition-colors line-clamp-1 mb-1 tracking-tight">
                     {portfolio.title}
                 </h3>
-                <p className="text-xs font-bold text-gray-400 mb-3">{getChildName(portfolio.child_id)} • {formatDate(portfolio.date)}</p>
+                <p className="text-xs font-bold text-ui-soft mb-3">{getChildName(portfolio.child_id)} • {formatDate(portfolio.date)}</p>
                 
                 {portfolio.description && (
-                  <p className="text-sm font-medium text-gray-600 line-clamp-2 leading-relaxed mb-6 flex-1">
+                  <p className="text-sm font-medium text-ui-muted line-clamp-2 leading-relaxed mb-6 flex-1">
                     {portfolio.description}
                   </p>
                 )}

@@ -103,7 +103,7 @@ export default function AdminPayrollDetailsPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/hr/payroll')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Payroll
         </button>
@@ -123,12 +123,12 @@ export default function AdminPayrollDetailsPage() {
           <IOSCard className="p-6">
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-600">Staff Member</label>
-                <p className="mt-1 text-gray-900">{getStaffName(payrollRecord.staff_id)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Staff Member</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{getStaffName(payrollRecord.staff_id)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Period</label>
-                <p className="mt-1 text-gray-900">
+                <label className="block text-sm font-medium text-ui-muted">Period</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">
                   {getMonthName(payrollRecord.month)} {payrollRecord.year}
                 </p>
               </div>
@@ -136,41 +136,41 @@ export default function AdminPayrollDetailsPage() {
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-600">Base Salary</label>
-                <p className="mt-1 text-gray-900">€{payrollRecord.base_salary.toFixed(2)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Base Salary</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">€{payrollRecord.base_salary.toFixed(2)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Overtime Amount</label>
-                <p className="mt-1 text-gray-900">€{payrollRecord.overtime_amount.toFixed(2)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Overtime Amount</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">€{payrollRecord.overtime_amount.toFixed(2)}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-600">Bonuses</label>
+                <label className="block text-sm font-medium text-ui-muted">Bonuses</label>
                 <p className="mt-1 text-green-600">€{payrollRecord.bonuses.toFixed(2)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Deductions</label>
+                <label className="block text-sm font-medium text-ui-muted">Deductions</label>
                 <p className="mt-1 text-red-600">€{payrollRecord.deductions.toFixed(2)}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-600">Tax Amount</label>
-                <p className="mt-1 text-gray-900">€{payrollRecord.tax_amount.toFixed(2)}</p>
+                <label className="block text-sm font-medium text-ui-muted">Tax Amount</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">€{payrollRecord.tax_amount.toFixed(2)}</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-600">Net Salary</label>
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <label className="block text-sm font-medium text-ui-muted">Net Salary</label>
+                <p className="mt-1 text-lg font-bold text-slate-900 dark:text-slate-50">
                   €{payrollRecord.net_salary.toFixed(2)}
                 </p>
               </div>
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-600">Status</label>
+              <label className="block text-sm font-medium text-ui-muted">Status</label>
               <span
                 className={[
                   'inline-block mt-1 px-2 py-1 text-xs font-medium rounded-full',
@@ -187,8 +187,8 @@ export default function AdminPayrollDetailsPage() {
 
             {payrollRecord.notes && (
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-600">Notes</label>
-                <p className="mt-1 text-gray-900">{payrollRecord.notes}</p>
+                <label className="block text-sm font-medium text-ui-muted">Notes</label>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{payrollRecord.notes}</p>
               </div>
             )}
 
@@ -228,7 +228,7 @@ export default function AdminPayrollDetailsPage() {
         </div>
       ) : (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
-          <p className="text-gray-400 font-bold">No payroll record found.</p>
+          <p className="text-ui-soft font-bold">No payroll record found.</p>
         </IOSCard>
       )}
     </div>

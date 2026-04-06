@@ -125,7 +125,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="base_salary" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="base_salary" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
           Base Salary (€) <span className="text-red-500">*</span>
         </label>
         <input
@@ -141,7 +141,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
       </div>
 
       <div>
-        <label htmlFor="hourly_rate" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="hourly_rate" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
           Hourly Rate (€)
         </label>
         <input
@@ -156,7 +156,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
       </div>
 
       <div>
-        <label htmlFor="overtime_multiplier" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="overtime_multiplier" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
           Overtime Multiplier
         </label>
         <input
@@ -168,12 +168,12 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
           min="1"
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
         />
-        <p className="text-xs text-gray-500 mt-1">Default: 1.5 (time and a half)</p>
+        <p className="text-xs text-ui-soft mt-1">Default: 1.5 (time and a half)</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label htmlFor="effective_from" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="effective_from" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Effective From <span className="text-red-500">*</span>
           </label>
           <input
@@ -187,7 +187,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
         </div>
 
         <div>
-          <label htmlFor="effective_to" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="effective_to" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
             Effective To (Optional)
           </label>
           <input
@@ -202,7 +202,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
       </div>
 
       <div>
-        <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="notes" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
           Notes
         </label>
         <textarea

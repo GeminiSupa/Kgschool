@@ -49,8 +49,8 @@ export default function AdminConsentsPage() {
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <div>
-          <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Überblick über erteilte und widerrufene Einwilligungen der Eltern.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Überblick über erteilte und widerrufene Einwilligungen der Eltern.</p>
         </div>
       </div>
 
@@ -62,7 +62,7 @@ export default function AdminConsentsPage() {
                     className={`px-5 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all duration-300 flex-shrink-0 ${
                         selectedType === t.value 
                         ? 'bg-black text-white border-black shadow-lg shadow-black/10' 
-                        : 'bg-white text-gray-400 border-black/5 hover:border-black/10'
+                        : 'bg-white text-ui-soft border-black/5 hover:border-black/10'
                     }`}
                 >
                     {t.label}
@@ -75,7 +75,7 @@ export default function AdminConsentsPage() {
       ) : consents.length === 0 ? (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
           <div className="text-6xl opacity-10 mb-6">✅</div>
-          <p className="text-gray-400 font-bold max-w-xs mx-auto">Keine Einträge für diesen Filter gefunden.</p>
+          <p className="text-ui-soft font-bold max-w-xs mx-auto">Keine Einträge für diesen Filter gefunden.</p>
         </IOSCard>
       ) : (
         <IOSCard className="p-0 overflow-hidden shadow-sm border-black/5">
@@ -94,10 +94,10 @@ export default function AdminConsentsPage() {
                         {consents.map(consent => (
                             <tr key={consent.id} className="hover:bg-gray-50/80 transition-colors group">
                                 <td className="px-6 py-5">
-                                    <p className="text-sm font-black text-gray-900 leading-tight">{getChildName(consent.child_id)}</p>
+                                    <p className="text-sm font-black text-slate-900 dark:text-slate-50 leading-tight">{getChildName(consent.child_id)}</p>
                                 </td>
                                 <td className="px-6 py-5">
-                                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{consent.consent_type}</span>
+                                    <span className="text-[10px] font-black text-ui-soft uppercase tracking-widest">{consent.consent_type}</span>
                                 </td>
                                 <td className="px-6 py-5">
                                     <span className={`px-2 py-0.5 text-[9px] font-black uppercase rounded-md border ${
@@ -106,7 +106,7 @@ export default function AdminConsentsPage() {
                                         {consent.granted ? 'Erteilt' : 'Widerrufen'}
                                     </span>
                                 </td>
-                                <td className="px-6 py-5 text-xs font-black text-gray-400">
+                                <td className="px-6 py-5 text-xs font-black text-ui-soft">
                                     {new Date(consent.granted_at).toLocaleDateString()}
                                 </td>
                                 <td className="px-6 py-5 text-right">

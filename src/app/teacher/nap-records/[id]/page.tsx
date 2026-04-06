@@ -69,7 +69,7 @@ export default function NapRecordDetailPage() {
   }
 
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
-  if (!record && !recordsLoading) return <div className="max-w-4xl mx-auto py-12 text-center"><p className="text-gray-500">Schlafprotokoll nicht gefunden.</p></div>
+  if (!record && !recordsLoading) return <div className="max-w-4xl mx-auto py-12 text-center"><p className="text-ui-soft">Schlafprotokoll nicht gefunden.</p></div>
 
   return (
     <div className="max-w-3xl mx-auto pb-12">
@@ -82,12 +82,12 @@ export default function NapRecordDetailPage() {
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
             <div>
-                <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
+                <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
                 <div className="flex items-center gap-3 mt-2">
                     <span className="px-2.5 py-1 bg-purple-50 text-purple-600 text-[10px] font-black uppercase tracking-widest rounded-md border border-purple-100">
                       😴 {record.duration_minutes ? `${record.duration_minutes} Minuten` : 'Dauer unbekannt'}
                     </span>
-                    <span className="text-sm font-bold text-gray-400">{getChildName(record.child_id)}</span>
+                    <span className="text-sm font-bold text-ui-soft">{getChildName(record.child_id)}</span>
                 </div>
             </div>
             <div className="flex gap-2">
@@ -102,7 +102,7 @@ export default function NapRecordDetailPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
             <div>
                 <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-2">Datum</p>
-                <div className="text-base text-gray-800 font-bold">{formatDate(record.nap_date)}</div>
+                <div className="text-base text-slate-800 dark:text-slate-100 font-bold">{formatDate(record.nap_date)}</div>
             </div>
             {(record.start_time || record.end_time) && (
                 <div>
@@ -119,7 +119,7 @@ export default function NapRecordDetailPage() {
         {record.notes && (
             <div className="mb-10 pt-10 border-t border-black/5">
                 <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-4">Anmerkungen</p>
-                <div className="bg-gray-50/80 p-6 rounded-2xl border border-black/5 text-gray-700 leading-relaxed font-medium">
+                <div className="bg-gray-50/80 p-6 rounded-2xl border border-black/5 text-slate-700 dark:text-slate-200 leading-relaxed font-medium">
                     {record.notes}
                 </div>
             </div>

@@ -170,7 +170,7 @@ export default function TeacherDashboardPage() {
                         <span className="px-3 py-1 bg-orange-100 text-orange-600 text-[10px] font-black uppercase tracking-widest rounded-full">
                           {t(pT(ROUTE, 'lunchBadge'))}
                         </span>
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        <span className="text-[10px] font-bold text-ui-soft uppercase tracking-widest">
                           {t(pT(ROUTE, 'todayPrefix'))}, {new Date().toLocaleDateString(dateLocale)}
                         </span>
                       </div>
@@ -213,7 +213,7 @@ export default function TeacherDashboardPage() {
                             </div>
                             <div>
                               <p className="text-xl font-black text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">{groupAssignment.group.name}</p>
-                              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-0.5">{groupAssignment.group.age_range}</p>
+                              <p className="text-xs font-bold text-ui-soft uppercase tracking-widest mt-0.5">{groupAssignment.group.age_range}</p>
                             </div>
                           </div>
                           <div className="text-right">
@@ -245,7 +245,7 @@ export default function TeacherDashboardPage() {
             {/* Quick Access - 5 cols */}
             <div className="lg:col-span-5">
                <div className="flex items-center gap-4 mb-8">
-                  <h2 className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionQuickAccess'))}</h2>
+                  <h2 className="text-sm font-black text-ui-soft uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionQuickAccess'))}</h2>
                   <div className="h-px flex-1 bg-slate-100"></div>
               </div>
               <IOSCard className="p-4 bg-slate-50/50 border-slate-50">
@@ -272,7 +272,7 @@ export default function TeacherDashboardPage() {
                  <IOSCard className="p-8 bg-linear-to-br from-slate-900 to-slate-800 border-0 text-white overflow-hidden relative group">
                     <div className="absolute bottom-0 right-0 -mr-6 -mb-6 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
                     <h4 className="text-lg font-black mb-2 relative z-10 font-display">{t(pT(ROUTE, 'toolkitTitle'))}</h4>
-                    <p className="text-slate-400 text-sm mb-6 relative z-10">{t(pT(ROUTE, 'toolkitSubtitle'))}</p>
+                    <p className="text-ui-soft text-sm mb-6 relative z-10">{t(pT(ROUTE, 'toolkitSubtitle'))}</p>
                     <Link
                       href="/teacher/todo"
                       className="inline-block px-5 py-2 bg-indigo-600 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-indigo-500 transition-colors relative z-10"

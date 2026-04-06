@@ -32,11 +32,11 @@ export const AbsenceSubmissionForm = ({ onSubmit, onCancel, loading }: AbsenceSu
 
   return (
     <div className="p-1">
-      <h3 className="text-xl font-bold text-gray-900 mb-6">Abwesenheit melden</h3>
+      <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50 mb-6">Abwesenheit melden</h3>
       
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label htmlFor="reason" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="reason" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Grund <span className="text-red-500">*</span>
           </label>
           <textarea
@@ -51,7 +51,7 @@ export const AbsenceSubmissionForm = ({ onSubmit, onCancel, loading }: AbsenceSu
         </div>
 
         <div>
-          <label htmlFor="notes" className="block text-sm font-semibold text-gray-700 mb-1.5">
+          <label htmlFor="notes" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
             Zusätzliche Notizen (Optional)
           </label>
           <textarea

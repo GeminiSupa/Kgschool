@@ -133,7 +133,7 @@ export default function AdminParentWorkNewPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/parent-work')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Parent Work Tasks
         </button>
@@ -145,7 +145,7 @@ export default function AdminParentWorkNewPage() {
           {submitError && <ErrorAlert message={submitError} />}
 
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="title" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Title <span className="text-red-500">*</span>
             </label>
             <input
@@ -160,7 +160,7 @@ export default function AdminParentWorkNewPage() {
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="description" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Description
             </label>
             <textarea
@@ -175,7 +175,7 @@ export default function AdminParentWorkNewPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="task_type" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="task_type" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Task Type <span className="text-red-500">*</span>
               </label>
               <select
@@ -195,7 +195,7 @@ export default function AdminParentWorkNewPage() {
             </div>
 
             <div>
-              <label htmlFor="hourly_rate" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="hourly_rate" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Hourly Rate (€) <span className="text-red-500">*</span>
               </label>
               <input
@@ -213,7 +213,7 @@ export default function AdminParentWorkNewPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="estimated_hours" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="estimated_hours" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Estimated Hours
               </label>
               <input
@@ -233,7 +233,7 @@ export default function AdminParentWorkNewPage() {
             </div>
 
             <div>
-              <label htmlFor="due_date" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="due_date" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Due Date
               </label>
               <input
@@ -247,7 +247,7 @@ export default function AdminParentWorkNewPage() {
           </div>
 
           <div>
-            <label htmlFor="assigned_to" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="assigned_to" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Assign To (Optional)
             </label>
             <select
@@ -267,7 +267,7 @@ export default function AdminParentWorkNewPage() {
           </div>
 
           <div>
-            <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="notes" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
               Notes
             </label>
             <textarea

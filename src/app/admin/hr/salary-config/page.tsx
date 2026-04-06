@@ -52,8 +52,8 @@ export default function AdminSalaryConfigPage() {
         >
           ← Zurück zur Abrechnung
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Legen Sie Basisgehälter und Stundensätze für Ihr Personal fest.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Legen Sie Basisgehälter und Stundensätze für Ihr Personal fest.</p>
       </div>
 
       <div className="flex justify-end mb-8">
@@ -69,7 +69,7 @@ export default function AdminSalaryConfigPage() {
       ) : configs.length === 0 ? (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
           <div className="text-6xl opacity-10 mb-6">⚙️</div>
-          <p className="text-gray-400 font-bold max-w-xs mx-auto">Keine Gehaltskonfigurationen vorhanden.</p>
+          <p className="text-ui-soft font-bold max-w-xs mx-auto">Keine Gehaltskonfigurationen vorhanden.</p>
         </IOSCard>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -80,8 +80,8 @@ export default function AdminSalaryConfigPage() {
                     <div className="relative z-10">
                         <div className="flex justify-between items-start mb-6">
                             <div>
-                                <h3 className="text-lg font-black text-gray-900 leading-tight">{getStaffName(config.staff_id)}</h3>
-                                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-1">Gültig ab: {new Date(config.effective_from).toLocaleDateString()}</p>
+                                <h3 className="text-lg font-black text-slate-900 dark:text-slate-50 leading-tight">{getStaffName(config.staff_id)}</h3>
+                                <p className="text-[10px] font-black text-ui-soft uppercase tracking-widest mt-1">Gültig ab: {new Date(config.effective_from).toLocaleDateString()}</p>
                             </div>
                             <button onClick={() => handleDelete(config.id)} className="p-2 hover:bg-red-50 text-red-300 hover:text-red-500 rounded-lg transition-colors">🗑️</button>
                         </div>
@@ -89,11 +89,11 @@ export default function AdminSalaryConfigPage() {
                         <div className="space-y-4 mb-8">
                             <div className="flex justify-between items-end border-b border-black/5 pb-2">
                                 <span className="text-[10px] font-black text-black/30 uppercase tracking-widest">Basisgehalt</span>
-                                <span className="text-xl font-black text-gray-900">{config.base_salary.toFixed(2)}€</span>
+                                <span className="text-xl font-black text-slate-900 dark:text-slate-50">{config.base_salary.toFixed(2)}€</span>
                             </div>
                             <div className="flex justify-between items-end border-b border-black/5 pb-2">
                                 <span className="text-[10px] font-black text-black/30 uppercase tracking-widest">Stundensatz</span>
-                                <span className="text-sm font-black text-gray-700">{config.hourly_rate?.toFixed(2) || '0.00'}€ / h</span>
+                                <span className="text-sm font-black text-slate-700 dark:text-slate-200">{config.hourly_rate?.toFixed(2) || '0.00'}€ / h</span>
                             </div>
                             <div className="flex justify-between items-end border-b border-black/5 pb-2">
                                 <span className="text-[10px] font-black text-black/30 uppercase tracking-widest">Überstunden</span>

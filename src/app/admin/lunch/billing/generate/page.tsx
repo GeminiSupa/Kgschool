@@ -183,7 +183,7 @@ export default function AdminLunchBillingGeneratePage() {
       <div className="mb-6">
         <Link
           href="/admin/lunch/billing"
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Billing
         </Link>
@@ -200,7 +200,7 @@ export default function AdminLunchBillingGeneratePage() {
         >
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="month" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="month" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Month <span className="text-red-500">*</span>
               </label>
               <select
@@ -222,7 +222,7 @@ export default function AdminLunchBillingGeneratePage() {
             </div>
 
             <div>
-              <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="year" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Year <span className="text-red-500">*</span>
               </label>
               <input
@@ -262,21 +262,21 @@ export default function AdminLunchBillingGeneratePage() {
                 <h3 className="font-medium mb-3">Summary</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                   <div>
-                    <p className="text-gray-600">Total Billable Days</p>
+                    <p className="text-ui-muted">Total Billable Days</p>
                     <p className="text-lg font-semibold">{detailedPreview.summary.totalBillableDays}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Total Refundable Days</p>
+                    <p className="text-ui-muted">Total Refundable Days</p>
                     <p className="text-lg font-semibold">{detailedPreview.summary.totalRefundableDays}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Estimated Total</p>
+                    <p className="text-ui-muted">Estimated Total</p>
                     <p className="text-lg font-semibold text-green-600">
                       €{detailedPreview.summary.estimatedTotal.toFixed(2)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Estimated Refund</p>
+                    <p className="text-ui-muted">Estimated Refund</p>
                     <p className="text-lg font-semibold text-blue-600">
                       €{detailedPreview.summary.estimatedRefund.toFixed(2)}
                     </p>
@@ -301,7 +301,7 @@ export default function AdminLunchBillingGeneratePage() {
                       <div key={child.childId} className="p-4 hover:bg-gray-50">
                         <div className="flex items-center justify-between mb-2 gap-3">
                           <p className="font-medium">{child.childName}</p>
-                          <div className="text-sm text-gray-600">
+                          <div className="text-sm text-ui-muted">
                             <span className="text-green-600">
                               €{child.estimatedAmount.toFixed(2)}
                             </span>
@@ -312,7 +312,7 @@ export default function AdminLunchBillingGeneratePage() {
                             )}
                           </div>
                         </div>
-                        <div className="text-xs text-gray-500">
+                        <div className="text-xs text-ui-soft">
                           Billable: {child.billableDays} days | Refundable: {child.refundableDays} days
                         </div>
                       </div>
@@ -326,14 +326,14 @@ export default function AdminLunchBillingGeneratePage() {
           {!detailedPreview && preview && !loadingPreview && (
             <div className="p-4 bg-gray-50 rounded-md space-y-2">
               <h3 className="font-medium mb-2">Basic Preview</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-ui-muted">
                 This will generate billing for all active children for{' '}
                 <strong>
                   {getMonthName(form.month)} {form.year}
                 </strong>
                 .
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-ui-muted">
                 Estimated children: <strong>{preview.estimatedChildren}</strong>
               </p>
               {preview.hasPricing === false && (
@@ -359,7 +359,7 @@ export default function AdminLunchBillingGeneratePage() {
           <div className="flex gap-3 justify-end pt-4">
             <Link
               href="/admin/lunch/billing"
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
+              className="px-4 py-2 text-slate-700 dark:text-slate-200 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
             >
               Cancel
             </Link>

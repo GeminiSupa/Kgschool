@@ -206,12 +206,12 @@ export default function AdminContractsNewPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/contracts')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Contracts
         </button>
         <Heading size="xl" className="mb-1">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500">Create a new care contract for a child</p>
+        <p className="text-sm text-ui-soft">Create a new care contract for a child</p>
       </div>
 
       {error && <ErrorAlert message={error} />}
@@ -225,7 +225,7 @@ export default function AdminContractsNewPage() {
           className="space-y-6"
         >
           <div>
-            <label htmlFor="child_id" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="child_id" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
               Child <span className="text-red-500">*</span>
             </label>
             <select
@@ -246,7 +246,7 @@ export default function AdminContractsNewPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label htmlFor="start_date" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="start_date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Start Date <span className="text-red-500">*</span>
               </label>
               <input
@@ -260,7 +260,7 @@ export default function AdminContractsNewPage() {
             </div>
 
             <div>
-              <label htmlFor="end_date" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="end_date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 End Date (Optional)
               </label>
               <input
@@ -271,12 +271,12 @@ export default function AdminContractsNewPage() {
                 onChange={(e) => setForm((p) => ({ ...p, end_date: e.target.value }))}
                 className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500"
               />
-              <p className="text-xs text-gray-500 mt-2">Leave empty for ongoing contract</p>
+              <p className="text-xs text-ui-soft mt-2">Leave empty for ongoing contract</p>
             </div>
           </div>
 
           <div>
-            <label htmlFor="contract_number" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="contract_number" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
               Contract Number (Optional)
             </label>
             <input
@@ -287,11 +287,11 @@ export default function AdminContractsNewPage() {
               className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500"
               placeholder="e.g., VERT-2024-001"
             />
-            <p className="text-xs text-gray-500 mt-2">Auto-generated if left empty</p>
+            <p className="text-xs text-ui-soft mt-2">Auto-generated if left empty</p>
           </div>
 
           <div>
-            <label htmlFor="betreuung_hours_type" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="betreuung_hours_type" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
               Betreuungsumfang (Care Hours) <span className="text-red-500">*</span>
             </label>
             <select
@@ -311,7 +311,7 @@ export default function AdminContractsNewPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label htmlFor="fee_category" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="fee_category" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Fee Category <span className="text-red-500">*</span>
               </label>
               <select
@@ -329,7 +329,7 @@ export default function AdminContractsNewPage() {
             </div>
 
             <div>
-              <label htmlFor="subsidy_type" className="block text-sm font-semibold text-gray-700 mb-2">
+              <label htmlFor="subsidy_type" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Subsidy Type (Optional)
               </label>
               <select
@@ -351,7 +351,7 @@ export default function AdminContractsNewPage() {
           {form.subsidy_type && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label htmlFor="subsidy_amount" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="subsidy_amount" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                   Subsidy Amount (€)
                 </label>
                 <input
@@ -382,13 +382,13 @@ export default function AdminContractsNewPage() {
                   onChange={(e) => setForm((p) => ({ ...p, lunch_obligation: e.target.checked }))}
                   className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
                 />
-                <label htmlFor="lunch_obligation" className="text-sm font-medium text-gray-700 cursor-pointer">
+                <label htmlFor="lunch_obligation" className="text-sm font-medium text-slate-700 dark:text-slate-200 cursor-pointer">
                   Lunch Obligation (Child must have lunch)
                 </label>
               </div>
 
               <div>
-                <label htmlFor="lunch_billing_type" className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="lunch_billing_type" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                   Lunch Billing Type <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -409,7 +409,7 @@ export default function AdminContractsNewPage() {
 
               {(form.lunch_billing_type === 'flat_monthly' || form.lunch_billing_type === 'hybrid') && (
                 <div>
-                  <label htmlFor="lunch_flat_rate_amount" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="lunch_flat_rate_amount" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                     Monthly Flat Rate (€) <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -423,14 +423,14 @@ export default function AdminContractsNewPage() {
                     className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500"
                     placeholder="66.00"
                   />
-                  <p className="text-xs text-gray-500 mt-2">Fixed monthly amount for lunch</p>
+                  <p className="text-xs text-ui-soft mt-2">Fixed monthly amount for lunch</p>
                 </div>
               )}
             </div>
           </div>
 
           <div>
-            <label htmlFor="status" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="status" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
               Status <span className="text-red-500">*</span>
             </label>
             <select
@@ -448,7 +448,7 @@ export default function AdminContractsNewPage() {
           </div>
 
           <div>
-            <label htmlFor="notes" className="block text-sm font-semibold text-gray-700 mb-2">
+            <label htmlFor="notes" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
               Notes (Optional)
             </label>
             <textarea
@@ -465,7 +465,7 @@ export default function AdminContractsNewPage() {
             <button
               type="button"
               onClick={() => router.push('/admin/contracts')}
-              className="px-6 py-2.5 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition-all"
+              className="px-6 py-2.5 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 transition-all"
               disabled={submitting}
             >
               Cancel

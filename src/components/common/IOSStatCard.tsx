@@ -38,33 +38,33 @@ export function IOSStatCard({
   const Content = (
     <>
       <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <p className="text-[12px] font-bold text-slate-400 mb-2 tracking-wider uppercase">
+        <div className="flex-1 min-w-0">
+          <p className="text-[12px] font-bold text-ui-soft mb-2 tracking-wider uppercase">
             {title}
           </p>
-          <p className="text-[32px] md:text-[28px] font-black leading-tight text-slate-900 tracking-tight">
+          <p className="text-[32px] md:text-[28px] font-black leading-tight text-slate-900 dark:text-white tracking-tight">
             {formatValue}
           </p>
           {subtitle && (
-            <p className="text-[12px] text-slate-400 mt-1 font-medium">
+            <p className="text-[12px] text-ui-soft mt-1 font-medium">
               {subtitle}
             </p>
           )}
         </div>
         {icon && (
-          <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-[24px] text-indigo-600">
+          <div className="w-12 h-12 shrink-0 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-[24px] text-indigo-600 dark:text-indigo-300">
             {icon}
           </div>
         )}
       </div>
       {trend && (
-        <div className="mt-4 pt-4 border-t border-slate-50">
+        <div className="mt-4 pt-4 border-t border-slate-100 dark:border-white/10">
           <div className={cn("flex items-center text-xs font-bold", trend.type === 'up' ? 'text-emerald-500' : 'text-rose-500')}>
             <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-current bg-opacity-10">
               <span>{trend.type === 'up' ? '↑' : '↓'}</span>
               <span>{trend.value}</span>
             </span>
-            <span className="ml-2 text-slate-400 font-medium whitespace-nowrap">vs last month</span>
+            <span className="ml-2 text-ui-soft font-medium whitespace-nowrap">vs last month</span>
           </div>
         </div>
       )}
@@ -72,8 +72,8 @@ export function IOSStatCard({
   )
 
   const cardClasses = cn(
-    'block bg-white border border-slate-100 rounded-3xl p-6 shadow-xl shadow-slate-200/40 transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] text-inherit no-underline group h-full',
-    to && 'cursor-pointer hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-200/30 hover:border-indigo-100 active:scale-[0.98]',
+    'block rounded-3xl border border-slate-100 dark:border-white/10 bg-white dark:bg-slate-900/60 p-6 shadow-xl shadow-slate-200/40 dark:shadow-none transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] text-inherit no-underline group h-full',
+    to && 'cursor-pointer hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-200/30 dark:hover:border-indigo-500/30 hover:border-indigo-100 active:scale-[0.98]',
     color,
     className
   )

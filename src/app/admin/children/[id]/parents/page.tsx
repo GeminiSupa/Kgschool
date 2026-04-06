@@ -182,14 +182,14 @@ export default function AdminChildParentsPage() {
         <button
           type="button"
           onClick={() => router.push(`/admin/children/${childId}`)}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Child
         </button>
         <Heading size="xl" className="mb-2">
           Manage Parents
         </Heading>
-        {childName && <p className="text-gray-700 font-medium">Child: {childName}</p>}
+        {childName && <p className="text-slate-700 dark:text-slate-200 font-medium">Child: {childName}</p>}
       </div>
 
       {loading ? (
@@ -209,7 +209,7 @@ export default function AdminChildParentsPage() {
 
             <div className="mb-6">
               <div className="flex items-center justify-between mb-2 gap-4">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200">
                   Search Parent by Email or Name
                 </label>
 
@@ -247,7 +247,7 @@ export default function AdminChildParentsPage() {
 
             {searchResults.length > 0 && (
               <div className="mb-6">
-                <p className="text-sm font-medium text-gray-700 mb-2">Search Results:</p>
+                <p className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Search Results:</p>
                 <div className="space-y-2">
                   {searchResults.map((parent) => {
                     const alreadyAdded = currentParentIds.includes(parent.id)
@@ -255,7 +255,7 @@ export default function AdminChildParentsPage() {
                       <div key={parent.id} className="p-3 bg-gray-50 rounded-md flex items-center justify-between gap-4">
                         <div>
                           <p className="font-medium">{parent.full_name}</p>
-                          <p className="text-sm text-gray-600">{parent.email}</p>
+                          <p className="text-sm text-ui-muted">{parent.email}</p>
                         </div>
                         <button
                           type="button"
@@ -263,7 +263,7 @@ export default function AdminChildParentsPage() {
                           disabled={alreadyAdded}
                           className={[
                             'px-3 py-1 text-sm rounded-md transition-colors',
-                            alreadyAdded ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700',
+                            alreadyAdded ? 'bg-gray-300 text-ui-soft cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700',
                           ].join(' ')}
                         >
                           {alreadyAdded ? 'Already Added' : 'Add'}
@@ -283,7 +283,7 @@ export default function AdminChildParentsPage() {
               </div>
             )}
 
-            {searching && <div className="mb-6 text-center py-4 text-gray-500 text-sm">Searching...</div>}
+            {searching && <div className="mb-6 text-center py-4 text-ui-soft text-sm">Searching...</div>}
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
@@ -292,7 +292,7 @@ export default function AdminChildParentsPage() {
             </Heading>
 
             {currentParents.length === 0 ? (
-              <div className="text-gray-500 text-sm">No parents linked to this child.</div>
+              <div className="text-ui-soft text-sm">No parents linked to this child.</div>
             ) : (
               <div className="space-y-2">
                 {currentParents.map((parent) => (
@@ -302,7 +302,7 @@ export default function AdminChildParentsPage() {
                   >
                     <div>
                       <p className="font-medium">{parent.full_name}</p>
-                      <p className="text-sm text-gray-600">{parent.email}</p>
+                      <p className="text-sm text-ui-muted">{parent.email}</p>
                     </div>
                     <button
                       type="button"

@@ -68,8 +68,8 @@ export default function TeacherNapRecordsPage() {
     <div className="max-w-4xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Dokumentieren Sie Schlaf- und Ruhezeiten der Kinder.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Dokumentieren Sie Schlaf- und Ruhezeiten der Kinder.</p>
         </div>
         <Link href="/teacher/nap-records/new">
           <IOSButton variant="primary" className="px-6 py-2.5 text-sm font-bold flex items-center gap-2">
@@ -84,7 +84,7 @@ export default function TeacherNapRecordsPage() {
             <select
               value={selectedChildId}
               onChange={(e) => { setSelectedChildId(e.target.value); setTimeout(() => handleFetch(), 10) }}
-              className="px-4 py-2 bg-white border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all shadow-sm"
+              className="px-4 py-2 bg-white border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all shadow-sm"
             >
               <option value="">Alle Kinder</option>
               {children.map(child => (
@@ -99,7 +99,7 @@ export default function TeacherNapRecordsPage() {
               type="date"
               value={selectedDate}
               onChange={(e) => { setSelectedDate(e.target.value); setTimeout(() => handleFetch(), 10) }}
-              className="px-4 py-2 bg-white border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all shadow-sm"
+              className="px-4 py-2 bg-white border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all shadow-sm"
             />
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function TeacherNapRecordsPage() {
       ) : napRecords.length === 0 ? (
         <IOSCard className="p-16 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">😴</div>
-          <p className="text-gray-500 font-medium">Keine Schlafprotokolle für diesen Zeitraum gefunden.</p>
+          <p className="text-ui-soft font-medium">Keine Schlafprotokolle für diesen Zeitraum gefunden.</p>
         </IOSCard>
       ) : (
         <div className="grid gap-3">
@@ -119,13 +119,13 @@ export default function TeacherNapRecordsPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                        <h4 className="text-lg font-black text-gray-900 tracking-tight">{getChildName(record.child_id)}</h4>
+                        <h4 className="text-lg font-black text-slate-900 dark:text-slate-50 tracking-tight">{getChildName(record.child_id)}</h4>
                         <span className="px-2.5 py-1 bg-purple-50 text-purple-600 text-[10px] font-black uppercase tracking-widest rounded-md border border-purple-100">
                           😴 {record.duration_minutes ? `${record.duration_minutes} Min.` : 'Unbekannt'}
                         </span>
                     </div>
                     
-                    <div className="flex items-center gap-4 text-xs font-bold text-gray-400 mb-4">
+                    <div className="flex items-center gap-4 text-xs font-bold text-ui-soft mb-4">
                         <div className="flex items-center gap-1.5">
                             <span>📅</span> {formatDate(record.nap_date)}
                         </div>
@@ -137,7 +137,7 @@ export default function TeacherNapRecordsPage() {
                     </div>
                     
                     {record.notes && (
-                        <p className="text-sm font-medium text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-100">
+                        <p className="text-sm font-medium text-ui-muted leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-100">
                             {record.notes}
                         </p>
                     )}

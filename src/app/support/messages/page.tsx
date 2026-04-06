@@ -124,10 +124,10 @@ export default function SupportMessagesPage() {
     <div className="max-w-4xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">
             Nachrichten
           </Heading>
-          <p className="text-sm text-gray-500 mt-1">Austausch mit Eltern, der Leitung und Support.</p>
+          <p className="text-sm text-ui-soft mt-1">Austausch mit Eltern, der Leitung und Support.</p>
         </div>
 
         <IOSButton
@@ -140,20 +140,26 @@ export default function SupportMessagesPage() {
         </IOSButton>
       </div>
 
-      <div className="flex gap-2 mb-6 p-1.5 bg-[#f2f2f7] rounded-2xl w-fit">
+      <div className="mb-6 flex w-fit gap-2 rounded-2xl bg-slate-100 p-1.5 dark:bg-white/10">
         <button
+          type="button"
           onClick={() => setActiveTab('inbox')}
-          className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
-            activeTab === 'inbox' ? 'bg-white text-[#667eea] shadow-sm' : 'text-gray-500 hover:text-gray-700'
+          className={`flex min-h-11 items-center gap-2 rounded-xl px-6 py-2 text-sm font-bold transition-all duration-300 ${
+            activeTab === 'inbox'
+              ? 'bg-white text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-300'
+              : 'text-ui-soft hover:text-slate-800 dark:hover:text-slate-100'
           }`}
         >
           Posteingang
-          {unreadCount > 0 && <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />}
+          {unreadCount > 0 && <span className="h-2 w-2 animate-pulse rounded-full bg-red-500" aria-hidden />}
         </button>
         <button
+          type="button"
           onClick={() => setActiveTab('outbox')}
-          className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
-            activeTab === 'outbox' ? 'bg-white text-[#667eea] shadow-sm' : 'text-gray-500 hover:text-gray-700'
+          className={`min-h-11 rounded-xl px-6 py-2 text-sm font-bold transition-all duration-300 ${
+            activeTab === 'outbox'
+              ? 'bg-white text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-300'
+              : 'text-ui-soft hover:text-slate-800 dark:hover:text-slate-100'
           }`}
         >
           Gesendet
@@ -163,9 +169,9 @@ export default function SupportMessagesPage() {
       {error ? (
         <ErrorAlert message={error.message || 'Fehler beim Laden der Nachrichten'} />
       ) : displayMessages.length === 0 ? (
-        <IOSCard className="p-16 text-center bg-gray-50/50">
+        <IOSCard className="bg-slate-50/80 p-16 text-center dark:bg-white/5">
           <div className="text-5xl opacity-40 mb-4">💬</div>
-          <p className="text-gray-500 font-medium">
+          <p className="text-ui-soft font-medium">
             {activeTab === 'inbox' ? 'Keine Nachrichten empfangen.' : 'Keine Nachrichten gesendet.'}
           </p>
         </IOSCard>
@@ -175,15 +181,15 @@ export default function SupportMessagesPage() {
             <IOSCard
               key={message.id}
               onClick={() => handleMarkAsRead(message.id, !!message.read_at)}
-              className={`p-0 overflow-hidden cursor-pointer group transition-all duration-300 border-black/5 hover:border-[#667eea]/30 ${
-                activeTab === 'inbox' && !message.read_at ? 'bg-blue-50/30' : ''
+              className={`group cursor-pointer overflow-hidden border-border p-0 transition-all duration-300 hover:border-indigo-400/30 dark:hover:border-indigo-500/30 ${
+                activeTab === 'inbox' && !message.read_at ? 'bg-indigo-500/10 dark:bg-indigo-950/30' : ''
               }`}
             >
               <div className="p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h4 className="font-black text-gray-900 group-hover:text-[#667eea] transition-colors">
+                      <h4 className="font-black text-slate-900 dark:text-slate-50 group-hover:text-[#667eea] transition-colors">
                         {getPartnerName(message)}
                       </h4>
                       {activeTab === 'inbox' && !message.read_at && (
@@ -192,10 +198,10 @@ export default function SupportMessagesPage() {
                         </span>
                       )}
                     </div>
-                    <p className="text-sm font-medium text-gray-600 line-clamp-2 leading-relaxed">{message.content}</p>
-                    <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mt-4">{formatDate(message.created_at)}</p>
+                    <p className="text-sm font-medium text-ui-muted line-clamp-2 leading-relaxed">{message.content}</p>
+                    <p className="mt-4 text-[10px] font-black uppercase tracking-widest text-ui-soft">{formatDate(message.created_at)}</p>
                   </div>
-                  <div className="text-gray-200 group-hover:text-[#667eea] transition-colors pt-1">
+                  <div className="text-slate-300 transition-colors group-hover:text-indigo-500 dark:text-slate-600 dark:group-hover:text-indigo-400 pt-1">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                     </svg>
@@ -211,12 +217,14 @@ export default function SupportMessagesPage() {
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-6 animate-in fade-in duration-300">
           <IOSCard className="max-w-2xl w-full p-8 shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
             <div className="flex items-center justify-between mb-8">
-              <Heading size="md" className="text-gray-900">
+              <Heading size="md" className="text-slate-900 dark:text-slate-50">
                 Nachricht verfassen
               </Heading>
               <button
+                type="button"
                 onClick={() => setShowCompose(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Close"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl text-ui-soft transition-colors hover:text-ui-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -226,7 +234,7 @@ export default function SupportMessagesPage() {
 
             <form onSubmit={handleSendMessage} className="space-y-6">
               <div>
-                <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-2">
+                <label className="mb-2 block text-xs font-black uppercase tracking-widest text-ui-soft">
                   Empfänger *
                 </label>
                 <select
@@ -234,7 +242,7 @@ export default function SupportMessagesPage() {
                   onChange={(e) => setComposeForm((p) => ({ ...p, recipient_id: e.target.value }))}
                   required
                   disabled={profilesLoading}
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                  className="w-full rounded-xl border-2 border-border bg-background px-4 py-2.5 text-sm font-bold text-slate-800 outline-none transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 dark:text-slate-100"
                 >
                   <option value="">{profilesLoading ? 'Loading...' : 'Select recipient'}</option>
                   {profiles.map((p) => (
@@ -246,19 +254,19 @@ export default function SupportMessagesPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-2">Inhalt *</label>
+                <label className="mb-2 block text-xs font-black uppercase tracking-widest text-ui-soft">Inhalt *</label>
                 <textarea
                   value={composeForm.content}
                   onChange={(e) => setComposeForm((p) => ({ ...p, content: e.target.value }))}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-gray-50 border border-black/5 rounded-xl text-sm font-medium text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+                  className="w-full resize-none rounded-xl border-2 border-border bg-background px-4 py-3 text-sm font-medium text-slate-800 outline-none transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 dark:text-slate-100"
                   placeholder="Schreiben Sie Ihre Nachricht hier..."
                 />
               </div>
 
               {composeError && (
-                <div className="p-3 bg-red-50 text-red-700 rounded-xl text-xs font-bold border border-red-100">
+                <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-bold text-red-800 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-200">
                   {composeError}
                 </div>
               )}

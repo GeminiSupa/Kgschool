@@ -132,7 +132,7 @@ export default function AdminLunchBillingTimetableNewPage() {
         <button
           type="button"
           onClick={handleCancel}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Timetables
         </button>
@@ -149,7 +149,7 @@ export default function AdminLunchBillingTimetableNewPage() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="group_id" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="group_id" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Group <span className="text-red-500">*</span>
               </label>
               <select
@@ -170,7 +170,7 @@ export default function AdminLunchBillingTimetableNewPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-3">
                 Billable Days <span className="text-red-500">*</span>
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -196,12 +196,12 @@ export default function AdminLunchBillingTimetableNewPage() {
                   </label>
                 ))}
               </div>
-              <p className="text-xs text-gray-500 mt-2">Select which days of the week should be billable for this group.</p>
+              <p className="text-xs text-ui-soft mt-2">Select which days of the week should be billable for this group.</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="effective_from" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="effective_from" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                   Effective From <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -215,7 +215,7 @@ export default function AdminLunchBillingTimetableNewPage() {
                 />
               </div>
               <div>
-                <label htmlFor="effective_to" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="effective_to" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                   Effective To (optional)
                 </label>
                 <input
@@ -226,12 +226,12 @@ export default function AdminLunchBillingTimetableNewPage() {
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                   disabled={submitting}
                 />
-                <p className="text-xs text-gray-500 mt-1">Leave empty for ongoing schedule</p>
+                <p className="text-xs text-ui-soft mt-1">Leave empty for ongoing schedule</p>
               </div>
             </div>
 
             <div>
-              <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="notes" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Notes
               </label>
               <textarea

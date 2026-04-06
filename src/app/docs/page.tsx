@@ -23,7 +23,7 @@ export default function DocsPage() {
         <h1 className="text-3xl md:text-4xl font-bold font-[family-name:var(--font-plus-jakarta)] tracking-tight mb-3">
           Hilfe & Dokumentation
         </h1>
-        <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-10">
+        <p className="text-ui-muted text-sm leading-relaxed mb-10">
           Laden Sie die Markdown-Dateien herunter und öffnen Sie sie im Editor, in Marp/Slidev oder drucken Sie sie im Browser als PDF
           („Drucken → Als PDF speichern“).
         </p>
@@ -39,7 +39,7 @@ export default function DocsPage() {
             </div>
             <div className="min-w-0">
               <p className="font-bold text-lg">Benutzerhandbuch</p>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-sm text-ui-soft mt-1">
                 Rollen, Module und Abläufe — für Leitung und Team (PDF-tauglich).
               </p>
               <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-3">kg-school-manual.md →</p>
@@ -56,7 +56,7 @@ export default function DocsPage() {
             </div>
             <div className="min-w-0">
               <p className="font-bold text-lg">Präsentation</p>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-sm text-ui-soft mt-1">
                 Folienstruktur für Pitches und Einrichtungsvorstellungen (Marp, Druck, PDF).
               </p>
               <p className="text-xs font-semibold text-fuchsia-600 dark:text-fuchsia-400 mt-3">kg-school-presentation.md →</p>
@@ -64,7 +64,7 @@ export default function DocsPage() {
           </a>
         </div>
 
-        <p className="text-xs text-slate-400 dark:text-slate-500 mt-10 leading-relaxed">
+        <p className="text-xs text-ui-soft mt-10 leading-relaxed">
           Quelldateien im Repository: <code className="text-slate-600 dark:text-slate-300">docs/MANUAL.md</code> und{' '}
           <code className="text-slate-600 dark:text-slate-300">docs/PRESENTATION.md</code>.
         </p>

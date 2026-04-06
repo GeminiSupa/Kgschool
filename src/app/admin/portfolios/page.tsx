@@ -38,8 +38,8 @@ export default function AdminPortfoliosPage() {
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <div>
-          <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Überwachen Sie die pädagogische Dokumentation für alle Kinder.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Überwachen Sie die pädagogische Dokumentation für alle Kinder.</p>
         </div>
       </div>
 
@@ -71,8 +71,8 @@ export default function AdminPortfoliosPage() {
                     </div>
                     <div className="p-8">
                         <p className="text-[10px] font-black text-[#667eea] uppercase tracking-widest mb-1">{getChildName(entry.child_id)}</p>
-                        <h3 className="text-xl font-black text-gray-900 mb-4">{entry.title}</h3>
-                        <p className="text-sm text-gray-500 line-clamp-2 mb-8 font-medium leading-relaxed">{entry.content}</p>
+                        <h3 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-4">{entry.title}</h3>
+                        <p className="text-sm text-ui-soft line-clamp-2 mb-8 font-medium leading-relaxed">{entry.content}</p>
                         
                         <div className="flex gap-2">
                              <Link href={`/admin/portfolios/${entry.id}`} className="flex-1">

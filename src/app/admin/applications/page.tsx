@@ -69,8 +69,8 @@ export default function AdminApplicationsPage() {
     <div className="max-w-7xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
         <div>
-          <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Verwalten Sie neue Anmeldungen und die Kommunikation mit Eltern.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Verwalten Sie neue Anmeldungen und die Kommunikation mit Eltern.</p>
         </div>
         <Link href="/admin/applications/waitlist">
           <IOSButton variant="secondary" className="px-6 py-2.5 text-sm font-black uppercase tracking-widest flex items-center gap-2 border-black/10">
@@ -88,7 +88,7 @@ export default function AdminApplicationsPage() {
                     className={`px-5 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all duration-300 ${
                         selectedStatus === s.value 
                         ? 'bg-black text-white border-black shadow-lg shadow-black/10' 
-                        : 'bg-white text-gray-400 border-black/5 hover:border-black/10'
+                        : 'bg-white text-ui-soft border-black/5 hover:border-black/10'
                     }`}
                 >
                     {s.label}
@@ -101,7 +101,7 @@ export default function AdminApplicationsPage() {
       ) : applications.length === 0 ? (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
           <div className="text-5xl opacity-10 mb-6">📬</div>
-          <p className="text-gray-400 font-bold max-w-xs mx-auto">Keine Anmeldungen in dieser Kategorie gefunden.</p>
+          <p className="text-ui-soft font-bold max-w-xs mx-auto">Keine Anmeldungen in dieser Kategorie gefunden.</p>
         </IOSCard>
       ) : (
         <div className="space-y-4">
@@ -110,7 +110,7 @@ export default function AdminApplicationsPage() {
                     <div className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
-                                <h3 className="text-lg font-black text-gray-900">{app.child_first_name} {app.child_last_name}</h3>
+                                <h3 className="text-lg font-black text-slate-900 dark:text-slate-50">{app.child_first_name} {app.child_last_name}</h3>
                                 {getStatusBadge(app.status)}
                             </div>
                             <div className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] font-black text-black/30 uppercase tracking-widest">
@@ -121,8 +121,8 @@ export default function AdminApplicationsPage() {
                             <div className="mt-4 flex items-center gap-3">
                                 <div className="w-8 h-8 rounded-full bg-black/5 flex items-center justify-center text-[10px] font-black italic">👤</div>
                                 <div>
-                                    <p className="text-xs font-black text-gray-800 leading-none">{app.parent_name}</p>
-                                    <p className="text-[10px] font-bold text-gray-400">{app.parent_email}</p>
+                                    <p className="text-xs font-black text-slate-800 dark:text-slate-100 leading-none">{app.parent_name}</p>
+                                    <p className="text-[10px] font-bold text-ui-soft">{app.parent_email}</p>
                                 </div>
                             </div>
                         </div>

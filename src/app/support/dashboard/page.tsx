@@ -94,8 +94,8 @@ export default function SupportDashboardPage() {
             <IOSCard className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Total Children</p>
-                  <p className="text-2xl font-bold text-gray-900 mt-1">{totalChildren}</p>
+                  <p className="text-sm text-ui-muted">Total Children</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-slate-50 mt-1">{totalChildren}</p>
                 </div>
                 <span className="text-3xl">👶</span>
               </div>
@@ -104,8 +104,8 @@ export default function SupportDashboardPage() {
             <IOSCard className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Today's Attendance</p>
-                  <p className="text-2xl font-bold text-gray-900 mt-1">{todayAttendance}</p>
+                  <p className="text-sm text-ui-muted">Today's Attendance</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-slate-50 mt-1">{todayAttendance}</p>
                 </div>
                 <span className="text-3xl">✅</span>
               </div>
@@ -114,8 +114,8 @@ export default function SupportDashboardPage() {
             <IOSCard className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Unread Messages</p>
-                  <p className="text-2xl font-bold text-gray-900 mt-1">{unreadMessages}</p>
+                  <p className="text-sm text-ui-muted">Unread Messages</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-slate-50 mt-1">{unreadMessages}</p>
                 </div>
                 <span className="text-3xl">💬</span>
               </div>
@@ -130,25 +130,25 @@ export default function SupportDashboardPage() {
               <div className="space-y-2">
                 <Link
                   href="/support/attendance"
-                  className="block px-4 py-3 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors"
+                  className="flex min-h-11 w-full items-center rounded-xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-indigo-900 transition-colors hover:bg-indigo-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50 dark:focus-visible:ring-indigo-500/40"
                 >
                   ✅ Take Attendance
                 </Link>
                 <Link
                   href="/support/children"
-                  className="block px-4 py-3 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors"
+                  className="flex min-h-11 w-full items-center rounded-xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-indigo-900 transition-colors hover:bg-indigo-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50 dark:focus-visible:ring-indigo-500/40"
                 >
                   👶 View Children
                 </Link>
                 <Link
                   href="/support/messages"
-                  className="block px-4 py-3 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors"
+                  className="flex min-h-11 w-full items-center rounded-xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-indigo-900 transition-colors hover:bg-indigo-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50 dark:focus-visible:ring-indigo-500/40"
                 >
                   💬 Send Messages
                 </Link>
                 <Link
                   href="/support/reports"
-                  className="block px-4 py-3 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors"
+                  className="flex min-h-11 w-full items-center rounded-xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-indigo-900 transition-colors hover:bg-indigo-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50 dark:focus-visible:ring-indigo-500/40"
                 >
                   📊 View Reports
                 </Link>
@@ -160,13 +160,13 @@ export default function SupportDashboardPage() {
                 Recent Activity
               </Heading>
               {recentActivity.length === 0 ? (
-                <div className="text-gray-500 text-sm">No recent activity.</div>
+                <div className="text-ui-soft text-sm">No recent activity.</div>
               ) : (
                 <div className="space-y-2">
                   {recentActivity.map((activity) => (
-                    <div key={activity.id} className="p-3 bg-gray-50 rounded-md text-sm">
+                    <div key={activity.id} className="rounded-xl border border-border/60 bg-slate-50 p-3 text-sm dark:border-white/10 dark:bg-white/5">
                       <p className="font-medium">{activity.description}</p>
-                      <p className="text-xs text-gray-500 mt-1">{formatTime(activity.timestamp)}</p>
+                      <p className="text-xs text-ui-soft mt-1">{formatTime(activity.timestamp)}</p>
                     </div>
                   ))}
                 </div>

@@ -88,11 +88,11 @@ export const TeacherAssignmentList = forwardRef<TeacherAssignmentListRef, Teache
     const formatDate = (date: string) => new Date(date).toLocaleDateString('de-DE')
 
     if (loading) {
-      return <div className="text-center py-4 text-gray-500 text-sm">Loading assignments...</div>
+      return <div className="text-center py-4 text-ui-soft text-sm">Loading assignments...</div>
     }
 
     if (assignments.length === 0) {
-      return <div className="text-center py-4 text-gray-500 text-sm">No staff assignments yet.</div>
+      return <div className="text-center py-4 text-ui-soft text-sm">No staff assignments yet.</div>
     }
 
     return (
@@ -101,19 +101,19 @@ export const TeacherAssignmentList = forwardRef<TeacherAssignmentListRef, Teache
           const typeClass =
             assignment.assignment_type === 'primary_teacher' ? 'bg-blue-100 text-blue-800' :
             assignment.assignment_type === 'assistant_teacher' ? 'bg-green-100 text-green-800' :
-            'bg-gray-100 text-gray-800'
+            'bg-gray-100 text-slate-800 dark:text-slate-100'
 
           return (
             <div key={assignment.id} className="p-3 bg-white/50 border border-black/10 rounded-xl shadow-sm hover:bg-white/80 transition-colors">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <p className="font-semibold text-gray-900 text-sm">{getStaffName(assignment.staff_id)}</p>
+                    <p className="font-semibold text-slate-900 dark:text-slate-50 text-sm">{getStaffName(assignment.staff_id)}</p>
                     <span className={`px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide rounded-full ${typeClass}`}>
                       {formatAssignmentType(assignment.assignment_type)}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-600 font-medium">
+                  <p className="text-xs text-ui-muted font-medium">
                     {formatDate(assignment.start_date)}
                     {assignment.end_date ? (
                       <span> - {formatDate(assignment.end_date)}</span>
@@ -122,7 +122,7 @@ export const TeacherAssignmentList = forwardRef<TeacherAssignmentListRef, Teache
                     )}
                   </p>
                   {assignment.notes && (
-                    <p className="text-xs text-gray-500 mt-1.5 italic bg-black/5 p-1.5 rounded-lg">
+                    <p className="text-xs text-ui-soft mt-1.5 italic bg-black/5 p-1.5 rounded-lg">
                       {assignment.notes}
                     </p>
                   )}

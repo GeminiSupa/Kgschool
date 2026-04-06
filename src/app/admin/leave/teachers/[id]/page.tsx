@@ -125,7 +125,7 @@ export default function AdminTeacherLeaveRequestDetailPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/leave')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Leave Requests
         </button>
@@ -141,17 +141,17 @@ export default function AdminTeacherLeaveRequestDetailPage() {
           <ErrorAlert message={error} />
         </div>
       ) : !request ? (
-        <div className="p-8 text-center text-gray-500">Leave request not found.</div>
+        <div className="p-8 text-center text-ui-soft">Leave request not found.</div>
       ) : (
         <div className="bg-white rounded-lg shadow p-6 max-w-3xl space-y-6">
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <h3 className="text-sm font-medium text-gray-600">Teacher</h3>
-                <p className="mt-1 text-gray-900">{getTeacherName(request.teacher_id)}</p>
+                <h3 className="text-sm font-medium text-ui-muted">Teacher</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{getTeacherName(request.teacher_id)}</p>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-600">Status</h3>
+                <h3 className="text-sm font-medium text-ui-muted">Status</h3>
                 <span
                   className={[
                     'inline-block mt-1 px-2 py-1 text-xs font-medium rounded-full',
@@ -169,36 +169,36 @@ export default function AdminTeacherLeaveRequestDetailPage() {
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <h3 className="text-sm font-medium text-gray-600">Start Date</h3>
-                <p className="mt-1 text-gray-900">{formatDate(request.start_date)}</p>
+                <h3 className="text-sm font-medium text-ui-muted">Start Date</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{formatDate(request.start_date)}</p>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-600">End Date</h3>
-                <p className="mt-1 text-gray-900">{formatDate(request.end_date)}</p>
+                <h3 className="text-sm font-medium text-ui-muted">End Date</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{formatDate(request.end_date)}</p>
               </div>
             </div>
 
             <div className="mb-4">
-              <h3 className="text-sm font-medium text-gray-600">Leave Type</h3>
-              <p className="mt-1 text-gray-900">{formatLeaveType(request.leave_type)}</p>
+              <h3 className="text-sm font-medium text-ui-muted">Leave Type</h3>
+              <p className="mt-1 text-slate-900 dark:text-slate-50">{formatLeaveType(request.leave_type)}</p>
             </div>
 
             <div className="mb-4">
-              <h3 className="text-sm font-medium text-gray-600">Reason</h3>
-              <p className="mt-1 text-gray-900">{request.reason}</p>
+              <h3 className="text-sm font-medium text-ui-muted">Reason</h3>
+              <p className="mt-1 text-slate-900 dark:text-slate-50">{request.reason}</p>
             </div>
 
             {request.admin_notes && (
               <div className="mb-4">
-                <h3 className="text-sm font-medium text-gray-600">Admin Notes</h3>
-                <p className="mt-1 text-gray-900">{request.admin_notes}</p>
+                <h3 className="text-sm font-medium text-ui-muted">Admin Notes</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{request.admin_notes}</p>
               </div>
             )}
 
             {request.status === 'pending' && (
               <div className="pt-4 border-t space-y-4">
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700 mb-2">Admin Notes (Optional)</h3>
+                  <h3 className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Admin Notes (Optional)</h3>
                   <textarea
                     value={adminNotes}
                     onChange={(e) => setAdminNotes(e.target.value)}

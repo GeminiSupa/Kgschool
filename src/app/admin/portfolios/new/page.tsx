@@ -55,7 +55,7 @@ export default function AdminPortfoliosNewPage() {
         <button
           type="button"
           onClick={handleCancel}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Portfolios
         </button>

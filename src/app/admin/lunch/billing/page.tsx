@@ -136,8 +136,8 @@ export default function AdminLunchBillingPage() {
         >
           ← Zurück zu Bestellungen
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">
           Übersicht der Monatsabrechnungen. Nutze die Aktionen, um Abrechnungen und Berichte zu erstellen.
         </p>
 
@@ -172,7 +172,7 @@ export default function AdminLunchBillingPage() {
       <div className="bg-white rounded-lg shadow p-4 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Month</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Month</label>
             <select
               value={filters.month ?? ''}
               onChange={(e) => {
@@ -193,7 +193,7 @@ export default function AdminLunchBillingPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Year</label>
             <input
               value={filters.year}
               onChange={(e) => setFilters((p) => ({ ...p, year: Number(e.target.value) }))}
@@ -204,7 +204,7 @@ export default function AdminLunchBillingPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Status</label>
             <select
               value={filters.status}
               onChange={(e) => setFilters((p) => ({ ...p, status: e.target.value }))}
@@ -238,7 +238,7 @@ export default function AdminLunchBillingPage() {
         <ErrorAlert message={error} />
       ) : bills.length === 0 ? (
         <IOSCard className="p-8 text-center bg-gray-50/30 border-black/5">
-          <p className="text-gray-600 font-semibold">No bills found.</p>
+          <p className="text-ui-muted font-semibold">No bills found.</p>
         </IOSCard>
       ) : (
         <IOSCard className="overflow-hidden">
@@ -246,29 +246,29 @@ export default function AdminLunchBillingPage() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Child</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Month/Year</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Total Amount</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Paid</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Refund</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Due Date</th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Child</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Month/Year</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Total Amount</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Paid</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Refund</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Status</th>
+                  <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Due Date</th>
+                  <th className="px-4 py-3 text-right text-xs font-medium text-ui-soft uppercase">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {bills.map((bill) => (
                   <tr key={bill.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                       {getChildName(bill.child_id)}
                     </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-ui-soft">
                       {getMonthName(bill.month)} {bill.year}
                     </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                       €{bill.total_amount.toFixed(2)}
                     </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-ui-soft">
                       €{bill.paid_amount.toFixed(2)}
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap text-sm text-green-600">
@@ -288,7 +288,7 @@ export default function AdminLunchBillingPage() {
                         {bill.status}
                       </span>
                     </td>
-                    <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-4 py-4 whitespace-nowrap text-sm text-ui-soft">
                       {formatDate(bill.due_date)}
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">

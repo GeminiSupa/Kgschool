@@ -76,7 +76,7 @@ export default function GroupDetailPage() {
   if (loading) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
   if (!group)
     return (
-      <div className="max-w-4xl mx-auto py-12 text-center text-gray-500">{t(sT('errNotFoundGroup'))}</div>
+      <div className="max-w-4xl mx-auto py-12 text-center text-ui-soft">{t(sT('errNotFoundGroup'))}</div>
     )
 
   return (
@@ -87,14 +87,14 @@ export default function GroupDetailPage() {
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-4">
             <div>
-                <Heading size="xl" className="text-gray-900 tracking-tight">{group.name}</Heading>
+                <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{group.name}</Heading>
                 <div className="flex items-center gap-3 mt-2">
                     <span className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-widest rounded-md border ${
                         group.age_range.includes('U3') ? 'bg-amber-50 text-amber-600 border-amber-100' : 'bg-green-50 text-green-600 border-green-100'
                     }`}>
                         {group.age_range} Bereich
                     </span>
-                    <span className="text-sm font-bold text-gray-400">{groupChildren.length} / {group.capacity} Kinder</span>
+                    <span className="text-sm font-bold text-ui-soft">{groupChildren.length} / {group.capacity} Kinder</span>
                 </div>
             </div>
             {!isEditing && (
@@ -126,7 +126,7 @@ export default function GroupDetailPage() {
                 <IOSCard className="p-8 border-black/5 shadow-sm">
                     <h3 className="text-[10px] font-black text-black/30 uppercase tracking-widest mb-8 border-b border-black/5 pb-4">Zugewiesene Kinder</h3>
                     {groupChildren.length === 0 ? (
-                        <p className="text-center py-10 text-gray-400 font-bold italic">Keine Kinder in dieser Gruppe.</p>
+                        <p className="text-center py-10 text-ui-soft font-bold italic">Keine Kinder in dieser Gruppe.</p>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {groupChildren.map(child => (
@@ -134,8 +134,8 @@ export default function GroupDetailPage() {
                                     <div className="flex items-center gap-4 p-4 bg-gray-50/50 rounded-2xl border border-black/5 hover:border-[#667eea]/30 transition-all group">
                                         <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-xs font-black text-gray-300 shadow-sm border border-black/5 group-hover:text-[#667eea]">👶</div>
                                         <div>
-                                            <p className="text-sm font-black text-gray-800">{child.first_name} {child.last_name}</p>
-                                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Aktiv</p>
+                                            <p className="text-sm font-black text-slate-800 dark:text-slate-100">{child.first_name} {child.last_name}</p>
+                                            <p className="text-[10px] font-bold text-ui-soft uppercase tracking-widest">Aktiv</p>
                                         </div>
                                     </div>
                                 </Link>

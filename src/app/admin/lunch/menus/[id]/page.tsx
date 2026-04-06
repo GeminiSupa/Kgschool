@@ -92,7 +92,7 @@ export default function AdminLunchMenuDetailsPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/lunch/menus')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Lunch Menus
         </button>
@@ -111,17 +111,17 @@ export default function AdminLunchMenuDetailsPage() {
         </div>
       ) : !menu ? (
         <IOSCard className="p-10 text-center bg-gray-50/30 border-black/5">
-          <p className="text-gray-600 font-semibold">Menü nicht gefunden</p>
+          <p className="text-ui-muted font-semibold">Menü nicht gefunden</p>
         </IOSCard>
       ) : (
         <IOSCard className="p-6 max-w-3xl mx-auto">
           <div className="space-y-6">
             <div className="space-y-2">
               <div>
-                <h3 className="text-xl font-black text-gray-900 mb-1">{menu.meal_name}</h3>
-                <p className="text-sm text-gray-500">{formatDate(menu.date)}</p>
+                <h3 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-1">{menu.meal_name}</h3>
+                <p className="text-sm text-ui-soft">{formatDate(menu.date)}</p>
               </div>
-              {menu.description && <p className="text-sm text-gray-700">{menu.description}</p>}
+              {menu.description && <p className="text-sm text-slate-700 dark:text-slate-200">{menu.description}</p>}
             </div>
 
             {menu.allergens && menu.allergens.length > 0 && (
@@ -148,8 +148,8 @@ export default function AdminLunchMenuDetailsPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {Object.entries(menu.nutritional_info).map(([key, value]) => (
                     <div key={key} className="flex justify-between gap-3">
-                      <span className="text-sm font-semibold text-gray-700 capitalize">{key}:</span>
-                      <span className="text-sm text-gray-900">{String(value)}</span>
+                      <span className="text-sm font-semibold text-slate-700 dark:text-slate-200 capitalize">{key}:</span>
+                      <span className="text-sm text-slate-900 dark:text-slate-50">{String(value)}</span>
                     </div>
                   ))}
                 </div>
@@ -169,7 +169,7 @@ export default function AdminLunchMenuDetailsPage() {
             )}
 
             <div className="pt-4 border-t border-gray-200 flex justify-between items-center gap-4">
-              <h3 className="text-sm font-semibold text-gray-800">Bestellungen für dieses Menü</h3>
+              <h3 className="text-sm font-semibold text-slate-800 dark:text-slate-100">Bestellungen für dieses Menü</h3>
               <IOSButton
                 onClick={() => router.push(`/admin/lunch/menus/${menu.id}/edit`)}
                 variant="secondary"
@@ -180,19 +180,19 @@ export default function AdminLunchMenuDetailsPage() {
             </div>
 
             {orders.length === 0 ? (
-              <p className="text-sm text-gray-600">Noch keine Bestellungen für dieses Menü.</p>
+              <p className="text-sm text-ui-muted">Noch keine Bestellungen für dieses Menü.</p>
             ) : (
               <div className="space-y-2">
                 {orders.map((order) => (
                   <IOSCard key={order.id} className="p-4 border-black/5" elevated={false}>
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <p className="font-medium text-sm text-gray-900">{getChildName(order.child_id)}</p>
-                        <p className="text-xs text-gray-700 mt-1">
+                        <p className="font-medium text-sm text-slate-900 dark:text-slate-50">{getChildName(order.child_id)}</p>
+                        <p className="text-xs text-slate-700 dark:text-slate-200 mt-1">
                           Status: <span className="font-semibold">{statusLabel(order.status)}</span>
                         </p>
                         {order.special_requests && (
-                          <p className="text-xs text-gray-700 mt-1">
+                          <p className="text-xs text-slate-700 dark:text-slate-200 mt-1">
                             Besondere Wünsche: {order.special_requests}
                           </p>
                         )}

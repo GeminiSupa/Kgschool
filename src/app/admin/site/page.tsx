@@ -117,8 +117,8 @@ export default function AdminSiteBuilderPage() {
     <div className="max-w-5xl mx-auto pb-12">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Öffentliche Kita-Seite + Platzanfrage-Funnel.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Öffentliche Kita-Seite + Platzanfrage-Funnel.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Link href={previewHref} className="rounded-xl border border-gray-200 px-4 py-2 text-xs font-black hover:bg-gray-50">
@@ -137,7 +137,7 @@ export default function AdminSiteBuilderPage() {
         <IOSCard className="p-6 border-black/5">
           <p className="text-[10px] font-black text-black/30 uppercase tracking-widest">Veröffentlichung</p>
           <div className="mt-4 space-y-3">
-            <label className="block text-xs font-black text-gray-700">Slug</label>
+            <label className="block text-xs font-black text-slate-700 dark:text-slate-200">Slug</label>
             <input
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
@@ -148,7 +148,7 @@ export default function AdminSiteBuilderPage() {
               <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} />
               Öffentlich sichtbar
             </label>
-            <p className="text-xs text-gray-500">Öffentliche URL: <span className="font-mono">{slug ? `/s/${slug.trim()}` : '—'}</span></p>
+            <p className="text-xs text-ui-soft">Öffentliche URL: <span className="font-mono">{slug ? `/s/${slug.trim()}` : '—'}</span></p>
           </div>
         </IOSCard>
 
@@ -239,7 +239,7 @@ export default function AdminSiteBuilderPage() {
               className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm font-semibold"
             />
           </div>
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="mt-4 text-xs text-ui-soft">
             Für vollständige Funktion bitte SQL aus <span className="font-mono">next-app/sql/tenant_site_builder.sql</span> in Supabase ausführen.
           </p>
         </IOSCard>

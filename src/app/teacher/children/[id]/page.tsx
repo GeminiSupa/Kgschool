@@ -137,8 +137,8 @@ export default function TeacherChildDetailPage({ params }: PageProps) {
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between px-5 py-4 gap-1">
-      <span className="text-sm font-semibold text-gray-500">{label}</span>
-      <span className="text-sm sm:text-base font-semibold text-gray-900">{value}</span>
+      <span className="text-sm font-semibold text-ui-soft">{label}</span>
+      <span className="text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-50">{value}</span>
     </div>
   )
 }

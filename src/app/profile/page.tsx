@@ -172,7 +172,7 @@ export default function ProfilePage() {
         <Heading size="xl" className="mb-1">
           Mein Profil
         </Heading>
-        <p className="text-sm text-gray-500">Verwalten Sie Ihre persönlichen Informationen und Kontoeinstellungen</p>
+        <p className="text-sm text-ui-soft">Verwalten Sie Ihre persönlichen Informationen und Kontoeinstellungen</p>
       </div>
 
       {updateError && <ErrorAlert message={updateError} />}
@@ -222,7 +222,7 @@ export default function ProfilePage() {
                 {uploadingAvatar ? '⏳ Wird hochgeladen...' : '📷 Bild ändern'}
               </IOSButton>
 
-              <p className="text-xs text-gray-500 mt-3">JPG, PNG oder GIF. Max. Größe 2MB.</p>
+              <p className="text-xs text-ui-soft mt-3">JPG, PNG oder GIF. Max. Größe 2MB.</p>
 
               {profile.avatar_url && (
                 <IOSButton
@@ -249,7 +249,7 @@ export default function ProfilePage() {
           <form onSubmit={handleUpdate} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                   Vollständiger Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -263,18 +263,18 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">E-Mail</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">E-Mail</label>
                 <input
                   value={profile.email}
                   type="email"
                   disabled
-                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed"
+                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed"
                 />
-                <p className="text-xs text-gray-500 mt-2">E-Mail kann nicht geändert werden</p>
+                <p className="text-xs text-ui-soft mt-2">E-Mail kann nicht geändert werden</p>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Telefon</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">Telefon</label>
                 <input
                   value={form.phone || ''}
                   onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
@@ -285,13 +285,13 @@ export default function ProfilePage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Rolle</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">Rolle</label>
                 <div className="relative">
                   <input
                     value={roleLabel}
                     type="text"
                     disabled
-                    className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed capitalize"
+                    className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed capitalize"
                   />
                   <span
                     className={[
@@ -308,7 +308,7 @@ export default function ProfilePage() {
                     {profile.role}
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">Rolle kann nicht geändert werden</p>
+                <p className="text-xs text-ui-soft mt-2">Rolle kann nicht geändert werden</p>
               </div>
             </div>
 
@@ -340,7 +340,7 @@ export default function ProfilePage() {
 
           <div className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Neues Passwort <span className="text-red-500">*</span>
               </label>
               <input
@@ -354,7 +354,7 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">
                 Neues Passwort bestätigen <span className="text-red-500">*</span>
               </label>
               <input
@@ -389,33 +389,33 @@ export default function ProfilePage() {
 
           <div className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Benutzer-ID</label>
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">Benutzer-ID</label>
               <input
                 value={profile.id}
                 type="text"
                 disabled
-                className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed font-mono text-sm"
+                className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed font-mono text-sm"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Erstellt am</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">Erstellt am</label>
                 <input
                   value={profile.created_at ? formatDate(profile.created_at) : ''}
                   type="text"
                   disabled
-                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed"
+                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Zuletzt aktualisiert</label>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-2">Zuletzt aktualisiert</label>
                 <input
                   value={profile.updated_at ? formatDate(profile.updated_at) : ''}
                   type="text"
                   disabled
-                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-gray-600 cursor-not-allowed"
+                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed"
                 />
               </div>
             </div>

@@ -121,12 +121,12 @@ export default function AdminLunchBillingTimetablePage() {
           <button
             type="button"
             onClick={() => router.push('/admin/lunch/billing')}
-            className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+            className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
           >
             ← Back to Billing
           </button>
           <Heading size="xl">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-600 mt-2">
+          <p className="text-sm text-ui-muted mt-2">
             Configure which days of the week are billable for each group
           </p>
         </div>
@@ -158,24 +158,24 @@ export default function AdminLunchBillingTimetablePage() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Group</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Days</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Group</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Days</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">
                     Effective From
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">
                     Effective To
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {timetables.map((t) => (
                   <tr key={t.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{getGroupName(t.group_id)}</td>
-                    <td className="px-6 py-4 text-sm text-gray-500">{getDayBadges(t)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{formatDate(t.effective_from)}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">{getGroupName(t.group_id)}</td>
+                    <td className="px-6 py-4 text-sm text-ui-soft">{getDayBadges(t)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">{formatDate(t.effective_from)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-ui-soft">
                       {t.effective_to ? formatDate(t.effective_to) : 'Ongoing'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">

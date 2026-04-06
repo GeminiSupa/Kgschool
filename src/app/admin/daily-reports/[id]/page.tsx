@@ -84,7 +84,7 @@ export default function AdminDailyReportDetailPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/daily-reports')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Daily Reports
         </button>
@@ -92,34 +92,34 @@ export default function AdminDailyReportDetailPage() {
       </div>
 
       {!report ? (
-        <div className="p-8 text-center text-gray-500">Daily report not found.</div>
+        <div className="p-8 text-center text-ui-soft">Daily report not found.</div>
       ) : (
         <div className="bg-white rounded-lg shadow p-6 max-w-3xl">
           <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Title</h3>
-              <p className="mt-1 text-lg text-gray-900">{report.title}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Title</h3>
+              <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{report.title}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Group</h3>
-              <p className="mt-1 text-gray-900">{getGroupName(report.group_id)}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Group</h3>
+              <p className="mt-1 text-slate-900 dark:text-slate-50">{getGroupName(report.group_id)}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Date</h3>
-              <p className="mt-1 text-gray-900">{formatDate(report.report_date)}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Date</h3>
+              <p className="mt-1 text-slate-900 dark:text-slate-50">{formatDate(report.report_date)}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Content</h3>
-              <p className="mt-1 text-gray-900 whitespace-pre-wrap">{report.content}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Content</h3>
+              <p className="mt-1 text-slate-900 dark:text-slate-50 whitespace-pre-wrap">{report.content}</p>
             </div>
 
             {report.activities && report.activities.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Activities</h3>
-                <ul className="mt-1 list-disc list-inside text-gray-900">
+                <h3 className="text-sm font-medium text-ui-soft">Activities</h3>
+                <ul className="mt-1 list-disc list-inside text-slate-900 dark:text-slate-50">
                   {report.activities.map((activity) => (
                     <li key={activity}>{activity}</li>
                   ))}
@@ -129,21 +129,21 @@ export default function AdminDailyReportDetailPage() {
 
             {report.weather && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Weather</h3>
-                <p className="mt-1 text-gray-900">{report.weather}</p>
+                <h3 className="text-sm font-medium text-ui-soft">Weather</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{report.weather}</p>
               </div>
             )}
 
             {report.special_events && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Special Events</h3>
-                <p className="mt-1 text-gray-900">{report.special_events}</p>
+                <h3 className="text-sm font-medium text-ui-soft">Special Events</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{report.special_events}</p>
               </div>
             )}
 
             {report.photos && report.photos.length > 0 && (
               <div className="mt-4">
-                <h3 className="text-sm font-medium text-gray-500 mb-2">Photos</h3>
+                <h3 className="text-sm font-medium text-ui-soft mb-2">Photos</h3>
                 <div className="grid grid-cols-3 gap-2">
                   {report.photos.map((photo) => (
                     // eslint-disable-next-line @next/next/no-img-element

@@ -62,7 +62,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="child_id" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="child_id" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Kind <span className="text-red-500">*</span>
         </label>
         <select
@@ -88,7 +88,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
       </div>
 
       <div>
-        <label htmlFor="observation_date" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="observation_date" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Datum <span className="text-red-500">*</span>
         </label>
         <input
@@ -102,7 +102,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
       </div>
 
       <div>
-        <label htmlFor="context" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="context" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Kontext (Wo/Wann)
         </label>
         <input
@@ -116,7 +116,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
       </div>
 
       <div>
-        <label htmlFor="development_area" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="development_area" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Entwicklungsbereich
         </label>
         <select
@@ -136,7 +136,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-semibold text-gray-700 mb-1.5">
+        <label htmlFor="description" className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1.5">
           Beschreibung <span className="text-red-500">*</span>
         </label>
         <textarea

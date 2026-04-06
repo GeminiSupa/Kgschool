@@ -108,7 +108,7 @@ export default function AdminDashboardPage() {
               {t(pT(ROUTE, 'greetingHello'))}{' '}
               <span className="text-aura-indigo">{t('roles.admin')}</span>
             </h1>
-            <p className="text-base md:text-lg text-slate-400 font-medium">{t(pT(ROUTE, 'tagline'))}</p>
+            <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 font-medium">{t(pT(ROUTE, 'tagline'))}</p>
           </div>
           <div className="flex items-center gap-3">
             <ThemeToggle />
@@ -160,14 +160,14 @@ export default function AdminDashboardPage() {
                     <h3 className="text-3xl font-black text-slate-800 dark:text-white tracking-tight leading-tight group-hover:text-aura-indigo transition-colors uppercase italic">
                       {todayMenu.meal_name}
                     </h3>
-                    <p className="text-slate-400 font-medium line-clamp-3">
+                    <p className="text-ui-soft font-medium line-clamp-3">
                       {todayMenu.description || t(pT(ROUTE, 'lunchDescriptionFallback'))}
                     </p>
                     <div className="flex gap-2 mt-4 flex-wrap">
                       {todayMenu.allergens?.map((a: string) => (
                         <span
                           key={a}
-                          className="px-2 py-1 bg-white/50 dark:bg-white/10 rounded-lg text-[9px] font-black uppercase text-slate-500 dark:text-slate-400"
+                          className="px-2 py-1 bg-white/50 dark:bg-white/10 rounded-lg text-[9px] font-black uppercase text-ui-soft"
                         >
                           {a}
                         </span>
@@ -182,7 +182,7 @@ export default function AdminDashboardPage() {
                   <span className="text-4xl mb-4 block" aria-hidden>
                     🥣
                   </span>
-                  <p className="font-bold text-slate-400 uppercase tracking-widest text-xs">{t(pT(ROUTE, 'lunchEmptyState'))}</p>
+                  <p className="font-bold text-ui-soft uppercase tracking-widest text-xs">{t(pT(ROUTE, 'lunchEmptyState'))}</p>
                 </div>
               </div>
             )}
@@ -205,7 +205,7 @@ export default function AdminDashboardPage() {
           <div className="md:col-span-4 lg:col-span-4">
             <div className="glass p-8 rounded-premium h-full">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-[10px] font-black text-slate-400 tracking-[0.4em] uppercase">{t(pT(ROUTE, 'sectionQuickAccess'))}</h2>
+                <h2 className="text-[10px] font-black text-ui-soft tracking-[0.4em] uppercase">{t(pT(ROUTE, 'sectionQuickAccess'))}</h2>
                 <span className="w-8 h-8 rounded-full bg-aura-indigo/10 flex items-center justify-center text-aura-indigo">
                   <Settings className="w-4 h-4" strokeWidth={2} aria-hidden />
                 </span>
@@ -232,7 +232,7 @@ export default function AdminDashboardPage() {
               <span className="text-aura-rose animate-pulse" aria-hidden>
                 ●
               </span>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest flex-1">
+              <p className="text-xs font-bold text-ui-soft uppercase tracking-widest flex-1">
                 {stats.pendingLeaveRequests > 0
                   ? fillCount(t(pT(ROUTE, 'leavePendingMessage')), stats.pendingLeaveRequests)
                   : t(pT(ROUTE, 'leaveAllClear'))}
@@ -281,7 +281,7 @@ function GlassStatCard({
       </div>
       <div className={variant === 'wide' ? 'flex-1 grow flex items-center justify-between' : ''}>
         <div className="mt-4">
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">{title}</p>
+          <p className="text-[10px] font-black uppercase tracking-widest text-ui-soft mb-1">{title}</p>
           <div className="flex items-baseline gap-3">
             <h2 className="text-5xl font-black text-slate-800 dark:text-white tracking-tighter">{value}</h2>
           </div>

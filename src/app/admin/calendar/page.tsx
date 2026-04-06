@@ -110,8 +110,8 @@ export default function AdminCalendarPage() {
                       {new Date(currentYear, currentMonth).toLocaleString(calLocale, { month: 'long', year: 'numeric' })}
                     </h3>
                     <div className="flex gap-4">
-                        <button className="w-10 h-10 flex items-center justify-center bg-slate-50 text-slate-400 rounded-xl hover:bg-indigo-600 hover:text-white transition-all shadow-sm">←</button>
-                        <button className="w-10 h-10 flex items-center justify-center bg-slate-50 text-slate-400 rounded-xl hover:bg-indigo-600 hover:text-white transition-all shadow-sm">→</button>
+                        <button type="button" className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-xl bg-slate-50 dark:bg-white/10 text-ui-soft transition-all shadow-sm hover:bg-indigo-600 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40" aria-label="Previous month">←</button>
+                        <button type="button" className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-xl bg-slate-50 dark:bg-white/10 text-ui-soft transition-all shadow-sm hover:bg-indigo-600 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40" aria-label="Next month">→</button>
                     </div>
                 </div>
 
@@ -144,7 +144,7 @@ export default function AdminCalendarPage() {
                     {t(sT('todaysAbsences'))}
                 </h4>
                 <div className="space-y-4">
-                    <p className="text-sm font-bold text-slate-400 italic">{t(sT('noAbsencesToday'))}</p>
+                    <p className="text-sm font-bold text-ui-soft italic">{t(sT('noAbsencesToday'))}</p>
                 </div>
             </IOSCard>
 
@@ -161,14 +161,14 @@ export default function AdminCalendarPage() {
                             </div>
                             <div className="min-w-0">
                                 <p className="text-lg font-black text-slate-900 group-hover:text-indigo-600 transition-colors tracking-tight truncate">{event.title}</p>
-                                <p className="text-[10px] font-black text-slate-400 uppercase mt-1 tracking-widest">
+                                <p className="text-[10px] font-black text-ui-soft uppercase mt-1 tracking-widest">
                                     {new Date(event.start_date).toLocaleTimeString(calLocale, { hour: '2-digit', minute: '2-digit' })}
                                 </p>
                             </div>
                         </div>
                     ))}
                     {events.length === 0 && (
-                        <p className="text-xs font-bold text-slate-400 italic">{t(sT('noUpcomingEvents'))}</p>
+                        <p className="text-xs font-bold text-ui-soft italic">{t(sT('noUpcomingEvents'))}</p>
                     )}
                 </div>
             </IOSCard>
@@ -183,7 +183,7 @@ export default function AdminCalendarPage() {
       >
         <form onSubmit={handleAddEvent} className="space-y-8">
             <div className="space-y-3">
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('eventTitleLabel'))}</label>
+                <label className="text-[11px] font-black text-ui-soft uppercase tracking-widest ml-1">{t(sT('eventTitleLabel'))}</label>
                 <input 
                     type="text"
                     required
@@ -196,7 +196,7 @@ export default function AdminCalendarPage() {
 
             <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-3">
-                    <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('startDateLabel'))}</label>
+                    <label className="text-[11px] font-black text-ui-soft uppercase tracking-widest ml-1">{t(sT('startDateLabel'))}</label>
                     <input 
                         type="date"
                         required
@@ -206,7 +206,7 @@ export default function AdminCalendarPage() {
                     />
                 </div>
                 <div className="space-y-3">
-                    <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('endDateLabel'))}</label>
+                    <label className="text-[11px] font-black text-ui-soft uppercase tracking-widest ml-1">{t(sT('endDateLabel'))}</label>
                     <input 
                         type="date"
                         required
@@ -218,7 +218,7 @@ export default function AdminCalendarPage() {
             </div>
 
             <div className="space-y-3">
-                <label className="text-[11px] font-black text-slate-400 uppercase tracking-widest ml-1">{t(sT('eventTypeLabel'))}</label>
+                <label className="text-[11px] font-black text-ui-soft uppercase tracking-widest ml-1">{t(sT('eventTypeLabel'))}</label>
                 <select 
                     value={newEvent.holiday_type}
                     onChange={e => setNewEvent({...newEvent, holiday_type: e.target.value as any})}
@@ -236,7 +236,7 @@ export default function AdminCalendarPage() {
                 <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="flex flex-col">
                         <span className="text-sm font-black text-slate-900">{t(sT('affectsBilling'))}</span>
-                        <span className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{t(sT('affectsBillingHint'))}</span>
+                        <span className="text-[10px] font-bold text-ui-soft uppercase mt-0.5">{t(sT('affectsBillingHint'))}</span>
                     </div>
                     <input 
                         type="checkbox"
@@ -248,7 +248,7 @@ export default function AdminCalendarPage() {
                 <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
                     <div className="flex flex-col">
                         <span className="text-sm font-black text-slate-900">{t(sT('affectsAttendance'))}</span>
-                        <span className="text-[10px] font-bold text-slate-400 uppercase mt-0.5">{t(sT('affectsAttendanceHint'))}</span>
+                        <span className="text-[10px] font-bold text-ui-soft uppercase mt-0.5">{t(sT('affectsAttendanceHint'))}</span>
                     </div>
                     <input 
                         type="checkbox"

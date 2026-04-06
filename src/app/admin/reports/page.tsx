@@ -86,7 +86,7 @@ export default function ReportsIndexPage() {
           </div>
           <div className="relative z-10 max-w-xl mx-auto">
             <h4 className="text-2xl font-black mb-4 font-display">{t(sT('reportsAdvancedTitle'))}</h4>
-            <p className="text-slate-400 font-medium mb-8 italic">{t(sT('reportsBuilding'))}</p>
+            <p className="text-ui-soft font-medium mb-8 italic">{t(sT('reportsBuilding'))}</p>
             <div className="inline-flex items-center gap-2 px-6 py-2 bg-white/10 rounded-full border border-white/10 text-[10px] font-black uppercase tracking-widest text-white/60">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
               {t(sT('reportsInDevelopment'))}

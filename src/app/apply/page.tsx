@@ -129,15 +129,15 @@ export default function ApplyPage() {
           </div>
           <div className="mb-6">
             <Heading size="xl">{t('apply.title')}</Heading>
-            <p className="text-gray-600 mt-2">{t('apply.subtitle')}</p>
+            <p className="text-ui-muted mt-2">{t('apply.subtitle')}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="border-b border-gray-200 pb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('apply.childSection')}</h2>
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">{t('apply.childSection')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="child_first_name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="child_first_name" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                     {t('apply.firstName')} <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -151,7 +151,7 @@ export default function ApplyPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="child_last_name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="child_last_name" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                     {t('apply.lastName')} <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -165,7 +165,7 @@ export default function ApplyPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="child_date_of_birth" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="child_date_of_birth" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                     {t('apply.dob')} <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -179,7 +179,7 @@ export default function ApplyPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="preferred_start_date" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="preferred_start_date" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                     {t('apply.preferredStart')} <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -196,8 +196,8 @@ export default function ApplyPage() {
             </div>
 
             <div className="border-b border-gray-200 pb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('apply.careSection')}</h2>
-              <label htmlFor="betreuung_hours_type" className="block text-sm font-medium text-gray-700 mb-2">
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">{t('apply.careSection')}</h2>
+              <label htmlFor="betreuung_hours_type" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 {t('apply.careHours')} <span className="text-red-500">*</span>
               </label>
               <select
@@ -217,10 +217,10 @@ export default function ApplyPage() {
             </div>
 
             <div className="border-b border-gray-200 pb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('apply.parentSection')}</h2>
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">{t('apply.parentSection')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="parent_name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="parent_name" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                     {t('apply.parentName')} <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -234,7 +234,7 @@ export default function ApplyPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="parent_email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="parent_email" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                     {t('apply.parentEmail')} <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -248,7 +248,7 @@ export default function ApplyPage() {
                 </div>
 
                 <div className="md:col-span-1">
-                  <label htmlFor="parent_phone" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="parent_phone" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                     {t('apply.parentPhone')}
                   </label>
                   <input
@@ -263,8 +263,8 @@ export default function ApplyPage() {
             </div>
 
             <div className="border-b border-gray-200 pb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('apply.facilitySection')}</h2>
-              <label htmlFor="kita_id" className="block text-sm font-medium text-gray-700 mb-2">
+              <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">{t('apply.facilitySection')}</h2>
+              <label htmlFor="kita_id" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 {t('apply.preferredKita')} <span className="text-red-500">*</span>
               </label>
               <select
@@ -285,7 +285,7 @@ export default function ApplyPage() {
             </div>
 
             <div>
-              <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="notes" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 {t('apply.notes')}
               </label>
               <textarea

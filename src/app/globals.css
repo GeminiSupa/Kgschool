@@ -19,15 +19,18 @@
   --glass-blur: 20px;
 }
 
+/* Soft dark surfaces (not pure black) + readable secondary text — WCAG AA friendly */
 .dark {
-  --background: #030408;
-  --foreground: #f8fafc;
-  --muted: #94a3b8;
-  --border: rgba(255, 255, 255, 0.06);
-  
-  --glass-bg: rgba(15, 17, 26, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  
+  color-scheme: dark;
+  --background: #121212;
+  --foreground: #f1f5f9;
+  /* ~4.6:1+ on #121212 — avoid slate-500/600 on dark for body UI copy */
+  --muted: #cbd5e1;
+  --border: rgba(255, 255, 255, 0.1);
+
+  --glass-bg: rgba(30, 32, 40, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.12);
+
   --aura-indigo: #818cf8;
   --aura-coral: #fb7185;
   --aura-mint: #34d399;
@@ -35,13 +38,14 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
-    --background: #030408;
-    --foreground: #f8fafc;
-    --muted: #94a3b8;
-    --border: rgba(255, 255, 255, 0.06);
-    
-    --glass-bg: rgba(15, 17, 26, 0.8);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    color-scheme: dark;
+    --background: #121212;
+    --foreground: #f1f5f9;
+    --muted: #cbd5e1;
+    --border: rgba(255, 255, 255, 0.1);
+
+    --glass-bg: rgba(30, 32, 40, 0.92);
+    --glass-border: rgba(255, 255, 255, 0.12);
 
     --aura-indigo: #818cf8;
     --aura-coral: #fb7185;
@@ -65,6 +69,16 @@
   --font-display: var(--font-plus-jakarta), var(--font-inter), system-ui, sans-serif;
   
   --radius-premium: 32px;
+}
+
+/* Secondary copy: readable in light & dark (replaces ad-hoc text-slate-400 everywhere) */
+@layer utilities {
+  .text-ui-muted {
+    @apply text-slate-600 dark:text-slate-300;
+  }
+  .text-ui-soft {
+    @apply text-slate-500 dark:text-slate-400;
+  }
 }
 
 @layer utilities {

@@ -42,8 +42,8 @@ export default function ParentPortfoliosPage() {
   return (
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-10 text-center">
-        <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Die schönsten Momente und Lernfortschritte Ihres Kindes.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Die schönsten Momente und Lernfortschritte Ihres Kindes.</p>
       </div>
 
       {children.length > 1 && (
@@ -55,7 +55,7 @@ export default function ParentPortfoliosPage() {
                     className={`px-6 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all duration-300 ${
                         selectedChildId === c.id 
                         ? 'bg-black text-white border-black shadow-lg' 
-                        : 'bg-white text-gray-400 border-black/5'
+                        : 'bg-white text-ui-soft border-black/5'
                     }`}
                 >
                     {c.first_name}
@@ -67,7 +67,7 @@ export default function ParentPortfoliosPage() {
       {portfolios.length === 0 ? (
         <IOSCard className="p-20 text-center bg-gray-50/30 border-black/5">
           <div className="text-6xl opacity-10 mb-6">📸</div>
-          <p className="text-gray-400 font-bold max-w-xs mx-auto">Noch keine Portfolio-Einträge vorhanden.</p>
+          <p className="text-ui-soft font-bold max-w-xs mx-auto">Noch keine Portfolio-Einträge vorhanden.</p>
         </IOSCard>
       ) : (
         <div className="space-y-12">
@@ -78,7 +78,7 @@ export default function ParentPortfoliosPage() {
                     <IOSCard className="p-0 overflow-hidden border-black/5 shadow-xl shadow-black/5">
                         <div className="p-8 border-b border-black/5 flex items-center justify-between">
                             <div>
-                                <h3 className="text-lg font-black text-gray-900 mb-0.5">{entry.title}</h3>
+                                <h3 className="text-lg font-black text-slate-900 dark:text-slate-50 mb-0.5">{entry.title}</h3>
                                 <p className="text-[10px] font-black text-black/20 uppercase tracking-widest">{new Date(entry.date).toLocaleDateString()}</p>
                             </div>
                             <span className="text-2xl">✨</span>
@@ -91,7 +91,7 @@ export default function ParentPortfoliosPage() {
                         )}
                         
                         <div className="p-8">
-                            <p className="text-base text-gray-600 font-medium leading-relaxed whitespace-pre-wrap">{entry.content}</p>
+                            <p className="text-base text-ui-muted font-medium leading-relaxed whitespace-pre-wrap">{entry.content}</p>
                         </div>
                     </IOSCard>
                 </div>

@@ -102,7 +102,7 @@ export default function AdminPayrollGeneratePage() {
         <button
           type="button"
           onClick={() => router.push('/admin/hr/payroll')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Payroll
         </button>
@@ -121,7 +121,7 @@ export default function AdminPayrollGeneratePage() {
         >
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="month" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="month" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Month <span className="text-red-500">*</span>
               </label>
               <select
@@ -140,7 +140,7 @@ export default function AdminPayrollGeneratePage() {
             </div>
 
             <div>
-              <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="year" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 Year <span className="text-red-500">*</span>
               </label>
               <input
@@ -159,10 +159,10 @@ export default function AdminPayrollGeneratePage() {
           {preview && (
             <div className="p-4 bg-gray-50 rounded-md space-y-2">
               <h3 className="font-medium mb-2">Preview</h3>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-ui-muted">
                 This will generate payroll for <strong>{preview.staffCount}</strong> staff members.
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-ui-muted">
                 Total estimated payroll: <strong>€{preview.totalAmount.toFixed(2)}</strong>
               </p>
             </div>

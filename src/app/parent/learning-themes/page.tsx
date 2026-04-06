@@ -28,8 +28,8 @@ export default function ParentLearningThemesPage() {
   return (
     <div className="max-w-4xl mx-auto pb-12">
       <div className="mb-10 text-center">
-        <Heading size="xl" className="text-gray-900 tracking-tight">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Aktuelle Lernthemen und pädagogische Projekte in der Kita.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 tracking-tight">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Aktuelle Lernthemen und pädagogische Projekte in der Kita.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -46,13 +46,13 @@ export default function ParentLearningThemesPage() {
                         </span>
                     </div>
                     <div className="p-8">
-                        <h3 className="text-xl font-black text-gray-900 mb-3">{theme.title}</h3>
-                        <p className="text-sm text-gray-500 line-clamp-2 mb-6 font-medium leading-relaxed">{theme.description}</p>
+                        <h3 className="text-xl font-black text-slate-900 dark:text-slate-50 mb-3">{theme.title}</h3>
+                        <p className="text-sm text-ui-soft line-clamp-2 mb-6 font-medium leading-relaxed">{theme.description}</p>
                         
                         {theme.learning_areas && theme.learning_areas.length > 0 && (
                              <div className="flex flex-wrap gap-2">
                                  {theme.learning_areas.map(area => (
-                                     <span key={area} className="px-2 py-0.5 bg-gray-50 text-gray-400 text-[9px] font-black uppercase tracking-widest rounded-md border border-black/5">{area}</span>
+                                     <span key={area} className="px-2 py-0.5 bg-gray-50 text-ui-soft text-[9px] font-black uppercase tracking-widest rounded-md border border-black/5">{area}</span>
                                  ))}
                              </div>
                         )}

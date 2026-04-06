@@ -85,7 +85,7 @@ export default function AdminObservationDetailPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/observations')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Observations
         </button>
@@ -93,42 +93,42 @@ export default function AdminObservationDetailPage() {
       </div>
 
       {!observation ? (
-        <div className="p-8 text-center text-gray-500">Observation not found.</div>
+        <div className="p-8 text-center text-ui-soft">Observation not found.</div>
       ) : (
         <div className="bg-white rounded-lg shadow p-6 max-w-3xl">
           <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Child</h3>
-              <p className="mt-1 text-lg text-gray-900">{getChildName(observation.child_id)}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Child</h3>
+              <p className="mt-1 text-lg text-slate-900 dark:text-slate-50">{getChildName(observation.child_id)}</p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Date</h3>
-              <p className="mt-1 text-gray-900">{formatDate(observation.observation_date)}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Date</h3>
+              <p className="mt-1 text-slate-900 dark:text-slate-50">{formatDate(observation.observation_date)}</p>
             </div>
 
             {observation.context && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Context</h3>
-                <p className="mt-1 text-gray-900">{observation.context}</p>
+                <h3 className="text-sm font-medium text-ui-soft">Context</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{observation.context}</p>
               </div>
             )}
 
             <div>
-              <h3 className="text-sm font-medium text-gray-500">Description</h3>
-              <p className="mt-1 text-gray-900 whitespace-pre-wrap">{observation.description}</p>
+              <h3 className="text-sm font-medium text-ui-soft">Description</h3>
+              <p className="mt-1 text-slate-900 dark:text-slate-50 whitespace-pre-wrap">{observation.description}</p>
             </div>
 
             {observation.development_area && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500">Development Area</h3>
-                <p className="mt-1 text-gray-900">{observation.development_area}</p>
+                <h3 className="text-sm font-medium text-ui-soft">Development Area</h3>
+                <p className="mt-1 text-slate-900 dark:text-slate-50">{observation.development_area}</p>
               </div>
             )}
 
             {observation.photos && observation.photos.length > 0 && (
               <div className="mt-4">
-                <h3 className="text-sm font-medium text-gray-500 mb-2">Photos</h3>
+                <h3 className="text-sm font-medium text-ui-soft mb-2">Photos</h3>
                 <div className="grid grid-cols-3 gap-2">
                   {observation.photos.map((photo) => (
                     <div key={photo}>

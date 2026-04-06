@@ -164,7 +164,7 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
           {!isCollapsed && (
             <div className="flex-1 min-w-0 transition-opacity duration-300">
               <p className="text-sm font-bold text-slate-900 dark:text-white tracking-tight truncate font-display">{t('brand.appTitle')}</p>
-              <p className="text-[10px] text-indigo-500 font-bold tracking-widest uppercase mt-0.5">
+              <p className="text-[10px] text-indigo-600 dark:text-indigo-300 font-bold tracking-widest uppercase mt-0.5">
                 {loading ? '...' : userRoleLabel}
               </p>
             </div>
@@ -176,7 +176,7 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
         {loading ? (
           <div className="space-y-2 py-4">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="h-11 px-4 rounded-xl bg-slate-50 animate-pulse"></div>
+              <div key={i} className="h-11 px-4 rounded-xl bg-slate-50 dark:bg-white/10 animate-pulse"></div>
             ))}
           </div>
         ) : (
@@ -189,17 +189,17 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
                   <Link
                     key={item.path}
                     href={item.path}
-                    className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900/40 ${
+                    className={`group relative flex min-h-11 items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40 ${
                       active
                         ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm dark:bg-indigo-950/60 dark:text-indigo-200'
-                        : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-slate-100'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white'
                     } ${isCollapsed ? 'justify-center px-0' : ''}`}
                     title={isCollapsed ? t(item.labelKey) : undefined}
                   >
                     {active && (
                       <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-600 rounded-r-full" />
                     )}
-                    <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-slate-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors'}`}>
+                    <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-ui-soft group-hover:text-indigo-500 dark:group-hover:text-indigo-300 transition-colors'}`}>
                       {item.icon}
                     </span>
                     {!isCollapsed && (
@@ -215,7 +215,7 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
               <div key={section.label}>
                 {!isCollapsed && (
                   <div className="mt-4 mb-1 px-3 flex items-center gap-2">
-                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-600">{section.label}</span>
+                    <span className="text-[9px] font-black uppercase tracking-[0.2em] text-ui-soft">{section.label}</span>
                     <div className="flex-1 h-px bg-slate-100 dark:bg-white/5" />
                   </div>
                 )}
@@ -227,17 +227,17 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
                       <Link
                         key={item.path}
                         href={item.path}
-                        className={`group relative flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900/40 ${
+                        className={`group relative flex min-h-11 items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40 ${
                           active
                             ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm dark:bg-indigo-950/60 dark:text-indigo-200'
-                            : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-slate-100'
+                            : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white'
                         } ${isCollapsed ? 'justify-center px-0' : ''}`}
                         title={isCollapsed ? t(item.labelKey) : undefined}
                       >
                         {active && (
                           <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-600 rounded-r-full" />
                         )}
-                        <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-slate-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400 transition-colors'}`}>
+                        <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-ui-soft group-hover:text-indigo-500 dark:group-hover:text-indigo-300 transition-colors'}`}>
                           {item.icon}
                         </span>
                         {!isCollapsed && (
@@ -256,7 +256,7 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
       <div className="border-t border-slate-50 dark:border-white/5 p-4 flex flex-col gap-3 mt-auto bg-slate-50/50 dark:bg-white/5">
         <Link
           href="/logout"
-          className={`flex items-center gap-3 justify-center w-full px-3 py-2.5 rounded-xl text-sm font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 hover:text-rose-700 dark:text-rose-400 dark:bg-rose-950/40 dark:hover:bg-rose-950/60 transition-all focus:ring-2 focus:ring-rose-100 dark:focus:ring-rose-900/50 ${isCollapsed ? 'px-0' : ''}`}
+          className={`flex min-h-11 items-center gap-3 justify-center w-full px-3 py-2.5 rounded-xl text-sm font-bold text-rose-600 bg-rose-50 hover:bg-rose-100 hover:text-rose-700 dark:text-rose-300 dark:bg-rose-950/40 dark:hover:bg-rose-950/60 transition-all focus-visible:ring-2 focus-visible:ring-rose-400/60 dark:focus-visible:ring-rose-500/50 ${isCollapsed ? 'px-0' : ''}`}
           title={isCollapsed ? t('nav.logout') : undefined}
         >
           <LogOut size={18} className="shrink-0" aria-hidden />

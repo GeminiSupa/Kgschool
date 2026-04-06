@@ -78,7 +78,7 @@ export default function ChildProfilePage({ params }: PageProps) {
             {child.first_name[0]}{child.last_name[0]}
           </div>
           <div>
-            <Heading size="xl" className="text-gray-900 leading-tight">
+            <Heading size="xl" className="text-slate-900 dark:text-slate-50 leading-tight">
               {child.first_name} {child.last_name}
             </Heading>
             <p className="text-sm font-bold text-[#667eea] bg-[#667eea]/10 px-3 py-1 rounded-full border border-[#667eea]/10 inline-block mt-2">
@@ -120,8 +120,8 @@ export default function ChildProfilePage({ params }: PageProps) {
 function InfoRow({ label, value }: { label: string, value: string }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 gap-1 sm:gap-4">
-      <span className="text-sm font-semibold text-gray-500">{label}</span>
-      <span className="text-base font-bold text-gray-900">{value}</span>
+      <span className="text-sm font-semibold text-ui-soft">{label}</span>
+      <span className="text-base font-bold text-slate-900 dark:text-slate-50">{value}</span>
     </div>
   )
 }

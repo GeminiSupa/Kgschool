@@ -51,7 +51,7 @@ function getExpiryStatusClass(expiryDate?: string | null) {
   const status = getExpiryStatus(expiryDate)
   if (status === 'Expired') return 'px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800'
   if (status === 'Expiring Soon') return 'px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800'
-  if (status === 'No expiry') return 'px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800'
+  if (status === 'No expiry') return 'px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-slate-800 dark:text-slate-100'
   return 'px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800'
 }
 
@@ -137,7 +137,7 @@ export default function AdminStaffQualificationsPage() {
       </div>
 
       <div className="bg-white rounded-lg shadow p-4">
-        <label htmlFor="staff_filter" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="staff_filter" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
           Filter by Staff
         </label>
         <select
@@ -159,35 +159,35 @@ export default function AdminStaffQualificationsPage() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Staff</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Qualification</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Certificate #</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Issued</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Expires</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Staff</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Qualification</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Certificate #</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Issued</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Expires</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Status</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {qualifications.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-6 py-8 text-center text-gray-500">
+                <td colSpan={6} className="px-6 py-8 text-center text-ui-soft">
                   No qualifications found
                 </td>
               </tr>
             ) : (
               qualifications.map((qual) => (
                 <tr key={qual.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                     {staffMap[qual.staff_id] || qual.staff_id}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{qual.qualification_type}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">{qual.qualification_type}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                     {qual.certificate_number || '-'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-ui-soft">
                     {qual.issued_date ? formatDate(qual.issued_date) : '-'}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-ui-soft">
                     {qual.expiry_date ? formatDate(qual.expiry_date) : 'No expiry'}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

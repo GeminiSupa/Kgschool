@@ -81,7 +81,7 @@ export default function FeeConfigFormPage() {
         >
           ← Zurück zur Liste
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2">
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">
             {isEdit ? 'Konfiguration bearbeiten' : 'Neue Konfiguration'}
         </Heading>
       </div>
@@ -95,7 +95,7 @@ export default function FeeConfigFormPage() {
                         value={form.fee_type}
                         onChange={(e) => setForm(prev => ({ ...prev, fee_type: e.target.value as any }))}
                         required
-                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
                     >
                         <option value="tuition">Grundgebühr</option>
                         <option value="lunch">Verpflegung</option>
@@ -108,7 +108,7 @@ export default function FeeConfigFormPage() {
                     <select
                         value={form.group_id}
                         onChange={(e) => setForm(prev => ({ ...prev, group_id: e.target.value }))}
-                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
                     >
                         <option value="">Alle Gruppen (Standard)</option>
                         {groups.map(g => (
@@ -127,7 +127,7 @@ export default function FeeConfigFormPage() {
                         value={form.amount}
                         onChange={(e) => setForm(prev => ({ ...prev, amount: parseFloat(e.target.value) || 0 }))}
                         required
-                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
                     />
                 </div>
                 <div>
@@ -137,7 +137,7 @@ export default function FeeConfigFormPage() {
                         value={form.effective_from}
                         onChange={(e) => setForm(prev => ({ ...prev, effective_from: e.target.value }))}
                         required
-                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
                     />
                 </div>
             </div>
@@ -148,7 +148,7 @@ export default function FeeConfigFormPage() {
                     rows={3}
                     value={form.notes}
                     onChange={(e) => setForm(prev => ({ ...prev, notes: e.target.value }))}
-                    className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-medium text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                    className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
                 />
             </div>
 

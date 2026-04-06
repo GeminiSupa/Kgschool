@@ -63,9 +63,9 @@ export default function AdminUsersPage() {
       teacher: 'bg-indigo-50 text-indigo-600 border-indigo-100',
       parent: 'bg-green-50 text-green-600 border-green-100',
       kitchen: 'bg-amber-50 text-amber-600 border-amber-100',
-      support: 'bg-gray-50 text-gray-600 border-gray-100'
+      support: 'bg-gray-50 text-ui-muted border-gray-100'
     }
-    return colors[role] || 'bg-gray-50 text-gray-600 border-gray-100'
+    return colors[role] || 'bg-gray-50 text-ui-muted border-gray-100'
   }
 
   if (loading && users.length === 0) return <div className="flex justify-center py-24"><LoadingSpinner /></div>
@@ -93,10 +93,10 @@ export default function AdminUsersPage() {
           <button
             key={role}
             onClick={() => setSelectedRole(role)}
-            className={`px-6 py-2 rounded-2xl text-[11px] font-black uppercase tracking-[0.1em] border transition-all duration-300 ${
+            className={`min-h-11 px-6 py-2 rounded-2xl text-[11px] font-black uppercase tracking-[0.1em] border transition-all duration-300 touch-manipulation ${
               selectedRole === role 
                 ? 'bg-indigo-600 text-white border-indigo-600 shadow-lg shadow-indigo-100' 
-                : 'bg-white text-slate-400 border-slate-100 hover:border-slate-200 hover:text-slate-600'
+                : 'bg-white text-ui-soft border-slate-100 hover:border-slate-200 hover:text-slate-600 dark:bg-white/5 dark:border-white/10 dark:hover:border-white/20 dark:hover:text-slate-100'
             }`}
           >
             {role ? t(`roles.${role}`) : t(sT('allUsers'))}
@@ -114,7 +114,7 @@ export default function AdminUsersPage() {
               ? t(sT('noUsersForRole')).replace('{{role}}', t(`roles.${selectedRole}`))
               : t(sT('noUsersSystem'))}
           </p>
-          <p className="text-slate-400 mt-2 font-medium">{t(sT('tryAdjustFiltersUsers'))}</p>
+          <p className="text-ui-soft mt-2 font-medium">{t(sT('tryAdjustFiltersUsers'))}</p>
         </IOSCard>
       ) : (
         <IOSCard className="p-0 overflow-hidden shadow-xl shadow-slate-200/40 border-slate-100">
@@ -122,10 +122,10 @@ export default function AdminUsersPage() {
                 <table className="w-full text-left border-collapse">
                     <thead>
                         <tr className="bg-slate-50/50">
-                            <th className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">User Profile</th>
-                            <th className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">Role</th>
-                            <th className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest">Added On</th>
-                            <th className="px-8 py-5 text-[11px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+                            <th className="px-8 py-5 text-[11px] font-black text-ui-soft uppercase tracking-widest">User Profile</th>
+                            <th className="px-8 py-5 text-[11px] font-black text-ui-soft uppercase tracking-widest">Role</th>
+                            <th className="px-8 py-5 text-[11px] font-black text-ui-soft uppercase tracking-widest">Added On</th>
+                            <th className="px-8 py-5 text-[11px] font-black text-ui-soft uppercase tracking-widest text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
@@ -140,7 +140,7 @@ export default function AdminUsersPage() {
                                             <span className="block font-black text-slate-900 text-lg tracking-tight group-hover:text-indigo-600 transition-colors">
                                                 {u.full_name || 'Unbekannt'}
                                             </span>
-                                            <span className="text-xs font-bold text-slate-400 uppercase tracking-tight">{u.email}</span>
+                                            <span className="text-xs font-bold text-ui-soft uppercase tracking-tight">{u.email}</span>
                                         </div>
                                     </div>
                                 </td>
@@ -149,7 +149,7 @@ export default function AdminUsersPage() {
                                         {u.role}
                                     </span>
                                 </td>
-                                <td className="px-8 py-6 text-sm text-slate-400 font-bold uppercase tracking-tight">{formatDate(u.created_at)}</td>
+                                <td className="px-8 py-6 text-sm text-ui-soft font-bold uppercase tracking-tight">{formatDate(u.created_at)}</td>
                                 <td className="px-8 py-6 text-right">
                                     <Link href={`/admin/users/${u.id}`} className="inline-flex px-6 py-2 bg-slate-100 hover:bg-indigo-600 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-white rounded-xl transition-all shadow-sm">
                                         View Profile

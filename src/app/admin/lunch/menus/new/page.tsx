@@ -86,7 +86,7 @@ export default function AdminLunchMenusNewPage() {
         <button
           type="button"
           onClick={() => router.push('/admin/lunch/menus')}
-          className="text-gray-600 hover:text-gray-900 mb-4 inline-block"
+          className="text-ui-muted hover:text-slate-900 dark:text-slate-50 mb-4 inline-block"
         >
           ← Back to Lunch Menus
         </button>
@@ -96,7 +96,7 @@ export default function AdminLunchMenusNewPage() {
       <IOSCard className="max-w-2xl p-6">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="date" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="date" className="block text-sm font-medium text-slate-700 dark:text-slate-200">
               Datum <span className="text-red-500">*</span>
             </label>
             <input
@@ -110,7 +110,7 @@ export default function AdminLunchMenusNewPage() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="meal_name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="meal_name" className="block text-sm font-medium text-slate-700 dark:text-slate-200">
               Gerichtname <span className="text-red-500">*</span>
             </label>
             <input
@@ -125,7 +125,7 @@ export default function AdminLunchMenusNewPage() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="description" className="block text-sm font-medium text-slate-700 dark:text-slate-200">
               Beschreibung
             </label>
             <textarea
@@ -139,7 +139,7 @@ export default function AdminLunchMenusNewPage() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="allergens" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="allergens" className="block text-sm font-medium text-slate-700 dark:text-slate-200">
               Allergene (kommagetrennt)
             </label>
             <input

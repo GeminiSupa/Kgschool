@@ -45,8 +45,8 @@ export default function NewNapRecordPage() {
         >
           ← Zurück zu Schlafprotokollen
         </Link>
-        <Heading size="xl" className="text-gray-900 mt-2">{t(pT(ROUTE))}</Heading>
-        <p className="text-sm text-gray-500 mt-1">Dokumentieren Sie die Schlaf- oder Ruhezeit eines Kindes.</p>
+        <Heading size="xl" className="text-slate-900 dark:text-slate-50 mt-2">{t(pT(ROUTE))}</Heading>
+        <p className="text-sm text-ui-soft mt-1">Dokumentieren Sie die Schlaf- oder Ruhezeit eines Kindes.</p>
       </div>
 
       <IOSCard className="p-8">

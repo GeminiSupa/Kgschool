@@ -74,10 +74,10 @@ export default function LoginPage() {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-indigo-500 to-fuchsia-500 rounded-2xl mb-4 shadow-lg shadow-indigo-500/25">
               <GraduationCap className="w-8 h-8 text-white" strokeWidth={2} aria-hidden />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2 tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-2 tracking-tight">
               {t('login.title')}
             </h1>
-            <p className="text-gray-600 text-sm md:text-base">{t('login.subtitle')}</p>
+            <p className="text-ui-muted text-sm md:text-base">{t('login.subtitle')}</p>
           </div>
           
           <form onSubmit={handleLogin} className="space-y-5" noValidate>
@@ -151,14 +151,14 @@ export default function LoginPage() {
             <Link href="/" className="text-[#6e6e73] text-sm no-underline transition-all duration-200 inline-block hover:text-[#1d1d1f] hover:-translate-x-[3px]">
               ← {t('common.backToHome')}
             </Link>
-            <div className="mt-3 flex justify-center gap-4 text-xs text-gray-500">
-              <Link href="/privacy" className="hover:text-gray-700">
+            <div className="mt-3 flex justify-center gap-4 text-xs text-ui-soft">
+              <Link href="/privacy" className="hover:text-slate-700 dark:text-slate-200">
                 {t('common.privacy')}
               </Link>
-              <Link href="/imprint" className="hover:text-gray-700">
+              <Link href="/imprint" className="hover:text-slate-700 dark:text-slate-200">
                 {t('common.imprint')}
               </Link>
-              <Link href="/security" className="hover:text-gray-700">
+              <Link href="/security" className="hover:text-slate-700 dark:text-slate-200">
                 {t('common.security')}
               </Link>
             </div>

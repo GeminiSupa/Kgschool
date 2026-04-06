@@ -118,8 +118,8 @@ export default function TeacherMessagesPage() {
     <div className="max-w-4xl mx-auto pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <Heading size="xl" className="text-gray-900">{t(pT(ROUTE))}</Heading>
-          <p className="text-sm text-gray-500 mt-1">Austausch mit Eltern, der Leitung und Kollegen.</p>
+          <Heading size="xl" className="text-slate-900 dark:text-slate-50">{t(pT(ROUTE))}</Heading>
+          <p className="text-sm text-ui-soft mt-1">Austausch mit Eltern, der Leitung und Kollegen.</p>
         </div>
         <IOSButton
           variant="primary"
@@ -135,7 +135,7 @@ export default function TeacherMessagesPage() {
         <button
           onClick={() => setActiveTab('inbox')}
           className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
-            activeTab === 'inbox' ? 'bg-white text-[#667eea] shadow-sm' : 'text-gray-500 hover:text-gray-700'
+            activeTab === 'inbox' ? 'bg-white text-[#667eea] shadow-sm' : 'text-ui-soft hover:text-slate-700 dark:text-slate-200'
           }`}
         >
           Posteingang
@@ -144,7 +144,7 @@ export default function TeacherMessagesPage() {
         <button
           onClick={() => setActiveTab('outbox')}
           className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
-            activeTab === 'outbox' ? 'bg-white text-[#667eea] shadow-sm' : 'text-gray-500 hover:text-gray-700'
+            activeTab === 'outbox' ? 'bg-white text-[#667eea] shadow-sm' : 'text-ui-soft hover:text-slate-700 dark:text-slate-200'
           }`}
         >
           Gesendet
@@ -156,7 +156,7 @@ export default function TeacherMessagesPage() {
       ) : displayMessages.length === 0 ? (
         <IOSCard className="p-16 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">💬</div>
-          <p className="text-gray-500 font-medium">{activeTab === 'inbox' ? 'Keine Nachrichten empfangen.' : 'Keine Nachrichten gesendet.'}</p>
+          <p className="text-ui-soft font-medium">{activeTab === 'inbox' ? 'Keine Nachrichten empfangen.' : 'Keine Nachrichten gesendet.'}</p>
         </IOSCard>
       ) : (
         <div className="grid gap-3">
@@ -172,14 +172,14 @@ export default function TeacherMessagesPage() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                        <h4 className="font-black text-gray-900 group-hover:text-[#667eea] transition-colors">
+                        <h4 className="font-black text-slate-900 dark:text-slate-50 group-hover:text-[#667eea] transition-colors">
                             {activeTab === 'inbox' ? getPartnerName(message.sender_id) : getPartnerName(message.recipient_id)}
                         </h4>
                         {activeTab === 'inbox' && !message.read_at && (
                             <span className="px-2 py-0.5 bg-[#667eea] text-white text-[9px] font-black uppercase tracking-widest rounded-md">Neu</span>
                         )}
                     </div>
-                    <p className="text-sm font-medium text-gray-600 line-clamp-2 leading-relaxed">{message.content}</p>
+                    <p className="text-sm font-medium text-ui-muted line-clamp-2 leading-relaxed">{message.content}</p>
                     <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mt-4">{formatDate(message.created_at)}</p>
                   </div>
                   <div className="text-gray-200 group-hover:text-[#667eea] transition-colors pt-1">
@@ -199,8 +199,8 @@ export default function TeacherMessagesPage() {
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-6 animate-in fade-in duration-300">
           <IOSCard className="max-w-2xl w-full p-8 shadow-2xl animate-in zoom-in-95 slide-in-from-bottom-4 duration-300">
             <div className="flex items-center justify-between mb-8">
-                <Heading size="md" className="text-gray-900">Nachricht verfassen</Heading>
-                <button onClick={() => setShowCompose(false)} className="text-gray-400 hover:text-gray-600 transition-colors">
+                <Heading size="md" className="text-slate-900 dark:text-slate-50">Nachricht verfassen</Heading>
+                <button onClick={() => setShowCompose(false)} className="text-ui-soft hover:text-ui-muted transition-colors">
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -214,7 +214,7 @@ export default function TeacherMessagesPage() {
                         value={composeForm.recipient_id}
                         onChange={(e) => setComposeForm(prev => ({ ...prev, recipient_id: e.target.value }))}
                         required
-                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
                     >
                         <option value="">Empfänger auswählen</option>
                         {profiles.map(p => (
@@ -230,7 +230,7 @@ export default function TeacherMessagesPage() {
                         onChange={(e) => setComposeForm(prev => ({ ...prev, content: e.target.value }))}
                         required
                         rows={6}
-                        className="w-full px-4 py-3 bg-gray-50 border border-black/5 rounded-xl text-sm font-medium text-gray-800 outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+                        className="w-full px-4 py-3 bg-gray-50 border border-black/5 rounded-xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
                         placeholder="Schreiben Sie Ihre Nachricht hier..."
                     />
                 </div>
