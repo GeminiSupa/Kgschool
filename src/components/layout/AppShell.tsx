@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { useI18n } from '@/i18n/I18nProvider'
+import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 
 interface AppShellProps {
   showSidebar?: boolean
@@ -30,18 +31,21 @@ export function AppShell({
           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs ring-2 ring-indigo-100 dark:ring-white/10">KG</div>
           <span className="font-bold text-sm tracking-tight text-foreground">{t('brand.appTitle')}</span>
         </div>
-        <button
-          type="button"
-          className="inline-flex min-h-11 min-w-11 -mr-2 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-slate-100 dark:hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 dark:focus-visible:ring-indigo-500/50"
-          onClick={() => setMobileSidebarOpen(true)}
-          aria-label={t('shell.openMenu')}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <line x1="4" y1="12" x2="20" y2="12"></line>
-            <line x1="4" y1="6" x2="20" y2="6"></line>
-            <line x1="4" y1="18" x2="20" y2="18"></line>
-          </svg>
-        </button>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher className="shrink-0" />
+          <button
+            type="button"
+            className="inline-flex min-h-11 min-w-11 -mr-2 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-slate-100 dark:hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 dark:focus-visible:ring-indigo-500/50"
+            onClick={() => setMobileSidebarOpen(true)}
+            aria-label={t('shell.openMenu')}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="6" x2="20" y2="6"></line>
+              <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
 
       {header && <div className="hidden md:block flex-none">{header}</div>}
@@ -59,7 +63,7 @@ export function AppShell({
             )}
             <aside
               className={[
-                'md:hidden fixed inset-y-0 left-0 z-50 w-[84vw] max-w-[320px] bg-background shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
+                'md:hidden fixed inset-y-0 left-0 z-50 w-[84vw] max-w-[320px] bg-background shadow-2xl transition-transform duration-300 ease-in-out',
                 mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full',
               ].join(' ')}
             >

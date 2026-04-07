@@ -77,7 +77,31 @@
     @apply text-slate-600 dark:text-slate-300;
   }
   .text-ui-soft {
-    @apply text-slate-500 dark:text-slate-400;
+    @apply text-slate-500 dark:text-slate-300;
+  }
+}
+
+/* Dark-mode contrast guardrails for legacy Tailwind text colors.
+   This avoids low-contrast UI when pages use text-slate-500/600 without dark variants. */
+@layer utilities {
+  .dark .text-slate-400,
+  .dark .text-slate-500,
+  .dark .text-slate-600,
+  .dark .text-gray-400,
+  .dark .text-gray-500,
+  .dark .text-gray-600,
+  .dark .text-zinc-400,
+  .dark .text-zinc-500,
+  .dark .text-neutral-400,
+  .dark .text-neutral-500 {
+    color: rgb(203 213 225); /* slate-300 */
+  }
+
+  .dark .text-slate-700,
+  .dark .text-gray-700,
+  .dark .text-zinc-700,
+  .dark .text-neutral-700 {
+    color: rgb(226 232 240); /* slate-200 */
   }
 }
 

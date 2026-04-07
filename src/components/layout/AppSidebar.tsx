@@ -262,14 +262,12 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
           <LogOut size={18} className="shrink-0" aria-hidden />
           {!isCollapsed && <span className="truncate tracking-tight">{t('nav.logout')}</span>}
         </Link>
-        {!isCollapsed && (
-          <div className="pt-2 flex flex-col gap-3">
-            <div className="flex justify-center">
-              <ThemeToggle />
-            </div>
-            <LanguageSwitcher className="w-full justify-center brightness-100" />
+        <div className={['pt-2 flex flex-col gap-3', isCollapsed ? 'items-center' : ''].join(' ')}>
+          <div className="flex justify-center">
+            <ThemeToggle />
           </div>
-        )}
+          <LanguageSwitcher className={[isCollapsed ? 'w-auto' : 'w-full justify-center', 'brightness-100'].join(' ')} />
+        </div>
       </div>
     </div>
   )

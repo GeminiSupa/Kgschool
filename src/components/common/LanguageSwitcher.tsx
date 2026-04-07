@@ -17,7 +17,7 @@ export function LanguageSwitcher({ className = '' }: { className?: string }) {
       aria-label={t('common.language')}
       className={`inline-flex max-w-full flex-wrap items-center justify-center gap-1 rounded-xl border border-gray-200 bg-white/90 p-1 dark:border-white/15 dark:bg-white/5 ${className}`}
     >
-      <span className="px-2 text-[10px] font-black uppercase tracking-widest text-ui-muted">
+      <span className="hidden sm:inline px-2 text-[10px] font-black uppercase tracking-widest text-ui-muted">
         {t('common.language')}
       </span>
       {options.map((o) => (
@@ -29,7 +29,7 @@ export function LanguageSwitcher({ className = '' }: { className?: string }) {
             'min-h-11 min-w-11 touch-manipulation rounded-lg px-3 py-2 text-[10px] font-black uppercase tracking-widest transition-colors sm:min-h-0 sm:min-w-0 sm:px-2.5 sm:py-1',
             lang === o.id
               ? 'bg-gray-900 text-white dark:bg-slate-100 dark:text-slate-900'
-              : 'text-slate-700 dark:text-slate-200 hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-white/10',
+              : 'text-slate-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-white/10',
           ].join(' ')}
           aria-pressed={lang === o.id}
           aria-label={`${t('common.language')}: ${o.label}`}
