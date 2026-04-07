@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
+import { useAuthStore } from '@/stores/auth'
 import { useI18n } from '@/i18n/I18nProvider'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 
@@ -19,10 +20,15 @@ export default function DashboardRedirect() {
       return
     }
 
-    // Profile must exist after hydration; otherwise session is invalid for app use.
+    // Profile can take a moment to appear right after sign-in / registration.
+    // Retry hydration once before sending the user to /unauthorized.
     if (!profile?.role) {
-      router.replace('/unauthorized')
-      return
+      void useAuthStore.getState().fetchProfile()
+      const timer = window.setTimeout(() => {
+        const p = useAuthStore.getState().profile
+        if (!p?.role) router.replace('/unauthorized')
+      }, 1200)
+      return () => window.clearTimeout(timer)
     }
 
     // Legacy / API-created rows may use `staff` — same app area as teachers.
