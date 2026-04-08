@@ -7,6 +7,8 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { useAuth } from '@/hooks/useAuth'
+import { MiniLineChart, type MiniLinePoint } from '@/components/dashboard/MiniLineChart'
+import { getLastNDays } from '@/utils/dashboard/dateRange'
 
 export default function SupportDashboardPage() {
   const supabase = createClient()
@@ -18,6 +20,7 @@ export default function SupportDashboardPage() {
   const [todayAttendance, setTodayAttendance] = useState(0)
   const [unreadMessages, setUnreadMessages] = useState(0)
   const [recentActivity, setRecentActivity] = useState<any[]>([])
+  const [attendanceTrend, setAttendanceTrend] = useState<MiniLinePoint[]>([])
 
   useEffect(() => {
     const run = async () => {
@@ -38,6 +41,18 @@ export default function SupportDashboardPage() {
           .eq('date', today)
           .eq('status', 'present')
         setTodayAttendance(attendanceCount || 0)
+
+        const days = getLastNDays(7)
+        const counts: number[] = []
+        for (const d of days) {
+          const { count: c } = await supabase
+            .from('attendance')
+            .select('id', { count: 'exact', head: true })
+            .eq('date', d.key)
+            .eq('status', 'present')
+          counts.push(c || 0)
+        }
+        setAttendanceTrend(days.map((d, i) => ({ xLabel: d.label, y: counts[i] ?? 0 })))
 
         if (user?.id) {
           const { count: unreadCount } = await supabase
@@ -121,6 +136,16 @@ export default function SupportDashboardPage() {
               </div>
             </IOSCard>
           </div>
+
+          <IOSCard className="p-6">
+            <div className="flex items-center justify-between mb-3">
+              <Heading size="md">Attendance trend</Heading>
+              <Link href="/support/attendance" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300 hover:underline">
+                View →
+              </Link>
+            </div>
+            <MiniLineChart data={attendanceTrend} />
+          </IOSCard>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <IOSCard className="p-6">

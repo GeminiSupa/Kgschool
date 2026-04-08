@@ -10,6 +10,8 @@ import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
 import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
+import { MiniLineChart, type MiniLinePoint } from '@/components/dashboard/MiniLineChart'
+import { getLastNDays } from '@/utils/dashboard/dateRange'
 
 const ROUTE = 'teacher.dashboard'
 
@@ -25,6 +27,7 @@ export default function TeacherDashboardPage() {
   const [childrenCount, setChildrenCount] = useState(0)
   const [todayAttendance, setTodayAttendance] = useState(0)
   const [todayMenu, setTodayMenu] = useState<any>(null)
+  const [attendanceTrend, setAttendanceTrend] = useState<MiniLinePoint[]>([])
 
   useEffect(() => {
     async function fetchTeacherData() {
@@ -78,6 +81,20 @@ export default function TeacherDashboardPage() {
 
           if (childrenData && childrenData.length > 0) {
             const childIds = childrenData.map((c) => c.id)
+            // 7-day attendance trend
+            const days = getLastNDays(7)
+            const counts: number[] = []
+            for (const d of days) {
+              const { count: c } = await supabase
+                .from('attendance')
+                .select('id', { count: 'exact', head: true })
+                .eq('date', d.key)
+                .in('child_id', childIds)
+                .eq('status', 'present')
+              counts.push(c || 0)
+            }
+            setAttendanceTrend(days.map((d, i) => ({ xLabel: d.label, y: counts[i] ?? 0 })))
+
             const { count: attCount } = await supabase
               .from('attendance')
               .select('id', { count: 'exact', head: true })
@@ -186,6 +203,17 @@ export default function TeacherDashboardPage() {
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-12">
+              <IOSCard className="p-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h2 className="text-xs font-black uppercase tracking-widest text-ui-soft">{t(pT(ROUTE, 'statTodayAttendance'))}</h2>
+                  <Link href="/teacher/attendance" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300 hover:underline">
+                    {t('common.view')} →
+                  </Link>
+                </div>
+                <MiniLineChart data={attendanceTrend} />
+              </IOSCard>
+            </div>
             {/* My Groups - 7 cols */}
             <div className="lg:col-span-7">
                <div className="flex items-center gap-4 mb-8">

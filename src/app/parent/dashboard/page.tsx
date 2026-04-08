@@ -12,6 +12,8 @@ import { IOSStatCard } from '@/components/common/IOSStatCard'
 import { useI18n } from '@/i18n/I18nProvider'
 import { sT } from '@/i18n/sT'
 import { pT } from '@/i18n/pT'
+import { MiniLineChart, type MiniLinePoint } from '@/components/dashboard/MiniLineChart'
+import { getLastNDays } from '@/utils/dashboard/dateRange'
 
 const ROUTE = 'parent.dashboard'
 
@@ -23,6 +25,7 @@ export default function ParentDashboardPage() {
   const [todayMenu, setTodayMenu] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const supabase = createClient()
+  const [unreadTrend, setUnreadTrend] = useState<MiniLinePoint[]>([])
 
   useEffect(() => {
     if (user?.id) {
@@ -45,6 +48,22 @@ export default function ParentDashboardPage() {
       // 2. Fetch messages to get unread count
       if (user?.id) {
         await fetchMessages(user.id, 'inbox')
+      }
+
+      // 7-day "new messages" trend (approx): count messages received per day
+      if (user?.id) {
+        const days = getLastNDays(7)
+        const counts: number[] = []
+        for (const d of days) {
+          const { count: c } = await supabase
+            .from('messages')
+            .select('id', { count: 'exact', head: true })
+            .eq('recipient_id', user.id)
+            .gte('created_at', `${d.key}T00:00:00.000Z`)
+            .lt('created_at', `${d.key}T23:59:59.999Z`)
+          counts.push(c || 0)
+        }
+        setUnreadTrend(days.map((d, i) => ({ xLabel: d.label, y: counts[i] ?? 0 })))
       }
 
       // 3. Fetch Today's Menu
@@ -119,6 +138,16 @@ export default function ParentDashboardPage() {
             icon="📅"
           />
         </div>
+
+        <IOSCard className="p-6">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-xs font-black uppercase tracking-widest text-ui-soft">{t(pT(ROUTE, 'statUnread'))}</h2>
+            <Link href="/parent/messages" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300 hover:underline">
+              {t('common.view')} →
+            </Link>
+          </div>
+          <MiniLineChart data={unreadTrend} />
+        </IOSCard>
 
         {/* Today's Menu Highlight */}
         {todayMenu && (
@@ -253,7 +282,7 @@ function QuickActionLink({
       <div className={`w-10 h-10 flex items-center justify-center rounded-xl text-lg ${colorClasses[color] || 'bg-gray-100'} shadow-sm border border-black/5 group-hover:scale-110 transition-transform`}>
         {icon}
       </div>
-      <span className="font-bold text-slate-700 dark:text-slate-200 text-sm group-hover:text-slate-900 dark:text-slate-50 transition-colors">
+      <span className="font-bold text-slate-700 dark:text-slate-200 text-sm group-hover:text-slate-900 dark:group-hover:text-slate-50 transition-colors">
         {t(pT(ROUTE, labelKey))}
       </span>
       <div className="ml-auto text-gray-300 group-hover:text-ui-soft transition-colors">

@@ -7,6 +7,8 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { IOSStatCard } from '@/components/common/IOSStatCard'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import Link from 'next/link'
+import { MiniLineChart, type MiniLinePoint } from '@/components/dashboard/MiniLineChart'
+import { getLastNDays } from '@/utils/dashboard/dateRange'
 
 type KitchenMenu = {
   meal_name: string
@@ -23,6 +25,7 @@ export default function KitchenDashboardPage() {
   const [weeklyMenus, setWeeklyMenus] = useState(0)
   const [pendingPrep, setPendingPrep] = useState(0)
   const [todayMenu, setTodayMenu] = useState<KitchenMenu | null>(null)
+  const [ordersTrend, setOrdersTrend] = useState<MiniLinePoint[]>([])
 
   useEffect(() => {
     const run = async () => {
@@ -39,6 +42,18 @@ export default function KitchenDashboardPage() {
           .select('id', { count: 'exact', head: true })
           .eq('order_date', today)
         setTodayOrders(ordersCount || 0)
+
+        // 7-day orders trend
+        const days = getLastNDays(7)
+        const counts: number[] = []
+        for (const d of days) {
+          const { count: c } = await supabase
+            .from('lunch_orders')
+            .select('id', { count: 'exact', head: true })
+            .eq('order_date', d.key)
+          counts.push(c || 0)
+        }
+        setOrdersTrend(days.map((d, i) => ({ xLabel: d.label, y: counts[i] ?? 0 })))
 
         // Weekly menus
         const { count: menusCount } = await supabase
@@ -83,6 +98,18 @@ export default function KitchenDashboardPage() {
             <IOSStatCard title="Today's Orders" value={todayOrders} icon="🛒" className="p-5" />
             <IOSStatCard title="Menus This Week" value={weeklyMenus} icon="🍽️" className="p-5" />
             <IOSStatCard title="Pending Prep" value={pendingPrep} icon="⏳" className="p-5" />
+          </div>
+
+          <div className="mb-6">
+            <IOSCard className="p-6">
+              <div className="flex items-center justify-between mb-3">
+                <Heading size="md">Orders (7 days)</Heading>
+                <Link href="/kitchen/orders" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300 hover:underline">
+                  View →
+                </Link>
+              </div>
+              <MiniLineChart data={ordersTrend} stroke="rgb(245 158 11)" />
+            </IOSCard>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">

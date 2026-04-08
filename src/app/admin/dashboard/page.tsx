@@ -9,6 +9,9 @@ import { useI18n } from '@/i18n/I18nProvider'
 import { pT } from '@/i18n/pT'
 import { getActiveKitaId } from '@/utils/tenant/client'
 import { ThemeToggle } from '@/components/common/ThemeToggle'
+import { IOSCard } from '@/components/ui/IOSCard'
+import { MiniLineChart, type MiniLinePoint } from '@/components/dashboard/MiniLineChart'
+import { getLastNDays } from '@/utils/dashboard/dateRange'
 
 const ROUTE = 'admin.dashboard'
 
@@ -22,6 +25,8 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true)
   const [kitaMissing, setKitaMissing] = useState(false)
   const [todayMenu, setTodayMenu] = useState<any>(null)
+  const [attendanceTrend, setAttendanceTrend] = useState<MiniLinePoint[]>([])
+  const [pendingLeaves, setPendingLeaves] = useState<Array<{ id: string; start_date: string; end_date: string; leave_type: string }>>([])
 
   const [stats, setStats] = useState({
     totalChildren: 0,
@@ -71,6 +76,27 @@ export default function AdminDashboardPage() {
         const { data: menuData } = await supabase.from('lunch_menus').select('*').eq('date', today).eq('kita_id', kitaId).maybeSingle()
 
         setTodayMenu(menuData)
+
+        // Attendance trend (last 14 days)
+        const days = getLastNDays(14)
+        const counts: number[] = []
+        for (const d of days) {
+          const { count: c } = await supabase
+            .from('attendance')
+            .select('id', { count: 'exact', head: true })
+            .eq('date', d.key)
+            .eq('status', 'present')
+          counts.push(c || 0)
+        }
+        setAttendanceTrend(days.map((d, i) => ({ xLabel: d.label, y: counts[i] ?? 0 })))
+
+        const { data: leaveRows } = await supabase
+          .from('leave_requests')
+          .select('id, start_date, end_date, leave_type')
+          .eq('status', 'pending')
+          .order('created_at', { ascending: false })
+          .limit(5)
+        setPendingLeaves((leaveRows || []) as any)
       } catch (error) {
         console.error('Error fetching admin dashboard data:', error)
       } finally {
@@ -251,6 +277,49 @@ export default function AdminDashboardPage() {
               )}
             </div>
           </div>
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <IOSCard className="p-6 lg:col-span-7">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-xs font-black uppercase tracking-widest text-ui-soft">{t(pT(ROUTE, 'statAttendanceToday'))}</h2>
+              <Link href="/admin/attendance" className="text-[10px] font-black uppercase tracking-widest text-aura-indigo hover:underline">
+                {t('common.view')} →
+              </Link>
+            </div>
+            <MiniLineChart data={attendanceTrend} />
+          </IOSCard>
+
+          <IOSCard className="p-6 lg:col-span-5">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xs font-black uppercase tracking-widest text-ui-soft">{t(pT(ROUTE, 'viewLeave'))}</h2>
+              <Link href="/admin/leave" className="text-[10px] font-black uppercase tracking-widest text-aura-indigo hover:underline">
+                {t('common.view')} →
+              </Link>
+            </div>
+            {pendingLeaves.length === 0 ? (
+              <div className="text-sm text-ui-soft">{t(pT(ROUTE, 'leaveAllClear'))}</div>
+            ) : (
+              <div className="space-y-2">
+                {pendingLeaves.map((r) => (
+                  <div key={r.id} className="flex items-center justify-between rounded-2xl border border-border/60 bg-slate-50/60 p-3 dark:bg-white/5 dark:border-white/10">
+                    <div className="min-w-0">
+                      <div className="text-sm font-black text-foreground truncate">{r.leave_type}</div>
+                      <div className="text-[10px] font-black uppercase tracking-widest text-ui-soft">
+                        {r.start_date} → {r.end_date}
+                      </div>
+                    </div>
+                    <Link
+                      href={`/admin/leave/${r.id}`}
+                      className="shrink-0 rounded-xl bg-indigo-600 px-3 py-2 text-[10px] font-black uppercase tracking-widest text-white hover:bg-indigo-700"
+                    >
+                      Open
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            )}
+          </IOSCard>
         </div>
       </div>
     </div>
