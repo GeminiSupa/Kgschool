@@ -32,8 +32,55 @@ export async function GET() {
       return NextResponse.json({ error: profileError.message }, { status: 500 })
     }
 
+    // Self-heal: if the user exists in auth but has no profile row (trigger missing / race),
+    // create a minimal profile so the app can hydrate and route correctly.
     if (!profile) {
-      return NextResponse.json(null)
+      const roleRaw = (user.user_metadata as Record<string, unknown> | null | undefined)?.role
+      const role =
+        roleRaw === 'admin' || roleRaw === 'teacher' || roleRaw === 'parent' || roleRaw === 'kitchen' || roleRaw === 'support'
+          ? roleRaw
+          : 'parent'
+
+      const fullNameRaw = (user.user_metadata as Record<string, unknown> | null | undefined)?.full_name
+      const full_name = typeof fullNameRaw === 'string' && fullNameRaw.trim() ? fullNameRaw.trim() : 'User'
+
+      const email = user.email || ''
+
+      const { data: inserted, error: insertErr } = await admin
+        .from('profiles')
+        .insert({
+          id: user.id,
+          email,
+          full_name,
+          role,
+          updated_at: new Date().toISOString(),
+        })
+        .select('*')
+        .maybeSingle()
+
+      if (insertErr) {
+        console.error('[api/auth/my-profile] profiles insert:', insertErr)
+        return NextResponse.json({ error: insertErr.message }, { status: 500 })
+      }
+
+      if (!inserted) {
+        return NextResponse.json(null)
+      }
+
+      const { data: members, error: omError } = await admin
+        .from('organization_members')
+        .select('kita_id')
+        .eq('profile_id', user.id)
+
+      if (omError) {
+        console.error('[api/auth/my-profile] organization_members:', omError)
+        return NextResponse.json({ error: omError.message }, { status: 500 })
+      }
+
+      return NextResponse.json({
+        ...inserted,
+        organization_members: members ?? [],
+      })
     }
 
     const { data: members, error: omError } = await admin

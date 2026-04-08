@@ -32,7 +32,7 @@ export function AppShell({
           <span className="font-bold text-sm tracking-tight text-foreground">{t('brand.appTitle')}</span>
         </div>
         <div className="flex items-center gap-2">
-          <LanguageSwitcher className="shrink-0" />
+          <LanguageSwitcher className="shrink-0" compact />
           <button
             type="button"
             className="inline-flex min-h-11 min-w-11 -mr-2 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-slate-100 dark:hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 dark:focus-visible:ring-indigo-500/50"

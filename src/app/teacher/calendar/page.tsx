@@ -53,11 +53,11 @@ export default function TeacherCalendarPage() {
 
                 <div className="grid grid-cols-7 gap-2">
                     {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(d => (
-                        <div key={d} className="text-center text-[10px] font-black text-black/20 uppercase tracking-widest py-2">{d}</div>
+                        <div key={d} className="text-center text-[10px] font-black text-ui-soft uppercase tracking-widest py-2">{d}</div>
                     ))}
                     {calendarDays.map(day => (
-                        <div key={day} className="aspect-square bg-gray-50/50 rounded-2xl border border-black/5 p-2 group hover:border-[#667eea]/20 transition-all cursor-pointer relative overflow-hidden">
-                            <span className="text-xs font-black text-ui-soft group-hover:text-black transition-colors">{day}</span>
+                        <div key={day} className="aspect-square bg-slate-50/60 dark:bg-white/6 rounded-2xl border border-black/5 dark:border-white/10 p-2 group hover:border-[#667eea]/35 transition-all cursor-pointer relative overflow-hidden">
+                            <span className="text-xs font-black text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">{day}</span>
                         </div>
                     ))}
                 </div>

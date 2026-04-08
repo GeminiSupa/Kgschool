@@ -29,11 +29,11 @@ export default function ParentCalendarPage() {
       </div>
 
       <div className="space-y-8">
-            <h3 className="text-sm font-black text-black/20 uppercase tracking-widest ml-4">Anstehende Termine</h3>
+            <h3 className="text-sm font-black text-ui-soft uppercase tracking-widest ml-4">Anstehende Termine</h3>
             
             <div className="space-y-4">
                 <IOSCard className="p-6 border-black/5 flex gap-6 hover:shadow-xl transition-all">
-                    <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex flex-col items-center justify-center flex-shrink-0 border border-indigo-100/50 shadow-lg shadow-indigo-500/5">
+                    <div className="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex flex-col items-center justify-center shrink-0 border border-indigo-100/50 shadow-lg shadow-indigo-500/5">
                         <span className="text-[9px] font-black uppercase">Apr</span>
                         <span className="text-xl font-black leading-none">12</span>
                     </div>
@@ -45,7 +45,7 @@ export default function ParentCalendarPage() {
                 </IOSCard>
 
                 <IOSCard className="p-6 border-black/5 flex gap-6 hover:shadow-xl transition-all">
-                    <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex flex-col items-center justify-center flex-shrink-0 border border-amber-100/50 shadow-lg shadow-amber-500/5">
+                    <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex flex-col items-center justify-center shrink-0 border border-amber-100/50 shadow-lg shadow-amber-500/5">
                         <span className="text-[9px] font-black uppercase">Mai</span>
                         <span className="text-xl font-black leading-none">01</span>
                     </div>

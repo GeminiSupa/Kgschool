@@ -101,23 +101,30 @@ export default function AdminDashboardPage() {
   return (
     <div className="min-h-screen bg-mesh-light animate-in fade-in duration-1000">
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-8 md:py-12">
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 md:mb-16 px-0">
-          <div className="space-y-2">
-            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-aura-indigo/60">{t(pT(ROUTE, 'headerEyebrow'))}</h4>
-            <h1 className="text-3xl md:text-5xl font-display font-black text-slate-900 dark:text-white tracking-tight leading-none">
-              {t(pT(ROUTE, 'greetingHello'))}{' '}
-              <span className="text-aura-indigo">{t('roles.admin')}</span>
-            </h1>
-            <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 font-medium">{t(pT(ROUTE, 'tagline'))}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <Link
-              href="/admin/children/new"
-              className="px-5 md:px-8 py-3 md:py-4 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-3xl font-black text-xs uppercase tracking-widest shadow-2xl hover:-translate-y-1 transition-all active:scale-95 whitespace-nowrap"
-            >
-              {t(pT(ROUTE, 'addChild'))}
-            </Link>
+        <header className="glass rounded-premium p-6 md:p-10 mb-8 md:mb-16 overflow-hidden relative">
+          <div className="absolute -top-24 -right-24 h-56 w-56 rounded-full bg-aura-indigo/15 blur-3xl" aria-hidden />
+          <div className="absolute -bottom-28 -left-24 h-64 w-64 rounded-full bg-aura-coral/10 blur-3xl" aria-hidden />
+
+          <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-aura-indigo/70">
+                {t(pT(ROUTE, 'headerEyebrow'))}
+              </h4>
+              <h1 className="text-3xl md:text-5xl font-display font-black text-foreground tracking-tight leading-none">
+                {t(pT(ROUTE, 'greetingHello'))}{' '}
+                <span className="text-aura-indigo">{t('roles.admin')}</span>
+              </h1>
+              <p className="text-base md:text-lg text-ui-muted font-medium">{t(pT(ROUTE, 'tagline'))}</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
+              <Link
+                href="/admin/children/new"
+                className="px-5 md:px-8 py-3 md:py-4 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-3xl font-black text-xs uppercase tracking-widest shadow-2xl hover:-translate-y-1 transition-all active:scale-95 whitespace-nowrap"
+              >
+                {t(pT(ROUTE, 'addChild'))}
+              </Link>
+            </div>
           </div>
         </header>
 
@@ -203,7 +210,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="md:col-span-4 lg:col-span-4">
-            <div className="glass p-8 rounded-premium h-full">
+            <div className="glass p-6 md:p-8 rounded-premium h-full">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-[10px] font-black text-ui-soft tracking-[0.4em] uppercase">{t(pT(ROUTE, 'sectionQuickAccess'))}</h2>
                 <span className="w-8 h-8 rounded-full bg-aura-indigo/10 flex items-center justify-center text-aura-indigo">
@@ -214,7 +221,7 @@ export default function AdminDashboardPage() {
                 {quickLinks.map((link) => (
                   <Link key={link.href} href={link.href} className="group flex flex-col items-center">
                     <div
-                      className={`w-full aspect-square rounded-[32px] ${link.color} flex flex-col items-center justify-center gap-3 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm border border-white/20 dark:border-white/5 active:scale-95`}
+                      className={`w-full aspect-square rounded-premium ${link.color} flex flex-col items-center justify-center gap-3 hover:scale-105 hover:-translate-y-1 transition-all duration-300 shadow-sm border border-white/20 dark:border-white/8 active:scale-95`}
                     >
                       <span className="text-3xl transition-transform group-hover:scale-125 duration-500">{link.icon}</span>
                       <span className="text-[10px] font-black uppercase tracking-tighter text-center px-2 opacity-80 dark:text-white">

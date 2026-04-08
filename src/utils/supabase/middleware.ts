@@ -35,9 +35,9 @@ export async function updateSession(request: NextRequest) {
   const isAuthRoute =
     path === '/login' ||
     path === '/signup' ||
-    path === '/register' ||
     path === '/auth/forgot-password' ||
     path === '/auth/callback'
+  const isRegisterRoute = path === '/register'
   const isProtected = request.nextUrl.pathname.startsWith('/admin') || 
                       request.nextUrl.pathname.startsWith('/teacher') || 
                       request.nextUrl.pathname.startsWith('/parent') ||
@@ -51,7 +51,8 @@ export async function updateSession(request: NextRequest) {
   }
 
   // Basic role-based routing (we will enhance this when profile fetching is established later)
-  if (user && isAuthRoute) {
+  // Allow /register while signed in so admins can create a new Kita/org without logging out.
+  if (user && isAuthRoute && !isRegisterRoute) {
     const url = request.nextUrl.clone()
     url.pathname = '/dashboard' // or determine by role
     return NextResponse.redirect(url)

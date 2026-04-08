@@ -8,7 +8,14 @@ const options = [
   { id: 'tr', label: 'TR' },
 ] as const
 
-export function LanguageSwitcher({ className = '' }: { className?: string }) {
+export function LanguageSwitcher({
+  className = '',
+  compact = false,
+}: {
+  className?: string
+  /** Use smaller buttons; best for mobile top bar. */
+  compact?: boolean
+}) {
   const { lang, setLang, t } = useI18n()
 
   return (
@@ -26,7 +33,9 @@ export function LanguageSwitcher({ className = '' }: { className?: string }) {
           type="button"
           onClick={() => setLang(o.id)}
           className={[
-            'min-h-11 min-w-11 touch-manipulation rounded-lg px-3 py-2 text-[10px] font-black uppercase tracking-widest transition-colors sm:min-h-0 sm:min-w-0 sm:px-2.5 sm:py-1',
+            compact
+              ? 'min-h-9 min-w-9 touch-manipulation rounded-lg px-2.5 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors'
+              : 'min-h-11 min-w-11 touch-manipulation rounded-lg px-3 py-2 text-[10px] font-black uppercase tracking-widest transition-colors sm:min-h-0 sm:min-w-0 sm:px-2.5 sm:py-1',
             lang === o.id
               ? 'bg-gray-900 text-white dark:bg-slate-100 dark:text-slate-900'
               : 'text-slate-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-white/10',

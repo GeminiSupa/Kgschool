@@ -266,7 +266,10 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
           <div className="flex justify-center">
             <ThemeToggle />
           </div>
-          <LanguageSwitcher className={[isCollapsed ? 'w-auto' : 'w-full justify-center', 'brightness-100'].join(' ')} />
+          <LanguageSwitcher
+            className={[isCollapsed ? 'w-auto' : 'w-full justify-center', 'brightness-100'].join(' ')}
+            compact={isCollapsed}
+          />
         </div>
       </div>
     </div>

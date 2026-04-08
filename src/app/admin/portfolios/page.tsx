@@ -47,7 +47,7 @@ export default function AdminPortfoliosPage() {
         <select 
             value={selectedChild} 
             onChange={(e) => setSelectedChild(e.target.value)}
-            className="px-5 py-2.5 bg-white border border-black/5 rounded-2xl text-[11px] font-black uppercase tracking-widest shadow-sm focus:ring-2 focus:ring-[#667eea]/20 outline-none transition-all"
+            className="px-5 py-2.5 bg-white/90 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl text-[11px] font-black uppercase tracking-widest text-foreground shadow-sm focus:ring-2 focus:ring-[#667eea]/20 outline-none transition-all"
         >
             <option value="">Alle Kinder</option>
             {children.map(c => (
@@ -78,7 +78,7 @@ export default function AdminPortfoliosPage() {
                              <Link href={`/admin/portfolios/${entry.id}`} className="flex-1">
                                <IOSButton
                                  variant="secondary"
-                                 className="w-full py-3 text-[10px] font-black uppercase tracking-widest border-black/5 bg-gray-50 hover:bg-white text-black"
+                                 className="w-full py-3 text-[10px] font-black uppercase tracking-widest border-black/5 dark:border-white/10 bg-gray-50 hover:bg-white dark:bg-white/8 dark:hover:bg-white/12 text-slate-900 dark:text-slate-100"
                                >
                                  Öffnen
                                </IOSButton>

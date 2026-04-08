@@ -86,16 +86,16 @@ export default function AdminCalendarPage() {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-2">
+          <h1 className="text-4xl font-black text-foreground tracking-tight mb-2">
             {t(pT(ROUTE))}
           </h1>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl">{t(sT('calendarSubtitle'))}</p>
+          <p className="text-lg text-ui-muted font-medium max-w-2xl">{t(sT('calendarSubtitle'))}</p>
         </div>
         <div className="flex gap-3">
           <button
             type="button"
             onClick={() => setIsSlideOverOpen(true)}
-            className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all"
+            className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100/80 dark:shadow-indigo-900/30 hover:bg-indigo-700 hover:-translate-y-1 transition-all"
           >
             {t(sT('addNewEvent'))}
           </button>
@@ -104,9 +104,9 @@ export default function AdminCalendarPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
         <div className="lg:col-span-3">
-            <IOSCard className="p-10 border-slate-50 shadow-xl shadow-slate-200/40">
+            <IOSCard className="p-10 border-slate-50 shadow-xl shadow-slate-200/40 dark:shadow-black/40">
                 <div className="flex items-center justify-between mb-12">
-                    <h3 className="text-3xl font-black text-slate-900 tracking-tight">
+                    <h3 className="text-3xl font-black text-foreground tracking-tight">
                       {new Date(currentYear, currentMonth).toLocaleString(calLocale, { month: 'long', year: 'numeric' })}
                     </h3>
                     <div className="flex gap-4">
@@ -117,13 +117,18 @@ export default function AdminCalendarPage() {
 
                 <div className="grid grid-cols-7 gap-4">
                     {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map(d => (
-                        <div key={d} className="text-center text-[11px] font-black text-slate-300 uppercase tracking-[0.2em] mb-4">{d}</div>
+                        <div key={d} className="text-center text-[11px] font-black text-ui-soft uppercase tracking-[0.2em] mb-4">{d}</div>
                     ))}
                     {calendarDays.map(day => {
                         const dayEvents = getEventsForDay(day)
                         return (
-                            <div key={day} className="aspect-square bg-slate-50/50 rounded-3xl border border-slate-100 p-4 group hover:bg-white hover:border-indigo-100 transition-all cursor-pointer relative overflow-hidden shadow-sm hover:shadow-xl hover:shadow-indigo-100/40">
-                                <span className="text-lg font-black text-slate-300 group-hover:text-indigo-600 transition-colors">{day}</span>
+                            <div
+                              key={day}
+                              className="aspect-square bg-slate-50/60 dark:bg-white/6 rounded-3xl border border-slate-200/70 dark:border-white/10 p-4 group hover:bg-white dark:hover:bg-white/10 hover:border-indigo-200/60 dark:hover:border-indigo-400/30 transition-all cursor-pointer relative overflow-hidden shadow-sm hover:shadow-xl hover:shadow-indigo-100/40 dark:hover:shadow-indigo-900/20"
+                            >
+                                <span className="text-lg font-black text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
+                                  {day}
+                                </span>
                                 
                                 <div className="mt-2 flex flex-wrap gap-1">
                                     {dayEvents.map(e => (
@@ -138,9 +143,9 @@ export default function AdminCalendarPage() {
         </div>
 
         <div className="space-y-8">
-            <IOSCard className="p-8 border-indigo-100 bg-indigo-50/20 shadow-none">
-                <h4 className="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-indigo-400" />
+            <IOSCard className="p-8 border-indigo-100/70 dark:border-indigo-400/20 bg-indigo-50/20 dark:bg-indigo-950/20 shadow-none">
+                <h4 className="text-[11px] font-black text-indigo-500 dark:text-indigo-300 uppercase tracking-widest mb-6 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-300" />
                     {t(sT('todaysAbsences'))}
                 </h4>
                 <div className="space-y-4">
@@ -148,19 +153,19 @@ export default function AdminCalendarPage() {
                 </div>
             </IOSCard>
 
-            <IOSCard className="p-8 border-slate-50 shadow-xl shadow-slate-200/40">
-                <h4 className="text-[11px] font-black text-slate-300 uppercase tracking-widest mb-8">{t(sT('upcomingEvents'))}</h4>
+            <IOSCard className="p-8 border-slate-50 shadow-xl shadow-slate-200/40 dark:shadow-black/40">
+                <h4 className="text-[11px] font-black text-ui-soft uppercase tracking-widest mb-8">{t(sT('upcomingEvents'))}</h4>
                 <div className="space-y-8">
                     {events.slice(0, 3).map(event => (
                         <div key={event.id} className="flex gap-6 items-center group cursor-pointer">
-                            <div className="w-16 h-16 rounded-2xl bg-slate-50 flex flex-col items-center justify-center shrink-0 border border-slate-100 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
+                            <div className="w-16 h-16 rounded-2xl bg-slate-50 dark:bg-white/8 flex flex-col items-center justify-center shrink-0 border border-slate-100 dark:border-white/10 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm">
                                 <span className="text-[9px] font-black opacity-40 uppercase">
                                   {new Date(event.start_date).toLocaleString(calLocale, { month: 'short' })}
                                 </span>
                                 <span className="text-2xl font-black leading-none mt-1">{new Date(event.start_date).getDate()}</span>
                             </div>
                             <div className="min-w-0">
-                                <p className="text-lg font-black text-slate-900 group-hover:text-indigo-600 transition-colors tracking-tight truncate">{event.title}</p>
+                                <p className="text-lg font-black text-foreground group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors tracking-tight truncate">{event.title}</p>
                                 <p className="text-[10px] font-black text-ui-soft uppercase mt-1 tracking-widest">
                                     {new Date(event.start_date).toLocaleTimeString(calLocale, { hour: '2-digit', minute: '2-digit' })}
                                 </p>
