@@ -257,7 +257,7 @@ export default function ProfilePage() {
                   onChange={(e) => setForm((p) => ({ ...p, full_name: e.target.value }))}
                   type="text"
                   required
-                  className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="ui-input"
                   placeholder="Ihr vollständiger Name"
                 />
               </div>
@@ -268,7 +268,7 @@ export default function ProfilePage() {
                   value={profile.email}
                   type="email"
                   disabled
-                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed"
+                  className="ui-input bg-slate-100/80 dark:bg-white/5 text-ui-muted cursor-not-allowed"
                 />
                 <p className="text-xs text-ui-soft mt-2">E-Mail kann nicht geändert werden</p>
               </div>
@@ -279,7 +279,7 @@ export default function ProfilePage() {
                   value={form.phone || ''}
                   onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
                   type="tel"
-                  className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                  className="ui-input"
                   placeholder="+49 123 456 7890"
                 />
               </div>
@@ -291,7 +291,7 @@ export default function ProfilePage() {
                     value={roleLabel}
                     type="text"
                     disabled
-                    className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed capitalize"
+                    className="ui-input bg-slate-100/80 dark:bg-white/5 text-ui-muted cursor-not-allowed capitalize"
                   />
                   <span
                     className={[
@@ -320,7 +320,7 @@ export default function ProfilePage() {
               <div className="p-4 bg-green-50 border-2 border-green-200 text-green-800 rounded-xl text-sm">✅ Profil erfolgreich aktualisiert!</div>
             )}
 
-            <div className="flex justify-end gap-3 pt-4 border-t border-gray-200">
+            <div className="flex justify-end gap-3 pt-4 border-t border-border">
               <IOSButton
                 type="submit"
                 disabled={updating}
@@ -347,7 +347,7 @@ export default function ProfilePage() {
                 value={passwordForm.newPassword}
                 onChange={(e) => setPasswordForm((p) => ({ ...p, newPassword: e.target.value }))}
                 type="password"
-                className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="ui-input"
                 placeholder="Neues Passwort eingeben"
                 disabled={changingPassword}
               />
@@ -361,7 +361,7 @@ export default function ProfilePage() {
                 value={passwordForm.confirmPassword}
                 onChange={(e) => setPasswordForm((p) => ({ ...p, confirmPassword: e.target.value }))}
                 type="password"
-                className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="ui-input"
                 placeholder="Neues Passwort bestätigen"
                 disabled={changingPassword}
               />
@@ -394,7 +394,7 @@ export default function ProfilePage() {
                 value={profile.id}
                 type="text"
                 disabled
-                className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed font-mono text-sm"
+                className="ui-input bg-slate-100/80 dark:bg-white/5 text-ui-muted cursor-not-allowed font-mono text-sm"
               />
             </div>
 
@@ -405,7 +405,7 @@ export default function ProfilePage() {
                   value={profile.created_at ? formatDate(profile.created_at) : ''}
                   type="text"
                   disabled
-                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed"
+                  className="ui-input bg-slate-100/80 dark:bg-white/5 text-ui-muted cursor-not-allowed"
                 />
               </div>
 
@@ -415,7 +415,7 @@ export default function ProfilePage() {
                   value={profile.updated_at ? formatDate(profile.updated_at) : ''}
                   type="text"
                   disabled
-                  className="w-full px-4 py-3 bg-gray-100 border-2 border-gray-300 rounded-xl text-ui-muted cursor-not-allowed"
+                  className="ui-input bg-slate-100/80 dark:bg-white/5 text-ui-muted cursor-not-allowed"
                 />
               </div>
             </div>

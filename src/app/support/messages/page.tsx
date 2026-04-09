@@ -159,7 +159,7 @@ export default function SupportMessagesPage() {
           onClick={() => setActiveTab('inbox')}
           className={`flex min-h-11 items-center gap-2 rounded-xl px-6 py-2 text-sm font-bold transition-all duration-300 ${
             activeTab === 'inbox'
-              ? 'bg-white text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-300'
+              ? 'bg-white dark:bg-white/10 text-aura-primary shadow-sm'
               : 'text-ui-soft hover:text-slate-800 dark:hover:text-slate-100'
           }`}
         >
@@ -171,7 +171,7 @@ export default function SupportMessagesPage() {
           onClick={() => setActiveTab('outbox')}
           className={`min-h-11 rounded-xl px-6 py-2 text-sm font-bold transition-all duration-300 ${
             activeTab === 'outbox'
-              ? 'bg-white text-indigo-600 shadow-sm dark:bg-slate-800 dark:text-indigo-300'
+              ? 'bg-white dark:bg-white/10 text-aura-primary shadow-sm'
               : 'text-ui-soft hover:text-slate-800 dark:hover:text-slate-100'
           }`}
         >
@@ -194,19 +194,19 @@ export default function SupportMessagesPage() {
             <IOSCard
               key={message.id}
               onClick={() => handleMarkAsRead(message.id, !!message.read_at)}
-              className={`group cursor-pointer overflow-hidden border-border p-0 transition-all duration-300 hover:border-indigo-400/30 dark:hover:border-indigo-500/30 ${
-                activeTab === 'inbox' && !message.read_at ? 'bg-indigo-500/10 dark:bg-indigo-950/30' : ''
+              className={`group cursor-pointer overflow-hidden border-border p-0 transition-all duration-300 hover:border-aura-primary/30 ${
+                activeTab === 'inbox' && !message.read_at ? 'bg-aura-primary/10 dark:bg-aura-primary/10' : ''
               }`}
             >
               <div className="p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h4 className="font-black text-slate-900 dark:text-slate-50 group-hover:text-[#667eea] transition-colors">
+                      <h4 className="font-black text-slate-900 dark:text-slate-50 group-hover:text-aura-primary transition-colors">
                         {getPartnerName(message)}
                       </h4>
                       {activeTab === 'inbox' && !message.read_at && (
-                        <span className="px-2 py-0.5 bg-[#667eea] text-white text-[9px] font-black uppercase tracking-widest rounded-md">
+                        <span className="px-2 py-0.5 bg-aura-primary text-white text-[9px] font-black uppercase tracking-widest rounded-md">
                           Neu
                         </span>
                       )}
@@ -255,7 +255,7 @@ export default function SupportMessagesPage() {
                   onChange={(e) => setComposeForm((p) => ({ ...p, recipient_id: e.target.value }))}
                   required
                   disabled={profilesLoading}
-                  className="w-full rounded-xl border-2 border-border bg-background px-4 py-2.5 text-sm font-bold text-slate-800 outline-none transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 dark:text-slate-100"
+                  className="w-full rounded-2xl border-2 border-border bg-background px-4 py-2.5 text-sm font-bold text-slate-800 outline-none transition-all focus:border-aura-primary focus:ring-2 focus:ring-(--aura-primary)/25 dark:text-slate-100"
                 >
                   <option value="">{profilesLoading ? 'Loading...' : 'Select recipient'}</option>
                   {profiles.map((p) => (
@@ -273,7 +273,7 @@ export default function SupportMessagesPage() {
                   onChange={(e) => setComposeForm((p) => ({ ...p, content: e.target.value }))}
                   required
                   rows={6}
-                  className="w-full resize-none rounded-xl border-2 border-border bg-background px-4 py-3 text-sm font-medium text-slate-800 outline-none transition-all focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 dark:text-slate-100"
+                  className="w-full resize-none rounded-2xl border-2 border-border bg-background px-4 py-3 text-sm font-medium text-slate-800 outline-none transition-all focus:border-aura-primary focus:ring-2 focus:ring-(--aura-primary)/25 dark:text-slate-100"
                   placeholder="Schreiben Sie Ihre Nachricht hier..."
                 />
               </div>
@@ -296,7 +296,7 @@ export default function SupportMessagesPage() {
                 <IOSButton
                   type="submit"
                   disabled={composing || !composeForm.recipient_id || !composeForm.content.trim()}
-                  className="px-8 py-2.5 font-bold shadow-lg shadow-[#667eea]/20"
+                  className="px-8 py-2.5 font-bold shadow-lg shadow-black/10"
                 >
                   {composing ? (
                     <span className="flex items-center justify-center gap-2">

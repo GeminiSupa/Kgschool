@@ -74,7 +74,7 @@ export const LeaveRequestForm = ({
           value={form.child_id}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-select"
         >
           <option value="">Kind auswählen</option>
           {children.map(child => (
@@ -97,7 +97,7 @@ export const LeaveRequestForm = ({
             onChange={handleChange}
             required
             min={minDate}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+            className="ui-input"
           />
         </div>
 
@@ -112,7 +112,7 @@ export const LeaveRequestForm = ({
             onChange={handleChange}
             required
             min={form.start_date || minDate}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+            className="ui-input"
           />
         </div>
       </div>
@@ -126,7 +126,7 @@ export const LeaveRequestForm = ({
           value={form.leave_type}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-select"
         >
           <option value="">Art auswählen</option>
           <option value="sick">Krankheit</option>
@@ -145,7 +145,7 @@ export const LeaveRequestForm = ({
           onChange={handleChange}
           rows={3}
           required
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="Geben Sie den Grund für die Abwesenheit an..."
         />
       </div>
@@ -159,7 +159,7 @@ export const LeaveRequestForm = ({
           value={form.notes}
           onChange={handleChange}
           rows={2}
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="Weitere Informationen..."
         />
       </div>

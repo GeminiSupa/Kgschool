@@ -50,6 +50,13 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  // If a user is signed in, the marketing landing page should behave like "Home" → dashboard.
+  if (user && path === '/') {
+    const url = request.nextUrl.clone()
+    url.pathname = '/dashboard'
+    return NextResponse.redirect(url)
+  }
+
   // Basic role-based routing (we will enhance this when profile fetching is established later)
   // Allow /register while signed in so admins can create a new Kita/org without logging out.
   if (user && isAuthRoute && !isRegisterRoute) {

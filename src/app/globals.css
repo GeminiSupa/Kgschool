@@ -96,6 +96,24 @@
   }
 }
 
+/* Minimal shared form styles (use on worst offenders first) */
+@layer utilities {
+  .ui-input,
+  .ui-select,
+  .ui-textarea {
+    @apply w-full min-h-11 px-4 py-3 rounded-2xl border border-border bg-background text-foreground outline-none;
+    @apply focus:ring-2 focus:ring-(--aura-primary)/25;
+  }
+
+  .ui-select {
+    @apply font-semibold;
+  }
+
+  .ui-textarea {
+    @apply resize-none;
+  }
+}
+
 /* Dark-mode contrast guardrails for legacy Tailwind text colors.
    This avoids low-contrast UI when pages use text-slate-500/600 without dark variants. */
 @layer utilities {

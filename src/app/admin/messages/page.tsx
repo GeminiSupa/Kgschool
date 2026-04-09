@@ -17,6 +17,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSCard } from '@/components/ui/IOSCard'
+import { IOSButton } from '@/components/ui/IOSButton'
 
 export default function AdminMessagesPage() {
   const { t } = useI18n()
@@ -97,15 +98,15 @@ export default function AdminMessagesPage() {
       </div>
 
       {/* Tabs */}
-      <div className="mb-4 flex gap-4 border-b border-black/10">
+      <div className="mb-4 flex gap-4 border-b border-black/10 dark:border-white/10">
         {(['inbox', 'outbox'] as const).map(tab => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-3 font-semibold text-sm capitalize border-b-2 transition-colors ${
               activeTab === tab
-                ? 'border-[#667eea] text-[#667eea]'
-                : 'border-transparent text-ui-muted hover:text-slate-900 dark:text-slate-50'
+                ? 'border-aura-primary text-aura-primary'
+                : 'border-transparent text-ui-muted hover:text-slate-900 dark:text-slate-200'
             }`}
           >
             {tab === 'inbox' ? 'Eingang' : 'Gesendet'}
@@ -116,12 +117,9 @@ export default function AdminMessagesPage() {
             )}
           </button>
         ))}
-        <button
-          onClick={() => setShowCompose(true)}
-          className="ml-auto mb-1 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white rounded-xl shadow-md hover:opacity-90 transition-all"
-        >
+        <IOSButton onClick={() => setShowCompose(true)} size="small" className="ml-auto mb-1">
           ➕ Verfassen
-        </button>
+        </IOSButton>
       </div>
 
       {loading ? (
@@ -138,10 +136,10 @@ export default function AdminMessagesPage() {
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-black/5">
+            <div className="divide-y divide-black/5 dark:divide-white/10">
               {displayMessages.map(msg => (
                 <Link key={msg.id} href={`/admin/messages/${msg.id}`}
-                  className={`block p-5 hover:bg-white/60 transition-colors ${!msg.read_at && activeTab === 'inbox' ? 'bg-blue-50/40' : ''}`}>
+                  className={`block p-5 hover:bg-slate-50/70 dark:hover:bg-white/5 transition-colors ${!msg.read_at && activeTab === 'inbox' ? 'bg-aura-primary/10 dark:bg-aura-primary/10' : ''}`}>
                   <div className="flex items-center justify-between">
                     <div className="flex-1 min-w-0">
                       <p className={`text-sm font-semibold text-slate-900 dark:text-slate-50 ${!msg.read_at && activeTab === 'inbox' ? 'font-bold' : ''}`}>
@@ -151,7 +149,7 @@ export default function AdminMessagesPage() {
                       <p className="text-xs text-ui-soft mt-1.5">{formatDateTime(msg.created_at)}</p>
                     </div>
                     {!msg.read_at && activeTab === 'inbox' && (
-                      <div className="ml-4 flex-shrink-0 w-2.5 h-2.5 bg-[#667eea] rounded-full" />
+                      <div className="ml-4 shrink-0 w-2.5 h-2.5 bg-aura-primary rounded-full" />
                     )}
                   </div>
                 </Link>
@@ -165,18 +163,18 @@ export default function AdminMessagesPage() {
       {showCompose && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={(e) => { if (e.target === e.currentTarget) setShowCompose(false) }}>
-          <div className="bg-white/95 rounded-2xl shadow-2xl max-w-2xl w-full border border-white/20 overflow-hidden">
+          <IOSCard className="max-w-2xl w-full p-0 overflow-hidden bg-background">
             <div className="p-6">
               <div className="flex justify-between items-center mb-5">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-50">Nachricht verfassen</h3>
-                <button onClick={() => setShowCompose(false)} className="text-ui-soft hover:text-slate-700 dark:text-slate-200">✕</button>
+                <h3 className="text-xl font-bold text-foreground">Nachricht verfassen</h3>
+                <button onClick={() => setShowCompose(false)} className="text-ui-soft hover:text-foreground transition-colors">✕</button>
               </div>
               <form onSubmit={handleSend} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Empfänger *</label>
+                  <label className="block text-sm font-semibold text-ui-muted mb-1">Empfänger *</label>
                   <select required value={composeForm.recipient_id}
                     onChange={e => setComposeForm({ ...composeForm, recipient_id: e.target.value })}
-                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#667eea] outline-none text-slate-900 dark:text-slate-50">
+                    className="w-full min-h-11 px-4 py-3 bg-background border border-border rounded-2xl focus:ring-2 focus:ring-(--aura-primary)/25 outline-none text-foreground font-semibold">
                     <option value="">Empfänger auswählen</option>
                     {profiles.map(p => (
                       <option key={p.id} value={p.id}>{p.full_name} ({p.role})</option>
@@ -184,28 +182,26 @@ export default function AdminMessagesPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">Nachricht *</label>
+                  <label className="block text-sm font-semibold text-ui-muted mb-1">Nachricht *</label>
                   <textarea required rows={6} value={composeForm.content}
                     onChange={e => setComposeForm({ ...composeForm, content: e.target.value })}
                     placeholder="Ihre Nachricht..."
-                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#667eea] outline-none resize-none text-slate-900 dark:text-slate-50" />
+                    className="w-full px-4 py-3 bg-background border border-border rounded-2xl focus:ring-2 focus:ring-(--aura-primary)/25 outline-none resize-none text-foreground font-medium" />
                 </div>
                 {composeError && (
                   <div className="p-3 bg-red-50 border border-red-100 text-red-700 rounded-xl text-sm">{composeError}</div>
                 )}
                 <div className="flex justify-end gap-3 pt-2">
-                  <button type="button" onClick={() => setShowCompose(false)}
-                    className="px-5 py-2.5 text-slate-700 dark:text-slate-200 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors">
+                  <IOSButton type="button" variant="secondary" onClick={() => setShowCompose(false)}>
                     Abbrechen
-                  </button>
-                  <button type="submit" disabled={composeLoading}
-                    className="px-5 py-2.5 bg-gradient-to-r from-[#667eea] to-[#764ba2] text-white rounded-xl font-medium shadow-md hover:opacity-90 disabled:opacity-50 transition-all">
+                  </IOSButton>
+                  <IOSButton type="submit" disabled={composeLoading}>
                     {composeLoading ? 'Wird gesendet...' : 'Senden'}
-                  </button>
+                  </IOSButton>
                 </div>
               </form>
             </div>
-          </div>
+          </IOSCard>
         </div>
       )}
     </div>

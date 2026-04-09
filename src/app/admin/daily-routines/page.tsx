@@ -35,14 +35,14 @@ export default function AdminDailyRoutinesPage() {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
         <div>
-          <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-2">
+          <h1 className="text-4xl font-black text-foreground tracking-tight mb-2">
             {t(pT(ROUTE))}
           </h1>
-          <p className="text-lg text-slate-500 font-medium max-w-2xl">{t(sT('dailyRoutinesListSubtitle'))}</p>
+          <p className="text-lg text-ui-muted font-medium max-w-2xl">{t(sT('dailyRoutinesListSubtitle'))}</p>
         </div>
         <div className="flex gap-3">
-          <Link href="/admin/daily-routines/new" className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all">
-            {t(sT('createRoutine'))}
+          <Link href="/admin/daily-routines/new">
+            <IOSButton>{t(sT('createRoutine'))}</IOSButton>
           </Link>
         </div>
       </div>
@@ -52,7 +52,7 @@ export default function AdminDailyRoutinesPage() {
             <select 
                 value={selectedGroup} 
                 onChange={(e) => setSelectedGroup(e.target.value)}
-                className="w-full pl-6 pr-12 py-3 bg-white border border-slate-100 rounded-2xl text-[11px] font-black text-slate-900 uppercase tracking-widest shadow-sm focus:ring-2 focus:ring-indigo-100 outline-none transition-all appearance-none cursor-pointer"
+                className="ui-select pl-6 pr-12 py-3 text-[11px] font-black uppercase tracking-widest appearance-none cursor-pointer"
             >
                 <option value="">{t(sT('allGroups'))}</option>
                 {groups.map(g => (
@@ -67,28 +67,28 @@ export default function AdminDailyRoutinesPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {dailyRoutines.map(routine => (
-                <IOSCard key={routine.id} className="p-0 overflow-hidden group hover:border-indigo-100 transition-all duration-500">
+                <IOSCard key={routine.id} className="p-0 overflow-hidden group hover:border-aura-primary/20 transition-all duration-500">
                     <div className="p-8 flex items-center gap-8">
-                        <div className="shrink-0 w-24 flex flex-col items-center justify-center p-4 bg-indigo-50 rounded-2xl border border-indigo-100 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500 shadow-sm">
+                        <div className="shrink-0 w-24 flex flex-col items-center justify-center p-4 bg-aura-primary/10 rounded-2xl border border-aura-primary/15 group-hover:bg-aura-primary group-hover:text-white transition-all duration-500 shadow-sm">
                             <span className="text-xs font-black uppercase tracking-tight opacity-60 mb-1">Start</span>
                             <span className="text-xl font-black">{routine.start_time}</span>
                         </div>
                         
                         <div className="flex-1 min-w-0">
-                            <h3 className="text-xl font-black text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors tracking-tight truncate">{routine.routine_name}</h3>
+                            <h3 className="text-xl font-black text-foreground mb-1 group-hover:text-aura-primary transition-colors tracking-tight truncate">{routine.routine_name}</h3>
                             <div className="flex flex-wrap items-center gap-4">
                                 <span className="flex items-center gap-2 text-[10px] font-black text-ui-soft uppercase tracking-widest">
                                     <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
                                     {routine.location || 'Classroom'}
                                 </span>
-                                <span className="px-3 py-1 bg-slate-100 text-slate-500 text-[9px] font-black uppercase tracking-widest rounded-full">
+                                <span className="px-3 py-1 bg-slate-100/80 dark:bg-white/5 text-ui-soft text-[9px] font-black uppercase tracking-widest rounded-full">
                                     {routine.day_of_week === null ? 'Every Day' : `Day ${routine.day_of_week}`}
                                 </span>
                             </div>
                         </div>
 
                         <div className="shrink-0">
-                             <Link href={`/admin/daily-routines/edit/${routine.id}`} className="w-12 h-12 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-center text-sm shadow-sm group-hover:bg-slate-900 group-hover:text-white transition-all">
+                             <Link href={`/admin/daily-routines/edit/${routine.id}`} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 text-sm shadow-sm group-hover:bg-slate-900 group-hover:text-white transition-all">
                                 ✏️
                              </Link>
                         </div>

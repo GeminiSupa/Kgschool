@@ -189,17 +189,17 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
                   <Link
                     key={item.path}
                     href={item.path}
-                    className={`group relative flex min-h-11 items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40 ${
+                    className={`group relative flex min-h-11 items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 ${
                       active
-                        ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm dark:bg-indigo-950/60 dark:text-indigo-200'
+                        ? 'bg-aura-primary/10 text-aura-primary font-bold shadow-sm dark:bg-aura-primary/10'
                         : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white'
                     } ${isCollapsed ? 'justify-center px-0' : ''}`}
                     title={isCollapsed ? t(item.labelKey) : undefined}
                   >
                     {active && (
-                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-600 rounded-r-full" />
+                      <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-aura-primary rounded-r-full" />
                     )}
-                    <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-ui-soft group-hover:text-indigo-500 dark:group-hover:text-indigo-300 transition-colors'}`}>
+                    <span className={`${active ? 'text-aura-primary' : 'text-ui-soft group-hover:text-aura-primary transition-colors'}`}>
                       {item.icon}
                     </span>
                     {!isCollapsed && (
@@ -227,17 +227,17 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
                       <Link
                         key={item.path}
                         href={item.path}
-                        className={`group relative flex min-h-11 items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40 ${
+                        className={`group relative flex min-h-11 items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 ${
                           active
-                            ? 'bg-indigo-50 text-indigo-700 font-bold shadow-sm dark:bg-indigo-950/60 dark:text-indigo-200'
+                            ? 'bg-aura-primary/10 text-aura-primary font-bold shadow-sm dark:bg-aura-primary/10'
                             : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white'
                         } ${isCollapsed ? 'justify-center px-0' : ''}`}
                         title={isCollapsed ? t(item.labelKey) : undefined}
                       >
                         {active && (
-                          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-indigo-600 rounded-r-full" />
+                          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-aura-primary rounded-r-full" />
                         )}
-                        <span className={`${active ? 'text-indigo-600 dark:text-indigo-300' : 'text-ui-soft group-hover:text-indigo-500 dark:group-hover:text-indigo-300 transition-colors'}`}>
+                        <span className={`${active ? 'text-aura-primary' : 'text-ui-soft group-hover:text-aura-primary transition-colors'}`}>
                           {item.icon}
                         </span>
                         {!isCollapsed && (

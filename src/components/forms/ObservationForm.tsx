@@ -71,7 +71,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
           onChange={handleChange}
           required
           disabled={childrenLoading}
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all disabled:opacity-50"
+          className="ui-select disabled:opacity-50"
         >
           <option value="">{childrenLoading ? 'Lade Kinder...' : 'Kind auswählen'}</option>
           {(children || []).map((child: Child) => (
@@ -97,7 +97,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
           value={form.observation_date.split('T')[0]}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
         />
       </div>
 
@@ -110,7 +110,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
           type="text"
           value={form.context}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
           placeholder="z.B. Freispiel, Morgenkreis"
         />
       </div>
@@ -123,7 +123,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
           id="development_area"
           value={form.development_area}
           onChange={handleChange}
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-select"
         >
           <option value="">Bereich auswählen</option>
           <option value="Social">Sozial</option>
@@ -145,7 +145,7 @@ export const ObservationForm = ({ initialData, onSubmit, onCancel, loading: subm
           onChange={handleChange}
           rows={5}
           required
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="Beschreiben Sie Ihre Beobachtung..."
         />
       </div>

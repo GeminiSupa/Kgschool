@@ -256,7 +256,7 @@ export default function EditUserPage() {
       <div className="mb-8">
         <Link
           href="/admin/users"
-          className="text-sm font-semibold text-[#667eea] mb-2 inline-flex items-center gap-1 hover:translate-x-[-4px] transition-transform"
+          className="text-sm font-semibold text-aura-primary mb-2 inline-flex items-center gap-1 hover:translate-x-[-4px] transition-transform"
         >
           ← Zurück zu Benutzern
         </Link>
@@ -281,11 +281,11 @@ export default function EditUserPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Vollständiger Name</label>
-                                <input type="text" value={form.full_name} onChange={(e) => setForm(prev => ({ ...prev, full_name: e.target.value }))} required className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="text" value={form.full_name} onChange={(e) => setForm(prev => ({ ...prev, full_name: e.target.value }))} required className="ui-input font-bold bg-gray-50 dark:bg-white/5 border-black/5 dark:border-white/10" />
                             </div>
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Rolle</label>
-                                <select value={form.role} onChange={(e) => setForm(prev => ({ ...prev, role: e.target.value }))} required className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
+                                <select value={form.role} onChange={(e) => setForm(prev => ({ ...prev, role: e.target.value }))} required className="ui-select bg-gray-50 dark:bg-white/5 border-black/5 dark:border-white/10">
                                     <option value="parent">Elternteil</option>
                                     <option value="teacher">Pädagogische Fachkraft</option>
                                     <option value="admin">Administrator</option>
@@ -308,20 +308,20 @@ export default function EditUserPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="md:col-span-2">
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Adresse</label>
-                                <input type="text" value={form.address} onChange={(e) => setForm(prev => ({ ...prev, address: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="text" value={form.address} onChange={(e) => setForm(prev => ({ ...prev, address: e.target.value }))} className="ui-input font-bold bg-gray-50 dark:bg-white/5 border-black/5 dark:border-white/10" />
                             </div>
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Geburtsdatum</label>
-                                <input type="date" value={form.date_of_birth} onChange={(e) => setForm(prev => ({ ...prev, date_of_birth: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="date" value={form.date_of_birth} onChange={(e) => setForm(prev => ({ ...prev, date_of_birth: e.target.value }))} className="ui-input font-bold bg-gray-50 dark:bg-white/5 border-black/5 dark:border-white/10" />
                             </div>
                             <div></div>
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Notfallkontakt Name</label>
-                                <input type="text" value={form.emergency_contact_name} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_name: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="text" value={form.emergency_contact_name} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_name: e.target.value }))} className="ui-input font-bold bg-gray-50 dark:bg-white/5 border-black/5 dark:border-white/10" />
                             </div>
                             <div>
                                 <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-1.5 ml-1">Notfallkontakt Telefon</label>
-                                <input type="text" value={form.emergency_contact_phone} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_phone: e.target.value }))} className="w-full px-5 py-3 bg-gray-50 border border-black/5 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                <input type="text" value={form.emergency_contact_phone} onChange={(e) => setForm(prev => ({ ...prev, emergency_contact_phone: e.target.value }))} className="ui-input font-bold bg-gray-50 dark:bg-white/5 border-black/5 dark:border-white/10" />
                             </div>
                         </div>
                     </div>
@@ -335,11 +335,11 @@ export default function EditUserPage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-indigo-50/30 p-6 rounded-2xl border border-indigo-100">
                                     <div>
                                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Vertragsbeginn</label>
-                                        <input type="date" value={employment.start_date} onChange={(e) => setEmployment(prev => ({ ...prev, start_date: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                        <input type="date" value={employment.start_date} onChange={(e) => setEmployment(prev => ({ ...prev, start_date: e.target.value }))} className="ui-input font-bold bg-white dark:bg-white/5 border-indigo-100 dark:border-white/10" />
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Vertragsart</label>
-                                        <select value={employment.contract_type} onChange={(e) => setEmployment(prev => ({ ...prev, contract_type: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all">
+                                        <select value={employment.contract_type} onChange={(e) => setEmployment(prev => ({ ...prev, contract_type: e.target.value }))} className="ui-select bg-white dark:bg-white/5 border-indigo-100 dark:border-white/10">
                                             <option value="">Bitte wählen...</option>
                                             <option value="Vollzeit">Vollzeit</option>
                                             <option value="Teilzeit">Teilzeit</option>
@@ -348,19 +348,19 @@ export default function EditUserPage() {
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Wochenstunden</label>
-                                        <input type="number" value={employment.weekly_hours} onChange={(e) => setEmployment(prev => ({ ...prev, weekly_hours: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                        <input type="number" value={employment.weekly_hours} onChange={(e) => setEmployment(prev => ({ ...prev, weekly_hours: e.target.value }))} className="ui-input font-bold bg-white dark:bg-white/5 border-indigo-100 dark:border-white/10" />
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black text-indigo-900/40 uppercase tracking-widest mb-1.5 ml-1">Qualifikationen</label>
-                                        <input type="text" value={employment.qualifications} onChange={(e) => setEmployment(prev => ({ ...prev, qualifications: e.target.value }))} className="w-full px-5 py-3 bg-white border border-indigo-100 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all" />
+                                        <input type="text" value={employment.qualifications} onChange={(e) => setEmployment(prev => ({ ...prev, qualifications: e.target.value }))} className="ui-input font-bold bg-white dark:bg-white/5 border-indigo-100 dark:border-white/10" />
                                     </div>
                                 </div>
                             </div>
                         </>
                     )}
 
-                    <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl border border-black/5 mt-8">
-                        <input type="checkbox" id="active" checked={form.active} onChange={(e) => setForm(prev => ({ ...prev, active: e.target.checked }))} className="w-5 h-5 rounded border-gray-300 text-[#667eea] focus:ring-[#667eea]" />
+                    <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-white/5 rounded-2xl border border-black/5 dark:border-white/10 mt-8">
+                        <input type="checkbox" id="active" checked={form.active} onChange={(e) => setForm(prev => ({ ...prev, active: e.target.checked }))} className="w-5 h-5 rounded border-gray-300 text-aura-primary focus:ring-(--aura-primary)/25" />
                         <label htmlFor="active" className="text-sm font-bold text-slate-700 dark:text-slate-200">Account ist aktiv</label>
                     </div>
 

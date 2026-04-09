@@ -135,7 +135,7 @@ export default function AdminDailyRoutinesNewPage() {
               value={form.group_id}
               onChange={(e) => setForm((p) => ({ ...p, group_id: e.target.value }))}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-select"
             >
               <option value="">Select a group</option>
               {groups.map((g) => (
@@ -156,7 +156,7 @@ export default function AdminDailyRoutinesNewPage() {
               onChange={(e) => setForm((p) => ({ ...p, routine_name: e.target.value }))}
               type="text"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-input"
               placeholder="e.g., Morning Circle, Nap Time"
             />
           </div>
@@ -172,7 +172,7 @@ export default function AdminDailyRoutinesNewPage() {
                 onChange={(e) => setForm((p) => ({ ...p, start_time: e.target.value }))}
                 type="time"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-input"
               />
             </div>
             <div>
@@ -184,7 +184,7 @@ export default function AdminDailyRoutinesNewPage() {
                 value={form.end_time}
                 onChange={(e) => setForm((p) => ({ ...p, end_time: e.target.value }))}
                 type="time"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-input"
               />
             </div>
           </div>
@@ -200,7 +200,7 @@ export default function AdminDailyRoutinesNewPage() {
                 const val = e.target.value
                 setForm((p) => ({ ...p, day_of_week: val === '' ? null : Number(val) }))
               }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-select"
             >
               <option value="">Every Day</option>
               <option value="0">Sunday</option>
@@ -222,7 +222,7 @@ export default function AdminDailyRoutinesNewPage() {
               value={form.location}
               onChange={(e) => setForm((p) => ({ ...p, location: e.target.value }))}
               type="text"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-input"
               placeholder="e.g., Indoor, Outdoor, Gym"
             />
           </div>
@@ -236,19 +236,15 @@ export default function AdminDailyRoutinesNewPage() {
               value={form.description}
               onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-textarea"
               placeholder="Describe the routine..."
             />
           </div>
 
           <div className="flex gap-3 justify-end pt-2">
-            <button
-              type="button"
-              onClick={() => router.push('/admin/daily-routines')}
-              className="px-4 py-2 text-slate-700 dark:text-slate-200 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
-            >
+            <IOSButton type="button" variant="secondary" onClick={() => router.push('/admin/daily-routines')}>
               Cancel
-            </button>
+            </IOSButton>
             <IOSButton
               type="submit"
               className="px-4 py-2"

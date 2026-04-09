@@ -112,7 +112,7 @@ export const DailyReportForm = ({
             onChange={handleChange}
             required
             disabled={groupsLoading}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all disabled:opacity-50"
+            className="ui-select disabled:opacity-50"
           >
             <option value="">{groupsLoading ? 'Lade Gruppen...' : 'Gruppe auswählen'}</option>
             {groups.map((group: any) => (
@@ -139,7 +139,7 @@ export const DailyReportForm = ({
             value={form.report_date.split('T')[0]}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+            className="ui-input"
           />
         </div>
       </div>
@@ -154,7 +154,7 @@ export const DailyReportForm = ({
           value={form.title}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
           placeholder="z.B. Ein wunderbarer Tag in Gruppe A"
         />
       </div>
@@ -168,7 +168,7 @@ export const DailyReportForm = ({
             type="button"
             onClick={handleGenerateAI}
             disabled={isGenerating}
-            className="text-sm font-semibold text-[#667eea] hover:text-[#5a6edb] flex items-center gap-1.5 disabled:opacity-50 transition-colors bg-[#667eea]/10 px-3 py-1.5 rounded-lg"
+            className="text-sm font-semibold text-aura-primary hover:opacity-90 flex items-center gap-1.5 disabled:opacity-50 transition-colors bg-aura-primary/10 px-3 py-1.5 rounded-xl"
           >
             {isGenerating ? <LoadingSpinner size="sm" /> : '✨ Magic Wand'}
           </button>
@@ -179,7 +179,7 @@ export const DailyReportForm = ({
           onChange={handleChange}
           rows={6}
           required
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="Stichpunkte oder Text hier eingeben... (dann 'Magic Wand' drücken)"
         />
       </div>
@@ -193,7 +193,7 @@ export const DailyReportForm = ({
           value={activitiesText}
           onChange={handleActivitiesChange}
           rows={4}
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="Morgenkreis&#10;Freispiel&#10;Draußenzeit"
         />
       </div>
@@ -208,7 +208,7 @@ export const DailyReportForm = ({
             type="text"
             value={form.weather}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+            className="ui-input"
             placeholder="z.B. Sonnig, 20°C"
           />
         </div>
@@ -222,7 +222,7 @@ export const DailyReportForm = ({
             type="text"
             value={form.special_events}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+            className="ui-input"
             placeholder="z.B. Geburtstagsfeier"
           />
         </div>

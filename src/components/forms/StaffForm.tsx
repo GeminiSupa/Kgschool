@@ -108,12 +108,12 @@ export function StaffForm({ staff, onSubmit, onCancel, loading }: StaffFormProps
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-[14px] font-semibold text-[#1d1d1f] mb-2 tracking-[0.3px]">Rolle *</label>
+          <label className="block text-[14px] font-semibold text-foreground mb-2 tracking-[0.3px]">Rolle *</label>
           <select
             value={form.role}
             onChange={(e) => setForm({ ...form, role: e.target.value })}
             required
-            className="w-full px-4 py-3 bg-white/90 backdrop-blur-[10px] border border-black/10 rounded-[12px] text-[#1d1d1f] text-base transition-all outline-none focus:border-[#667eea]/50 focus:shadow-[0_0_0_4px_rgba(102,126,234,0.2)]"
+            className="ui-select"
           >
             <option value="">Rolle wählen</option>
             <option value="teacher">Erzieher</option>
