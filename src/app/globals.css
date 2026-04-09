@@ -6,12 +6,17 @@
   --muted: #64748b;
   --border: #e2e8f0;
   
-  /* Aura Palette - Refined for "Garden of Care" */
-  --aura-indigo: #4338ca;
+  /* Aura Palette - Refined for "Garden of Care" (warmer, daycare-friendly) */
+  --aura-indigo: #4338ca; /* kept for existing pages; no longer the primary CTA */
+  --aura-mint: #0d9488; /* teal-600 */
+  --aura-sun: #f59e0b; /* amber-500 */
   --aura-coral: #ef4444;
-  --aura-mint: #059669;
   --aura-lavender: #f1f5f9;
   --aura-rose: #db2777;
+
+  /* Semantic accents */
+  --aura-primary: var(--aura-mint);
+  --aura-accent: var(--aura-sun);
   
   /* Glassmorphism - Higher contrast for Light Mode */
   --glass-bg: rgba(255, 255, 255, 0.85);
@@ -33,7 +38,10 @@
 
   --aura-indigo: #818cf8;
   --aura-coral: #fb7185;
-  --aura-mint: #34d399;
+  --aura-mint: #2dd4bf; /* teal-400 */
+  --aura-sun: #fbbf24; /* amber-400 */
+  --aura-primary: var(--aura-mint);
+  --aura-accent: var(--aura-sun);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,7 +57,10 @@
 
     --aura-indigo: #818cf8;
     --aura-coral: #fb7185;
-    --aura-mint: #34d399;
+    --aura-mint: #2dd4bf;
+    --aura-sun: #fbbf24;
+    --aura-primary: var(--aura-mint);
+    --aura-accent: var(--aura-sun);
   }
 }
 
@@ -62,8 +73,12 @@
   --color-aura-indigo: var(--aura-indigo);
   --color-aura-coral: var(--aura-coral);
   --color-aura-mint: var(--aura-mint);
+  --color-aura-sun: var(--aura-sun);
   --color-aura-lavender: var(--aura-lavender);
   --color-aura-rose: var(--aura-rose);
+
+  --color-aura-primary: var(--aura-primary);
+  --color-aura-accent: var(--aura-accent);
   
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-display: var(--font-plus-jakarta), var(--font-inter), system-ui, sans-serif;
@@ -136,8 +151,8 @@
     background-color: var(--background);
     background-image:
       radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.08) 0, transparent 50%),
-      radial-gradient(at 50% 0%, rgba(239, 68, 68, 0.06) 0, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.06) 0, transparent 50%);
+      radial-gradient(at 50% 0%, rgba(245, 158, 11, 0.07) 0, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.06) 0, transparent 50%);
     background-attachment: fixed;
   }
 
@@ -145,8 +160,8 @@
     background-color: var(--background);
     background-image:
       radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.12) 0, transparent 50%),
-      radial-gradient(at 50% 0%, rgba(251, 113, 133, 0.08) 0, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(52, 211, 153, 0.08) 0, transparent 50%);
+      radial-gradient(at 50% 0%, rgba(251, 191, 36, 0.08) 0, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(45, 212, 191, 0.08) 0, transparent 50%);
   }
 
   .glass {

@@ -31,6 +31,7 @@ export default function ParentMessagesPage() {
   const [composeForm, setComposeForm] = useState({ recipient_id: '', content: '' })
   const [composing, setComposing] = useState(false)
   const [composeError, setComposeError] = useState('')
+  const [activeTemplate, setActiveTemplate] = useState<string | null>(null)
   
   const supabase = createClient()
 
@@ -106,6 +107,20 @@ export default function ParentMessagesPage() {
     }
   }
 
+  const templates = [
+    { id: 'pickup', label: 'Abholung', text: 'Hallo, wir kommen heute ca. 10 Minuten später zur Abholung.' },
+    { id: 'sick', label: 'Krank', text: 'Hallo, mein Kind ist heute krank und bleibt zuhause.' },
+    { id: 'question', label: 'Frage', text: 'Hallo, ich habe eine kurze Frage: ' },
+    { id: 'thanks', label: 'Danke', text: 'Vielen Dank für die Info!' },
+  ]
+
+  const applyTemplate = (text: string) => {
+    setComposeForm((p) => ({
+      ...p,
+      content: p.content ? `${p.content.trimEnd()}\n\n${text}` : text,
+    }))
+  }
+
   const handleMarkAsRead = async (messageId: string, isRead: boolean) => {
     if (activeTab === 'inbox' && !isRead) {
       try {
@@ -145,11 +160,11 @@ export default function ParentMessagesPage() {
         </IOSButton>
       </div>
 
-      <div className="flex gap-2 mb-6 p-1.5 bg-[#f2f2f7] rounded-2xl w-fit">
+      <div className="flex gap-2 mb-6 p-1.5 bg-slate-100/80 dark:bg-white/5 rounded-2xl w-fit">
         <button
           onClick={() => setActiveTab('inbox')}
           className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 flex items-center gap-2 ${
-            activeTab === 'inbox' ? 'bg-white text-[#667eea] shadow-sm' : 'text-ui-soft hover:text-slate-700 dark:text-slate-200'
+            activeTab === 'inbox' ? 'bg-white dark:bg-white/10 text-aura-primary shadow-sm' : 'text-ui-soft hover:text-slate-700 dark:text-slate-200'
           }`}
         >
           Posteingang
@@ -158,7 +173,7 @@ export default function ParentMessagesPage() {
         <button
           onClick={() => setActiveTab('outbox')}
           className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
-            activeTab === 'outbox' ? 'bg-white text-[#667eea] shadow-sm' : 'text-ui-soft hover:text-slate-700 dark:text-slate-200'
+            activeTab === 'outbox' ? 'bg-white dark:bg-white/10 text-aura-primary shadow-sm' : 'text-ui-soft hover:text-slate-700 dark:text-slate-200'
           }`}
         >
           Gesendet
@@ -178,7 +193,7 @@ export default function ParentMessagesPage() {
             <IOSCard
               key={message.id}
               onClick={() => handleMarkAsRead(message.id, !!message.read_at)}
-              className={`p-0 overflow-hidden cursor-pointer group transition-all duration-300 border-black/5 hover:border-[#667eea]/30 ${
+              className={`p-0 overflow-hidden cursor-pointer group transition-all duration-300 border-black/5 hover:border-aura-primary/30 ${
                 activeTab === 'inbox' && !message.read_at ? 'bg-blue-50/30' : ''
               }`}
             >
@@ -186,17 +201,17 @@ export default function ParentMessagesPage() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                        <h4 className="font-black text-slate-900 dark:text-slate-50 group-hover:text-[#667eea] transition-colors">
+                        <h4 className="font-black text-slate-900 dark:text-slate-50 group-hover:text-aura-primary transition-colors">
                             {activeTab === 'inbox' ? getPartnerName(message.sender_id) : getPartnerName(message.recipient_id)}
                         </h4>
                         {activeTab === 'inbox' && !message.read_at && (
-                            <span className="px-2 py-0.5 bg-[#667eea] text-white text-[9px] font-black uppercase tracking-widest rounded-md">Neu</span>
+                            <span className="px-2 py-0.5 bg-aura-primary text-white text-[9px] font-black uppercase tracking-widest rounded-md">Neu</span>
                         )}
                     </div>
                     <p className="text-sm font-medium text-ui-muted line-clamp-2 leading-relaxed">{message.content}</p>
                     <p className="text-[10px] font-black text-black/30 uppercase tracking-widest mt-4">{formatDate(message.created_at)}</p>
                   </div>
-                  <div className="text-gray-200 group-hover:text-[#667eea] transition-colors pt-1">
+                  <div className="text-gray-200 group-hover:text-aura-primary transition-colors pt-1">
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                     </svg>
@@ -228,7 +243,7 @@ export default function ParentMessagesPage() {
                         value={composeForm.recipient_id}
                         onChange={(e) => setComposeForm(prev => ({ ...prev, recipient_id: e.target.value }))}
                         required
-                        className="w-full px-4 py-2.5 bg-gray-50 border border-black/5 rounded-xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+                        className="w-full min-h-11 px-4 py-2.5 bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl text-sm font-bold text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-(--aura-primary)/25 transition-all"
                     >
                         <option value="">Empfänger auswählen</option>
                         {recipients.map(p => (
@@ -239,12 +254,31 @@ export default function ParentMessagesPage() {
                 
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-2">Inhalt *</label>
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {templates.map((tpl) => (
+                        <button
+                          key={tpl.id}
+                          type="button"
+                          onClick={() => {
+                            setActiveTemplate(tpl.id)
+                            applyTemplate(tpl.text)
+                          }}
+                          className={`min-h-11 rounded-2xl px-4 py-2 text-[11px] font-black uppercase tracking-widest transition-colors border ${
+                            activeTemplate === tpl.id
+                              ? 'bg-aura-primary text-white border-aura-primary'
+                              : 'bg-slate-100/80 dark:bg-white/5 text-ui-soft border-border hover:text-foreground'
+                          }`}
+                        >
+                          {tpl.label}
+                        </button>
+                      ))}
+                    </div>
                     <textarea
                         value={composeForm.content}
                         onChange={(e) => setComposeForm(prev => ({ ...prev, content: e.target.value }))}
                         required
                         rows={6}
-                        className="w-full px-4 py-3 bg-gray-50 border border-black/5 rounded-xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+                        className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-(--aura-primary)/25 transition-all resize-none"
                         placeholder="Schreiben Sie Ihre Nachricht hier..."
                     />
                 </div>
@@ -260,7 +294,7 @@ export default function ParentMessagesPage() {
                     <IOSButton
                         type="submit"
                         disabled={composing || !composeForm.recipient_id || !composeForm.content.trim()}
-                        className="px-8 py-2.5 font-bold shadow-lg shadow-[#667eea]/20"
+                        className="px-8 py-2.5 font-bold shadow-lg shadow-black/10"
                     >
                         {composing ? <LoadingSpinner size="sm" /> : 'Senden'}
                     </IOSButton>

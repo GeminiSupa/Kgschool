@@ -19,10 +19,11 @@ export function IOSButton({
   ...props
 }: IOSButtonProps) {
   const variants = {
-    primary: 'bg-indigo-600 text-white shadow-lg shadow-indigo-200/50 hover:bg-indigo-700 hover:shadow-indigo-300/50 dark:shadow-none focus:ring-indigo-500',
+    primary:
+      'bg-[color:var(--aura-primary)] text-white shadow-lg shadow-black/10 hover:brightness-110 active:brightness-95 focus-visible:ring-[color:var(--aura-primary)]',
     secondary: 'bg-background border-2 border-border text-foreground hover:bg-slate-50 dark:hover:bg-white/5 focus:ring-slate-400 font-bold',
     ghost: 'bg-transparent text-muted hover:bg-slate-100 dark:hover:bg-white/5 hover:text-foreground',
-    danger: 'bg-red-500 text-white shadow-lg shadow-red-200/50 hover:bg-red-600 focus:ring-red-500',
+    danger: 'bg-red-600 text-white shadow-lg shadow-black/10 hover:bg-red-500 focus-visible:ring-red-500',
   }
   /* Min heights meet ~44–48px touch targets (mobile-first) */
   const sizes = {

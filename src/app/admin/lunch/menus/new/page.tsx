@@ -16,6 +16,7 @@ import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { useKita } from '@/hooks/useKita'
 import { ImageUpload } from '@/components/common/ImageUpload'
+import { toUserErrorMessage } from '@/utils/errors/toUserErrorMessage'
 
 export default function AdminLunchMenusNewPage() {
   const { t } = useI18n()
@@ -71,10 +72,7 @@ export default function AdminLunchMenusNewPage() {
       router.push('/admin/lunch/menus')
     } catch (err: any) {
       console.error('Error creating menu:', err)
-      setError(
-        err.message ||
-          (err.code ? fillTemplate(t(sT('errDatabase')), { code: err.code }) : t(sT('errCreateMenu')))
-      )
+      setError(toUserErrorMessage(err, t(sT('errCreateMenu'))))
     } finally {
       setLoading(false)
     }

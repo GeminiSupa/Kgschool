@@ -160,7 +160,7 @@ export default function AdminSetupPage() {
                 <p className="text-[10px] font-black text-black/30 uppercase tracking-widest">Website & Platzanfrage</p>
                 <p className="mt-2 text-sm text-ui-muted">Richten Sie Ihre öffentliche Seite ein und verbinden Sie sie mit dem Bewerbungsprozess.</p>
               </div>
-              <Link href="/admin/site" className="rounded-2xl bg-[#667eea] px-5 py-3 text-xs font-black text-white uppercase tracking-widest shadow-lg shadow-indigo-500/20 hover:scale-[1.02] transition-transform">
+              <Link href="/admin/site" className="rounded-2xl bg-aura-primary px-5 py-3 text-xs font-black text-white uppercase tracking-widest shadow-lg shadow-black/10 hover:brightness-110 hover:scale-[1.02] transition-transform">
                 Website bearbeiten
               </Link>
             </div>

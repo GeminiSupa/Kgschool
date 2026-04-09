@@ -14,6 +14,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { IOSButton } from '@/components/ui/IOSButton'
+import { IOSCard } from '@/components/ui/IOSCard'
 
 export default function TeacherObservationsPage() {
   const { t } = useI18n()
@@ -56,7 +57,7 @@ export default function TeacherObservationsPage() {
           <p className="text-sm text-ui-muted mt-1">Dokumentieren Sie die Entwicklung der Kinder</p>
         </div>
         <Link href="/teacher/observations/new" className="inline-flex items-center gap-2">
-          <IOSButton className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors shadow-sm">
+          <IOSButton>
             ➕ Neue Beobachtung
           </IOSButton>
         </Link>
@@ -69,7 +70,7 @@ export default function TeacherObservationsPage() {
             setSelectedChildId(e.target.value)
             void handleFiltersChange()
           }}
-          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="min-h-11 px-4 py-2.5 border border-border rounded-2xl bg-background text-foreground text-sm font-semibold focus:ring-2 focus:ring-(--aura-primary)/25 outline-none"
         >
           <option value="">Alle Kinder</option>
           {myChildren.map((child) => (
@@ -85,7 +86,7 @@ export default function TeacherObservationsPage() {
             setSelectedDate(e.target.value)
             void handleFiltersChange()
           }}
-          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="min-h-11 px-4 py-2.5 border border-border rounded-2xl bg-background text-foreground text-sm font-semibold focus:ring-2 focus:ring-(--aura-primary)/25 outline-none"
         />
       </div>
 
@@ -98,19 +99,30 @@ export default function TeacherObservationsPage() {
           <ErrorAlert message={error.message || 'Fehler beim Laden der Beobachtungen'} />
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <IOSCard className="p-0 overflow-hidden">
           {observations.length === 0 ? (
-            <div className="p-8 text-center text-ui-soft">Keine Beobachtungen gefunden.</div>
+            <div className="p-12 text-center">
+              <div className="text-6xl opacity-20 mb-5">🔎</div>
+              <p className="text-foreground font-black text-lg">Noch keine Beobachtungen</p>
+              <p className="text-ui-soft mt-2 font-medium max-w-md mx-auto">
+                Starten Sie mit der ersten Beobachtung, um Entwicklungsschritte und kleine Erfolge festzuhalten.
+              </p>
+              <div className="mt-6 flex justify-center">
+                <Link href="/teacher/observations/new">
+                  <IOSButton>➕ Erste Beobachtung hinzufügen</IOSButton>
+                </Link>
+              </div>
+            </div>
           ) : (
-            <div className="divide-y divide-gray-200">
+            <div className="divide-y divide-border">
               {observations.map((observation) => (
-                <div key={observation.id} className="p-6 hover:bg-gray-50 transition-colors">
+                <div key={observation.id} className="p-6 hover:bg-slate-50/60 dark:hover:bg-white/5 transition-colors">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="text-lg font-medium text-slate-900 dark:text-slate-50">{getChildName(observation.child_id)}</h3>
                         {observation.development_area && (
-                          <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
+                          <span className="px-2 py-1 bg-aura-accent/15 text-amber-700 dark:text-amber-300 text-xs rounded-xl font-bold">
                             {observation.development_area}
                           </span>
                         )}
@@ -127,14 +139,14 @@ export default function TeacherObservationsPage() {
                     <div className="flex items-center gap-2">
                       <Link
                         href={`/teacher/observations/${observation.id}`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors"
+                        className="inline-flex min-h-11 items-center gap-1 px-4 py-2 rounded-2xl bg-aura-primary/10 text-aura-primary font-black text-xs uppercase tracking-widest hover:bg-aura-primary/15 transition-colors"
                       >
                         <span>👁️</span>
                         <span>Ansehen</span>
                       </Link>
                       <Link
                         href={`/teacher/observations/${observation.id}?edit=true`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-yellow-50 text-yellow-700 rounded-md hover:bg-yellow-100 transition-colors"
+                        className="inline-flex min-h-11 items-center gap-1 px-4 py-2 rounded-2xl bg-aura-accent/15 text-amber-700 dark:text-amber-300 font-black text-xs uppercase tracking-widest hover:bg-aura-accent/20 transition-colors"
                       >
                         <span>✏️</span>
                         <span>Bearbeiten</span>
@@ -145,7 +157,7 @@ export default function TeacherObservationsPage() {
               ))}
             </div>
           )}
-        </div>
+        </IOSCard>
       )}
     </div>
   )

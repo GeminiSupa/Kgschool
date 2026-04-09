@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { createClient } from '@/utils/supabase/client'
+import { toUserErrorMessage } from '@/utils/errors/toUserErrorMessage'
 
 export interface LunchMenu {
   id: string
@@ -70,8 +71,8 @@ export const useLunchStore = create<LunchState>((set, get) => ({
       if (error) throw error
       set({ menus: data || [] })
     } catch (e: any) {
-      set({ error: e })
-      console.error('Error fetching menus:', e)
+      const msg = toUserErrorMessage(e, 'Fehler beim Laden des Speiseplans.')
+      set({ error: new Error(msg) })
     } finally {
       set({ loading: false })
     }
@@ -91,7 +92,7 @@ export const useLunchStore = create<LunchState>((set, get) => ({
       if (error && error.code !== 'PGRST116') throw error
       set({ todayMenu: data })
     } catch (e: any) {
-      console.error('Error fetching today menu:', e)
+      // swallow; dashboards show "no menu" state
     }
   },
 
@@ -110,8 +111,8 @@ export const useLunchStore = create<LunchState>((set, get) => ({
       if (error) throw error
       set({ orders: data || [] })
     } catch (e: any) {
-      set({ error: e })
-      console.error('Error fetching orders:', e)
+      const msg = toUserErrorMessage(e, 'Fehler beim Laden der Bestellungen.')
+      set({ error: new Error(msg) })
     } finally {
       set({ loading: false })
     }
@@ -139,7 +140,7 @@ export const useLunchStore = create<LunchState>((set, get) => ({
       if (error) throw error
       return data as LunchMenu
     } catch (e: unknown) {
-      throw e
+      throw new Error(toUserErrorMessage(e, 'Menü konnte nicht erstellt werden.'))
     }
   },
 
@@ -166,7 +167,7 @@ export const useLunchStore = create<LunchState>((set, get) => ({
       if (error) throw error
       return data as LunchMenu
     } catch (e: unknown) {
-      throw e
+      throw new Error(toUserErrorMessage(e, 'Menü konnte nicht gespeichert werden.'))
     }
   },
 
@@ -176,7 +177,7 @@ export const useLunchStore = create<LunchState>((set, get) => ({
       const { error } = await supabase.from('lunch_menus').delete().eq('id', menuId)
       if (error) throw error
     } catch (e: unknown) {
-      throw e
+      throw new Error(toUserErrorMessage(e, 'Menü konnte nicht gelöscht werden.'))
     }
   },
 
@@ -191,8 +192,7 @@ export const useLunchStore = create<LunchState>((set, get) => ({
       if (error) throw error
       return data as LunchOrder
     } catch (e: any) {
-      console.error('Error creating order:', e)
-      throw e
+      throw new Error(toUserErrorMessage(e, 'Bestellung konnte nicht erstellt werden.'))
     }
   },
 
@@ -215,8 +215,7 @@ export const useLunchStore = create<LunchState>((set, get) => ({
       if (error) throw error
       return data as LunchOrder
     } catch (e: any) {
-      console.error('Error cancelling order:', e)
-      throw e
+      throw new Error(toUserErrorMessage(e, 'Bestellung konnte nicht storniert werden.'))
     }
   }
 }))

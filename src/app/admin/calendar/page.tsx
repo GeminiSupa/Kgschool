@@ -15,6 +15,7 @@ import { IOSCard } from '@/components/ui/IOSCard'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { SlideOver } from '@/components/ui/SlideOver'
 import Link from 'next/link'
+import { IOSButton } from '@/components/ui/IOSButton'
 
 export default function AdminCalendarPage() {
   const { t, lang } = useI18n()
@@ -92,13 +93,9 @@ export default function AdminCalendarPage() {
           <p className="text-lg text-ui-muted font-medium max-w-2xl">{t(sT('calendarSubtitle'))}</p>
         </div>
         <div className="flex gap-3">
-          <button
-            type="button"
-            onClick={() => setIsSlideOverOpen(true)}
-            className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-100/80 dark:shadow-indigo-900/30 hover:bg-indigo-700 hover:-translate-y-1 transition-all"
-          >
+          <IOSButton type="button" onClick={() => setIsSlideOverOpen(true)}>
             {t(sT('addNewEvent'))}
-          </button>
+          </IOSButton>
         </div>
       </div>
 
@@ -195,7 +192,7 @@ export default function AdminCalendarPage() {
                     value={newEvent.title}
                     onChange={e => setNewEvent({...newEvent, title: e.target.value})}
                     placeholder={t(sT('eventTitlePlaceholder'))}
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
+                    className="w-full min-h-11 px-6 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm font-bold text-slate-900 dark:text-slate-50 focus:ring-2 focus:ring-(--aura-primary)/25 outline-none transition-all"
                 />
             </div>
 
@@ -207,7 +204,7 @@ export default function AdminCalendarPage() {
                         required
                         value={newEvent.start_date}
                         onChange={e => setNewEvent({...newEvent, start_date: e.target.value})}
-                        className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
+                        className="w-full min-h-11 px-6 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm font-bold text-slate-900 dark:text-slate-50 focus:ring-2 focus:ring-(--aura-primary)/25 outline-none transition-all"
                     />
                 </div>
                 <div className="space-y-3">
@@ -217,17 +214,17 @@ export default function AdminCalendarPage() {
                         required
                         value={newEvent.end_date}
                         onChange={e => setNewEvent({...newEvent, end_date: e.target.value})}
-                        className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-indigo-100 outline-none transition-all"
+                        className="w-full min-h-11 px-6 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm font-bold text-slate-900 dark:text-slate-50 focus:ring-2 focus:ring-(--aura-primary)/25 outline-none transition-all"
                     />
                 </div>
             </div>
 
             <div className="space-y-3">
-                <label className="text-[11px] font-black text-ui-soft uppercase tracking-widest ml-1">{t(sT('eventTypeLabel'))}</label>
+                <label className="text-[11px] font-black text-ui-soft uppercase tracking-widest ml-1">Kategorie</label>
                 <select 
                     value={newEvent.holiday_type}
                     onChange={e => setNewEvent({...newEvent, holiday_type: e.target.value as any})}
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-900 focus:ring-2 focus:ring-indigo-100 outline-none transition-all appearance-none"
+                    className="w-full min-h-11 px-6 py-4 bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10 rounded-2xl text-sm font-bold text-slate-900 dark:text-slate-50 focus:ring-2 focus:ring-(--aura-primary)/25 outline-none transition-all appearance-none"
                 >
                     <option value="holiday">{t(sT('eventTypeHoliday'))}</option>
                     <option value="vacation">{t(sT('eventTypeVacation'))}</option>
@@ -238,7 +235,7 @@ export default function AdminCalendarPage() {
             </div>
 
             <div className="space-y-6 pt-4">
-                <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                <div className="flex items-center justify-between gap-4 p-5 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/10">
                     <div className="flex flex-col">
                         <span className="text-sm font-black text-slate-900">{t(sT('affectsBilling'))}</span>
                         <span className="text-[10px] font-bold text-ui-soft uppercase mt-0.5">{t(sT('affectsBillingHint'))}</span>
@@ -247,10 +244,10 @@ export default function AdminCalendarPage() {
                         type="checkbox"
                         checked={newEvent.affects_billing}
                         onChange={e => setNewEvent({...newEvent, affects_billing: e.target.checked})}
-                        className="w-6 h-6 rounded-lg text-indigo-600 focus:ring-indigo-100"
+                        className="h-7 w-7 rounded-xl text-aura-primary focus:ring-(--aura-primary)/25"
                     />
                 </div>
-                <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                <div className="flex items-center justify-between gap-4 p-5 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/10">
                     <div className="flex flex-col">
                         <span className="text-sm font-black text-slate-900">{t(sT('affectsAttendance'))}</span>
                         <span className="text-[10px] font-bold text-ui-soft uppercase mt-0.5">{t(sT('affectsAttendanceHint'))}</span>
@@ -259,7 +256,7 @@ export default function AdminCalendarPage() {
                         type="checkbox"
                         checked={newEvent.affects_attendance}
                         onChange={e => setNewEvent({...newEvent, affects_attendance: e.target.checked})}
-                        className="w-6 h-6 rounded-lg text-indigo-600 focus:ring-indigo-100"
+                        className="h-7 w-7 rounded-xl text-aura-primary focus:ring-(--aura-primary)/25"
                     />
                 </div>
             </div>

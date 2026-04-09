@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS notifications (
 -- Lunch menus table
 CREATE TABLE IF NOT EXISTS lunch_menus (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  kita_id UUID REFERENCES kitas(id) ON DELETE CASCADE,
   date DATE NOT NULL,
   meal_name TEXT NOT NULL,
   description TEXT,
@@ -111,7 +112,7 @@ CREATE TABLE IF NOT EXISTS lunch_menus (
   nutritional_info JSONB DEFAULT '{}'::JSONB,
   photo_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  UNIQUE(date)
+  UNIQUE(date, kita_id)
 );
 
 -- Lunch orders table

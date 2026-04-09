@@ -150,17 +150,17 @@ export default function ParentLunchPage() {
                 onClick={() => setSelectedChildId(child.id)}
                 className={`flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-300 border-2 ${
                   selectedChildId === child.id
-                    ? 'bg-white border-[#667eea] shadow-lg shadow-[#667eea]/10'
+                    ? 'bg-white border-aura-primary shadow-lg shadow-black/5'
                     : 'bg-gray-50 border-transparent hover:bg-white hover:border-black/5'
                 }`}
               >
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white text-sm font-black transition-colors ${
-                  selectedChildId === child.id ? 'bg-[#667eea]' : 'bg-gray-400'
+                  selectedChildId === child.id ? 'bg-aura-primary' : 'bg-gray-400'
                 }`}>
                   {child.first_name[0]}{child.last_name[0]}
                 </div>
                 <div className="text-left">
-                  <p className={`text-sm font-bold ${selectedChildId === child.id ? 'text-[#667eea]' : 'text-slate-700 dark:text-slate-200'}`}>
+                  <p className={`text-sm font-bold ${selectedChildId === child.id ? 'text-aura-primary' : 'text-slate-700 dark:text-slate-200'}`}>
                     {child.first_name}
                   </p>
                   <p className="text-[10px] font-bold text-black/30 uppercase tracking-wider">{child.last_name}</p>
@@ -242,7 +242,7 @@ export default function ParentLunchPage() {
                             <IOSButton
                               variant="primary"
                               onClick={() => handlePlaceOrder(menu.id)}
-                              className="w-full font-black text-xs py-3 h-auto shadow-lg shadow-[#667eea]/20"
+                              className="w-full font-black text-xs py-3 h-auto shadow-lg shadow-black/10"
                             >
                               Bestellen
                             </IOSButton>

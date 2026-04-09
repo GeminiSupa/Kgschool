@@ -30,6 +30,7 @@ export default function TeacherMessagesPage() {
   const [composeForm, setComposeForm] = useState({ recipient_id: '', content: '' })
   const [composing, setComposing] = useState(false)
   const [composeError, setComposeError] = useState('')
+  const [activeTemplate, setActiveTemplate] = useState<string | null>(null)
   
   const supabase = createClient()
 
@@ -103,6 +104,20 @@ export default function TeacherMessagesPage() {
     } finally {
       setComposing(false)
     }
+  }
+
+  const templates = [
+    { id: 'update', label: 'Update', text: 'Kurzes Update: ' },
+    { id: 'reminder', label: 'Erinnerung', text: 'Kurze Erinnerung: ' },
+    { id: 'thanks', label: 'Danke', text: 'Danke für die Rückmeldung!' },
+    { id: 'meeting', label: 'Termin', text: 'Können wir kurz telefonieren oder einen Termin vereinbaren?' },
+  ]
+
+  const applyTemplate = (text: string) => {
+    setComposeForm((p) => ({
+      ...p,
+      content: p.content ? `${p.content.trimEnd()}\n\n${text}` : text,
+    }))
   }
 
   const handleMarkAsRead = async (messageId: string, isRead: boolean) => {
@@ -238,12 +253,31 @@ export default function TeacherMessagesPage() {
                 
                 <div>
                     <label className="block text-xs font-black text-black/40 uppercase tracking-widest mb-2">Inhalt *</label>
+                <div className="mb-3 flex flex-wrap gap-2">
+                  {templates.map((tpl) => (
+                    <button
+                      key={tpl.id}
+                      type="button"
+                      onClick={() => {
+                        setActiveTemplate(tpl.id)
+                        applyTemplate(tpl.text)
+                      }}
+                      className={`min-h-11 rounded-2xl px-4 py-2 text-[11px] font-black uppercase tracking-widest transition-colors border ${
+                        activeTemplate === tpl.id
+                          ? 'bg-aura-primary text-white border-aura-primary'
+                          : 'bg-slate-100/80 dark:bg-white/5 text-ui-soft border-border hover:text-foreground'
+                      }`}
+                    >
+                      {tpl.label}
+                    </button>
+                  ))}
+                </div>
                     <textarea
                         value={composeForm.content}
                         onChange={(e) => setComposeForm(prev => ({ ...prev, content: e.target.value }))}
                         required
                         rows={6}
-                        className="w-full px-4 py-3 bg-gray-50 border border-black/5 rounded-xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl text-sm font-medium text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-(--aura-primary)/25 transition-all resize-none"
                         placeholder="Schreiben Sie Ihre Nachricht hier..."
                     />
                 </div>
