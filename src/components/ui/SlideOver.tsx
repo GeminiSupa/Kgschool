@@ -37,7 +37,7 @@ export const SlideOver: React.FC<SlideOverProps> = ({ isOpen, onClose, title, ch
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-xl text-ui-soft transition-colors hover:bg-slate-50 dark:hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:focus-visible:ring-indigo-500/40"
+                className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-xl text-ui-soft transition-colors hover:bg-slate-50 dark:hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25"
               >
                 <span aria-hidden>✕</span>
               </button>

@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Impressum | KG School',
+  title: 'Impressum | Kid Cloud',
 }
 
 export default function ImprintPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 dark:text-slate-50">
+    <main className="min-h-screen bg-background text-slate-900 dark:text-slate-50">
       <div className="mx-auto max-w-4xl px-6 py-12">
-        <Link href="/" className="text-sm text-indigo-700 hover:text-indigo-900">
+        <Link href="/" className="text-sm text-aura-primary hover:brightness-110">
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">Impressum</h1>
@@ -20,7 +20,7 @@ export default function ImprintPage() {
           <p>
             <strong>Anbieter:</strong>
             <br />
-            KG School GmbH
+            Kid Cloud GmbH
             <br />
             Musterstrasse 1
             <br />
@@ -31,7 +31,7 @@ export default function ImprintPage() {
           <p>
             <strong>Kontakt:</strong>
             <br />
-            E-Mail: kontakt@kgschool.de
+            E-Mail: kontakt@kidcloud.app
             <br />
             Telefon: +49 (0)241 000000
           </p>

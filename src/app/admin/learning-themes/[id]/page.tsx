@@ -11,6 +11,7 @@ import { useLearningThemesStore, type LearningTheme } from '@/stores/learningThe
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { IOSCard } from '@/components/ui/IOSCard'
 
 type Params = { id?: string }
 
@@ -71,7 +72,7 @@ export default function AdminLearningThemeDetailPage() {
       ) : !theme ? (
         <div className="p-8 text-center text-ui-soft">Learning theme not found.</div>
       ) : (
-        <div className="bg-white rounded-lg shadow p-6 max-w-3xl">
+        <IOSCard className="p-6 max-w-3xl">
           <div className="space-y-4">
             <div>
               <h3 className="text-sm font-medium text-ui-soft">Title</h3>
@@ -82,12 +83,12 @@ export default function AdminLearningThemeDetailPage() {
               <h3 className="text-sm font-medium text-ui-soft">Status</h3>
               <span
                 className={[
-                  'px-2 py-1 text-xs rounded',
+                  'px-2 py-1 text-xs font-black uppercase tracking-wide rounded-full border border-black/5 dark:border-white/10',
                   theme.status === 'active'
-                    ? 'bg-green-100 text-green-700'
+                    ? 'bg-emerald-50 text-emerald-900 dark:bg-emerald-400/10 dark:text-emerald-200'
                     : theme.status === 'completed'
-                      ? 'bg-gray-100 text-slate-700 dark:text-slate-200'
-                      : 'bg-blue-100 text-blue-700',
+                      ? 'bg-slate-50 text-slate-800 dark:bg-white/5 dark:text-slate-200'
+                      : 'bg-aura-primary/10 text-aura-primary',
                 ].join(' ')}
               >
                 {theme.status}
@@ -106,7 +107,7 @@ export default function AdminLearningThemeDetailPage() {
                 <h3 className="text-sm font-medium text-ui-soft">Learning Areas</h3>
                 <div className="mt-1 flex flex-wrap gap-2">
                   {theme.learning_areas.map((area) => (
-                    <span key={area} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
+                    <span key={area} className="px-2 py-1 bg-aura-primary/10 text-aura-primary text-xs font-bold rounded-full border border-black/5 dark:border-white/10">
                       {area}
                     </span>
                   ))}
@@ -125,7 +126,7 @@ export default function AdminLearningThemeDetailPage() {
               </div>
             )}
           </div>
-        </div>
+        </IOSCard>
       )}
     </div>
   )

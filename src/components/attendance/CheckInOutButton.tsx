@@ -38,7 +38,7 @@ export const CheckInOutButton = ({
           Check-In
         </IOSButton>
       ) : (
-        <div className="px-3 py-1.5 text-xs font-bold bg-green-50 text-green-700 rounded-lg border border-green-100 flex items-center">
+        <div className="px-3 py-1.5 text-xs font-bold bg-emerald-50 text-emerald-800 dark:bg-emerald-400/10 dark:text-emerald-200 rounded-lg border border-emerald-200 dark:border-emerald-400/20 flex items-center">
           ⬇️ {formatTime(checkInTime)}
         </div>
       )}
@@ -48,12 +48,12 @@ export const CheckInOutButton = ({
           variant="secondary"
           onClick={() => onCheckOut(childId, date)}
           disabled={loading}
-          className="text-xs px-3 py-1.5 font-bold bg-orange-50 text-orange-700 border-orange-100 hover:bg-orange-100"
+          className="text-xs px-3 py-1.5 font-bold bg-orange-50 text-orange-800 border-orange-200 hover:bg-orange-100 dark:bg-orange-400/10 dark:text-orange-200 dark:border-orange-400/20 dark:hover:bg-orange-400/15"
         >
           Check-Out
         </IOSButton>
       ) || checkOutTime && (
-        <div className="px-3 py-1.5 text-xs font-bold bg-gray-50 text-slate-700 dark:text-slate-200 rounded-lg border border-gray-100 flex items-center">
+        <div className="px-3 py-1.5 text-xs font-bold bg-slate-50 text-slate-800 dark:bg-white/5 dark:text-slate-200 rounded-lg border border-border flex items-center">
           ⬆️ {formatTime(checkOutTime)}
         </div>
       )}

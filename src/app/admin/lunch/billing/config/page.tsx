@@ -89,7 +89,7 @@ export default function AdminLunchBillingConfigPage() {
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
       </div>
 
-      <IOSCard className="bg-white rounded-lg shadow p-6 max-w-2xl mx-auto">
+      <IOSCard className="p-6 max-w-2xl mx-auto">
         {error && <ErrorAlert message={error} />}
 
         {loading ? (
@@ -110,7 +110,7 @@ export default function AdminLunchBillingConfigPage() {
                 min={1}
                 max={48}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-input"
               />
               <p className="text-xs text-ui-soft mt-1">
                 Number of hours before 8 AM on the absence date that parents must notify.
@@ -118,7 +118,7 @@ export default function AdminLunchBillingConfigPage() {
               </p>
             </div>
 
-            <div className="flex gap-3 justify-end pt-4 border-t">
+            <div className="flex gap-3 justify-end pt-4 border-t border-border">
               <IOSButton type="button" variant="secondary" onClick={() => router.push('/admin/lunch/billing')} disabled={saving}>
                 Cancel
               </IOSButton>

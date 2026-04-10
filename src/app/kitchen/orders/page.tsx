@@ -110,7 +110,7 @@ export default function KitchenOrdersPage() {
           type="date"
           value={selectedDate}
           onChange={(e) => setSelectedDate(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="ui-input w-auto"
         />
       </div>
 
@@ -168,7 +168,7 @@ export default function KitchenOrdersPage() {
                           <button
                             type="button"
                             onClick={() => updateOrderStatus(order.id, 'prepared')}
-                            className="min-h-10 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60"
+                            className="min-h-10 rounded-lg bg-aura-primary px-3 py-2 text-sm font-semibold text-white transition-colors hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25"
                           >
                             Mark Prepared
                           </button>

@@ -13,8 +13,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Kita Management',
-  description: 'Multi-tenant Kita Management Platform',
+  title: 'Kid Cloud',
+  description: 'Multi-tenant daycare management platform',
 }
 
 export default function RootLayout({

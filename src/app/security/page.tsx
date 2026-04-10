@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Security & Compliance | KG School',
+  title: 'Security & Compliance | Kid Cloud',
 }
 
 export default function SecurityPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 dark:text-slate-50">
+    <main className="min-h-screen bg-background text-slate-900 dark:text-slate-50">
       <div className="mx-auto max-w-5xl px-6 py-12">
-        <Link href="/" className="text-sm text-indigo-700 hover:text-indigo-900">
+        <Link href="/" className="text-sm text-aura-primary hover:brightness-110">
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">Security, Ethik und Compliance</h1>

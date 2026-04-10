@@ -188,7 +188,7 @@ export default function AdminLunchBillingTimetableEditPage() {
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
       </div>
 
-      <IOSCard className="bg-white rounded-lg shadow p-6 max-w-3xl mx-auto">
+      <IOSCard className="p-6 max-w-3xl mx-auto">
         {error && <ErrorAlert message={error} />}
 
         {loading ? (
@@ -207,7 +207,7 @@ export default function AdminLunchBillingTimetableEditPage() {
                 onChange={(e) => setForm((p) => ({ ...p, group_id: e.target.value }))}
                 required
                 disabled={submitting}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+                className="ui-select disabled:opacity-60"
               >
                 <option value="">Select a group</option>
                 {groups.map((g) => (
@@ -239,7 +239,7 @@ export default function AdminLunchBillingTimetableEditPage() {
                       checked={form[key]}
                       onChange={(e) => setForm((p) => ({ ...p, [key]: e.target.checked }))}
                       type="checkbox"
-                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      className="h-4 w-4 rounded border-border text-aura-primary focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25"
                       disabled={submitting}
                     />
                     <span className="text-sm">{label}</span>
@@ -260,7 +260,7 @@ export default function AdminLunchBillingTimetableEditPage() {
                   onChange={(e) => setForm((p) => ({ ...p, effective_from: e.target.value }))}
                   type="date"
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                  className="ui-input"
                   disabled={submitting}
                 />
               </div>
@@ -273,7 +273,7 @@ export default function AdminLunchBillingTimetableEditPage() {
                   value={form.effective_to}
                   onChange={(e) => setForm((p) => ({ ...p, effective_to: e.target.value }))}
                   type="date"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                  className="ui-input"
                   disabled={submitting}
                 />
                 <p className="text-xs text-ui-soft mt-1">Leave empty for ongoing schedule</p>
@@ -289,13 +289,13 @@ export default function AdminLunchBillingTimetableEditPage() {
                 value={form.notes}
                 onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-textarea"
                 placeholder="Optional notes about this timetable..."
                 disabled={submitting}
               />
             </div>
 
-            <div className="flex gap-3 justify-end pt-4 border-t">
+            <div className="flex gap-3 justify-end pt-4 border-t border-border">
               <IOSButton type="button" variant="secondary" onClick={handleCancel} disabled={submitting}>
                 Cancel
               </IOSButton>

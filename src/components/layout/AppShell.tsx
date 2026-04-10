@@ -28,7 +28,7 @@ export function AppShell({
       {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between px-4 py-3 bg-background/80 backdrop-blur-xl border-b border-border sticky top-0 z-40">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs ring-2 ring-indigo-100 dark:ring-white/10">KG</div>
+          <div className="w-8 h-8 bg-aura-primary rounded-lg flex items-center justify-center text-white font-bold text-xs ring-2 ring-black/5 dark:ring-white/10">KC</div>
           <span className="font-bold text-sm tracking-tight text-foreground">{t('brand.appTitle')}</span>
         </div>
         <div className="flex items-center gap-2">
@@ -69,7 +69,7 @@ export function AppShell({
             >
               <div className="flex items-center justify-between border-b border-border px-6 py-5">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-xs ring-2 ring-indigo-100">KG</div>
+                  <div className="w-8 h-8 bg-aura-primary rounded-lg flex items-center justify-center text-white font-bold text-xs ring-2 ring-black/5 dark:ring-white/10">KC</div>
                   <span className="font-bold text-sm tracking-tight text-foreground">{t('brand.appTitle')}</span>
                 </div>
                 <button
@@ -97,7 +97,7 @@ export function AppShell({
           </aside>
         )}
 
-        <main className="flex-1 overflow-y-auto relative perspective-1000 bg-background/50">
+        <main className="flex-1 overflow-y-auto relative perspective-1000">
           <div className="min-h-full transition-transform duration-500 transform-style-3d bg-transparent">
             {children}
           </div>

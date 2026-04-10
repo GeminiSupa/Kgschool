@@ -1,21 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbfbfe;
-  --foreground: #0a0a0b;
-  --muted: #64748b;
-  --border: #e2e8f0;
+  /* Canvas & surfaces — keep strong hierarchy in Light Mode */
+  --background: #e8eef3; /* cool gray-blue canvas (not pure white) */
+  --card: #ffffff; /* elevated surface */
+  --foreground: #0f172a; /* slate-900 */
+  --muted: #475569; /* slate-600 */
+  --border: #cbd5e1; /* slate-300 for visible structure */
   
-  /* Aura Palette - Refined for "Garden of Care" (warmer, daycare-friendly) */
+  /* Aura Palette - Kid Cloud (trust + warmth) */
   --aura-indigo: #4338ca; /* kept for existing pages; no longer the primary CTA */
-  --aura-mint: #0d9488; /* teal-600 */
-  --aura-sun: #f59e0b; /* amber-500 */
+  --aura-sky: #0284c7; /* sky-600 (primary) */
+  --aura-mint: #0d9488; /* teal-600 (secondary) */
+  --aura-sun: #f59e0b; /* amber-500 (accent) */
   --aura-coral: #ef4444;
   --aura-lavender: #f1f5f9;
   --aura-rose: #db2777;
 
   /* Semantic accents */
-  --aura-primary: var(--aura-mint);
+  --aura-primary: var(--aura-sky);
   --aura-accent: var(--aura-sun);
   
   /* Glassmorphism - Higher contrast for Light Mode */
@@ -28,6 +31,7 @@
 .dark {
   color-scheme: dark;
   --background: #121212;
+  --card: #1a1d24;
   --foreground: #f1f5f9;
   /* ~4.6:1+ on #121212 — avoid slate-500/600 on dark for body UI copy */
   --muted: #cbd5e1;
@@ -37,10 +41,11 @@
   --glass-border: rgba(255, 255, 255, 0.12);
 
   --aura-indigo: #818cf8;
+  --aura-sky: #38bdf8; /* sky-400 */
   --aura-coral: #fb7185;
   --aura-mint: #2dd4bf; /* teal-400 */
   --aura-sun: #fbbf24; /* amber-400 */
-  --aura-primary: var(--aura-mint);
+  --aura-primary: var(--aura-sky);
   --aura-accent: var(--aura-sun);
 }
 
@@ -48,6 +53,7 @@
   :root:not(.light) {
     color-scheme: dark;
     --background: #121212;
+    --card: #1a1d24;
     --foreground: #f1f5f9;
     --muted: #cbd5e1;
     --border: rgba(255, 255, 255, 0.1);
@@ -56,21 +62,24 @@
     --glass-border: rgba(255, 255, 255, 0.12);
 
     --aura-indigo: #818cf8;
+    --aura-sky: #38bdf8;
     --aura-coral: #fb7185;
     --aura-mint: #2dd4bf;
     --aura-sun: #fbbf24;
-    --aura-primary: var(--aura-mint);
+    --aura-primary: var(--aura-sky);
     --aura-accent: var(--aura-sun);
   }
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border: var(--border);
   
   --color-aura-indigo: var(--aura-indigo);
+  --color-aura-sky: var(--aura-sky);
   --color-aura-coral: var(--aura-coral);
   --color-aura-mint: var(--aura-mint);
   --color-aura-sun: var(--aura-sun);
@@ -101,8 +110,9 @@
   .ui-input,
   .ui-select,
   .ui-textarea {
-    @apply w-full min-h-11 px-4 py-3 rounded-2xl border border-border bg-background text-foreground outline-none;
+    @apply w-full min-h-11 px-4 py-3 rounded-2xl border border-border bg-card text-foreground outline-none;
     @apply focus:ring-2 focus:ring-(--aura-primary)/25;
+    @apply shadow-[0_1px_0_rgba(15,23,42,0.04)];
   }
 
   .ui-select {
@@ -168,18 +178,18 @@
   .bg-mesh-light {
     background-color: var(--background);
     background-image:
-      radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.08) 0, transparent 50%),
-      radial-gradient(at 50% 0%, rgba(245, 158, 11, 0.07) 0, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.06) 0, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.09) 0, transparent 55%),
+      radial-gradient(at 55% 0%, rgba(249, 115, 22, 0.07) 0, transparent 55%),
+      radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.05) 0, transparent 55%);
     background-attachment: fixed;
   }
 
   .dark .bg-mesh-light {
     background-color: var(--background);
     background-image:
-      radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.12) 0, transparent 50%),
-      radial-gradient(at 50% 0%, rgba(251, 191, 36, 0.08) 0, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(45, 212, 191, 0.08) 0, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.11) 0, transparent 55%),
+      radial-gradient(at 55% 0%, rgba(251, 146, 60, 0.08) 0, transparent 55%),
+      radial-gradient(at 100% 0%, rgba(45, 212, 191, 0.08) 0, transparent 55%);
   }
 
   .glass {
@@ -198,18 +208,18 @@
   .bg-mesh {
     background-color: var(--background);
     background-image: 
-      radial-gradient(at 0% 0%, rgba(67, 56, 202, 0.1) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, rgba(239, 68, 68, 0.08) 0, transparent 50%), 
-      radial-gradient(at 100% 0%, rgba(5, 150, 105, 0.08) 0, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.11) 0, transparent 55%), 
+      radial-gradient(at 55% 0%, rgba(249, 115, 22, 0.08) 0, transparent 55%), 
+      radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.07) 0, transparent 55%);
     background-attachment: fixed;
   }
 
   .dark .bg-mesh {
     background-color: var(--background);
     background-image: 
-      radial-gradient(at 0% 0%, rgba(129, 140, 248, 0.15) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, rgba(251, 113, 133, 0.1) 0, transparent 50%), 
-      radial-gradient(at 100% 0%, rgba(52, 211, 153, 0.1) 0, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.14) 0, transparent 55%), 
+      radial-gradient(at 55% 0%, rgba(251, 146, 60, 0.1) 0, transparent 55%), 
+      radial-gradient(at 100% 0%, rgba(45, 212, 191, 0.1) 0, transparent 55%);
   }
 }
 

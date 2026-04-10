@@ -13,6 +13,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { sT } from '@/i18n/sT'
+import { IOSCard } from '@/components/ui/IOSCard'
 
 type StaffQualification = {
   id: string
@@ -51,10 +52,12 @@ function getExpiryStatus(expiryDate?: string | null) {
 
 function getExpiryStatusClass(expiryDate?: string | null) {
   const status = getExpiryStatus(expiryDate)
-  if (status === 'Expired') return 'px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800'
-  if (status === 'Expiring Soon') return 'px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800'
-  if (status === 'No expiry') return 'px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-slate-800 dark:text-slate-100'
-  return 'px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800'
+  const base =
+    'px-2 py-1 text-xs font-black uppercase tracking-wide rounded-full border border-black/5 dark:border-white/10'
+  if (status === 'Expired') return `${base} bg-red-50 text-red-800 dark:bg-red-400/10 dark:text-red-200`
+  if (status === 'Expiring Soon') return `${base} bg-amber-50 text-amber-900 dark:bg-amber-400/10 dark:text-amber-200`
+  if (status === 'No expiry') return `${base} bg-slate-50 text-slate-800 dark:bg-white/5 dark:text-slate-200`
+  return `${base} bg-emerald-50 text-emerald-900 dark:bg-emerald-400/10 dark:text-emerald-200`
 }
 
 export default function AdminStaffQualificationsPage() {
@@ -152,7 +155,7 @@ export default function AdminStaffQualificationsPage() {
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-4">
+      <IOSCard className="p-4">
         <label htmlFor="staff_filter" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
           Filter by Staff
         </label>
@@ -160,7 +163,7 @@ export default function AdminStaffQualificationsPage() {
           id="staff_filter"
           value={selectedStaffId}
           onChange={(e) => setSelectedStaffId(e.target.value)}
-          className="w-full md:w-64 px-3 py-2 border border-gray-300 rounded-md"
+          className="ui-select w-full md:w-64"
         >
           <option value="">All Staff</option>
           {staffList.map((staff) => (
@@ -169,11 +172,11 @@ export default function AdminStaffQualificationsPage() {
             </option>
           ))}
         </select>
-      </div>
+      </IOSCard>
 
-      <div className="bg-white rounded-lg shadow overflow-hidden">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <IOSCard className="overflow-hidden">
+        <table className="min-w-full divide-y divide-border">
+          <thead className="bg-slate-50/70 dark:bg-white/5">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Staff</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Qualification</th>
@@ -183,7 +186,7 @@ export default function AdminStaffQualificationsPage() {
               <th className="px-6 py-3 text-left text-xs font-medium text-ui-soft uppercase">Status</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-card divide-y divide-border">
             {qualifications.length === 0 ? (
               <tr>
                 <td colSpan={6} className="px-6 py-8 text-center text-ui-soft">
@@ -192,7 +195,7 @@ export default function AdminStaffQualificationsPage() {
               </tr>
             ) : (
               qualifications.map((qual) => (
-                <tr key={qual.id}>
+                <tr key={qual.id} className="hover:bg-slate-50/60 dark:hover:bg-white/5 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                     {staffMap[qual.staff_id] || qual.staff_id}
                   </td>
@@ -214,7 +217,7 @@ export default function AdminStaffQualificationsPage() {
             )}
           </tbody>
         </table>
-      </div>
+      </IOSCard>
     </div>
   )
 }

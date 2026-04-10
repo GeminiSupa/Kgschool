@@ -21,7 +21,8 @@ export function IOSButton({
   const variants = {
     primary:
       'bg-[color:var(--aura-primary)] text-white shadow-lg shadow-black/10 hover:brightness-110 active:brightness-95 focus-visible:ring-[color:var(--aura-primary)]',
-    secondary: 'bg-background border-2 border-border text-foreground hover:bg-slate-50 dark:hover:bg-white/5 focus:ring-slate-400 font-bold',
+    secondary:
+      'bg-card border-2 border-border text-foreground hover:bg-slate-50 dark:bg-white/5 dark:hover:bg-white/10 focus:ring-[color:var(--aura-primary)] font-bold',
     ghost: 'bg-transparent text-muted hover:bg-slate-100 dark:hover:bg-white/5 hover:text-foreground',
     danger: 'bg-red-600 text-white shadow-lg shadow-black/10 hover:bg-red-500 focus-visible:ring-red-500',
   }

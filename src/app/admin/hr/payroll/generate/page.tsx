@@ -143,7 +143,7 @@ export default function AdminPayrollGeneratePage() {
                 value={month}
                 onChange={(e) => setMonth(parseInt(e.target.value, 10))}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-select"
               >
                 {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
                   <option key={m} value={m}>
@@ -165,14 +165,14 @@ export default function AdminPayrollGeneratePage() {
                 required
                 min={2020}
                 max={2100}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-input"
               />
             </div>
           </div>
 
           {preview && (
-            <div className="p-4 bg-gray-50 rounded-md space-y-2">
-              <h3 className="font-medium mb-2">Preview</h3>
+            <div className="p-4 rounded-2xl border border-border bg-slate-50/70 dark:bg-white/5 space-y-2">
+              <h3 className="font-black mb-2">Preview</h3>
               <p className="text-sm text-ui-muted">
                 This will generate payroll for <strong>{preview.staffCount}</strong> staff members.
               </p>

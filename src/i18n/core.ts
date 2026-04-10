@@ -13,8 +13,8 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       loadingDashboard: 'Dashboard wird geladen…',
     },
     brand: {
-      appTitle: 'Kita Management',
-      shortName: 'KG',
+      appTitle: 'Kid Cloud',
+      shortName: 'KC',
     },
     shell: {
       openMenu: 'Menü',
@@ -198,10 +198,10 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       marketingCtaBandSubtitle:
         'Schließen Sie sich Einrichtungen an, die Verwaltung vereinfachen und Familien begeistern.',
       marketingCtaBandButton: 'Jetzt registrieren',
-      marketingFooterRights: 'KG School Plattform. Alle Rechte vorbehalten.',
+      marketingFooterRights: 'Kid Cloud Plattform. Alle Rechte vorbehalten.',
     },
     login: {
-      title: 'KG School',
+      title: 'Kid Cloud',
       subtitle: 'Kindergarten Management System',
       emailLabel: 'E-Mail',
       emailPlaceholder: 'Geben Sie Ihre E-Mail ein',
@@ -252,8 +252,8 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       loadingDashboard: 'Loading dashboard…',
     },
     brand: {
-      appTitle: 'Daycare Management',
-      shortName: 'KG',
+      appTitle: 'Kid Cloud',
+      shortName: 'KC',
     },
     shell: {
       openMenu: 'Menu',
@@ -437,10 +437,10 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       marketingCtaBandSubtitle:
         'Join centers that simplified administration and delighted their communities.',
       marketingCtaBandButton: 'Register now',
-      marketingFooterRights: 'KG School Platform. All rights reserved.',
+      marketingFooterRights: 'Kid Cloud Platform. All rights reserved.',
     },
     login: {
-      title: 'KG School',
+      title: 'Kid Cloud',
       subtitle: 'Kindergarten Management System',
       emailLabel: 'Email',
       emailPlaceholder: 'Enter your email',
@@ -491,8 +491,8 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       loadingDashboard: 'Panel yükleniyor…',
     },
     brand: {
-      appTitle: 'Kreş Yönetimi',
-      shortName: 'KG',
+      appTitle: 'Kid Cloud',
+      shortName: 'KC',
     },
     shell: {
       openMenu: 'Menü',
@@ -676,10 +676,10 @@ export const coreTranslations: Record<AppLanguage, TranslationTree> = {
       marketingCtaBandSubtitle:
         'Yönetimini kolaylaştıran ve toplulukları memnun eden kurumlara katılın.',
       marketingCtaBandButton: 'Şimdi kayıt ol',
-      marketingFooterRights: 'KG School Platform. Tüm hakları saklıdır.',
+      marketingFooterRights: 'Kid Cloud Platform. Tüm hakları saklıdır.',
     },
     login: {
-      title: 'KG School',
+      title: 'Kid Cloud',
       subtitle: 'Anaokulu Yönetim Sistemi',
       emailLabel: 'E-posta',
       emailPlaceholder: 'E-postanızı girin',

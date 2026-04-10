@@ -24,7 +24,7 @@ export async function GET(_request: Request, context: { params: Promise<{ slug: 
     status: 200,
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
-      'Content-Disposition': `attachment; filename="kg-school-${slug}.md"`,
+      'Content-Disposition': `attachment; filename="kid-cloud-${slug}.md"`,
       'Cache-Control': 'public, max-age=3600',
     },
   })

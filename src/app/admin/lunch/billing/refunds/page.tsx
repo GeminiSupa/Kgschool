@@ -158,7 +158,7 @@ export default function AdminLunchBillingRefundsPage() {
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
       </div>
 
-      <IOSCard className="bg-white rounded-lg shadow p-6 mb-6 max-w-4xl mx-auto">
+      <IOSCard className="p-6 mb-6 max-w-4xl mx-auto">
         <p className="text-ui-muted mb-4">
           Refundable items are informed absences from previous months that were notified before the deadline.
         </p>
@@ -166,7 +166,6 @@ export default function AdminLunchBillingRefundsPage() {
           type="button"
           onClick={() => void loadRefundableItems()}
           disabled={processing || itemsLoading}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
         >
           {itemsLoading ? 'Loading...' : 'Load Refundable Items'}
         </IOSButton>
@@ -178,29 +177,28 @@ export default function AdminLunchBillingRefundsPage() {
           <LoadingSpinner />
         </div>
       ) : refundableItems.length === 0 ? (
-        <IOSCard className="bg-white rounded-lg shadow p-8 text-center text-ui-soft max-w-4xl mx-auto">
+        <IOSCard className="p-8 text-center text-ui-soft max-w-4xl mx-auto">
           No refundable items found.
         </IOSCard>
       ) : (
-        <IOSCard className="bg-white rounded-lg shadow overflow-hidden max-w-4xl mx-auto">
-          <div className="p-4 bg-gray-50 border-b flex items-center justify-between gap-4">
+        <IOSCard className="overflow-hidden max-w-4xl mx-auto">
+          <div className="p-4 bg-slate-50/70 dark:bg-white/5 border-b border-border flex items-center justify-between gap-4">
             <div>
-              <p className="font-medium">Total Refundable Amount: €{totalRefundAmount.toFixed(2)}</p>
+              <p className="font-black text-slate-900 dark:text-slate-50">Total Refundable Amount: €{totalRefundAmount.toFixed(2)}</p>
               <p className="text-sm text-ui-muted">{refundableItems.length} items</p>
             </div>
             <IOSButton
               type="button"
               onClick={() => void processAllRefunds()}
               disabled={processing}
-              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:opacity-50"
             >
               {processing ? 'Processing...' : 'Process All Refunds'}
             </IOSButton>
           </div>
 
-          <div className="divide-y divide-gray-200">
+          <div className="divide-y divide-border">
             {refundableItems.map((item) => (
-              <div key={item.id} className="p-6 hover:bg-gray-50 transition-colors">
+              <div key={item.id} className="p-6 hover:bg-slate-50/60 dark:hover:bg-white/5 transition-colors">
                 <div className="flex items-center justify-between gap-6">
                   <div className="flex-1">
                     <p className="font-medium text-slate-900 dark:text-slate-50">{getChildName(item.child_id)}</p>
@@ -218,12 +216,12 @@ export default function AdminLunchBillingRefundsPage() {
                         type="button"
                         onClick={() => void processRefund(item.id)}
                         disabled={processing}
-                        className="px-3 py-1 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:opacity-50"
+                        className="px-4 py-2 text-sm"
                       >
                         Process Refund
                       </IOSButton>
                     ) : (
-                      <span className="px-3 py-1 text-sm bg-gray-100 text-ui-muted rounded-md">Refunded</span>
+                      <span className="px-3 py-1 text-sm bg-slate-50 dark:bg-white/5 text-ui-muted rounded-full border border-border">Refunded</span>
                     )}
                   </div>
                 </div>

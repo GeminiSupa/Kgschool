@@ -15,6 +15,8 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { sT } from '@/i18n/sT'
+import { IOSCard } from '@/components/ui/IOSCard'
+import { IOSButton } from '@/components/ui/IOSButton'
 
 type Params = { id?: string }
 
@@ -159,7 +161,7 @@ export default function AdminLeaveRequestDetailPage() {
       ) : !request ? (
         <div className="p-8 text-center text-ui-soft">Leave request not found.</div>
       ) : (
-        <div className="bg-white rounded-lg shadow p-6 max-w-3xl space-y-6">
+        <IOSCard className="p-6 max-w-3xl space-y-6">
           <div className="space-y-6">
             <div>
               <h3 className="text-sm font-medium text-ui-soft">Child</h3>
@@ -203,12 +205,12 @@ export default function AdminLeaveRequestDetailPage() {
               <h3 className="text-sm font-medium text-ui-soft">Status</h3>
               <span
                 className={[
-                  'mt-1 inline-block px-3 py-1 text-sm font-medium rounded-full',
+                  'mt-1 inline-block px-3 py-1 text-sm font-black uppercase tracking-wide rounded-full border border-black/5 dark:border-white/10',
                   request.status === 'approved'
-                    ? 'bg-green-100 text-green-800'
+                    ? 'bg-emerald-50 text-emerald-900 dark:bg-emerald-400/10 dark:text-emerald-200'
                     : request.status === 'rejected'
-                      ? 'bg-red-100 text-red-800'
-                      : 'bg-yellow-100 text-yellow-800',
+                      ? 'bg-red-50 text-red-800 dark:bg-red-400/10 dark:text-red-200'
+                      : 'bg-amber-50 text-amber-900 dark:bg-amber-400/10 dark:text-amber-200',
                 ].join(' ')}
               >
                 {request.status}
@@ -223,7 +225,7 @@ export default function AdminLeaveRequestDetailPage() {
             )}
 
             {request.status === 'pending' && (
-              <div className="border-t pt-6">
+              <div className="border-t border-border pt-6">
                 <h3 className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-4">Admin Response</h3>
 
                 <div className="mb-4">
@@ -235,33 +237,32 @@ export default function AdminLeaveRequestDetailPage() {
                     value={adminNotes}
                     onChange={(e) => setAdminNotes(e.target.value)}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="ui-textarea"
                     placeholder="Add any notes for the parent..."
                   />
                 </div>
 
                 <div className="flex gap-3">
-                  <button
+                  <IOSButton
                     type="button"
                     onClick={() => void approveRequest()}
                     disabled={processing}
-                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {processing ? 'Processing...' : 'Approve'}
-                  </button>
-                  <button
+                  </IOSButton>
+                  <IOSButton
                     type="button"
                     onClick={() => void rejectRequest()}
                     disabled={processing}
-                    className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    variant="danger"
                   >
                     {processing ? 'Processing...' : 'Reject'}
-                  </button>
+                  </IOSButton>
                 </div>
               </div>
             )}
           </div>
-        </div>
+        </IOSCard>
       )}
     </div>
   )

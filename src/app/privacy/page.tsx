@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Datenschutz | KG School',
+  title: 'Datenschutz | Kid Cloud',
 }
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 dark:text-slate-50">
+    <main className="min-h-screen bg-background text-slate-900 dark:text-slate-50">
       <div className="mx-auto max-w-4xl px-6 py-12">
-        <Link href="/" className="text-sm text-indigo-700 hover:text-indigo-900">
+        <Link href="/" className="text-sm text-aura-primary hover:brightness-110">
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">Datenschutzerklaerung</h1>
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
         <section className="mt-8 space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-200">
           <p>
-            Diese Seite beschreibt, wie personenbezogene Daten in KG School verarbeitet werden. Der Text ist als
+            Diese Seite beschreibt, wie personenbezogene Daten in Kid Cloud verarbeitet werden. Der Text ist als
             Vorlage gedacht und muss vor Live-Betrieb durch Rechtsberatung geprueft werden.
           </p>
           <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">1. Verarbeitungszwecke</h2>

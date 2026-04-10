@@ -170,7 +170,7 @@ export default function AdminLunchPricingEditPage() {
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
       </div>
 
-      <IOSCard className="bg-white rounded-lg shadow p-6 max-w-2xl">
+      <IOSCard className="p-6 max-w-2xl">
         {error && <ErrorAlert message={error} />}
 
         {loading ? (
@@ -188,7 +188,7 @@ export default function AdminLunchPricingEditPage() {
                 value={form.group_id}
                 onChange={(e) => setForm((p) => ({ ...p, group_id: e.target.value }))}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-select"
                 disabled={submitting}
               >
                 <option value="">Select a group</option>
@@ -212,7 +212,7 @@ export default function AdminLunchPricingEditPage() {
                 step="0.01"
                 min={0}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-input"
                 disabled={submitting}
               />
             </div>
@@ -228,7 +228,7 @@ export default function AdminLunchPricingEditPage() {
                   onChange={(e) => setForm((p) => ({ ...p, effective_from: e.target.value }))}
                   type="date"
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                  className="ui-input"
                   disabled={submitting}
                 />
               </div>
@@ -246,14 +246,14 @@ export default function AdminLunchPricingEditPage() {
                     }))
                   }
                   type="date"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                  className="ui-input"
                   disabled={submitting}
                 />
                 <p className="text-xs text-ui-soft mt-1">Leave empty for ongoing pricing</p>
               </div>
             </div>
 
-            <div className="flex gap-3 justify-end pt-4 border-t">
+            <div className="flex gap-3 justify-end pt-4 border-t border-border">
               <IOSButton type="button" variant="secondary" onClick={handleDelete} disabled={submitting}>
                 Delete
               </IOSButton>

@@ -158,13 +158,13 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
     <div className={`h-full flex flex-col bg-background text-foreground transition-all duration-300 border-r border-slate-100 dark:border-white/5 z-50 ${isCollapsed ? 'w-20' : 'w-full'}`}>
       <div className="px-5 py-8 flex items-center justify-between border-b border-slate-50 dark:border-white/5 bg-background">
         <div className="flex items-center gap-3 min-w-0 overflow-hidden">
-          <div className="shrink-0 w-10 h-10 bg-linear-to-br from-indigo-600 to-indigo-500 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-indigo-100">
-            KG
+          <div className="shrink-0 w-10 h-10 bg-linear-to-br from-aura-primary to-sky-500 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-black/10">
+            KC
           </div>
           {!isCollapsed && (
             <div className="flex-1 min-w-0 transition-opacity duration-300">
               <p className="text-sm font-bold text-slate-900 dark:text-white tracking-tight truncate font-display">{t('brand.appTitle')}</p>
-              <p className="text-[10px] text-indigo-600 dark:text-indigo-300 font-bold tracking-widest uppercase mt-0.5">
+              <p className="text-[10px] text-aura-primary font-bold tracking-widest uppercase mt-0.5">
                 {loading ? '...' : userRoleLabel}
               </p>
             </div>

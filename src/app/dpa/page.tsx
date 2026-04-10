@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'AVV / DPA | KG School',
+  title: 'AVV / DPA | Kid Cloud',
 }
 
 export default function DpaPage() {
   return (
-    <main className="min-h-screen bg-white text-slate-900 dark:text-slate-50">
+    <main className="min-h-screen bg-background text-slate-900 dark:text-slate-50">
       <div className="mx-auto max-w-4xl px-6 py-12">
-        <Link href="/" className="text-sm text-indigo-700 hover:text-indigo-900">
+        <Link href="/" className="text-sm text-aura-primary hover:brightness-110">
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">AVV / Data Processing Agreement</h1>
@@ -19,7 +19,7 @@ export default function DpaPage() {
         <section className="mt-8 space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-200">
           <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Leistungsrahmen</h2>
           <p>
-            KG School verarbeitet personenbezogene Daten ausschliesslich im Auftrag und auf dokumentierte Weisung der
+            Kid Cloud verarbeitet personenbezogene Daten ausschliesslich im Auftrag und auf dokumentierte Weisung der
             verantwortlichen Stelle.
           </p>
 
@@ -35,7 +35,7 @@ export default function DpaPage() {
 
           <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Anfrageprozess</h2>
           <p>
-            Senden Sie Ihre AVV-Anfrage an <strong>dpa@kgschool.de</strong>. Sie erhalten eine Vertragsvorlage,
+            Senden Sie Ihre AVV-Anfrage an <strong>dpa@kidcloud.app</strong>. Sie erhalten eine Vertragsvorlage,
             TOM-Anlage und die aktuelle Subunternehmerliste.
           </p>
         </section>

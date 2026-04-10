@@ -114,14 +114,14 @@ export default function AdminLunchBillingReportsPage() {
         <Heading size="xl">{t(pT(ROUTE))}</Heading>
       </div>
 
-      <IOSCard className="bg-white rounded-lg shadow p-4 mb-6 max-w-6xl mx-auto">
+      <IOSCard className="p-4 mb-6 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Startmonat</label>
             <select
               value={filters.startMonth}
               onChange={(e) => setFilters((p) => ({ ...p, startMonth: Number(e.target.value) }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-select"
             >
               {Array.from({ length: 12 }).map((_, idx) => {
                 const m = idx + 1
@@ -139,7 +139,7 @@ export default function AdminLunchBillingReportsPage() {
               value={filters.startYear}
               onChange={(e) => setFilters((p) => ({ ...p, startYear: Number(e.target.value) }))}
               type="number"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-input"
             />
           </div>
           <div>
@@ -147,7 +147,7 @@ export default function AdminLunchBillingReportsPage() {
             <select
               value={filters.endMonth}
               onChange={(e) => setFilters((p) => ({ ...p, endMonth: Number(e.target.value) }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-select"
             >
               {Array.from({ length: 12 }).map((_, idx) => {
                 const m = idx + 1
@@ -165,7 +165,7 @@ export default function AdminLunchBillingReportsPage() {
               value={filters.endYear}
               onChange={(e) => setFilters((p) => ({ ...p, endYear: Number(e.target.value) }))}
               type="number"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-input"
             />
           </div>
         </div>
@@ -175,12 +175,11 @@ export default function AdminLunchBillingReportsPage() {
             type="button"
             onClick={() => void generateReport()}
             disabled={loading}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
             {loading ? 'Erstellt…' : 'Bericht erstellen'}
           </IOSButton>
           {reportData && (
-            <IOSButton type="button" onClick={exportToCSV} className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+            <IOSButton type="button" onClick={exportToCSV} variant="secondary" className="px-4 py-2">
               📥 CSV exportieren
             </IOSButton>
           )}
@@ -195,37 +194,37 @@ export default function AdminLunchBillingReportsPage() {
         </div>
       ) : reportData ? (
         <div className="space-y-6 max-w-6xl mx-auto px-2">
-          <IOSCard className="bg-white rounded-lg shadow p-6">
+          <IOSCard className="p-6">
             <Heading size="md" className="mb-4">
               Übersicht
             </Heading>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-blue-50 rounded-md">
+              <div className="p-4 rounded-2xl border border-border bg-aura-primary/10">
                 <p className="text-sm text-ui-muted">Umsatz (gesamt)</p>
-                <p className="text-2xl font-bold text-blue-600">€{reportData.totalRevenue.toFixed(2)}</p>
+                <p className="text-2xl font-black text-aura-primary">€{reportData.totalRevenue.toFixed(2)}</p>
               </div>
-              <div className="p-4 bg-green-50 rounded-md">
+              <div className="p-4 rounded-2xl border border-border bg-emerald-50 dark:bg-emerald-400/10">
                 <p className="text-sm text-ui-muted">Bezahlt</p>
-                <p className="text-2xl font-bold text-green-600">€{reportData.totalPaid.toFixed(2)}</p>
+                <p className="text-2xl font-black text-emerald-700 dark:text-emerald-200">€{reportData.totalPaid.toFixed(2)}</p>
               </div>
-              <div className="p-4 bg-yellow-50 rounded-md">
+              <div className="p-4 rounded-2xl border border-border bg-amber-50 dark:bg-amber-400/10">
                 <p className="text-sm text-ui-muted">Erstattungen</p>
-                <p className="text-2xl font-bold text-yellow-600">€{reportData.totalRefunds.toFixed(2)}</p>
+                <p className="text-2xl font-black text-amber-800 dark:text-amber-200">€{reportData.totalRefunds.toFixed(2)}</p>
               </div>
-              <div className="p-4 bg-gray-50 rounded-md">
+              <div className="p-4 rounded-2xl border border-border bg-slate-50/70 dark:bg-white/5">
                 <p className="text-sm text-ui-muted">Offen</p>
-                <p className="text-2xl font-bold text-ui-muted">€{reportData.pendingAmount.toFixed(2)}</p>
+                <p className="text-2xl font-black text-slate-900 dark:text-slate-50">€{reportData.pendingAmount.toFixed(2)}</p>
               </div>
             </div>
           </IOSCard>
 
-          <IOSCard className="bg-white rounded-lg shadow p-6">
+          <IOSCard className="p-6">
             <Heading size="md" className="mb-4">
               Monatsübersicht
             </Heading>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-border">
+                <thead className="bg-slate-50/70 dark:bg-white/5">
                   <tr>
                     <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">
                       Monat/Jahr
@@ -245,9 +244,9 @@ export default function AdminLunchBillingReportsPage() {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-card divide-y divide-border">
                   {reportData.monthlyBreakdown.map((m) => (
-                    <tr key={`${m.month}-${m.year}`} className="hover:bg-gray-50">
+                    <tr key={`${m.month}-${m.year}`} className="hover:bg-slate-50/60 dark:hover:bg-white/5 transition-colors">
                       <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">
                         {getMonthName(m.month)} {m.year}
                       </td>

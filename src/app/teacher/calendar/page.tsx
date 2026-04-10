@@ -46,8 +46,8 @@ export default function TeacherCalendarPage() {
                 <div className="flex items-center justify-between mb-8">
                     <h3 className="text-xl font-black text-slate-900 dark:text-slate-50">{new Date(currentYear, currentMonth).toLocaleString('de-DE', { month: 'long', year: 'numeric' })}</h3>
                     <div className="flex gap-2">
-                        <button type="button" aria-label="Previous month" className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-lg text-xl text-ui-soft transition-colors hover:bg-slate-100 dark:hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50">‹</button>
-                        <button type="button" aria-label="Next month" className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-lg text-xl text-ui-soft transition-colors hover:bg-slate-100 dark:hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50">›</button>
+                        <button type="button" aria-label="Previous month" className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-lg text-xl text-ui-soft transition-colors hover:bg-slate-100 dark:hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25">‹</button>
+                        <button type="button" aria-label="Next month" className="inline-flex min-h-11 min-w-11 touch-manipulation items-center justify-center rounded-lg text-xl text-ui-soft transition-colors hover:bg-slate-100 dark:hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25">›</button>
                     </div>
                 </div>
 
@@ -56,8 +56,8 @@ export default function TeacherCalendarPage() {
                         <div key={d} className="text-center text-[10px] font-black text-ui-soft uppercase tracking-widest py-2">{d}</div>
                     ))}
                     {calendarDays.map(day => (
-                        <div key={day} className="aspect-square bg-slate-50/60 dark:bg-white/6 rounded-2xl border border-black/5 dark:border-white/10 p-2 group hover:border-[#667eea]/35 transition-all cursor-pointer relative overflow-hidden">
-                            <span className="text-xs font-black text-slate-700 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">{day}</span>
+                        <div key={day} className="aspect-square bg-slate-50/60 dark:bg-white/6 rounded-2xl border border-black/5 dark:border-white/10 p-2 group hover:border-(--aura-primary)/25 transition-all cursor-pointer relative overflow-hidden">
+                            <span className="text-xs font-black text-slate-700 dark:text-slate-200 group-hover:text-aura-primary transition-colors">{day}</span>
                         </div>
                     ))}
                 </div>
@@ -65,16 +65,16 @@ export default function TeacherCalendarPage() {
         </div>
 
         <div className="space-y-6">
-            <IOSCard className="p-6 border-black/5 bg-[#667eea]/5">
-                <h4 className="text-[10px] font-black text-[#667eea]/40 uppercase tracking-widest mb-4">Urlaub & Abwesenheit</h4>
+            <IOSCard className="p-6 border-black/5 bg-aura-primary/10">
+                <h4 className="text-[10px] font-black text-aura-primary/60 uppercase tracking-widest mb-4">Urlaub & Abwesenheit</h4>
                 <div className="space-y-4">
                     {requests.length === 0 ? (
                          <p className="text-[10px] font-black text-ui-soft italic">Keine geplanten Urlaube diesen Monat.</p>
                     ) : (
                         requests.map(req => (
-                            <div key={req.id} className="p-4 bg-white rounded-2xl border border-black/5 shadow-sm">
+                            <div key={req.id} className="p-4 bg-card rounded-2xl border border-border shadow-sm">
                                 <p className="text-xs font-black text-slate-900 dark:text-slate-50">Urlaub genehmigt</p>
-                                <p className="text-[10px] font-black text-[#667eea] uppercase mt-1">{new Date(req.start_date).toLocaleDateString()} - {new Date(req.end_date).toLocaleDateString()}</p>
+                                <p className="text-[10px] font-black text-aura-primary uppercase mt-1">{new Date(req.start_date).toLocaleDateString()} - {new Date(req.end_date).toLocaleDateString()}</p>
                             </div>
                         ))
                     )}

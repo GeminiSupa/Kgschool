@@ -12,6 +12,7 @@ import { useGroupsStore, type Group } from '@/stores/groups'
 import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
+import { IOSCard } from '@/components/ui/IOSCard'
 
 type Params = { id?: string }
 
@@ -94,7 +95,7 @@ export default function AdminDailyReportDetailPage() {
       {!report ? (
         <div className="p-8 text-center text-ui-soft">Daily report not found.</div>
       ) : (
-        <div className="bg-white rounded-lg shadow p-6 max-w-3xl">
+        <IOSCard className="p-6 max-w-3xl">
           <div className="space-y-4">
             <div>
               <h3 className="text-sm font-medium text-ui-soft">Title</h3>
@@ -158,7 +159,7 @@ export default function AdminDailyReportDetailPage() {
               </div>
             )}
           </div>
-        </div>
+        </IOSCard>
       )}
     </div>
   )

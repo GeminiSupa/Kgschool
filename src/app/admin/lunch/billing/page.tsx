@@ -132,7 +132,7 @@ export default function AdminLunchBillingPage() {
       <div className="mb-10">
         <Link
           href="/admin/lunch/orders"
-          className="text-sm font-semibold text-[#667eea] mb-2 inline-flex items-center gap-1 hover:translate-x-[-4px] transition-transform"
+          className="text-sm font-semibold text-aura-primary mb-2 inline-flex items-center gap-1 hover:translate-x-[-4px] transition-transform"
         >
           ← Zurück zu Bestellungen
         </Link>
@@ -144,32 +144,32 @@ export default function AdminLunchBillingPage() {
         <div className="flex flex-wrap gap-2 mt-4">
           <Link
             href="/admin/lunch/billing/generate"
-            className="relative border-none font-semibold cursor-pointer transition-all duration-200 overflow-hidden select-none active:scale-[0.98] bg-linear-to-br from-[#667eea] to-[#764ba2] text-white shadow-[0_4px_14px_0_rgba(102,126,234,0.39)] hover:translate-y-[-2px] hover:shadow-[0_6px_20px_0_rgba(102,126,234,0.5)] active:translate-y-0 active:shadow-[0_2px_10px_0_rgba(102,126,234,0.3)] px-6 py-3 text-base rounded-[12px]"
+            className="inline-flex min-h-11 items-center justify-center rounded-2xl bg-aura-primary px-6 py-3 text-sm font-bold text-white shadow-lg shadow-black/10 hover:brightness-110 active:brightness-95 transition-all"
           >
             Generate
           </Link>
           <Link
             href="/admin/lunch/billing/reconciliation"
-            className="relative border-none font-semibold cursor-pointer transition-all duration-200 overflow-hidden select-none active:scale-[0.98] bg-white/20 backdrop-blur-[10px] text-[#667eea] border border-[#667eea]/30 px-6 py-3 text-base rounded-[12px]"
+            className="inline-flex min-h-11 items-center justify-center rounded-2xl border-2 border-border bg-card px-6 py-3 text-sm font-bold text-foreground hover:bg-slate-50 dark:bg-white/5 dark:hover:bg-white/10 transition-colors"
           >
             Reconciliation
           </Link>
           <Link
             href="/admin/lunch/billing/refunds"
-            className="relative border-none font-semibold cursor-pointer transition-all duration-200 overflow-hidden select-none active:scale-[0.98] bg-white/20 backdrop-blur-[10px] text-[#667eea] border border-[#667eea]/30 px-6 py-3 text-base rounded-[12px]"
+            className="inline-flex min-h-11 items-center justify-center rounded-2xl border-2 border-border bg-card px-6 py-3 text-sm font-bold text-foreground hover:bg-slate-50 dark:bg-white/5 dark:hover:bg-white/10 transition-colors"
           >
             Refunds
           </Link>
           <Link
             href="/admin/lunch/billing/reports"
-            className="relative border-none font-semibold cursor-pointer transition-all duration-200 overflow-hidden select-none active:scale-[0.98] bg-white/20 backdrop-blur-[10px] text-[#667eea] border border-[#667eea]/30 px-6 py-3 text-base rounded-[12px]"
+            className="inline-flex min-h-11 items-center justify-center rounded-2xl border-2 border-border bg-card px-6 py-3 text-sm font-bold text-foreground hover:bg-slate-50 dark:bg-white/5 dark:hover:bg-white/10 transition-colors"
           >
             Reports
           </Link>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-4 mb-6">
+      <IOSCard className="p-4 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-1">Month</label>
@@ -179,7 +179,7 @@ export default function AdminLunchBillingPage() {
                 const v = e.target.value
                 setFilters((p) => ({ ...p, month: v ? Number(v) : null }))
               }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-select"
             >
               <option value="">All</option>
               {Array.from({ length: 12 }).map((_, idx) => {
@@ -200,7 +200,7 @@ export default function AdminLunchBillingPage() {
               type="number"
               min={new Date().getFullYear() - 1}
               max={new Date().getFullYear() + 1}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-input"
             />
           </div>
           <div>
@@ -208,7 +208,7 @@ export default function AdminLunchBillingPage() {
             <select
               value={filters.status}
               onChange={(e) => setFilters((p) => ({ ...p, status: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              className="ui-select"
             >
               <option value="">All</option>
               <option value="pending">Pending</option>
@@ -228,7 +228,7 @@ export default function AdminLunchBillingPage() {
             </IOSButton>
           </div>
         </div>
-      </div>
+      </IOSCard>
 
       {loading ? (
         <div className="flex justify-center py-12">
@@ -243,8 +243,8 @@ export default function AdminLunchBillingPage() {
       ) : (
         <IOSCard className="overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-border">
+              <thead className="bg-slate-50/70 dark:bg-white/5">
                 <tr>
                   <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Child</th>
                   <th className="px-4 py-3 text-left text-xs font-medium text-ui-soft uppercase">Month/Year</th>
@@ -256,7 +256,7 @@ export default function AdminLunchBillingPage() {
                   <th className="px-4 py-3 text-right text-xs font-medium text-ui-soft uppercase">Actions</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-card divide-y divide-border">
                 {bills.map((bill) => (
                   <tr key={bill.id} className="hover:bg-gray-50">
                     <td className="px-4 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-50">

@@ -13,6 +13,7 @@ import { Heading } from '@/components/ui/Heading'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 import { ErrorAlert } from '@/components/common/ErrorAlert'
 import { sT } from '@/i18n/sT'
+import { IOSCard } from '@/components/ui/IOSCard'
 
 type Params = { id?: string }
 
@@ -95,7 +96,7 @@ export default function AdminObservationDetailPage() {
       {!observation ? (
         <div className="p-8 text-center text-ui-soft">Observation not found.</div>
       ) : (
-        <div className="bg-white rounded-lg shadow p-6 max-w-3xl">
+        <IOSCard className="p-6 max-w-3xl">
           <div className="space-y-4">
             <div>
               <h3 className="text-sm font-medium text-ui-soft">Child</h3>
@@ -144,7 +145,7 @@ export default function AdminObservationDetailPage() {
               </div>
             )}
           </div>
-        </div>
+        </IOSCard>
       )}
     </div>
   )
