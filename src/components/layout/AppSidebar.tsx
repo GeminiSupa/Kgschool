@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { useI18n } from '@/i18n/I18nProvider'
@@ -158,8 +159,8 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
     <div className={`h-full flex flex-col bg-background text-foreground transition-all duration-300 border-r border-slate-100 dark:border-white/5 z-50 ${isCollapsed ? 'w-20' : 'w-full'}`}>
       <div className="px-5 py-8 flex items-center justify-between border-b border-slate-50 dark:border-white/5 bg-background">
         <div className="flex items-center gap-3 min-w-0 overflow-hidden">
-          <div className="shrink-0 w-10 h-10 bg-linear-to-br from-aura-primary to-sky-500 rounded-xl flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-black/10">
-            KC
+          <div className="shrink-0 w-10 h-10 rounded-xl shadow-lg shadow-black/10 ring-2 ring-black/5 dark:ring-white/10 bg-card flex items-center justify-center overflow-hidden">
+            <Image src="/brand/kid-cloud-mark.png" alt="" width={40} height={40} className="w-10 h-10" priority />
           </div>
           {!isCollapsed && (
             <div className="flex-1 min-w-0 transition-opacity duration-300">

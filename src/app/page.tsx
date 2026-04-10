@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useI18n } from '@/i18n/I18nProvider'
 import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 import {
@@ -85,8 +86,8 @@ export default function Home() {
     <main className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans overflow-x-hidden">
       <div className="absolute top-0 left-0 right-0 z-50 px-4 md:px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-linear-to-br from-indigo-500 to-fuchsia-500 rounded-xl flex items-center justify-center shadow-lg">
-            <span className="text-white text-xl font-bold">{t('brand.shortName')}</span>
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-black/10 ring-2 ring-black/5 dark:ring-white/10 bg-card overflow-hidden">
+            <Image src="/brand/kid-cloud-mark.png" alt="" width={40} height={40} className="w-10 h-10" priority />
           </div>
           <span className="font-bold text-lg md:text-xl tracking-tight text-slate-800 font-display hidden sm:block">{t('brand.appTitle')}</span>
         </div>
