@@ -38,7 +38,7 @@ export function AppShell({
           <LanguageSwitcher className="shrink-0" compact />
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 -mr-2 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-slate-100 dark:hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 dark:focus-visible:ring-indigo-500/50"
+            className="inline-flex min-h-11 min-w-11 -mr-2 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-aura-primary/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25"
             onClick={() => setMobileSidebarOpen(true)}
             aria-label={t('shell.openMenu')}
           >
@@ -79,7 +79,7 @@ export function AppShell({
                 </div>
                 <button
                   type="button"
-                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-slate-100 dark:hover:bg-white/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/60 dark:focus-visible:ring-indigo-500/50"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl text-muted touch-manipulation hover:bg-aura-primary/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25"
                   onClick={() => setMobileSidebarOpen(false)}
                   aria-label={t('shell.closeMenu')}
                 >

@@ -121,7 +121,7 @@ export default function ApplyPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <IOSCard className="p-8">
           <div className="mb-4 flex justify-end">
@@ -133,7 +133,7 @@ export default function ApplyPage() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="border-b border-gray-200 pb-6">
+            <div className="border-b border-border pb-6">
               <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">{t('apply.childSection')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -146,7 +146,7 @@ export default function ApplyPage() {
                     onChange={(e) => setForm((p) => ({ ...p, child_first_name: e.target.value }))}
                     type="text"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                    className="ui-input"
                   />
                 </div>
 
@@ -160,7 +160,7 @@ export default function ApplyPage() {
                     onChange={(e) => setForm((p) => ({ ...p, child_last_name: e.target.value }))}
                     type="text"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                    className="ui-input"
                   />
                 </div>
 
@@ -174,7 +174,7 @@ export default function ApplyPage() {
                     onChange={(e) => setForm((p) => ({ ...p, child_date_of_birth: e.target.value }))}
                     type="date"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                    className="ui-input"
                   />
                 </div>
 
@@ -189,13 +189,13 @@ export default function ApplyPage() {
                     type="date"
                     required
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                    className="ui-input"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="border-b border-gray-200 pb-6">
+            <div className="border-b border-border pb-6">
               <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">{t('apply.careSection')}</h2>
               <label htmlFor="betreuung_hours_type" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 {t('apply.careHours')} <span className="text-red-500">*</span>
@@ -205,7 +205,7 @@ export default function ApplyPage() {
                 value={form.betreuung_hours_type}
                 onChange={(e) => setForm((p) => ({ ...p, betreuung_hours_type: e.target.value as BetreuungHoursType }))}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-select"
               >
                 <option value="">{t('apply.selectPlease')}</option>
                 <option value="25">25 Stunden/Woche</option>
@@ -216,7 +216,7 @@ export default function ApplyPage() {
               </select>
             </div>
 
-            <div className="border-b border-gray-200 pb-6">
+            <div className="border-b border-border pb-6">
               <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">{t('apply.parentSection')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -229,7 +229,7 @@ export default function ApplyPage() {
                     onChange={(e) => setForm((p) => ({ ...p, parent_name: e.target.value }))}
                     type="text"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                    className="ui-input"
                   />
                 </div>
 
@@ -243,7 +243,7 @@ export default function ApplyPage() {
                     onChange={(e) => setForm((p) => ({ ...p, parent_email: e.target.value }))}
                     type="email"
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                    className="ui-input"
                   />
                 </div>
 
@@ -256,13 +256,13 @@ export default function ApplyPage() {
                     value={form.parent_phone}
                     onChange={(e) => setForm((p) => ({ ...p, parent_phone: e.target.value }))}
                     type="tel"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                    className="ui-input"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="border-b border-gray-200 pb-6">
+            <div className="border-b border-border pb-6">
               <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">{t('apply.facilitySection')}</h2>
               <label htmlFor="kita_id" className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
                 {t('apply.preferredKita')} <span className="text-red-500">*</span>
@@ -273,7 +273,7 @@ export default function ApplyPage() {
                 onChange={(e) => setForm((p) => ({ ...p, kita_id: e.target.value }))}
                 required
                 disabled={kitasLoading}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                className="ui-select disabled:opacity-50"
               >
                 <option value="">{kitasLoading ? t('apply.loading') : t('apply.selectPlease')}</option>
                 {kitas.map((k) => (
@@ -293,7 +293,7 @@ export default function ApplyPage() {
                 value={form.notes}
                 onChange={(e) => setForm((p) => ({ ...p, notes: e.target.value }))}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                className="ui-textarea"
                 placeholder={t('apply.notesPlaceholder')}
               />
             </div>

@@ -49,7 +49,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[linear-gradient(135deg,#667eea_0%,#764ba2_50%,#f093fb_100%)] bg-size-[200%_200%] animate-[gradientShift_15s_ease_infinite]">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[linear-gradient(135deg,#0369a1_0%,#06b6d4_48%,#f59e0b_100%)] bg-size-[200%_200%] animate-[gradientShift_15s_ease_infinite]">
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes gradientShift {
           0% { background-position: 0% 50%; }
@@ -71,7 +71,7 @@ export default function LoginPage() {
             <LanguageSwitcher />
           </div>
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-indigo-500 to-fuchsia-500 rounded-2xl mb-4 shadow-lg shadow-indigo-500/25">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-aura-primary to-aura-accent rounded-2xl mb-4 shadow-lg shadow-black/10">
               <GraduationCap className="w-8 h-8 text-white" strokeWidth={2} aria-hidden />
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-2 tracking-tight">
@@ -123,7 +123,7 @@ export default function LoginPage() {
             <div className="text-center mt-3">
               <Link
                 href="/auth/forgot-password"
-                className="text-sm text-indigo-600 hover:text-indigo-800 hover:underline transition-colors"
+                className="text-sm text-aura-primary hover:brightness-110 hover:underline transition-colors"
               >
                 {t('login.forgotPassword')}
               </Link>
@@ -148,17 +148,17 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-8 text-center">
-            <Link href="/" className="text-[#6e6e73] text-sm no-underline transition-all duration-200 inline-block hover:text-[#1d1d1f] hover:-translate-x-[3px]">
+            <Link href="/" className="text-ui-soft text-sm no-underline transition-all duration-200 inline-block hover:text-aura-primary hover:-translate-x-[3px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
               ← {t('common.backToHome')}
             </Link>
             <div className="mt-3 flex justify-center gap-4 text-xs text-ui-soft">
-              <Link href="/privacy" className="hover:text-slate-700 dark:text-slate-200">
+              <Link href="/privacy" className="hover:text-aura-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
                 {t('common.privacy')}
               </Link>
-              <Link href="/imprint" className="hover:text-slate-700 dark:text-slate-200">
+              <Link href="/imprint" className="hover:text-aura-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
                 {t('common.imprint')}
               </Link>
-              <Link href="/security" className="hover:text-slate-700 dark:text-slate-200">
+              <Link href="/security" className="hover:text-aura-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
                 {t('common.security')}
               </Link>
             </div>

@@ -23,28 +23,28 @@ export default function Home() {
   const features = useMemo(
     () => [
       {
-        icon: <LayoutDashboard className="w-8 h-8 text-indigo-500" />,
+        icon: <LayoutDashboard className="w-8 h-8 text-aura-primary" />,
         titleKey: 'home.marketingFeature1Title',
         descKey: 'home.marketingFeature1Desc',
         image:
           'https://www.kinderpedia.co/media/yootheme/cache/29/student_information_system_1280px-290d7e79.webp',
       },
       {
-        icon: <Users className="w-8 h-8 text-blue-500" />,
+        icon: <Users className="w-8 h-8 text-aura-cyan" />,
         titleKey: 'home.marketingFeature2Title',
         descKey: 'home.marketingFeature2Desc',
         image:
           'https://www.kinderpedia.co/media/yootheme/cache/66/parent_teacher_communication_app_1280-66b0e1d7.webp',
       },
       {
-        icon: <BookOpen className="w-8 h-8 text-fuchsia-500" />,
+        icon: <BookOpen className="w-8 h-8 text-aura-pink" />,
         titleKey: 'home.marketingFeature3Title',
         descKey: 'home.marketingFeature3Desc',
         image:
           'https://www.kinderpedia.co/media/yootheme/cache/4a/classroom_management_software_1280px-4ab4ef11.webp',
       },
       {
-        icon: <CreditCard className="w-8 h-8 text-violet-500" />,
+        icon: <CreditCard className="w-8 h-8 text-aura-accent" />,
         titleKey: 'home.marketingFeature4Title',
         descKey: 'home.marketingFeature4Desc',
         image:
@@ -67,15 +67,15 @@ export default function Home() {
   const benefits = useMemo(
     () => [
       {
-        icon: <MessageSquare className="w-6 h-6 text-indigo-500" />,
+        icon: <MessageSquare className="w-6 h-6 text-aura-primary" />,
         textKey: 'home.marketingBenefit1',
       },
       {
-        icon: <Calendar className="w-6 h-6 text-fuchsia-500" />,
+        icon: <Calendar className="w-6 h-6 text-aura-accent" />,
         textKey: 'home.marketingBenefit2',
       },
       {
-        icon: <Heart className="w-6 h-6 text-rose-500" />,
+        icon: <Heart className="w-6 h-6 text-aura-pink" />,
         textKey: 'home.marketingBenefit3',
       },
     ],
@@ -97,7 +97,7 @@ export default function Home() {
             <IOSButton
               variant="secondary"
               size="small"
-              className="bg-white/90 backdrop-blur-md border-indigo-100 text-indigo-700 hover:bg-indigo-50 text-xs font-bold"
+              className="bg-white/90 backdrop-blur-md border-aura-primary/20 text-aura-primary hover:bg-aura-primary/10 text-xs font-bold"
             >
               {t('home.marketingCtaLogin')}
             </IOSButton>
@@ -106,7 +106,7 @@ export default function Home() {
             <IOSButton
               variant="primary"
               size="small"
-              className="bg-linear-to-r from-indigo-600 to-fuchsia-600 border-0 text-xs font-bold"
+              className="bg-linear-to-r from-aura-primary to-aura-accent border-0 text-xs font-bold"
             >
               {t('home.marketingCtaRegister')}
             </IOSButton>
@@ -115,20 +115,20 @@ export default function Home() {
       </div>
 
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-linear-to-b from-indigo-50/50 to-white">
-          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-linear-to-br from-fuchsia-400/20 to-indigo-500/20 blur-[80px] animate-[pulse_8s_ease-in-out_infinite]" />
-          <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-linear-to-tr from-blue-400/20 to-teal-400/20 blur-[100px] animate-[pulse_10s_ease-in-out_infinite_reverse]" />
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 bg-linear-to-b from-aura-primary/10 to-white">
+          <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-linear-to-br from-aura-pink/25 to-aura-primary/20 blur-[80px] animate-[pulse_8s_ease-in-out_infinite]" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-linear-to-tr from-aura-cyan/20 to-aura-lime/20 blur-[100px] animate-[pulse_10s_ease-in-out_infinite_reverse]" />
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-md border border-indigo-100 shadow-xs mb-8 animate-[fadeInUp_0.8s_ease_out]">
-            <span className="flex h-2 w-2 rounded-full bg-indigo-500" aria-hidden />
-            <span className="text-sm font-medium text-indigo-800">{t('home.marketingHeroBadge')}</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-md border border-aura-primary/20 shadow-xs mb-8 animate-[fadeInUp_0.8s_ease_out]">
+            <span className="flex h-2 w-2 rounded-full bg-aura-primary" aria-hidden />
+            <span className="text-sm font-medium text-aura-primary">{t('home.marketingHeroBadge')}</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold font-display tracking-tight text-slate-900 leading-[1.1] mb-8 animate-[fadeInUp_1s_ease_out]">
             {t('home.marketingHeroLead')} <br />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 to-fuchsia-600">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-aura-primary to-aura-accent">
               {t('home.marketingHeroAccent')}
             </span>
           </h1>
@@ -142,7 +142,7 @@ export default function Home() {
               <IOSButton
                 variant="primary"
                 size="large"
-                className="w-full sm:w-auto bg-linear-to-r from-indigo-600 to-fuchsia-600 hover:from-indigo-700 hover:to-fuchsia-700 border-0 shadow-xl shadow-indigo-500/20 group"
+                className="w-full sm:w-auto bg-linear-to-r from-aura-primary to-aura-accent hover:brightness-110 border-0 shadow-xl shadow-black/10 group"
               >
                 {t('home.marketingCtaRegister')}
                 <ArrowRight className="w-4 h-4 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
@@ -152,7 +152,7 @@ export default function Home() {
               <IOSButton
                 variant="secondary"
                 size="large"
-                className="w-full sm:w-auto bg-white/80 backdrop-blur-md border-indigo-100 text-indigo-700 hover:bg-indigo-50"
+                className="w-full sm:w-auto bg-white/80 backdrop-blur-md border-aura-primary/20 text-aura-primary hover:bg-aura-primary/10"
               >
                 {t('home.marketingCtaLogin')}
               </IOSButton>
@@ -189,7 +189,7 @@ export default function Home() {
       <section className="py-24 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-sm font-bold tracking-widest text-indigo-600 uppercase mb-3">
+            <h2 className="text-sm font-bold tracking-widest text-aura-primary uppercase mb-3">
               {t('home.marketingModulesEyebrow')}
             </h2>
             <h3 className="text-3xl md:text-5xl font-bold text-slate-900 font-display">
@@ -238,7 +238,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-1">
-            <h2 className="text-sm font-bold tracking-widest text-fuchsia-600 uppercase mb-3">
+            <h2 className="text-sm font-bold tracking-widest text-aura-accent uppercase mb-3">
               {t('home.marketingPartnersEyebrow')}
             </h2>
             <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 font-display">
@@ -258,16 +258,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 relative overflow-hidden bg-indigo-900">
-        <div className="absolute inset-0 bg-linear-to-br from-indigo-900 via-indigo-800 to-fuchsia-900 -z-10" />
+      <section className="py-24 relative overflow-hidden bg-slate-900">
+        <div className="absolute inset-0 bg-linear-to-br from-[#0c4a6e] via-[#0369a1] to-[#c2410c] -z-10" />
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-white/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
 
         <div className="max-w-4xl mx-auto px-6 text-center text-white">
           <h2 className="text-4xl md:text-6xl font-bold mb-8 font-display">{t('home.marketingCtaBandTitle')}</h2>
-          <p className="text-xl text-indigo-100 mb-12 opacity-90">{t('home.marketingCtaBandSubtitle')}</p>
+          <p className="text-xl text-sky-100 mb-12 opacity-90">{t('home.marketingCtaBandSubtitle')}</p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link href="/register">
-              <IOSButton size="large" className="bg-white text-indigo-900 hover:bg-indigo-50 border-0 shadow-xl px-10 py-4 text-lg">
+              <IOSButton size="large" className="bg-white text-aura-primary hover:bg-sky-50 border-0 shadow-xl px-10 py-4 text-lg">
                 {t('home.marketingCtaBandButton')}
               </IOSButton>
             </Link>
@@ -284,16 +284,16 @@ export default function Home() {
             <span className="font-semibold text-slate-900 tracking-tight font-display">{t('brand.appTitle')}</span>
           </div>
           <nav className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm font-medium text-slate-500" aria-label="Footer">
-            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">
+            <Link href="/privacy" className="hover:text-aura-primary transition-colors">
               {t('common.privacy')}
             </Link>
-            <Link href="/imprint" className="hover:text-indigo-600 transition-colors">
+            <Link href="/imprint" className="hover:text-aura-primary transition-colors">
               {t('common.imprint')}
             </Link>
-            <Link href="/security" className="hover:text-indigo-600 transition-colors">
+            <Link href="/security" className="hover:text-aura-primary transition-colors">
               {t('common.security')}
             </Link>
-            <Link href="/dpa" className="hover:text-indigo-600 transition-colors">
+            <Link href="/dpa" className="hover:text-aura-primary transition-colors">
               {t('common.dpa')}
             </Link>
           </nav>

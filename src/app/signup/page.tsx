@@ -10,7 +10,7 @@ export default function SignupPage() {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-aura-primary/10 to-aura-accent/15 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <IOSCard className="p-8 text-center">
           <div className="mb-6">
@@ -37,17 +37,17 @@ export default function SignupPage() {
               Zur Anmeldung
             </IOSButton>
 
-            <Link href="/" className="block text-center text-ui-muted hover:text-slate-800 dark:text-slate-100 text-sm">
+            <Link href="/" className="block text-center text-ui-muted hover:text-aura-primary text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
               ← Zurück zur Startseite
             </Link>
             <div className="flex justify-center gap-4 text-xs text-ui-soft">
-              <Link href="/privacy" className="hover:text-slate-700 dark:text-slate-200">
+              <Link href="/privacy" className="hover:text-aura-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
                 Datenschutz
               </Link>
-              <Link href="/imprint" className="hover:text-slate-700 dark:text-slate-200">
+              <Link href="/imprint" className="hover:text-aura-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
                 Impressum
               </Link>
-              <Link href="/security" className="hover:text-slate-700 dark:text-slate-200">
+              <Link href="/security" className="hover:text-aura-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
                 Sicherheit
               </Link>
             </div>

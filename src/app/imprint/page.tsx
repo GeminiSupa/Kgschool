@@ -8,7 +8,7 @@ export default function ImprintPage() {
   return (
     <main className="min-h-screen bg-background text-slate-900 dark:text-slate-50">
       <div className="mx-auto max-w-4xl px-6 py-12">
-        <Link href="/" className="text-sm text-aura-primary hover:brightness-110">
+        <Link href="/" className="text-sm text-aura-primary hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">Impressum</h1>

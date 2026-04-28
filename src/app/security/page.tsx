@@ -8,7 +8,7 @@ export default function SecurityPage() {
   return (
     <main className="min-h-screen bg-background text-slate-900 dark:text-slate-50">
       <div className="mx-auto max-w-5xl px-6 py-12">
-        <Link href="/" className="text-sm text-aura-primary hover:brightness-110">
+        <Link href="/" className="text-sm text-aura-primary hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1">
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">Security, Ethik und Compliance</h1>
@@ -18,7 +18,7 @@ export default function SecurityPage() {
         </p>
 
         <section className="mt-8 grid gap-5 md:grid-cols-2">
-          <article className="rounded-2xl border border-gray-200 p-5">
+          <article className="rounded-2xl border border-border bg-card p-5">
             <h2 className="font-semibold">Datenschutz (DSGVO)</h2>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700 dark:text-slate-200">
               <li>Auftragsverarbeitung (AVV) nach Art. 28 DSGVO</li>
@@ -27,7 +27,7 @@ export default function SecurityPage() {
               <li>Loesch- und Aufbewahrungskonzepte</li>
             </ul>
           </article>
-          <article className="rounded-2xl border border-gray-200 p-5">
+          <article className="rounded-2xl border border-border bg-card p-5">
             <h2 className="font-semibold">Technische Sicherheit</h2>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700 dark:text-slate-200">
               <li>TLS-Verschluesselung fuer Datenuebertragung</li>
@@ -36,7 +36,7 @@ export default function SecurityPage() {
               <li>Incident-Management und Eskalationspfade</li>
             </ul>
           </article>
-          <article className="rounded-2xl border border-gray-200 p-5">
+          <article className="rounded-2xl border border-border bg-card p-5">
             <h2 className="font-semibold">Ethische Datenverarbeitung</h2>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700 dark:text-slate-200">
               <li>Keine versteckte Profilbildung mit Kinderdaten</li>
@@ -45,7 +45,7 @@ export default function SecurityPage() {
               <li>Human-in-the-loop fuer paedagogische Entscheidungen</li>
             </ul>
           </article>
-          <article className="rounded-2xl border border-gray-200 p-5">
+          <article className="rounded-2xl border border-border bg-card p-5">
             <h2 className="font-semibold">Betrieb fuer Kommunen</h2>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700 dark:text-slate-200">
               <li>Mehrstandortfaehig fuer Traeger und Stadtverbuende</li>

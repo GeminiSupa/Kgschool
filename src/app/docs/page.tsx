@@ -32,7 +32,7 @@ export default function DocsPage() {
           <a
             href="/api/docs/manual"
             download
-            className="flex items-start gap-4 p-6 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-sm hover:border-indigo-300 dark:hover:border-indigo-500/50 hover:shadow-md transition-all group"
+            className="flex items-start gap-4 p-6 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-sm hover:border-(--aura-primary)/35 dark:hover:border-(--aura-primary)/30 hover:shadow-md transition-all group"
           >
             <div className="w-12 h-12 rounded-xl bg-(--aura-primary)/10 dark:bg-(--aura-primary)/15 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <FileText className="w-6 h-6 text-aura-primary" aria-hidden />

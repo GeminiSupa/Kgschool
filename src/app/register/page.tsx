@@ -77,7 +77,7 @@ export default function RegisterPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-linear-to-br from-indigo-50 to-fuchsia-100">
+      <div className="min-h-screen flex items-center justify-center p-4 bg-linear-to-br from-aura-primary/10 to-aura-accent/20">
         <IOSCard className="max-w-md w-full p-10 text-center animate-[fadeInUp_0.5s_ease_out]">
           <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl" aria-hidden>
@@ -92,8 +92,8 @@ export default function RegisterPage() {
               <span className="font-medium">{autoLoginHint}</span>
             </p>
           ) : null}
-          <div className="text-sm text-indigo-600 flex items-center justify-center gap-2">
-            <span className="w-4 h-4 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" aria-hidden />
+          <div className="text-sm text-aura-primary flex items-center justify-center gap-2">
+            <span className="w-4 h-4 border-2 border-aura-primary border-t-transparent rounded-full animate-spin" aria-hidden />
             {t(sT('redirectingLogin'))}
           </div>
         </IOSCard>
@@ -103,8 +103,8 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 relative bg-slate-50 overflow-hidden">
-      <div className="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-linear-to-br from-indigo-200/40 to-fuchsia-200/40 blur-[80px]" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[350px] h-[350px] rounded-full bg-linear-to-tl from-cyan-200/40 to-blue-200/40 blur-[100px]" />
+      <div className="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-linear-to-br from-aura-primary/20 to-aura-pink/20 blur-[80px]" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[350px] h-[350px] rounded-full bg-linear-to-tl from-aura-cyan/20 to-aura-accent/20 blur-[100px]" />
 
       <div className="relative z-10 w-full max-w-lg mb-12 mt-12">
         <div className="text-center mb-8">
@@ -118,7 +118,7 @@ export default function RegisterPage() {
           <p className="text-slate-600 text-lg">{t(sT('registerSubtitle'))}</p>
         </div>
 
-        <IOSCard className="p-8 md:p-10 shadow-2xl shadow-indigo-900/5 border border-white">
+        <IOSCard className="p-8 md:p-10 shadow-2xl shadow-black/5 border border-white">
           <form onSubmit={handleRegister} className="space-y-6" noValidate>
             <div className="pb-6 mb-6 top-1 border-b border-slate-100">
               <h3 className="text-sm font-bold text-ui-soft uppercase tracking-widest mb-4">{t(sT('orgDetailSection'))}</h3>
@@ -173,7 +173,7 @@ export default function RegisterPage() {
               />
             </div>
 
-            <IOSButton type="submit" disabled={loading} variant="primary" size="large" className="w-full mt-8 bg-indigo-600 hover:bg-indigo-700 text-base">
+            <IOSButton type="submit" disabled={loading} variant="primary" size="large" className="w-full mt-8 text-base">
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -192,11 +192,11 @@ export default function RegisterPage() {
 
             <p className="text-xs text-center text-slate-500 mt-6 leading-relaxed">
               {t(sT('registerAgreePrefix'))}{' '}
-              <Link href="/privacy" className="underline hover:text-indigo-600">
+              <Link href="/privacy" className="underline hover:text-aura-primary">
                 {t('common.privacy')}
               </Link>{' '}
               {t(sT('registerAgreeAnd'))}{' '}
-              <Link href="/dpa" className="underline hover:text-indigo-600">
+              <Link href="/dpa" className="underline hover:text-aura-primary">
                 {t('common.dpa')}
               </Link>
               .
@@ -206,7 +206,7 @@ export default function RegisterPage() {
 
         <div className="mt-8 text-center text-slate-600">
           {t(sT('alreadyHaveAccount'))}{' '}
-          <Link href="/login" className="font-semibold text-indigo-600 hover:underline">
+          <Link href="/login" className="font-semibold text-aura-primary hover:underline">
             {t(sT('logInToDashboardLink'))}
           </Link>
         </div>

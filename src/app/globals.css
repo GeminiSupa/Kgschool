@@ -11,8 +11,11 @@
   /* Aura Palette - Kid Cloud (trust + warmth) */
   --aura-indigo: #4338ca; /* kept for existing pages; no longer the primary CTA */
   --aura-sky: #0284c7; /* sky-600 (primary) */
+  --aura-cyan: #22c7df; /* logo cyan */
   --aura-mint: #0d9488; /* teal-600 (secondary) */
-  --aura-sun: #f59e0b; /* amber-500 (accent) */
+  --aura-sun: #f59e0b; /* logo orange (accent) */
+  --aura-lime: #6ee70e; /* logo lime */
+  --aura-pink: #f255c5; /* logo pink */
   --aura-coral: #ef4444;
   --aura-lavender: #f1f5f9;
   --aura-rose: #db2777;
@@ -42,9 +45,12 @@
 
   --aura-indigo: #818cf8;
   --aura-sky: #38bdf8; /* sky-400 */
+  --aura-cyan: #67e8f9;
   --aura-coral: #fb7185;
   --aura-mint: #2dd4bf; /* teal-400 */
   --aura-sun: #fbbf24; /* amber-400 */
+  --aura-lime: #bef264;
+  --aura-pink: #f9a8d4;
   --aura-primary: var(--aura-sky);
   --aura-accent: var(--aura-sun);
 }
@@ -63,9 +69,12 @@
 
     --aura-indigo: #818cf8;
     --aura-sky: #38bdf8;
+    --aura-cyan: #67e8f9;
     --aura-coral: #fb7185;
     --aura-mint: #2dd4bf;
     --aura-sun: #fbbf24;
+    --aura-lime: #bef264;
+    --aura-pink: #f9a8d4;
     --aura-primary: var(--aura-sky);
     --aura-accent: var(--aura-sun);
   }
@@ -80,9 +89,12 @@
   
   --color-aura-indigo: var(--aura-indigo);
   --color-aura-sky: var(--aura-sky);
+  --color-aura-cyan: var(--aura-cyan);
   --color-aura-coral: var(--aura-coral);
   --color-aura-mint: var(--aura-mint);
   --color-aura-sun: var(--aura-sun);
+  --color-aura-lime: var(--aura-lime);
+  --color-aura-pink: var(--aura-pink);
   --color-aura-lavender: var(--aura-lavender);
   --color-aura-rose: var(--aura-rose);
 
