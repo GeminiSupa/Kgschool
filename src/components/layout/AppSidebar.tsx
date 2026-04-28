@@ -160,7 +160,7 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
       <div className="px-5 py-8 flex items-center justify-between border-b border-slate-50 dark:border-white/5 bg-background">
         <div className="flex items-center gap-3 min-w-0 overflow-hidden">
           <div className="shrink-0 w-10 h-10 rounded-xl shadow-lg shadow-black/10 ring-2 ring-black/5 dark:ring-white/10 bg-card flex items-center justify-center overflow-hidden">
-            <Image src="/brand/kid-cloud-mark.png" alt="" width={40} height={40} className="w-10 h-10" priority />
+            <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={40} height={40} className="w-10 h-10 object-contain" priority />
           </div>
           {!isCollapsed && (
             <div className="flex-1 min-w-0 transition-opacity duration-300">

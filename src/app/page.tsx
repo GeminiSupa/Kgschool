@@ -87,7 +87,7 @@ export default function Home() {
       <div className="absolute top-0 left-0 right-0 z-50 px-4 md:px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-black/10 ring-2 ring-black/5 dark:ring-white/10 bg-card overflow-hidden">
-            <Image src="/brand/kid-cloud-mark.png" alt="" width={40} height={40} className="w-10 h-10" priority />
+            <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={40} height={40} className="w-10 h-10 object-contain" priority />
           </div>
           <span className="font-bold text-lg md:text-xl tracking-tight text-slate-800 font-display hidden sm:block">{t('brand.appTitle')}</span>
         </div>
@@ -165,7 +165,7 @@ export default function Home() {
             <img
               src="https://www.kinderpedia.co/media/yootheme/cache/29/student_information_system_1280px-290d7e79.webp"
               alt={t('home.marketingHeroImageAlt')}
-              className="w-full h-auto rounded-xl md:rounded-[32px] block shadow-inner"
+              className="w-full h-auto rounded-xl md:rounded-premium block shadow-inner"
             />
           </div>
         </div>
@@ -228,7 +228,7 @@ export default function Home() {
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
           <div className="flex-1 relative">
-            <div className="w-full aspect-square md:aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl relative border-8 border-white">
+            <div className="w-full aspect-square md:aspect-4/5 rounded-[40px] overflow-hidden shadow-2xl relative border-8 border-white">
               <img
                 src="https://www.kinderpedia.co/media/yootheme/cache/59/gradinita-bergman-05cf8571-593ee558.webp"
                 alt={t('home.marketingPartnersImageAlt')}
@@ -247,7 +247,7 @@ export default function Home() {
             <ul className="space-y-6">
               {benefits.map((item, i) => (
                 <li key={i} className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 shadow-xs">
+                  <div className="shrink-0 w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 shadow-xs">
                     {item.icon}
                   </div>
                   <span className="text-lg text-slate-700 font-medium">{t(item.textKey)}</span>
@@ -278,8 +278,8 @@ export default function Home() {
       <footer className="bg-slate-50 border-t border-slate-200 pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 flex items-center justify-center bg-indigo-600 rounded-lg text-white font-bold text-xs">
-              {t('brand.shortName')}
+            <div className="w-8 h-8 flex items-center justify-center bg-card rounded-lg ring-1 ring-black/5 dark:ring-white/10 overflow-hidden">
+              <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={32} height={32} className="w-8 h-8 object-contain" />
             </div>
             <span className="font-semibold text-slate-900 tracking-tight font-display">{t('brand.appTitle')}</span>
           </div>
