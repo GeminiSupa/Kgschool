@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { createClient } from '@/utils/supabase/client'
+import { getActiveKitaId } from '@/utils/tenant/client'
 
 export interface ParentWorkTask {
   id: string
@@ -60,8 +61,17 @@ export const useParentWorkStore = create<ParentWorkState>((set) => ({
     set({ loading: true, error: null })
     try {
       const supabase = createClient()
+      const { data: { user } } = await supabase.auth.getUser()
       let query = supabase.from('parent_work_tasks').select('*')
-      if (kitaId) query = query.eq('kita_id', kitaId)
+      if (kitaId) {
+        // Keep tenant isolation while still surfacing legacy tasks that were created
+        // before kita_id was persisted.
+        if (user?.id) {
+          query = query.or(`kita_id.eq.${kitaId},and(kita_id.is.null,created_by.eq.${user.id})`)
+        } else {
+          query = query.eq('kita_id', kitaId)
+        }
+      }
       if (status) query = query.eq('status', status)
       if (assignedTo) query = query.eq('assigned_to', assignedTo)
       query = query.order('created_at', { ascending: false })
@@ -79,7 +89,18 @@ export const useParentWorkStore = create<ParentWorkState>((set) => ({
     try {
       const supabase = createClient()
       const { data: { user } } = await supabase.auth.getUser()
-      const { data, error } = await supabase.from('parent_work_tasks').insert([{ ...taskData, created_by: user?.id }]).select().single()
+      const activeKitaId = await getActiveKitaId()
+      const payload = {
+        ...taskData,
+        created_by: user?.id,
+        kita_id: taskData.kita_id ?? activeKitaId ?? undefined,
+      }
+
+      if (!payload.kita_id) {
+        throw new Error('Keine aktive Kita gefunden. Bitte waehlen Sie zuerst eine Kita aus.')
+      }
+
+      const { data, error } = await supabase.from('parent_work_tasks').insert([payload]).select().single()
       if (error) throw error
       return data as ParentWorkTask
     } catch (e: any) { throw e }
