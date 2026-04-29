@@ -4,9 +4,21 @@ import React, { useState, useMemo } from 'react'
 import { IOSButton } from '@/components/ui/IOSButton'
 import { LoadingSpinner } from '@/components/common/LoadingSpinner'
 
+export type TeacherLeaveType = 'vacation' | 'sick' | 'personal' | 'other'
+
+export type TeacherLeaveRequestPayload = {
+  start_date: string
+  end_date: string
+  leave_type: TeacherLeaveType
+  reason: string
+  status: 'pending'
+}
+
+type TeacherLeaveRequestFormState = Omit<TeacherLeaveRequestPayload, 'status'>
+
 interface TeacherLeaveRequestFormProps {
-  initialData?: any
-  onSubmit: (data: any) => void
+  initialData?: Partial<TeacherLeaveRequestFormState>
+  onSubmit: (data: TeacherLeaveRequestPayload) => void | Promise<void>
   onCancel: () => void
   loading?: boolean
 }
@@ -17,12 +29,14 @@ export const TeacherLeaveRequestForm = ({
   onCancel,
   loading: submitting
 }: TeacherLeaveRequestFormProps) => {
+  const initialLeaveType = (initialData?.leave_type as TeacherLeaveType | undefined) ?? 'vacation'
+
   const [form, setForm] = useState({
     start_date: initialData?.start_date || '',
     end_date: initialData?.end_date || '',
-    leave_type: initialData?.leave_type || 'vacation',
+    leave_type: initialLeaveType,
     reason: initialData?.reason || ''
-  })
+  } satisfies TeacherLeaveRequestFormState)
 
   const [error, setError] = useState('')
 

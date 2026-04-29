@@ -30,7 +30,7 @@ export function AppShell({
       <div className="md:hidden flex items-center justify-between px-4 py-3 bg-background/80 backdrop-blur-xl border-b border-border sticky top-0 z-40">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg ring-2 ring-black/5 dark:ring-white/10 bg-card flex items-center justify-center overflow-hidden">
-            <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={32} height={32} className="w-8 h-8 object-contain" priority />
+            <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={32} height={32} className="object-contain" priority />
           </div>
           <span className="font-bold text-sm tracking-tight text-foreground">{t('brand.appTitle')}</span>
         </div>
@@ -73,7 +73,7 @@ export function AppShell({
               <div className="flex items-center justify-between border-b border-border px-6 py-5">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg ring-2 ring-black/5 dark:ring-white/10 bg-card flex items-center justify-center overflow-hidden">
-                    <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={32} height={32} className="w-8 h-8 object-contain" priority />
+                    <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={32} height={32} className="object-contain" priority />
                   </div>
                   <span className="font-bold text-sm tracking-tight text-foreground">{t('brand.appTitle')}</span>
                 </div>

@@ -12,7 +12,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { useTeacherLeaveRequestsStore } from '@/stores/teacherLeaveRequests'
 import { Heading } from '@/components/ui/Heading'
 import { IOSCard } from '@/components/ui/IOSCard'
-import { TeacherLeaveRequestForm } from '@/components/forms/TeacherLeaveRequestForm'
+import { TeacherLeaveRequestForm, type TeacherLeaveRequestPayload } from '@/components/forms/TeacherLeaveRequestForm'
 
 export default function NewTeacherLeavePage() {
   const { t } = useI18n()
@@ -22,7 +22,7 @@ export default function NewTeacherLeavePage() {
   const { createLeaveRequest } = useTeacherLeaveRequestsStore()
   const [submitting, setSubmitting] = useState(false)
 
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: TeacherLeaveRequestPayload) => {
     if (!user?.id) return
     setSubmitting(true)
     try {

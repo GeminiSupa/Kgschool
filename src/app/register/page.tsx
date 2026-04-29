@@ -112,7 +112,7 @@ export default function RegisterPage() {
             href="/"
             className="inline-flex items-center justify-center w-12 h-12 bg-white rounded-xl shadow-sm mb-6 border border-slate-100 hover:scale-105 transition-transform"
           >
-            <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={48} height={48} className="w-12 h-12 object-contain" />
+            <Image src="/brand/kid-cloud-logo.png" alt="Kid Cloud logo" width={48} height={48} className="object-contain" />
           </Link>
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight font-display">{t(sT('registerPageTitle'))}</h1>
           <p className="text-slate-600 text-lg">{t(sT('registerSubtitle'))}</p>
