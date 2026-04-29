@@ -12,43 +12,67 @@ export default function ImprintPage() {
           ← Zurueck zur Startseite
         </Link>
         <h1 className="mt-4 text-3xl font-bold">Impressum</h1>
-        <p className="mt-3 text-sm text-ui-muted">
-          Platzhalter-Vorlage. Bitte vor Veroeffentlichung mit Ihren echten Unternehmensdaten ersetzen.
-        </p>
+        <p className="mt-3 text-sm text-ui-muted">Angaben gemaess § 5 DDG, § 18 Abs. 2 MStV und den allgemeinen Informationspflichten fuer digitale Dienste.</p>
 
         <section className="mt-8 space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-200">
           <p>
             <strong>Anbieter:</strong>
             <br />
-            Kid Cloud GmbH
+            ZAHA GLOBAL GmbH
             <br />
-            Musterstrasse 1
+            ZAHA GLOBAL UG
             <br />
-            52062 Aachen
+            Adolfstr. 32, D-52134 Herzogenrath
             <br />
             Deutschland
           </p>
           <p>
             <strong>Kontakt:</strong>
             <br />
-            E-Mail: kontakt@kidcloud.app
+            E-Mail: info@zahaglobal.co
             <br />
-            Telefon: +49 (0)241 000000
+            Telefon: +49 170 9057 359
+            <br />
+            Website: https://zahaglobal.co/
           </p>
           <p>
             <strong>Vertretungsberechtigt:</strong>
             <br />
-            Max Mustermann (Geschaeftsfuehrung)
+            Geschaeftsfuehrung der ZAHA GLOBAL GmbH / ZAHA GLOBAL UG
           </p>
           <p>
             <strong>Registereintrag:</strong>
             <br />
-            Amtsgericht Aachen, HRB 00000
+            Amtsgericht Aachen, HRB 27903
+            <br />
+            EUID: DER3101.HRB27903
           </p>
           <p>
             <strong>Umsatzsteuer-ID:</strong>
             <br />
-            DE000000000
+            Bitte USt-IdNr. ergaenzen, sofern vorhanden
+          </p>
+          <p>
+            <strong>Inhaltlich verantwortlich gemaess § 18 Abs. 2 MStV:</strong>
+            <br />
+            ZAHA GLOBAL GmbH
+            <br />
+            Anschrift wie oben
+          </p>
+          <p>
+            <strong>Unternehmensgegenstand (Object):</strong>
+            <br />
+            Object
+          </p>
+          <p>
+            <strong>Hinweis zur Plattform:</strong>
+            <br />
+            Kid Cloud ist eine digitale Verwaltungs- und Kommunikationsplattform fuer Kitas, Traeger und Familien. Die Plattform wird von der ZAHA GLOBAL GmbH als Teil ihres Technologie- und Softwareportfolios entwickelt und betrieben. Inhalte, Produkttexte und Dokumentationen werden mit der gebotenen Sorgfalt gepflegt. Eine Gewaehr fuer jederzeitige Vollstaendigkeit, Richtigkeit und Aktualitaet allgemeiner Informationsseiten kann jedoch trotz regelmaessiger Pflege nicht uebernommen werden.
+          </p>
+          <p>
+            <strong>Haftung fuer Links:</strong>
+            <br />
+            Externe Links werden bei erstmaliger Verlinkung auf erkennbare Rechtsverstoesse geprueft. Eine permanente inhaltliche Kontrolle verlinkter externer Seiten ist ohne konkrete Anhaltspunkte nicht zumutbar. Bei Bekanntwerden von Rechtsverstoessen werden derartige Links unverzueglich entfernt.
           </p>
         </section>
       </div>

@@ -13,8 +13,9 @@ export default function SecurityPage() {
         </Link>
         <h1 className="mt-4 text-3xl font-bold">Security, Ethik und Compliance</h1>
         <p className="mt-3 text-sm text-ui-muted">
-          Orientierung fuer Traeger und Kommunen. Diese Seite kann als Grundlage fuer Vergabeunterlagen genutzt
-          werden.
+          Kid Cloud wird von der Zaha Global GmbH mit Fokus auf Datenschutz, Mandantentrennung und belastbare
+          Betriebsprozesse entwickelt und betrieben. Diese Seite gibt einen kompakten Ueberblick ueber unser
+          Sicherheits- und Compliance-Verstaendnis.
         </p>
 
         <section className="mt-8 grid gap-5 md:grid-cols-2">
@@ -33,7 +34,7 @@ export default function SecurityPage() {
               <li>TLS-Verschluesselung fuer Datenuebertragung</li>
               <li>Backup- und Wiederherstellungsprozesse</li>
               <li>Auditierbare Admin- und Sicherheitsereignisse</li>
-              <li>Incident-Management und Eskalationspfade</li>
+              <li>Incident-Management und definierte Eskalationspfade</li>
             </ul>
           </article>
           <article className="rounded-2xl border border-border bg-card p-5">
@@ -54,6 +55,26 @@ export default function SecurityPage() {
               <li>Schulungs- und Rolloutkonzept in Phasen</li>
             </ul>
           </article>
+        </section>
+
+        <section className="mt-8 rounded-2xl border border-border bg-card p-6 text-sm leading-6 text-slate-700 dark:text-slate-200">
+          <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50">Sicherheitsgrundsaetze von Kid Cloud</h2>
+          <p className="mt-3">
+            Wir verfolgen einen risikobasierten Ansatz fuer den Schutz von Vertraulichkeit, Integritaet und
+            Verfuegbarkeit. Dazu gehoeren rollenbasierte Berechtigungen, Protokollierung relevanter Systemaktionen,
+            technische Zugangssicherungen, regelmaessige Wartung sowie ein strukturierter Umgang mit Sicherheitsvorfaellen.
+          </p>
+          <p className="mt-3">
+            Organisatorisch wird der Zugriff auf produktive Daten auf berechtigte Rollen begrenzt. Vertragliche und
+            datenschutzrechtliche Anforderungen fuer Kunden aus dem Bildungs- und Kita-Umfeld werden ueber geeignete
+            Dokumente wie Datenschutzhinweise, TOMs und AVV/DPA-Prozesse begleitet.
+          </p>
+          <p className="mt-3">
+            Fuer allgemeine Rueckfragen kann derzeit die zentrale Unternehmensadresse <strong>info@zahaglobal.co</strong>
+            sowie die auf der Unternehmenswebseite genannte Telefonnummer <strong>+49 170 9057 359</strong> genutzt
+            werden. Fuer den Live-Betrieb empfiehlt sich zusaetzlich eine dedizierte Sicherheits- oder
+            Datenschutzkontaktadresse.
+          </p>
         </section>
       </div>
     </main>

@@ -13,14 +13,16 @@ export default function DpaPage() {
         </Link>
         <h1 className="mt-4 text-3xl font-bold">AVV / Data Processing Agreement</h1>
         <p className="mt-3 text-sm text-ui-muted">
-          Vorlage fuer den Abschluss eines Auftragsverarbeitungsvertrags (Art. 28 DSGVO).
+          Informationen zum Auftragsverarbeitungsvertrag fuer Kunden und Partner von Kid Cloud, bereitgestellt durch
+          die ZAHA GLOBAL GmbH.
         </p>
 
         <section className="mt-8 space-y-4 text-sm leading-6 text-slate-700 dark:text-slate-200">
           <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Leistungsrahmen</h2>
           <p>
-            Kid Cloud verarbeitet personenbezogene Daten ausschliesslich im Auftrag und auf dokumentierte Weisung der
-            verantwortlichen Stelle.
+            Sofern ZAHA GLOBAL GmbH personenbezogene Daten im Rahmen von Kid Cloud fuer Kitas, Traeger oder andere
+            Organisationen verarbeitet, geschieht dies ausschliesslich im Auftrag und auf dokumentierte Weisung der
+            jeweils verantwortlichen Stelle.
           </p>
 
           <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Mindestinhalte des AVV</h2>
@@ -33,10 +35,34 @@ export default function DpaPage() {
             <li>Unterstuetzung bei Betroffenenanfragen und Vorfallmanagement</li>
           </ul>
 
+          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Vertragspartner</h2>
+          <p>
+            Auftragsverarbeiter:
+            <br />
+            ZAHA GLOBAL GmbH
+            <br />
+            ZAHA GLOBAL UG
+            <br />
+            Adolfstr. 32, D-52134 Herzogenrath
+            <br />
+            Deutschland
+            <br />
+            Register: Amtsgericht Aachen, HRB 27903
+            <br />
+            EUID: DER3101.HRB27903
+          </p>
+          <p>
+            Verantwortliche Stelle:
+            <br />
+            Die jeweils vertragsschliessende Kita, der Traeger oder die nutzende Organisation.
+          </p>
+
           <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-50">Anfrageprozess</h2>
           <p>
-            Senden Sie Ihre AVV-Anfrage an <strong>dpa@kidcloud.app</strong>. Sie erhalten eine Vertragsvorlage,
-            TOM-Anlage und die aktuelle Subunternehmerliste.
+            Senden Sie Ihre AVV- oder DPA-Anfrage an <strong>info@zahaglobal.co</strong> oder nutzen Sie die auf der
+            Unternehmenswebseite veroeffentlichte Rufnummer <strong>+49 170 9057 359</strong> fuer die Erstaufnahme.
+            Auf Anfrage koennen AVV/DPA-Vorlage, TOM-Anlage und Informationen zu eingesetzten
+            Unterauftragsverarbeitern bereitgestellt werden.
           </p>
         </section>
       </div>
