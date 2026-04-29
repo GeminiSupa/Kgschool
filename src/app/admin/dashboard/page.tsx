@@ -311,7 +311,7 @@ export default function AdminDashboardPage() {
                     </div>
                     <Link
                       href={`/admin/leave/${r.id}`}
-                      className="shrink-0 rounded-xl bg-indigo-600 px-3 py-2 text-[10px] font-black uppercase tracking-widest text-white hover:bg-indigo-700"
+                      className="shrink-0 rounded-xl bg-aura-primary px-3 py-2 text-[10px] font-black uppercase tracking-widest text-white hover:brightness-110 active:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25"
                     >
                       Open
                     </Link>

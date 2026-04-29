@@ -79,7 +79,7 @@ export const NapRecordForm = ({
           onChange={handleChange}
           required
           disabled={childrenLoading}
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all disabled:opacity-50"
+          className="ui-select disabled:opacity-60"
         >
           <option value="">{childrenLoading ? 'Lädt...' : 'Kind auswählen'}</option>
           {children.map(child => (
@@ -100,7 +100,7 @@ export const NapRecordForm = ({
           value={form.nap_date}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
         />
       </div>
 
@@ -114,7 +114,7 @@ export const NapRecordForm = ({
             type="time"
             value={form.start_time}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+            className="ui-input"
           />
         </div>
         <div>
@@ -126,7 +126,7 @@ export const NapRecordForm = ({
             type="time"
             value={form.end_time}
             onChange={handleChange}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+            className="ui-input"
           />
         </div>
       </div>
@@ -141,7 +141,7 @@ export const NapRecordForm = ({
           value={form.duration_minutes}
           onChange={handleChange}
           min="0"
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
           placeholder="z.B. 90"
         />
       </div>
@@ -155,7 +155,7 @@ export const NapRecordForm = ({
           value={form.notes}
           onChange={handleChange}
           rows={3}
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="z.B. Kind ist schnell eingeschlafen, ruhiger Schlaf..."
         />
       </div>

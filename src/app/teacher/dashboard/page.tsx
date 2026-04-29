@@ -140,13 +140,13 @@ export default function TeacherDashboardPage() {
         <div className="flex flex-wrap gap-3">
           <Link
             href="/teacher/attendance"
-            className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-500/15 dark:shadow-indigo-900/40 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-background"
+            className="ui-cta-primary-link"
           >
             {t(pT(ROUTE, 'ctaAttendance'))}
           </Link>
           <Link
             href="/teacher/daily-reports/new"
-            className="px-6 py-3 bg-background text-slate-700 dark:text-slate-200 border border-border rounded-2xl font-bold text-sm shadow-sm hover:bg-slate-50 dark:hover:bg-white/5 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-600 focus:ring-offset-2 dark:focus:ring-offset-background"
+            className="ui-cta-secondary-link"
           >
             {t(pT(ROUTE, 'ctaNewDailyReport'))}
           </Link>
@@ -207,7 +207,7 @@ export default function TeacherDashboardPage() {
               <IOSCard className="p-6">
                 <div className="flex items-center justify-between mb-3">
                   <h2 className="text-xs font-black uppercase tracking-widest text-ui-soft">{t(pT(ROUTE, 'statTodayAttendance'))}</h2>
-                  <Link href="/teacher/attendance" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300 hover:underline">
+                  <Link href="/teacher/attendance" className="ui-micro-link">
                     {t('common.view')} →
                   </Link>
                 </div>
@@ -217,7 +217,7 @@ export default function TeacherDashboardPage() {
             {/* My Groups - 7 cols */}
             <div className="lg:col-span-7">
                <div className="flex items-center gap-4 mb-8">
-                  <h2 className="text-sm font-black text-indigo-600 uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionMyGroups'))}</h2>
+                  <h2 className="text-sm font-black text-aura-primary uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionMyGroups'))}</h2>
                   <div className="h-px flex-1 bg-slate-100"></div>
               </div>
               {myGroups.length === 0 ? (
@@ -233,21 +233,21 @@ export default function TeacherDashboardPage() {
                       href={`/teacher/groups/${groupAssignment.group.id}`}
                       className="group"
                     >
-                      <IOSCard className="p-6 hover:border-indigo-100 transition-all duration-500">
+                      <IOSCard className="p-6 hover:border-aura-primary/30 transition-all duration-500">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-5">
-                            <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center text-xl font-bold shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all duration-500">
+                            <div className="w-14 h-14 bg-aura-primary/10 text-aura-primary rounded-2xl flex items-center justify-center text-xl font-bold shadow-sm group-hover:bg-aura-primary group-hover:text-white transition-all duration-500">
                                {groupAssignment.group.name[0]}
                             </div>
                             <div>
-                              <p className="text-xl font-black text-slate-900 tracking-tight group-hover:text-indigo-600 transition-colors">{groupAssignment.group.name}</p>
+                              <p className="text-xl font-black text-slate-900 tracking-tight group-hover:text-aura-primary transition-colors">{groupAssignment.group.name}</p>
                               <p className="text-xs font-bold text-ui-soft uppercase tracking-widest mt-0.5">{groupAssignment.group.age_range}</p>
                             </div>
                           </div>
                           <div className="text-right">
                             <span
                               className={`px-3 py-1 text-[10px] font-black uppercase tracking-widest rounded-full shadow-sm ${
-                                groupAssignment.role === 'primary' ? 'bg-indigo-100 text-indigo-700' :
+                                groupAssignment.role === 'primary' ? 'bg-aura-primary/15 text-aura-primary' :
                                 groupAssignment.role === 'assistant' ? 'bg-emerald-100 text-emerald-700' :
                                 'bg-slate-100 text-slate-700'
                               }`}
@@ -281,7 +281,7 @@ export default function TeacherDashboardPage() {
                   {[
                     { href: '/teacher/children', icon: '👶', label: t(pT(ROUTE, 'qlChildren')), color: 'bg-blue-50 text-blue-600' },
                     { href: '/teacher/attendance', icon: '✅', label: t(pT(ROUTE, 'qlAttendance')), color: 'bg-emerald-50 text-emerald-600' },
-                    { href: '/teacher/daily-reports', icon: '📄', label: t(pT(ROUTE, 'qlDailyReports')), color: 'bg-indigo-50 text-indigo-600' },
+                    { href: '/teacher/daily-reports', icon: '📄', label: t(pT(ROUTE, 'qlDailyReports')), color: 'bg-aura-primary/10 text-aura-primary' },
                     { href: '/teacher/observations', icon: '👁️', label: t(pT(ROUTE, 'qlObservations')), color: 'bg-pink-50 text-pink-600' },
                     { href: '/teacher/portfolios', icon: '📔', label: t(pT(ROUTE, 'qlPortfolios')), color: 'bg-amber-50 text-amber-600' },
                     { href: '/teacher/messages', icon: '💬', label: t(pT(ROUTE, 'qlMessages')), color: 'bg-sky-50 text-sky-600' },
@@ -298,12 +298,12 @@ export default function TeacherDashboardPage() {
 
               <div className="mt-8">
                  <IOSCard className="p-8 bg-linear-to-br from-slate-900 to-slate-800 border-0 text-white overflow-hidden relative group">
-                    <div className="absolute bottom-0 right-0 -mr-6 -mb-6 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
+                    <div className="absolute bottom-0 right-0 -mr-6 -mb-6 w-32 h-32 bg-aura-accent/15 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
                     <h4 className="text-lg font-black mb-2 relative z-10 font-display">{t(pT(ROUTE, 'toolkitTitle'))}</h4>
                     <p className="text-ui-soft text-sm mb-6 relative z-10">{t(pT(ROUTE, 'toolkitSubtitle'))}</p>
                     <Link
                       href="/teacher/todo"
-                      className="inline-block px-5 py-2 bg-indigo-600 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-indigo-500 transition-colors relative z-10"
+                      className="ui-cta-primary-link relative z-10 px-5 py-2 text-xs uppercase tracking-widest"
                     >
                       {t(pT(ROUTE, 'toolkitCta'))}
                     </Link>

@@ -69,12 +69,14 @@ export function GroupForm({ group, onSubmit, onCancel, loading }: GroupFormProps
       />
 
       <div>
-        <label className="block text-[14px] font-semibold text-[#1d1d1f] mb-2 tracking-[0.3px]">Age Range *</label>
+        <label className="block text-[14px] font-semibold text-slate-800 dark:text-slate-100 mb-2 tracking-[0.3px]">
+          Age Range *
+        </label>
         <select
           required
           value={form.age_range}
           onChange={e => setForm({ ...form, age_range: e.target.value })}
-          className="w-full px-4 py-3 bg-white/90 border border-black/10 rounded-[12px] text-[#1d1d1f] outline-none focus:border-[#667eea]/50 focus:shadow-[0_0_0_4px_rgba(102,126,234,0.2)] transition-all"
+          className="ui-select"
         >
           <option value="">Select age range</option>
           <option value="U3">Under 3 (U3)</option>
@@ -93,11 +95,13 @@ export function GroupForm({ group, onSubmit, onCancel, loading }: GroupFormProps
       />
 
       <div>
-        <label className="block text-[14px] font-semibold text-[#1d1d1f] mb-2 tracking-[0.3px]">Assigned Teacher</label>
+        <label className="block text-[14px] font-semibold text-slate-800 dark:text-slate-100 mb-2 tracking-[0.3px]">
+          Assigned Teacher
+        </label>
         <select
           value={form.educator_id}
           onChange={e => setForm({ ...form, educator_id: e.target.value })}
-          className="w-full px-4 py-3 bg-white/90 border border-black/10 rounded-[12px] text-[#1d1d1f] outline-none focus:border-[#667eea]/50 focus:shadow-[0_0_0_4px_rgba(102,126,234,0.2)] transition-all"
+          className="ui-select"
         >
           <option value="">No teacher assigned</option>
           {teachers.map(t => (

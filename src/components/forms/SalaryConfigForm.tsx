@@ -136,7 +136,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
           step="0.01"
           required
           min="0"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="ui-input"
         />
       </div>
 
@@ -151,7 +151,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
           type="number"
           step="0.01"
           min="0"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="ui-input"
         />
       </div>
 
@@ -166,7 +166,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
           type="number"
           step="0.1"
           min="1"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="ui-input"
         />
         <p className="text-xs text-ui-soft mt-1">Default: 1.5 (time and a half)</p>
       </div>
@@ -182,7 +182,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
             onChange={handleChange}
             type="date"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
 
@@ -196,7 +196,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
             onChange={handleChange}
             type="date"
             min={form.effective_from}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
       </div>
@@ -210,7 +210,7 @@ export function SalaryConfigForm({ staffId, initialData, onSubmit, onCancel }: S
           value={form.notes}
           onChange={handleChange}
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+          className="ui-textarea"
           placeholder="Additional notes about this salary configuration..."
         />
       </div>

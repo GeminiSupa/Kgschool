@@ -69,7 +69,7 @@ export const TeacherLeaveRequestForm = ({
             onChange={handleChange}
             required
             min={minDate}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
           />
         </div>
 
@@ -84,7 +84,7 @@ export const TeacherLeaveRequestForm = ({
             onChange={handleChange}
             required
             min={form.start_date || minDate}
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
           />
         </div>
       </div>
@@ -98,7 +98,7 @@ export const TeacherLeaveRequestForm = ({
           value={form.leave_type}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-select"
         >
           <option value="vacation">Erholungsurlaub</option>
           <option value="sick">Krankmeldung</option>
@@ -117,7 +117,7 @@ export const TeacherLeaveRequestForm = ({
           onChange={handleChange}
           rows={4}
           required
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="Bitte geben Sie einen Grund für Ihren Urlaubsantrag an..."
         />
       </div>

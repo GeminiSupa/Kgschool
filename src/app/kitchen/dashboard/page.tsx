@@ -104,7 +104,7 @@ export default function KitchenDashboardPage() {
             <IOSCard className="p-6">
               <div className="flex items-center justify-between mb-3">
                 <Heading size="md">Orders (7 days)</Heading>
-                <Link href="/kitchen/orders" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300 hover:underline">
+                <Link href="/kitchen/orders" className="ui-micro-link">
                   View →
                 </Link>
               </div>
@@ -137,13 +137,13 @@ export default function KitchenDashboardPage() {
               <div className="space-y-1">
                 <Link
                   href="/kitchen/menus"
-                  className="flex min-h-11 w-full items-center rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:text-slate-200 dark:hover:bg-white/10 dark:focus-visible:ring-indigo-500/40"
+                  className="ui-card-link"
                 >
                   🍽️ Manage Menus
                 </Link>
                 <Link
                   href="/kitchen/orders"
-                  className="flex min-h-11 w-full items-center rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:text-slate-200 dark:hover:bg-white/10 dark:focus-visible:ring-indigo-500/40"
+                  className="ui-card-link"
                 >
                   🛒 View Orders
                 </Link>

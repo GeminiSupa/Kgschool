@@ -105,13 +105,13 @@ export default function ParentDashboardPage() {
         <div className="flex flex-wrap gap-3">
           <Link
             href="/parent/messages"
-            className="px-6 py-3 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-500/15 dark:shadow-indigo-900/40 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-background"
+            className="ui-cta-primary-link"
           >
             {t(pT(ROUTE, 'ctaInbox'))}
           </Link>
           <Link
             href="/parent/absences/new"
-            className="px-6 py-3 bg-background text-slate-700 dark:text-slate-200 border border-border rounded-2xl font-bold text-sm shadow-sm hover:bg-slate-50 dark:hover:bg-white/5 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-300 dark:focus:ring-slate-600 focus:ring-offset-2 dark:focus:ring-offset-background"
+            className="ui-cta-secondary-link"
           >
             {t(pT(ROUTE, 'qaAbsence'))}
           </Link>
@@ -142,7 +142,7 @@ export default function ParentDashboardPage() {
         <IOSCard className="p-6">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-xs font-black uppercase tracking-widest text-ui-soft">{t(pT(ROUTE, 'statUnread'))}</h2>
-            <Link href="/parent/messages" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300 hover:underline">
+            <Link href="/parent/messages" className="ui-micro-link">
               {t('common.view')} →
             </Link>
           </div>
@@ -183,7 +183,7 @@ export default function ParentDashboardPage() {
           {/* Children - 8 cols */}
           <div className="lg:col-span-8">
             <div className="flex items-center gap-4 mb-8">
-                <h2 className="text-sm font-black text-indigo-600 uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionMyChildren'))}</h2>
+                <h2 className="text-sm font-black text-aura-primary uppercase tracking-[0.2em]">{t(pT(ROUTE, 'sectionMyChildren'))}</h2>
                 <div className="h-px flex-1 bg-slate-100"></div>
             </div>
             {myChildren.length === 0 ? (
@@ -195,13 +195,13 @@ export default function ParentDashboardPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {myChildren.map(child => (
                   <Link key={child.id} href={`/parent/children/${child.id}`} className="group">
-                    <IOSCard className="p-8 hover:border-indigo-100 transition-all duration-500">
+                    <IOSCard className="p-8 hover:border-aura-primary/30 transition-all duration-500">
                       <div className="flex items-center gap-6">
-                        <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-indigo-600 to-indigo-500 flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-indigo-100 group-hover:scale-110 transition-transform">
+                        <div className="w-16 h-16 rounded-2xl bg-linear-to-br from-aura-primary to-aura-accent flex items-center justify-center text-white text-2xl font-black shadow-lg shadow-black/10 group-hover:scale-110 transition-transform">
                           {child.first_name[0]}{child.last_name[0]}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="text-xl font-black text-slate-900 truncate group-hover:text-indigo-600 transition-colors">
+                          <h4 className="text-xl font-black text-slate-900 truncate group-hover:text-aura-primary transition-colors">
                             {child.first_name} {child.last_name}
                           </h4>
                           <div className="flex items-center gap-2 mt-1">
@@ -211,7 +211,7 @@ export default function ParentDashboardPage() {
                             </p>
                           </div>
                         </div>
-                        <div className="text-slate-200 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all">
+                        <div className="text-slate-200 group-hover:text-aura-primary group-hover:translate-x-1 transition-all">
                           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
                           </svg>
@@ -242,11 +242,13 @@ export default function ParentDashboardPage() {
             </IOSCard>
 
             <div className="mt-8">
-               <IOSCard className="p-8 bg-linear-to-br from-indigo-900 to-indigo-800 border-0 text-white overflow-hidden relative group text-center">
+               <IOSCard className="p-8 bg-linear-to-br from-aura-primary/35 to-aura-accent/30 border-0 text-white overflow-hidden relative group text-center">
                   <div className="absolute top-0 left-0 -ml-8 -mt-8 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
                   <h4 className="text-xl font-black mb-2 relative z-10">School Calendar</h4>
-                  <p className="text-indigo-100/70 text-sm mb-6 relative z-10 font-medium">{t(sT('parentCalendarTeaser'))}</p>
-                  <Link href="/parent/calendar" className="inline-block w-full py-3 bg-white text-indigo-900 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white/90 transition-all relative z-10">Check Schedule</Link>
+                  <p className="text-white/80 text-sm mb-6 relative z-10 font-medium">{t(sT('parentCalendarTeaser'))}</p>
+                  <Link href="/parent/calendar" className="ui-cta-secondary-link relative z-10 w-full bg-white text-aura-primary hover:bg-white/90">
+                    Check Schedule
+                  </Link>
                </IOSCard>
             </div>
           </div>
@@ -269,23 +271,29 @@ function QuickActionLink({
 }) {
   const { t } = useI18n()
   const colorClasses: Record<string, string> = {
+    indigo: 'bg-aura-primary/10 text-aura-primary',
+    sky: 'bg-aura-cyan/10 text-aura-cyan',
     blue: 'bg-blue-50 text-blue-600',
     green: 'bg-green-50 text-green-600',
     purple: 'bg-purple-50 text-purple-600',
     orange: 'bg-orange-50 text-orange-600',
     emerald: 'bg-emerald-50 text-emerald-600',
-    pink: 'bg-pink-50 text-pink-600'
+    pink: 'bg-pink-50 text-pink-600',
+    amber: 'bg-aura-sun/10 text-aura-sun',
+    rose: 'bg-aura-pink/10 text-aura-pink'
   }
 
   return (
-    <Link href={href} className="flex items-center gap-3 p-3.5 rounded-xl hover:bg-white transition-all duration-300 group">
-      <div className={`w-10 h-10 flex items-center justify-center rounded-xl text-lg ${colorClasses[color] || 'bg-gray-100'} shadow-sm border border-black/5 group-hover:scale-110 transition-transform`}>
+    <Link href={href} className="ui-card-link group">
+      <div
+        className={`w-10 h-10 flex items-center justify-center rounded-xl text-lg ${colorClasses[color] || 'bg-aura-primary/10 text-aura-primary'} shadow-sm border border-black/5 group-hover:scale-110 transition-transform`}
+      >
         {icon}
       </div>
-      <span className="font-bold text-slate-700 dark:text-slate-200 text-sm group-hover:text-slate-900 dark:group-hover:text-slate-50 transition-colors">
+      <span className="min-w-0 flex-1 font-bold text-slate-700 dark:text-slate-200 text-sm group-hover:text-aura-primary transition-colors">
         {t(pT(ROUTE, labelKey))}
       </span>
-      <div className="ml-auto text-gray-300 group-hover:text-ui-soft transition-colors">
+      <div className="ml-auto shrink-0 text-gray-300 group-hover:text-aura-primary transition-colors">
         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
         </svg>

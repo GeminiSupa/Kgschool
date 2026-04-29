@@ -196,7 +196,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             value={form.month}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-select"
           >
             {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
               <option key={m} value={m}>
@@ -218,7 +218,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             required
             min={2020}
             max={2100}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
       </div>
@@ -236,7 +236,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             step="0.01"
             required
             min={0}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
 
@@ -251,7 +251,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             type="number"
             step="0.5"
             min={0}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
       </div>
@@ -268,7 +268,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             type="number"
             step="0.01"
             min={0}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
 
@@ -283,7 +283,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             type="number"
             step="0.01"
             min={0}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
       </div>
@@ -300,7 +300,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             type="number"
             step="0.01"
             min={0}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
 
@@ -315,7 +315,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             type="number"
             step="0.01"
             min={0}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
       </div>
@@ -332,7 +332,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             type="number"
             step="0.01"
             min={0}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
 
@@ -348,7 +348,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
             step="0.01"
             required
             min={0}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-input"
           />
         </div>
       </div>
@@ -362,7 +362,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
           value={form.status}
           onChange={handleChange}
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-select"
         >
           <option value="draft">Draft</option>
           <option value="approved">Approved</option>
@@ -379,7 +379,7 @@ export function PayrollForm({ staffId, initialData, onSubmit, onCancel }: Payrol
           value={form.notes}
           onChange={handleChange}
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            className="ui-textarea"
           placeholder="Additional notes..."
         />
       </div>

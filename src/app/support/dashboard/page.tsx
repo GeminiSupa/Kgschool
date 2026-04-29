@@ -140,7 +140,7 @@ export default function SupportDashboardPage() {
           <IOSCard className="p-6">
             <div className="flex items-center justify-between mb-3">
               <Heading size="md">Attendance trend</Heading>
-              <Link href="/support/attendance" className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-300 hover:underline">
+              <Link href="/support/attendance" className="ui-micro-link">
                 View →
               </Link>
             </div>
@@ -155,25 +155,25 @@ export default function SupportDashboardPage() {
               <div className="space-y-2">
                 <Link
                   href="/support/attendance"
-                  className="flex min-h-11 w-full items-center rounded-xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-indigo-900 transition-colors hover:bg-indigo-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50 dark:focus-visible:ring-indigo-500/40"
+                  className="ui-card-link rounded-xl bg-aura-primary/10 text-aura-primary dark:bg-aura-primary/15"
                 >
                   ✅ Take Attendance
                 </Link>
                 <Link
                   href="/support/children"
-                  className="flex min-h-11 w-full items-center rounded-xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-indigo-900 transition-colors hover:bg-indigo-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50 dark:focus-visible:ring-indigo-500/40"
+                  className="ui-card-link rounded-xl bg-aura-primary/10 text-aura-primary dark:bg-aura-primary/15"
                 >
                   👶 View Children
                 </Link>
                 <Link
                   href="/support/messages"
-                  className="flex min-h-11 w-full items-center rounded-xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-indigo-900 transition-colors hover:bg-indigo-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50 dark:focus-visible:ring-indigo-500/40"
+                  className="ui-card-link rounded-xl bg-aura-primary/10 text-aura-primary dark:bg-aura-primary/15"
                 >
                   💬 Send Messages
                 </Link>
                 <Link
                   href="/support/reports"
-                  className="flex min-h-11 w-full items-center rounded-xl bg-indigo-500/10 px-4 py-3 text-sm font-semibold text-indigo-900 transition-colors hover:bg-indigo-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 dark:bg-indigo-950/50 dark:text-indigo-200 dark:hover:bg-indigo-900/50 dark:focus-visible:ring-indigo-500/40"
+                  className="ui-card-link rounded-xl bg-aura-primary/10 text-aura-primary dark:bg-aura-primary/15"
                 >
                   📊 View Reports
                 </Link>

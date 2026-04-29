@@ -23,6 +23,7 @@
   /* Semantic accents */
   --aura-primary: var(--aura-sky);
   --aura-accent: var(--aura-sun);
+  --aura-primary-rgb: 2 132 199;
   
   /* Glassmorphism - Higher contrast for Light Mode */
   --glass-bg: rgba(255, 255, 255, 0.85);
@@ -53,6 +54,7 @@
   --aura-pink: #f9a8d4;
   --aura-primary: var(--aura-sky);
   --aura-accent: var(--aura-sun);
+  --aura-primary-rgb: 56 189 248;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -133,6 +135,82 @@
 
   .ui-textarea {
     @apply resize-none;
+  }
+
+  .ui-inline-link {
+    @apply inline-flex items-center gap-1 rounded-md px-1 text-sm font-semibold text-aura-primary transition-colors hover:brightness-110;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25;
+  }
+
+  .ui-cta-primary-link {
+    @apply inline-flex min-h-11 max-w-full items-center justify-center rounded-2xl bg-aura-primary px-6 py-3 text-sm font-bold text-white text-center;
+    @apply whitespace-normal wrap-break-word shadow-lg shadow-black/10 transition-all hover:brightness-110 active:brightness-95;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .ui-cta-secondary-link {
+    @apply inline-flex min-h-11 max-w-full items-center justify-center rounded-2xl border border-border bg-card px-6 py-3 text-sm font-bold text-foreground text-center;
+    @apply whitespace-normal wrap-break-word shadow-sm transition-colors hover:bg-aura-primary/10 hover:text-aura-primary;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .ui-card-link {
+    @apply flex min-h-11 w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-foreground transition-colors;
+    @apply whitespace-normal wrap-break-word hover:bg-aura-primary/10 hover:text-aura-primary;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25;
+  }
+
+  .ui-micro-link {
+    @apply text-[10px] font-black uppercase tracking-widest text-aura-primary transition-colors hover:brightness-110 hover:underline;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--aura-primary)/25 rounded-md px-1;
+  }
+}
+
+/* Global focus + legacy form fields guardrails (removes remaining blue/indigo focus drift) */
+@layer base {
+  :where(a, button):focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(var(--aura-primary-rgb) / 0.25) !important;
+  }
+
+  form
+    :is(input, select, textarea)
+    :not([type='checkbox'])
+    :not([type='radio'])
+    :not([type='range'])
+    :not([type='color'])
+    :not([type='file'])
+    :not([type='hidden'])
+    :not([type='submit'])
+    :not([type='button']) {
+    background-color: var(--card) !important;
+    border-color: var(--border) !important;
+    border-radius: 16px !important;
+    color: var(--foreground) !important;
+    padding: 12px 16px !important;
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04) !important;
+    min-height: 44px;
+  }
+
+  form textarea {
+    resize: none;
+  }
+
+  form
+    :is(input, select, textarea)
+    :not([type='checkbox'])
+    :not([type='radio'])
+    :not([type='range'])
+    :not([type='color'])
+    :not([type='file'])
+    :not([type='hidden'])
+    :not([type='submit'])
+    :not([type='button']):focus-visible {
+    outline: none !important;
+    border-color: rgba(var(--aura-primary-rgb) / 0.35) !important;
+    box-shadow:
+      0 0 0 2px rgba(var(--aura-primary-rgb) / 0.25),
+      0 1px 0 rgba(15, 23, 42, 0.04) !important;
   }
 }
 

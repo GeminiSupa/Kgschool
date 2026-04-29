@@ -179,11 +179,11 @@ export function ChildForm({ child, groups: initialGroups, onSubmit, onCancel, lo
       </div>
 
       <div>
-        <label className="block text-[14px] font-semibold text-[#1d1d1f] mb-2 tracking-[0.3px]">Gruppe</label>
+        <label className="block text-[14px] font-semibold text-slate-800 dark:text-slate-100 mb-2 tracking-[0.3px]">Gruppe</label>
         <select
           value={form.group_id}
           onChange={(e) => setForm({ ...form, group_id: e.target.value })}
-          className="w-full px-4 py-3 bg-white/90 backdrop-blur-[10px] border border-black/10 rounded-[12px] text-[#1d1d1f] text-base transition-all outline-none focus:border-[#667eea]/50 focus:shadow-[0_0_0_4px_rgba(102,126,234,0.2)]"
+          className="ui-select"
         >
           <option value="">Ungrouped (Unassigned)</option>
           {sortedGroups.map((group) => (
@@ -194,23 +194,25 @@ export function ChildForm({ child, groups: initialGroups, onSubmit, onCancel, lo
         </select>
 
         {!form.group_id && suggestions.length > 0 && (
-          <div className="mt-3 p-4 bg-blue-50/50 border border-blue-100/50 rounded-xl">
-            <p className="text-sm font-semibold text-blue-900 mb-2">Vorgeschlagene Gruppen:</p>
+          <div className="mt-3 p-4 bg-aura-primary/10 border border-border rounded-2xl">
+            <p className="text-sm font-semibold text-ui-soft mb-2">Vorgeschlagene Gruppen:</p>
             <div className="space-y-2">
               {suggestions.slice(0, 3).map((suggestion) => (
                 <button
                   key={suggestion.group.id}
                   type="button"
                   onClick={() => setForm({ ...form, group_id: suggestion.group.id })}
-                  className={`w-full text-left px-4 py-3 text-sm rounded-xl border transition-all ${
-                    suggestion.match === 'perfect' ? 'bg-green-50/80 border-green-200 hover:bg-green-100' :
-                    suggestion.match === 'good' ? 'bg-blue-50/80 border-blue-200 hover:bg-blue-100' :
-                    'bg-gray-50/80 border-gray-200 hover:bg-gray-100'
+                  className={`w-full text-left px-4 py-3 text-sm rounded-2xl border transition-all ${
+                    suggestion.match === 'perfect'
+                      ? 'bg-emerald-50/80 border-emerald-200 text-emerald-900 hover:bg-emerald-100 dark:bg-emerald-400/10 dark:border-emerald-400/20 dark:text-emerald-200'
+                      : suggestion.match === 'good'
+                        ? 'bg-aura-primary/10 border-aura-primary/30 text-aura-primary hover:bg-aura-primary/15'
+                        : 'bg-card border-border text-ui-soft hover:bg-aura-primary/5'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-semibold">{suggestion.group.name} ({suggestion.group.age_range})</span>
-                    <span className="text-xs text-black/50 font-medium">{suggestion.reason}</span>
+                    <span className="text-xs text-ui-soft font-medium">{suggestion.reason}</span>
                   </div>
                 </button>
               ))}
@@ -222,7 +224,9 @@ export function ChildForm({ child, groups: initialGroups, onSubmit, onCancel, lo
           <div className="mt-4 p-4 bg-white/50 border border-black/5 rounded-xl">
             <GroupCapacityIndicator current={selectedGroupCapacity.current} max={selectedGroupCapacity.max} />
             {selectedGroupCapacity.warning && (
-              <p className="text-xs font-semibold text-orange-600 mt-2">{selectedGroupCapacity.warning}</p>
+              <p className="text-xs font-semibold text-aura-accent dark:text-aura-accent mt-2">
+                {selectedGroupCapacity.warning}
+              </p>
             )}
           </div>
         )}
@@ -242,11 +246,11 @@ export function ChildForm({ child, groups: initialGroups, onSubmit, onCancel, lo
       </div>
 
       <div>
-        <label className="block text-[14px] font-semibold text-[#1d1d1f] mb-2 tracking-[0.3px]">Status</label>
+        <label className="block text-[14px] font-semibold text-slate-800 dark:text-slate-100 mb-2 tracking-[0.3px]">Status</label>
         <select
           value={form.status}
           onChange={(e) => setForm({ ...form, status: e.target.value as any })}
-          className="w-full px-4 py-3 bg-white/90 backdrop-blur-[10px] border border-black/10 rounded-[12px] text-[#1d1d1f] text-base transition-all outline-none focus:border-[#667eea]/50 focus:shadow-[0_0_0_4px_rgba(102,126,234,0.2)]"
+          className="ui-select"
         >
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>

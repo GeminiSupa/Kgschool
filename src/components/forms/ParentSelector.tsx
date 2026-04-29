@@ -5,6 +5,7 @@ import { createClient } from '@/utils/supabase/client'
 import { getActiveKitaId } from '@/utils/tenant/client'
 import { getProfileIdsForKita } from '@/utils/tenant/profileScope'
 import { CreateParentModal } from '@/components/modals/CreateParentModal'
+import { IOSButton } from '@/components/ui/IOSButton'
 
 interface ParentSelectorProps {
   value: string[]
@@ -115,24 +116,26 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
   return (
     <div className="space-y-3">
       <div>
-        <label className="block text-[14px] font-semibold text-[#1d1d1f] mb-2">
+        <label className="block text-[14px] font-semibold text-slate-800 dark:text-slate-100 mb-2">
           Parents <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-2">
           <input
             type="text"
-            className="flex-1 px-4 py-2.5 bg-black/5 border border-black/10 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#667eea]/50 outline-none transition-all text-sm"
+            className="flex-1 px-4 py-2.5 rounded-2xl border border-border bg-card text-foreground outline-none transition-all text-sm"
             placeholder="Search by email or name..."
             value={searchQuery}
             onChange={handleSearch}
           />
-          <button
+          <IOSButton
             type="button"
+            variant="primary"
+            size="small"
             onClick={() => setShowCreateModal(true)}
-            className="px-4 py-2.5 bg-green-600 text-white font-medium rounded-xl hover:bg-green-700 transition-colors shadow-sm text-sm"
+            className="shrink-0"
           >
             ➕ Create New
-          </button>
+          </IOSButton>
         </div>
       </div>
 
@@ -155,10 +158,10 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
                     type="button"
                     onClick={() => addParent(parent)}
                     disabled={isAdded}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
+                    className={`px-3 py-1.5 text-xs font-medium rounded-xl border transition-colors ${
                       isAdded
-                        ? 'bg-gray-200 text-ui-soft cursor-not-allowed'
-                        : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm'
+                        ? 'bg-card text-ui-soft cursor-not-allowed border-border'
+                        : 'bg-aura-primary/10 text-aura-primary border-aura-primary/30 hover:bg-aura-primary/15'
                     }`}
                   >
                     {isAdded ? 'Added' : 'Add'}
@@ -177,16 +180,16 @@ export function ParentSelector({ value, onChange }: ParentSelectorProps) {
             {selectedParents.map((parent) => (
               <div
                 key={parent.id}
-                className="flex items-center justify-between p-2.5 bg-blue-50/80 rounded-lg border border-blue-100"
+                className="flex items-center justify-between p-2.5 bg-aura-primary/10 rounded-lg border border-border"
               >
                 <div>
-                  <p className="text-sm font-semibold text-blue-900">{parent.full_name}</p>
-                  <p className="text-xs text-blue-700">{parent.email}</p>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{parent.full_name}</p>
+                  <p className="text-xs text-ui-soft">{parent.email}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => removeParent(parent.id)}
-                  className="px-3 py-1.5 text-xs font-medium bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors shadow-sm"
+                  className="px-3 py-1.5 text-xs font-medium bg-red-600 text-white rounded-xl hover:bg-red-500 transition-colors"
                 >
                   Remove
                 </button>

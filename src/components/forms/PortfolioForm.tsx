@@ -70,7 +70,7 @@ export const PortfolioForm = ({
           onChange={handleChange}
           required
           disabled={childrenLoading}
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all disabled:opacity-50"
+          className="ui-select disabled:opacity-60"
         >
           <option value="">{childrenLoading ? 'Lädt...' : 'Kind auswählen'}</option>
           {children.map(child => (
@@ -91,7 +91,7 @@ export const PortfolioForm = ({
           value={form.title}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
           placeholder="z.B. Kunstwerk - Frühlingsblumen"
         />
       </div>
@@ -106,7 +106,7 @@ export const PortfolioForm = ({
             value={form.portfolio_type}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-select"
           >
             <option value="artwork">Kunstwerk</option>
             <option value="photo">Foto</option>
@@ -127,7 +127,7 @@ export const PortfolioForm = ({
             value={form.date}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2.5 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all"
+          className="ui-input"
           />
         </div>
       </div>
@@ -141,7 +141,7 @@ export const PortfolioForm = ({
           value={form.description}
           onChange={handleChange}
           rows={2}
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="Kurze Zusammenfassung..."
         />
       </div>
@@ -155,7 +155,7 @@ export const PortfolioForm = ({
           value={form.content}
           onChange={handleChange}
           rows={4}
-          className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
           placeholder="Detaillierte Informationen..."
         />
       </div>

@@ -45,7 +45,7 @@ export const AbsenceSubmissionForm = ({ onSubmit, onCancel, loading }: AbsenceSu
             onChange={(e) => setForm(prev => ({ ...prev, reason: e.target.value }))}
             rows={3}
             required
-            className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
             placeholder="Grund für die Abwesenheit..."
           />
         </div>
@@ -59,7 +59,7 @@ export const AbsenceSubmissionForm = ({ onSubmit, onCancel, loading }: AbsenceSu
             value={form.notes}
             onChange={(e) => setForm(prev => ({ ...prev, notes: e.target.value }))}
             rows={2}
-            className="w-full px-4 py-3 bg-white border border-black/10 rounded-xl text-sm font-medium outline-none focus:ring-2 focus:ring-[#667eea] transition-all resize-none"
+          className="ui-textarea"
             placeholder="Weitere Informationen..."
           />
         </div>
