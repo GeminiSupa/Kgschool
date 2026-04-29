@@ -76,7 +76,18 @@ export const useGroupsStore = create<GroupsState>((set, get) => ({
 
   createGroup: async (groupData) => {
     const supabase = createClient()
-    const { data, error } = await supabase.from('groups').insert([groupData]).select().single()
+    const activeKitaId = await getActiveKitaId()
+    const payload = {
+      ...groupData,
+      kita_id: groupData.kita_id ?? activeKitaId ?? undefined,
+      educator_id: groupData.educator_id || null,
+    }
+
+    if (!payload.kita_id) {
+      throw new Error('Keine aktive Kita gefunden. Bitte waehlen Sie zuerst eine Kita aus.')
+    }
+
+    const { data, error } = await supabase.from('groups').insert([payload]).select().single()
     if (error) throw error
     set((s) => ({ groups: [data as Group, ...s.groups] }))
     return data as Group
