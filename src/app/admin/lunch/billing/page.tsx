@@ -169,6 +169,24 @@ export default function AdminLunchBillingPage() {
         </div>
       </div>
 
+      <IOSCard className="p-5 mb-6 border border-aura-primary/15 bg-aura-primary/5">
+        <h2 className="text-sm font-black uppercase tracking-wider text-aura-primary">Where Lunch Billing Is Collected</h2>
+        <div className="mt-3 grid gap-3 md:grid-cols-3 text-sm">
+          <div className="rounded-xl border border-border bg-card p-3">
+            <p className="font-semibold text-slate-900 dark:text-slate-50">1) Monthly Bills</p>
+            <p className="text-ui-soft">Generated in `monthly_billing` from lunch usage, then tracked by status (pending, paid, overdue).</p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-3">
+            <p className="font-semibold text-slate-900 dark:text-slate-50">2) Reconciliation</p>
+            <p className="text-ui-soft">Use reconciliation to compare expected vs paid amounts and find missing or partial payments.</p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-3">
+            <p className="font-semibold text-slate-900 dark:text-slate-50">3) Refunds & Reports</p>
+            <p className="text-ui-soft">Process credits/refunds and export reports for finance handover and accounting review.</p>
+          </div>
+        </div>
+      </IOSCard>
+
       <IOSCard className="p-4 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>

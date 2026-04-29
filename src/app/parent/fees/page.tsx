@@ -100,6 +100,13 @@ export default function ParentBillingPage() {
         <p className="text-sm text-ui-soft mt-1">Status Ihrer monatlichen Gebühren und Zahlungen.</p>
       </div>
 
+      <IOSCard className="p-4 mb-6 border border-aura-primary/15 bg-aura-primary/5">
+        <p className="text-sm text-slate-800 dark:text-slate-100">
+          Hier sehen Sie alle Gebühren Ihres Kindes aus der Monatsabrechnung: <strong>Schulgeld</strong>, <strong>Mittagessen</strong> und weitere Posten.
+          Der Status zeigt, ob eine Position offen, bezahlt oder überfällig ist.
+        </p>
+      </IOSCard>
+
       {fees.length === 0 ? (
         <IOSCard className="p-12 text-center bg-gray-50/50">
           <div className="text-5xl opacity-40 mb-4">💰</div>

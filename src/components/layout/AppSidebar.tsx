@@ -54,77 +54,59 @@ export function AppSidebar({ collapsed: controlledCollapsed, onCollapsedChange }
   if (!role) {
     navItems.push({ path: '/dashboard', labelKey: 'nav.gen.dashboard', icon: <LayoutDashboard {...iconProps} /> })
   } else if (role === 'admin') {
-    // Core navigation (no section header — shown at top)
+    // Compact admin navigation: prioritize daily operations.
     navItems.push(
       { path: '/admin/dashboard', labelKey: 'nav.admin.dashboard', icon: <LayoutDashboard {...iconProps} /> },
-      { path: '/admin/setup', labelKey: 'nav.admin.setup', icon: <Settings {...iconProps} /> },
-      { path: '/admin/site', labelKey: 'nav.admin.site', icon: <Globe {...iconProps} /> },
+      { path: '/admin/children', labelKey: 'nav.admin.children', icon: <Baby {...iconProps} /> },
+      { path: '/admin/groups', labelKey: 'nav.admin.groups', icon: <Users {...iconProps} /> },
+      { path: '/admin/attendance', labelKey: 'nav.admin.attendance', icon: <CheckSquare {...iconProps} /> },
     )
     adminSections.push(
       {
-        label: 'Management',
-        items: [
-          { path: '/admin/children', labelKey: 'nav.admin.children', icon: <Baby {...iconProps} /> },
-          { path: '/admin/groups', labelKey: 'nav.admin.groups', icon: <Users {...iconProps} /> },
-          { path: '/admin/staff', labelKey: 'nav.admin.staff', icon: <Briefcase {...iconProps} /> },
-          { path: '/admin/users', labelKey: 'nav.admin.users', icon: <User {...iconProps} /> },
-          { path: '/admin/attendance', labelKey: 'nav.admin.attendance', icon: <CheckSquare {...iconProps} /> },
-          { path: '/admin/calendar', labelKey: 'nav.admin.calendar', icon: <CalendarDays {...iconProps} /> },
-        ],
-      },
-      {
-        label: 'Classroom',
-        items: [
-          { path: '/admin/applications', labelKey: 'nav.admin.applications', icon: <ClipboardList {...iconProps} /> },
-          { path: '/admin/contracts', labelKey: 'nav.admin.contracts', icon: <FileText {...iconProps} /> },
-          { path: '/admin/consents', labelKey: 'nav.admin.consents', icon: <CheckCircle {...iconProps} /> },
-          { path: '/admin/daily-reports', labelKey: 'nav.admin.dailyReports', icon: <FileSignature {...iconProps} /> },
-          { path: '/admin/observations', labelKey: 'nav.admin.observations', icon: <Eye {...iconProps} /> },
-          { path: '/admin/portfolios', labelKey: 'nav.admin.portfolios', icon: <Book {...iconProps} /> },
-          { path: '/admin/learning-themes', labelKey: 'nav.admin.learningThemes', icon: <Palette {...iconProps} /> },
-          { path: '/admin/daily-routines', labelKey: 'nav.admin.dailyRoutines', icon: <Clock {...iconProps} /> },
-        ],
-      },
-      {
-        label: 'Finance & HR',
+        label: 'Operations',
         items: [
           { path: '/admin/lunch/menus', labelKey: 'nav.admin.lunchMenus', icon: <Utensils {...iconProps} /> },
           { path: '/admin/lunch/billing', labelKey: 'nav.admin.lunchBilling', icon: <Receipt {...iconProps} /> },
           { path: '/admin/fees', labelKey: 'nav.admin.fees', icon: <CreditCard {...iconProps} /> },
           { path: '/admin/parent-work', labelKey: 'nav.admin.parentWork', icon: <Wrench {...iconProps} /> },
-          { path: '/admin/leave', labelKey: 'nav.admin.leave', icon: <Umbrella {...iconProps} /> },
-          { path: '/admin/hr/payroll', labelKey: 'nav.admin.hrPayroll', icon: <Briefcase {...iconProps} /> },
+        ],
+      },
+      {
+        label: 'People',
+        items: [
+          { path: '/admin/staff', labelKey: 'nav.admin.staff', icon: <Briefcase {...iconProps} /> },
+          { path: '/admin/users', labelKey: 'nav.admin.users', icon: <User {...iconProps} /> },
           { path: '/admin/messages', labelKey: 'nav.admin.messages', icon: <MessageSquare {...iconProps} /> },
+        ],
+      },
+      {
+        label: 'Admin',
+        items: [
+          { path: '/admin/calendar', labelKey: 'nav.admin.calendar', icon: <CalendarDays {...iconProps} /> },
+          { path: '/admin/setup', labelKey: 'nav.admin.setup', icon: <Settings {...iconProps} /> },
+          { path: '/admin/site', labelKey: 'nav.admin.site', icon: <Globe {...iconProps} /> },
           { path: '/admin/settings', labelKey: 'nav.admin.settings', icon: <Settings {...iconProps} /> },
         ],
       },
     )
   } else if (role === 'teacher') {
+    // Compact teacher navigation.
     navItems.push(
       { path: '/teacher/dashboard', labelKey: 'nav.teacher.dashboard', icon: <LayoutDashboard {...iconProps} /> },
-      { path: '/teacher/todo', labelKey: 'nav.teacher.todo', icon: <ListTodo {...iconProps} /> },
       { path: '/teacher/children', labelKey: 'nav.teacher.children', icon: <Baby {...iconProps} /> },
       { path: '/teacher/attendance', labelKey: 'nav.teacher.attendance', icon: <CheckSquare {...iconProps} /> },
       { path: '/teacher/daily-reports', labelKey: 'nav.teacher.dailyReports', icon: <FileSignature {...iconProps} /> },
-      { path: '/teacher/observations', labelKey: 'nav.teacher.observations', icon: <Eye {...iconProps} /> },
-      { path: '/teacher/portfolios', labelKey: 'nav.teacher.portfolios', icon: <Book {...iconProps} /> },
-      { path: '/teacher/nap-records', labelKey: 'nav.teacher.napRecords', icon: <Bed {...iconProps} /> },
       { path: '/teacher/calendar', labelKey: 'nav.teacher.calendar', icon: <CalendarDays {...iconProps} /> },
       { path: '/teacher/leave', labelKey: 'nav.teacher.leave', icon: <Umbrella {...iconProps} /> },
-      { path: '/teacher/payroll', labelKey: 'nav.teacher.payroll', icon: <Briefcase {...iconProps} /> },
       { path: '/teacher/messages', labelKey: 'nav.teacher.messages', icon: <MessageSquare {...iconProps} /> }
     )
   } else if (role === 'parent') {
+    // Compact parent navigation.
     navItems.push(
       { path: '/parent/dashboard', labelKey: 'nav.parent.dashboard', icon: <LayoutDashboard {...iconProps} /> },
       { path: '/parent/children', labelKey: 'nav.parent.children', icon: <Baby {...iconProps} /> },
-      { path: '/parent/attendance', labelKey: 'nav.parent.attendance', icon: <CheckSquare {...iconProps} /> },
       { path: '/parent/daily-reports', labelKey: 'nav.parent.dailyReports', icon: <FileSignature {...iconProps} /> },
-      { path: '/parent/observations', labelKey: 'nav.parent.observations', icon: <Eye {...iconProps} /> },
-      { path: '/parent/portfolios', labelKey: 'nav.parent.portfolios', icon: <Book {...iconProps} /> },
-      { path: '/parent/learning-themes', labelKey: 'nav.parent.learningThemes', icon: <Palette {...iconProps} /> },
       { path: '/parent/absences', labelKey: 'nav.parent.absences', icon: <Umbrella {...iconProps} /> },
-      { path: '/parent/calendar', labelKey: 'nav.parent.calendar', icon: <CalendarDays {...iconProps} /> },
       { path: '/parent/lunch', labelKey: 'nav.parent.lunch', icon: <Utensils {...iconProps} /> },
       { path: '/parent/fees', labelKey: 'nav.parent.fees', icon: <CreditCard {...iconProps} /> },
       { path: '/parent/work', labelKey: 'nav.parent.parentWork', icon: <Wrench {...iconProps} /> },

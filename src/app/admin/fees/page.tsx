@@ -123,6 +123,24 @@ export default function AdminFeesPage() {
         </div>
       </div>
 
+      <IOSCard className="p-5 mb-6 border border-aura-accent/20 bg-aura-accent/10">
+        <h2 className="text-sm font-black uppercase tracking-wider text-aura-primary">Where Tuition Is Collected</h2>
+        <div className="mt-3 grid gap-3 md:grid-cols-3 text-sm">
+          <div className="rounded-xl border border-border bg-card p-3">
+            <p className="font-semibold text-slate-900 dark:text-slate-50">1) Tuition Records</p>
+            <p className="text-ui-soft">Tuition and other fees are stored in `monthly_fees` per child, month, year, and fee type.</p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-3">
+            <p className="font-semibold text-slate-900 dark:text-slate-50">2) Status Tracking</p>
+            <p className="text-ui-soft">Each entry tracks payment status (open/paid/overdue/waived) for collection follow-up.</p>
+          </div>
+          <div className="rounded-xl border border-border bg-card p-3">
+            <p className="font-semibold text-slate-900 dark:text-slate-50">3) Generation & Export</p>
+            <p className="text-ui-soft">Use “Generieren” to create monthly runs and CSV export to hand over to accounting.</p>
+          </div>
+        </div>
+      </IOSCard>
+
       <IOSCard className="p-6 mb-8 border-black/5 shadow-sm bg-[#f2f2f7]/30">
         <form onSubmit={applyFilters} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
           <div>
